@@ -1,24 +1,40 @@
 {
-  "name": "toyz",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "react": "latest",
-    "react-dom": "latest",
-    "next": "latest"
-  },
-  "devDependencies": {
-    "typescript": "latest",
-    "@types/react": "latest",
-    "@types/node": "latest",
-    "@types/react-dom": "latest",
-    "eslint": "latest",
-    "eslint-config-next": "latest"
-  }
+	"name": "toyz",
+	"version": "0.1.0",
+	"private": true,
+	"author": {
+		"name": "Aycan Öğüt",
+		"email": "aycanonfire@gmail.com",
+		"url": "https://aycan.dev"
+	},
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"prettier:check": "prettier --check \"**/*.{ts,tsx}\"",
+		"prettier:write": "prettier --write \"**/*.{ts,tsx}\"",
+		"prepare": "panda codegen"
+	},
+	"dependencies": {
+		"next": "latest",
+		"react": "latest",
+		"react-dom": "latest"
+	},
+	"devDependencies": {
+		"@types/node": "latest",
+		"@types/react": "latest",
+		"@types/react-dom": "latest",
+		"@typescript-eslint/eslint-plugin": "^6.4.0",
+		"eslint": "^8.50.0",
+		"eslint-config-prettier": "^9.0.0",
+		"eslint-config-standard-with-typescript": "^39.1.0",
+		"eslint-plugin-import": "^2.25.2",
+		"eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+		"eslint-plugin-prettier": "^5.0.0",
+		"eslint-plugin-promise": "^6.0.0",
+		"eslint-plugin-react": "^7.33.2",
+		"prettier": "^3.0.3",
+		"typescript": "^5.2.2"
+	}
 }
