@@ -20,6 +20,7 @@
 		"jsx-a11y/alt-text": "warn",
 		"import/no-anonymous-default-export": "off",
 		"@typescript-eslint/explicit-function-return-type": "off",
+		"@typescript-eslint/strict-boolean-expressions": "off",
 		"react-hooks/rules-of-hooks": "error",
 		"react-hooks/exhaustive-deps": "warn",
 		"react/display-name": "off",
