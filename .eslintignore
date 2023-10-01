@@ -1,0 +1,7 @@
+node_modules
+*.json
+*.config.js
+.next
+pnpm-lock.yaml
+public/ui
+build
