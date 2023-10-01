@@ -9,5 +9,6 @@
 	"quoteProps": "as-needed",
 	"bracketSpacing": true,
 	"htmlWhitespaceSensitivity": "strict",
-	"endOfLine": "auto"
+	"endOfLine": "auto",
+	"plugins": ["prettier-plugin-tailwindcss"]
 }
