@@ -13,8 +13,7 @@
 		"start": "next start",
 		"lint": "next lint",
 		"prettier:check": "prettier --check \"**/*.{ts,tsx}\"",
-		"prettier:write": "prettier --write \"**/*.{ts,tsx}\"",
-		"prepare": "panda codegen"
+		"prettier:write": "prettier --write \"**/*.{ts,tsx}\""
 	},
 	"dependencies": {
 		"next": "latest",
