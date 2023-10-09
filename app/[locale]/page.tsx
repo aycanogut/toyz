@@ -10,7 +10,7 @@ export default function Home() {
 		<>
 			<Header items={navigation} />
 
-			<main className="relative flex h-screen items-center justify-center">
+			<main className="relative flex h-screen items-center justify-center bg-black">
 				<Brand
 					src="/assets/logo.png"
 					alt="toyz logo"
