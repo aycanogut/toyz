@@ -1,8 +1,9 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-	images: {
+const withNextIntl = require('next-intl/plugin')(
+  './i18n.ts'
+);
+ 
+module.exports = withNextIntl({
+  images: {
 		domains: ['johnsonconsulting.com'],
 	},
-}
-
-module.exports = nextConfig
+});
