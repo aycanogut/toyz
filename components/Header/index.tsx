@@ -1,18 +1,21 @@
 import Link from 'next/link'
 
-import { type NavItemProps } from '@/types'
+import { useTranslations } from 'next-intl'
 
+import { type NavItemProps } from '@/types'
 interface HeadaerProps {
 	items: NavItemProps[]
 }
 
 function Header({ items }: HeadaerProps) {
+	const t = useTranslations('Navigation')
+
 	if (!items?.length) {
 		return null
 	}
 
 	return (
-		<header className="fixed bottom-0 left-0 z-50 w-full bg-black font-bold text-white">
+		<header className="fixed bottom-0 left-0 z-40 w-full bg-black font-bold text-white">
 			<nav>
 				<ul className="flex w-full list-none justify-around">
 					{items.map((item) => {
@@ -23,7 +26,7 @@ function Header({ items }: HeadaerProps) {
 									className="p-4 uppercase"
 								>
 									<Link href={item.href}>
-										<span>{item.label}</span>
+										<span>{t(item.label)}</span>
 									</Link>
 								</li>
 							)
