@@ -15,7 +15,7 @@ function Header({ items }: HeadaerProps) {
 	}
 
 	return (
-		<header className="fixed bottom-0 left-0 z-40 w-full bg-black font-bold text-white">
+		<header className="fixed bottom-0 left-0 z-40 w-full bg-black">
 			<nav>
 				<ul className="flex w-full list-none justify-around">
 					{items.map((item) => {
@@ -23,10 +23,12 @@ function Header({ items }: HeadaerProps) {
 							item.href && (
 								<li
 									key={item.label}
-									className="p-4 uppercase"
+									className="py-4 sm:p-4"
 								>
 									<Link href={item.href}>
-										<span>{t(item.label)}</span>
+										<span className="whitespace-nowrap text-xs font-bold uppercase text-white sm:text-lg">
+											{t(item.label)}
+										</span>
 									</Link>
 								</li>
 							)
