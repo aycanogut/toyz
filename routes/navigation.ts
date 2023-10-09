@@ -4,19 +4,19 @@ import { urls } from './urls'
 
 export const navigation: NavItemProps[] = [
 	{
-		label: 'Home',
+		label: 'home',
 		href: urls.Home,
 	},
 	{
-		label: 'Toyz',
+		label: 'toyz',
 		href: urls.Toyz,
 	},
 	{
-		label: 'About',
+		label: 'about',
 		href: urls.About,
 	},
 	{
-		label: 'Contact',
+		label: 'contact',
 		href: urls.Contact,
 	},
 ]
