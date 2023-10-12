@@ -5,6 +5,12 @@ import VideoOverlay from '@/components/VideoOverlay'
 import { locales } from '@/routes/locales'
 import { navigation } from '@/routes/navigation'
 
+const src = {
+	mp4: '/assets/video/v.mp4',
+	mov: '/assets/video/v.mov',
+	ogv: '/assets/video/v.ogv',
+}
+
 export default function Home() {
 	return (
 		<>
@@ -18,7 +24,7 @@ export default function Home() {
 
 				<LanguagePicker locales={locales} />
 
-				<VideoOverlay src="/assets/v.mp4" />
+				<VideoOverlay src={src} />
 			</main>
 		</>
 	)
