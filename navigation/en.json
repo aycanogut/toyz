@@ -1,8 +1,6 @@
 {
-  "Navigation": {
-    "home": "home",
-    "toyz":"toyz",
-    "about": "about",
-    "contact": "contact"
-  }
+	"Navigation": {
+		"toyz": "toyz",
+		"about": "about"
+	}
 }
