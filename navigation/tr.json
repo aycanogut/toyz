@@ -1,8 +1,6 @@
 {
-  "Navigation": {
-    "home": "ana sayfa",
-    "toyz":"oyuncaklar",
-    "about": "hakkinda",
-    "contact": "iletisim"
-  }
+	"Navigation": {
+		"toyz": "toyz",
+		"about": "hikaye"
+	}
 }

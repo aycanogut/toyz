@@ -1,5 +1,9 @@
 interface VideoOverlayProps {
-	src: string
+	src: {
+		mp4: string
+		mov: string
+		ogv: string
+	}
 }
 
 function VideoOverlay({ src }: VideoOverlayProps) {
@@ -10,10 +14,19 @@ function VideoOverlay({ src }: VideoOverlayProps) {
 				autoPlay
 				loop
 				muted
+				preload="auto"
 			>
 				<source
-					src={src}
+					src={src.mp4}
 					type="video/mp4"
+				/>
+				<source
+					src={src.mov}
+					type="video/mov"
+				/>
+				<source
+					src={src.ogv}
+					type="video/ogv"
 				/>
 			</video>
 		</div>

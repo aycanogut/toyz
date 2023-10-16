@@ -1,6 +1,4 @@
 export const urls = {
-	Home: '/',
-	Toyz: '/toyz',
+	Toyz: '/',
 	About: '/about',
-	Contact: '/contact',
 }

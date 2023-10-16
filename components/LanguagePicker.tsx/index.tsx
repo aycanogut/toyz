@@ -10,7 +10,7 @@ interface LanguagePickerProps {
 
 function LanguagePicker({ locales }: LanguagePickerProps) {
 	return (
-		<div className="absolute bottom-10 right-0 z-50 mx-2 my-7 flex gap-3 bg-black p-2 font-bold text-white">
+		<div className="absolute right-0 top-0 z-50 flex gap-3 bg-black p-2 font-bold  text-white">
 			{locales.map((item: LocaleProps) => {
 				return (
 					<Link

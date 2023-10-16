@@ -23,7 +23,7 @@ function Header({ items }: HeadaerProps) {
 							item.href && (
 								<li
 									key={item.label}
-									className="py-4 sm:p-4"
+									className="w-1/4 py-4 text-center sm:p-4"
 								>
 									<Link href={item.href}>
 										<span className="whitespace-nowrap text-xs font-bold uppercase text-white sm:text-lg">
