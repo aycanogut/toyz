@@ -4,7 +4,10 @@ import type { Metadata } from 'next'
 import { Golos_Text } from 'next/font/google'
 import { notFound } from 'next/navigation'
 
+import Header from '@/components/Header'
+import LanguagePicker from '@/components/LanguagePicker.tsx'
 import { locales } from '@/routes/locales'
+import { navigation } from '@/routes/navigation'
 
 import './globals.css'
 
@@ -31,7 +34,11 @@ export default function RootLayout({
 			lang={locale}
 			className={golos.variable}
 		>
-			<body>{children}</body>
+			<body>
+				{children}
+				<Header items={navigation} />
+				<LanguagePicker locales={locales} />
+			</body>
 		</html>
 	)
 }
