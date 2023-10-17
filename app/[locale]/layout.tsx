@@ -4,6 +4,8 @@ import type { Metadata } from 'next'
 import { Golos_Text } from 'next/font/google'
 import { notFound } from 'next/navigation'
 
+import classnames from 'classnames'
+
 import Header from '@/components/Header'
 import LanguagePicker from '@/components/LanguagePicker.tsx'
 import { locales } from '@/routes/locales'
@@ -13,7 +15,7 @@ import './globals.css'
 
 const golos = Golos_Text({
 	subsets: ['latin'],
-	variable: '--font-tolos',
+	variable: '--font-golos',
 	weight: ['400', '500', '600', '700', '800'],
 })
 
@@ -32,7 +34,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang={locale}
-			className={golos.variable}
+			className={classnames(golos.variable, 'bg-black')}
 		>
 			<body>
 				{children}
