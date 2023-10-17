@@ -26,7 +26,7 @@ function Header({ items }: HeadaerProps) {
 									className="w-1/4 py-4 text-center sm:p-4"
 								>
 									<Link href={item.href}>
-										<span className="font-golos whitespace-nowrap text-xs font-bold uppercase text-white sm:text-lg">
+										<span className="whitespace-nowrap font-golos text-xs font-bold uppercase text-white sm:text-lg">
 											{t(item.label)}
 										</span>
 									</Link>
