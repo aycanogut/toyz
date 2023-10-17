@@ -11,10 +11,10 @@ module.exports = {
 	],
 	theme: {
 		extend: {
-			 fontFamily: {
-      "tolos": "var(--font-tolos)",
-    },
-		 },
+			fontFamily: {
+				tolos: 'var(--font-tolos)',
+			},
+		},
 	},
-	plugins: [],
+	plugins: [require('@tailwindcss/typography')],
 }
