@@ -12,7 +12,7 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				tolos: 'var(--font-tolos)',
+				golos: 'var(--font-golos)',
 			},
 		},
 	},
