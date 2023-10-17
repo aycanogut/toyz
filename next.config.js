@@ -1,9 +1,7 @@
-const withNextIntl = require('next-intl/plugin')(
-  './i18n.ts'
-);
- 
+const withNextIntl = require('next-intl/plugin')('./i18n.ts')
+
 module.exports = withNextIntl({
-  images: {
-		domains: ['johnsonconsulting.com'],
+	images: {
+		domains: ['johnsonconsulting.com', 'images.ctfassets.net'],
 	},
-});
+})
