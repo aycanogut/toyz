@@ -16,7 +16,7 @@ function Post({ title, image, alt, author, children }: PostProps) {
 	const t = useTranslations('Post')
 
 	return (
-		<article className="font-golos prose dark:prose-invert lg:prose-xl">
+		<article className="prose font-golos dark:prose-invert lg:prose-xl">
 			<header>
 				<h1>{title}</h1>
 			</header>
