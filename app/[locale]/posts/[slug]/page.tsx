@@ -3,7 +3,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { useLocale } from 'next-intl'
 
 import { client } from '@/api/contentful'
-import Post from '@/components/Post'
+import Post from '@/components/PostDetail'
 
 interface PostsPageProps {
   params: {
@@ -11,7 +11,7 @@ interface PostsPageProps {
   }
 }
 
-const PostsPage = async ({ params }: PostsPageProps) => {
+async function PostsPage({ params }: PostsPageProps) {
   const locale = useLocale()
   const { slug } = params
 
@@ -20,7 +20,7 @@ const PostsPage = async ({ params }: PostsPageProps) => {
     locale: locale === 'en' ? 'en-US' : 'tr-TR',
   })
 
-  const post = page.items.find((item: any) => item.fields.id === Number(slug))
+  const post = page.items.find((item) => item.fields.id === Number(slug))
 
   if (!post) return <h1 className="text-3xl text-white">404 dönecek</h1>
 
