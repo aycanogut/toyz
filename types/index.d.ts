@@ -1,4 +1,4 @@
 export interface NavItemProps {
-	label: string
-	href: string
+  label: string
+  href: string
 }

@@ -1,4 +1,4 @@
 export const urls = {
-	Toyz: '/',
-	About: '/about',
+  Toyz: '/',
+  About: '/about',
 }
