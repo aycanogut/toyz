@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 
 import classnames from 'classnames'
 
+import GoogleAnalytics from '@/components/GoogleAnalytics'
 import Header from '@/components/Header'
 import LanguagePicker from '@/components/LanguagePicker.tsx'
 import metadata from '@/constants/metadata'
@@ -60,6 +61,7 @@ export default function RootLayout({
         {children}
         <Header items={navigation} />
         <LanguagePicker locales={locales} />
+        <GoogleAnalytics />
       </body>
     </html>
   )
