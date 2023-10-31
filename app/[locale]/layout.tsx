@@ -1,6 +1,5 @@
 import { type PropsWithChildren } from 'react'
 
-import type { Metadata } from 'next'
 import { Golos_Text } from 'next/font/google'
 import { notFound } from 'next/navigation'
 
@@ -18,11 +17,6 @@ const golos = Golos_Text({
   variable: '--font-golos',
   weight: ['400', '500', '600', '700', '800'],
 })
-
-export const metadata: Metadata = {
-  title: 'TOYZ',
-  description: 'A well blend of counter culture and modern art.',
-}
 
 export default function RootLayout({
   children,
