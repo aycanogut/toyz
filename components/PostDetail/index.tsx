@@ -23,7 +23,7 @@ function PostDetail({
   date,
   children,
 }: PostDetailProps) {
-  const t = useTranslations('Post')
+  const t = useTranslations('PostDetail')
   const publishDate = new Date(date).toLocaleDateString()
 
   return (

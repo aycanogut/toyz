@@ -1,9 +1,40 @@
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
+import { type Metadata } from 'next'
+
 import { useLocale } from 'next-intl'
 
 import { client } from '@/api/contentful'
-import Post from '@/components/PostDetail'
+import PostDetail from '@/components/PostDetail'
+
+interface MetadataProps {
+  params: {
+    slug: string
+    locale: string
+  }
+}
+export async function generateMetadata({
+  params,
+}: MetadataProps): Promise<Metadata> {
+  const { slug } = params
+
+  const page = await client.getEntries({
+    content_type: 'post',
+    locale: params.locale === 'en' ? 'en-US' : 'tr-TR',
+  })
+
+  const post = page.items.find((item) => item.fields.id === Number(slug))
+  const { metaTitle, metaDescription } = post?.fields as any
+
+  return {
+    title: metaTitle,
+    description: metaDescription,
+    openGraph: {
+      title: metaTitle,
+      description: metaDescription,
+    },
+  }
+}
 
 interface PostsPageProps {
   params: {
@@ -22,13 +53,13 @@ async function PostsPage({ params }: PostsPageProps) {
 
   const post = page.items.find((item) => item.fields.id === Number(slug))
 
-  if (!post) return <h1 className="text-3xl text-white">404 dönecek</h1>
+  if (!post) return null
 
-  const { content, title, image, author, date } = post?.fields as any
+  const { content, title, image, author, date } = post.fields as any
 
   return (
     <div className="flex h-screen flex-col items-center p-4 md:p-6 lg:p-12">
-      <Post
+      <PostDetail
         title={title}
         image={`https:${image?.fields?.file?.url}`}
         alt={image.fields.description}
@@ -36,7 +67,7 @@ async function PostsPage({ params }: PostsPageProps) {
         date={date}
       >
         {documentToReactComponents(content)}
-      </Post>
+      </PostDetail>
     </div>
   )
 }
