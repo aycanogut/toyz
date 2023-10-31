@@ -1,9 +1,9 @@
 {
-	"Navigation": {
-		"toyz": "toyz",
-		"about": "hikaye"
-	},
-	"Post": {
-		"author": "yazar"
-	}
+  "Navigation": {
+    "toyz": "toyz",
+    "about": "hikaye"
+  },
+  "PostDetail": {
+    "author": "yazar"
+  }
 }
