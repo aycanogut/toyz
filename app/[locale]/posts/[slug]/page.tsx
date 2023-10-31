@@ -3,7 +3,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { useLocale } from 'next-intl'
 
 import { client } from '@/api/contentful'
-import Post from '@/components/PostDetail'
+import PostDetail from '@/components/PostDetail'
 
 interface PostsPageProps {
   params: {
@@ -28,7 +28,7 @@ async function PostsPage({ params }: PostsPageProps) {
 
   return (
     <div className="flex h-screen flex-col items-center p-4 md:p-6 lg:p-12">
-      <Post
+      <PostDetail
         title={title}
         image={`https:${image?.fields?.file?.url}`}
         alt={image.fields.description}
@@ -36,7 +36,7 @@ async function PostsPage({ params }: PostsPageProps) {
         date={date}
       >
         {documentToReactComponents(content)}
-      </Post>
+      </PostDetail>
     </div>
   )
 }
