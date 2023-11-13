@@ -8,7 +8,7 @@ import classnames from 'classnames'
 
 import GoogleAnalytics from '@/components/GoogleAnalytics'
 import Header from '@/components/Header'
-import LanguagePicker from '@/components/LanguagePicker.tsx'
+import LanguagePicker from '@/components/LanguagePicker'
 import metadata from '@/constants/metadata'
 import { locales } from '@/routes/locales'
 import { navigation } from '@/routes/navigation'
