@@ -14,6 +14,7 @@ import { navigation } from '@/routes/navigation'
 
 import '@mantine/core/styles.css'
 import '@mantine/core/styles/global.css'
+import classes from './index.module.css'
 
 interface MetadataProps {
   params: {
@@ -48,7 +49,7 @@ export default function RootLayout({
 
   return (
     <html lang={locale}>
-      <body>
+      <body className={classes.body}>
         <MantineProvider defaultColorScheme="dark">
           {children}
           <Header items={navigation} />
