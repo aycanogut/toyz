@@ -14,11 +14,23 @@ const nextConfig = {
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
   },
   images: {
-    domains: [
-      'johnsonconsulting.com',
-      'images.ctfassets.net',
-      'placehold.co',
-      'freight.cargo.site',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'johnsonconsulting.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'freight.cargo.site',
+      },
     ],
   },
 }
