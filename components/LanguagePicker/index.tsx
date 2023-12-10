@@ -1,6 +1,10 @@
 'use client'
 
+import { Box } from '@mantine/core'
+
 import { usePathname, useRouter } from 'next-intl/client'
+
+import classes from './index.module.css'
 
 interface LocaleProps {
   label: string
@@ -19,19 +23,21 @@ function LanguagePicker({ locales }: LanguagePickerProps) {
   }
 
   return (
-    <div className="absolute right-0 top-0 z-50 flex gap-3 bg-black p-2 font-bold  text-white">
+    <Box className={classes.wrapper}>
       {locales.map((item: LocaleProps) => {
         return (
-          <span
+          <Box
+            component="span"
             key={item.label}
             onClick={handleChange}
+            onKeyDown={handleChange}
             className="cursor-pointer font-golos"
           >
-            <span>{item.label}</span>
-          </span>
+            <span className={classes.label}>{item.label}</span>
+          </Box>
         )
       })}
-    </div>
+    </Box>
   )
 }
 

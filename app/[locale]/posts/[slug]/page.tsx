@@ -1,3 +1,5 @@
+import { Box } from '@mantine/core'
+
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 import { type Metadata } from 'next'
@@ -58,7 +60,7 @@ async function PostsPage({ params }: PostsPageProps) {
   const { content, title, image, author, date } = post.fields as any
 
   return (
-    <div className="flex h-screen flex-col items-center p-4 md:p-6 lg:p-12">
+    <Box className="flex h-screen flex-col items-center p-4 md:p-6 lg:p-12">
       <PostDetail
         title={title}
         image={`https:${image?.fields?.file?.url}`}
@@ -68,7 +70,7 @@ async function PostsPage({ params }: PostsPageProps) {
       >
         {documentToReactComponents(content)}
       </PostDetail>
-    </div>
+    </Box>
   )
 }
 

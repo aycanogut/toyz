@@ -4,7 +4,7 @@ import { type Metadata } from 'next'
 import { Golos_Text } from 'next/font/google'
 import { notFound } from 'next/navigation'
 
-import classnames from 'classnames'
+import { MantineProvider } from '@mantine/core'
 
 import GoogleAnalytics from '@/components/GoogleAnalytics'
 import Header from '@/components/Header'
@@ -13,7 +13,8 @@ import metadata from '@/constants/metadata'
 import { locales } from '@/routes/locales'
 import { navigation } from '@/routes/navigation'
 
-import './globals.css'
+import '@mantine/core/styles.css'
+import '@mantine/core/styles/global.css'
 
 const golos = Golos_Text({
   subsets: ['latin'],
@@ -53,15 +54,14 @@ export default function RootLayout({
   if (!isValidLocale) notFound()
 
   return (
-    <html
-      lang={locale}
-      className={classnames(golos.variable, 'bg-black')}
-    >
+    <html lang={locale}>
       <body>
-        {children}
-        <Header items={navigation} />
-        <LanguagePicker locales={locales} />
-        <GoogleAnalytics />
+        <MantineProvider>
+          {children}
+          <Header items={navigation} />
+          <LanguagePicker locales={locales} />
+          <GoogleAnalytics />
+        </MantineProvider>
       </body>
     </html>
   )

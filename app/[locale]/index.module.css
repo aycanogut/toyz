@@ -1,0 +1,5 @@
+.main {
+  width: 100%;
+  margin-inline: auto;
+  background-color: var(--mantine-color-black);
+}

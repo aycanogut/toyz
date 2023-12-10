@@ -1,8 +1,13 @@
+import { Box, List } from '@mantine/core'
+
 import Link from 'next/link'
 
 import { useTranslations } from 'next-intl'
 
 import { type NavItemProps } from '@/types'
+
+import classes from './index.module.css'
+
 interface HeadaerProps {
   items: NavItemProps[]
 }
@@ -15,28 +20,37 @@ function Header({ items }: HeadaerProps) {
   }
 
   return (
-    <header className="fixed bottom-0 left-0 z-40 w-full bg-black">
-      <nav>
-        <ul className="flex w-full list-none justify-around">
+    <Box
+      component="header"
+      className={classes.header}
+    >
+      <Box component="nav">
+        <List className={classes.ul}>
           {items.map((item) => {
             return (
               item.href && (
                 <li
                   key={item.label}
-                  className="w-1/4 py-4 text-center sm:p-4"
+                  className={classes.li}
                 >
-                  <Link href={item.href}>
-                    <span className="whitespace-nowrap font-golos text-xs font-bold uppercase text-white sm:text-lg">
+                  <Link
+                    href={item.href}
+                    className={classes.link}
+                  >
+                    <Box
+                      component="span"
+                      className={classes.span}
+                    >
                       {t(item.label)}
-                    </span>
+                    </Box>
                   </Link>
                 </li>
               )
             )
           })}
-        </ul>
-      </nav>
-    </header>
+        </List>
+      </Box>
+    </Box>
   )
 }
 
