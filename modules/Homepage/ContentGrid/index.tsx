@@ -6,7 +6,7 @@ import { getTranslator } from 'next-intl/server'
 import { client } from '@/api/contentful'
 
 import Select from '@/components/Select'
-import Post from '../Post'
+import Post from '../../../components/Post'
 
 async function ContentGrid() {
   const locale = useLocale()
