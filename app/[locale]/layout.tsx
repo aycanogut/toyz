@@ -56,7 +56,7 @@ export default function RootLayout({
   return (
     <html lang={locale}>
       <body>
-        <MantineProvider>
+        <MantineProvider defaultColorScheme="dark">
           {children}
           <Header items={navigation} />
           <LanguagePicker locales={locales} />
