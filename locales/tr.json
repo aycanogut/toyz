@@ -5,5 +5,9 @@
   },
   "PostDetail": {
     "author": "yazar"
+  },
+  "Categories": {
+    "label": "Kategoriler",
+    "placeholder": "Bir kategori seçiniz"
   }
 }

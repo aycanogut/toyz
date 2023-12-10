@@ -1,70 +1,74 @@
+import { Container, SimpleGrid } from '@mantine/core'
+
 import { useLocale } from 'next-intl'
+import { getTranslator } from 'next-intl/server'
 
 import { client } from '@/api/contentful'
 
+import Select from '@/components/Select'
 import Post from '../Post'
 
 async function ContentGrid() {
   const locale = useLocale()
+  const t = await getTranslator(useLocale(), 'Categories')
 
+  // fetch posts
   const posts = await client.getEntries({
     content_type: 'post',
     locale: locale === 'en' ? 'en-US' : 'tr-TR',
   })
 
+  const { items } = posts
+
+  // fetch categories
   const categoriesResponse = await client.getEntries({
     content_type: 'post',
     select: ['fields.category'],
+    locale: locale === 'en' ? 'en-US' : 'tr-TR',
   })
-  const categories = categoriesResponse.items.map(
-    (item: any) => item.fields.category
-  )
 
-  const { items } = posts
+  // map categories
+  const categories = categoriesResponse.items
+    .map((item: any) => item.fields.category)
+    .flat()
+
+  // add all categories
+  locale === 'en'
+    ? categories.unshift('All')
+    : categories.unshift('Tüm Kategoriler')
 
   return (
-    <section className="container-fluid mx-auto my-4 h-screen p-4 lg:my-12 lg:p-10">
-      <div className="flex flex-col">
-        <label htmlFor="categories">categories</label>
-        <select
-          name="categories"
-          id="categories"
-        >
-          {/* 
-          burada iceriklerin sahip oldugu butun kategoriler select icerisinde render oluyor 
-          aktif olan kategoriyi bir state icerisinde tutup ona gore icerikleri render edebiliriz.
-          */}
-          {categories.flat().map((category: any) => {
+    <Container
+      fluid
+      px="md"
+      pb={100}
+    >
+      <Select
+        categories={categories}
+        label={t('label')}
+        placeholder={t('placeholder')}
+      />
+      <SimpleGrid
+        cols={{ base: 1, sm: 2 }}
+        spacing={{ base: 10, sm: 'xl' }}
+        verticalSpacing={{ base: 'md', sm: 'xl' }}
+      >
+        {items
+          // .filter((item: any) => item.fields.category[0] === activeCategory)
+          .map((item: any) => {
             return (
-              <option
-                key={category}
-                value={category}
-              >
-                {category}
-              </option>
+              <Post
+                key={item.fields.id}
+                id={item.fields.id}
+                title={item.fields.title}
+                category={`#${item.fields.category[0]}`}
+                image={`https:${item.fields.image.fields.file.url}`}
+                alt={item.fields.image.fields.file.fileName}
+              />
             )
           })}
-        </select>
-      </div>
-
-      <div className="grid gap-8 lg:grid-cols-2 lg:grid-rows-2 [&>*:last-child]:mb-32">
-        {/* 
-        aktif olan kategori all ise butun icerikler render olacak.
-        diger turlu sadece o an secili olan kategoriye ait icerikler render olacak.
-        */}
-        {items.map((item: any) => {
-          return (
-            <Post
-              key={item.fields.id}
-              id={item.fields.id}
-              title={item.fields.title}
-              image={`https:${item.fields.image.fields.file.url}`}
-              alt={item.fields.image.fields.file.fileName}
-            />
-          )
-        })}
-      </div>
-    </section>
+      </SimpleGrid>
+    </Container>
   )
 }
 

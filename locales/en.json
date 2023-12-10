@@ -5,5 +5,9 @@
   },
   "PostDetail": {
     "author": "author"
+  },
+  "Categories": {
+    "label": "Categories",
+    "placeholder": "Pick a category"
   }
 }

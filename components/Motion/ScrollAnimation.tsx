@@ -2,6 +2,8 @@
 
 import { motion, useScroll, useSpring } from 'framer-motion'
 
+import classes from './index.module.css'
+
 function ScrollAnimation() {
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, {
@@ -13,7 +15,7 @@ function ScrollAnimation() {
   return (
     <motion.div
       style={{ scaleX }}
-      className="fixed left-0 right-0 top-0 h-1 origin-left bg-white"
+      className={classes.scroll}
     />
   )
 }

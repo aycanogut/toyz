@@ -1,5 +1,9 @@
+import { Box } from '@mantine/core'
+
 import Brand from '../Brand'
 import VideoOverlay from '../VideoOverlay'
+
+import classes from './index.module.css'
 
 const src = {
   mp4: '/assets/video/v.mp4',
@@ -9,13 +13,13 @@ const src = {
 
 function Landing() {
   return (
-    <div className="relative flex h-full items-center justify-center bg-black">
+    <Box className={classes.wrapper}>
       <Brand
         src="/assets/logo.png"
         alt="toyz logo"
       />
       <VideoOverlay src={src} />
-    </div>
+    </Box>
   )
 }
 

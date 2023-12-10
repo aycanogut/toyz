@@ -1,6 +1,18 @@
+const bundleAnalyzer = require('@next/bundle-analyzer')
 const withNextIntl = require('next-intl/plugin')('./i18n.ts')
 
-module.exports = withNextIntl({
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+const nextConfig = {
+  reactStrictMode: false,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  experimental: {
+    optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
+  },
   images: {
     domains: [
       'johnsonconsulting.com',
@@ -9,4 +21,6 @@ module.exports = withNextIntl({
       'freight.cargo.site',
     ],
   },
-})
+}
+
+module.exports = withBundleAnalyzer(withNextIntl(nextConfig))

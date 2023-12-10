@@ -1,3 +1,7 @@
+import { Box } from '@mantine/core'
+
+import classes from './index.module.css'
+
 interface VideoOverlayProps {
   src: {
     mp4: string
@@ -8,28 +12,32 @@ interface VideoOverlayProps {
 
 function VideoOverlay({ src }: VideoOverlayProps) {
   return (
-    <div className="h-screen bg-cover bg-center bg-no-repeat">
-      <video
-        className="absolute inset-0 z-0 h-screen w-screen object-cover"
+    <Box className={classes.wrapper}>
+      <Box
+        component="video"
+        className={classes.video}
         autoPlay
         loop
         muted
         preload="auto"
       >
-        <source
+        <Box
+          component="source"
           src={src.mp4}
           type="video/mp4"
         />
-        <source
+        <Box
+          component="source"
           src={src.mov}
           type="video/mov"
         />
-        <source
+        <Box
+          component="source"
           src={src.ogv}
           type="video/ogv"
         />
-      </video>
-    </div>
+      </Box>
+    </Box>
   )
 }
 

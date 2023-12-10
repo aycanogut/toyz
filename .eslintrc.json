@@ -56,6 +56,7 @@
               ["^react", "^@?\\w"],
               ["^next", "^@?\\w"],
               ["^next-intl", "^@?\\w"],
+              ["^mantine", "^@?\\w"],
               ["^framer-motion", "^@?\\w"],
               ["^classnames", "^@?\\w"],
               ["^(@|components)(/.*|$)"],

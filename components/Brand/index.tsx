@@ -1,6 +1,10 @@
+import { Box } from '@mantine/core'
+
 import Image from 'next/image'
 
 import { BrandAnimation } from '@/components/Motion'
+
+import classes from './index.module.css'
 
 interface BrandProps {
   src: string
@@ -9,7 +13,7 @@ interface BrandProps {
 
 function Brand({ src, alt }: BrandProps) {
   return (
-    <div className="absolute inset-0 z-10 flex h-screen w-full items-center justify-center">
+    <Box className={classes.brand}>
       <BrandAnimation>
         <Image
           src={src}
@@ -18,7 +22,7 @@ function Brand({ src, alt }: BrandProps) {
           height={200}
         />
       </BrandAnimation>
-    </div>
+    </Box>
   )
 }
 
