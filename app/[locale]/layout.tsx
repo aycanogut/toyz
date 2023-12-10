@@ -1,10 +1,9 @@
+import { MantineProvider } from '@mantine/core'
+
 import { type PropsWithChildren } from 'react'
 
 import { type Metadata } from 'next'
-import { Golos_Text } from 'next/font/google'
 import { notFound } from 'next/navigation'
-
-import { MantineProvider } from '@mantine/core'
 
 import GoogleAnalytics from '@/components/GoogleAnalytics'
 import Header from '@/components/Header'
@@ -15,12 +14,6 @@ import { navigation } from '@/routes/navigation'
 
 import '@mantine/core/styles.css'
 import '@mantine/core/styles/global.css'
-
-const golos = Golos_Text({
-  subsets: ['latin'],
-  variable: '--font-golos',
-  weight: ['400', '500', '600', '700', '800'],
-})
 
 interface MetadataProps {
   params: {

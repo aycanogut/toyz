@@ -4,8 +4,8 @@ import { useLocale } from 'next-intl'
 import { getTranslator } from 'next-intl/server'
 
 import { client } from '@/api/contentful'
-
 import Select from '@/components/Select'
+
 import Post from '../../../components/Post'
 
 async function ContentGrid() {

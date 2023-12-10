@@ -2,7 +2,7 @@
 
 import {
   Select as SelectMantine,
-  SelectProps as SelectMantineProps,
+  type SelectProps as SelectMantineProps,
 } from '@mantine/core'
 
 interface SelectProps extends SelectMantineProps {
