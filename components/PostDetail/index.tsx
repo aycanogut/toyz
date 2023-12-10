@@ -31,7 +31,10 @@ function PostDetail({
   const publishDate = new Date(date).toLocaleDateString()
 
   return (
-    <Container size="md">
+    <Container
+      size="md"
+      className={classes.container}
+    >
       <ScrollAnimation />
       <Box
         component="article"

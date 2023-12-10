@@ -1,3 +1,7 @@
+.container {
+  background-color: var(--mantine-color-black);
+}
+
 .article {
   font-family: var(--font-golos);
 }
