@@ -1,5 +1,3 @@
-import { Box } from '@mantine/core'
-
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 import { type Metadata } from 'next'
@@ -7,9 +5,7 @@ import { type Metadata } from 'next'
 import { useLocale } from 'next-intl'
 
 import { client } from '@/api/contentful'
-import PostDetail from '@/components/PostDetail'
-
-import classes from './index.module.css'
+import PostDetail from '@/modules/PostDetail'
 
 interface MetadataProps {
   params: {
@@ -62,17 +58,15 @@ async function PostsPage({ params }: PostsPageProps) {
   const { content, title, image, author, date } = post.fields as any
 
   return (
-    <Box className={classes.container}>
-      <PostDetail
-        title={title}
-        image={`https:${image?.fields?.file?.url}`}
-        alt={image.fields.description}
-        author={author}
-        date={date}
-      >
-        {documentToReactComponents(content)}
-      </PostDetail>
-    </Box>
+    <PostDetail
+      title={title}
+      image={`https:${image?.fields?.file?.url}`}
+      alt={image.fields.description}
+      author={author}
+      date={date}
+    >
+      {documentToReactComponents(content)}
+    </PostDetail>
   )
 }
 

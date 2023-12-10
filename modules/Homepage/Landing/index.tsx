@@ -1,7 +1,7 @@
 import { Box } from '@mantine/core'
 
-import Brand from '../Brand'
-import VideoOverlay from '../VideoOverlay'
+import Brand from '../../../components/Brand'
+import VideoOverlay from '../../../components/VideoOverlay'
 
 import classes from './index.module.css'
 
