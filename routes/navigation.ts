@@ -1,8 +1,8 @@
 import { type NavItemProps } from '@/types'
 
-import { urls } from './urls'
+import urls from './urls'
 
-export const navigation: NavItemProps[] = [
+const navigation: NavItemProps[] = [
   {
     label: 'toyz',
     href: urls.Toyz,
@@ -12,3 +12,5 @@ export const navigation: NavItemProps[] = [
     href: urls.About,
   },
 ]
+
+export default navigation

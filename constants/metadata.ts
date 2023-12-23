@@ -1,8 +1,29 @@
+const url = new URL('https://toyz-swart.vercel.app/')
+
 const metadata = {
+  metadataBase: url,
   title: 'TOYZ',
   description: {
-    tr: 'Karşı kültür ve modern sanatın güzel bir karışımı.',
-    en: 'A well blend of counter culture and modern art.',
+    tr: 'placeholder tr.',
+    en: 'placeholder en.',
+  },
+  openGraph: {
+    title: 'TOYZ',
+    description: {
+      tr: 'placeholder tr.',
+      en: 'placeholder en.',
+    },
+    image: 'https://placehold.co/600x400/EEE/31343C',
+  },
+  twitter: {
+    title: 'TOYZ',
+    card: 'summary_large_image',
+    site: '@bleedeleventh',
+    description: {
+      tr: 'placeholder tr.',
+      en: 'placeholder en.',
+    },
+    image: 'https://placehold.co/600x400/EEE/31343C',
   },
 }
 

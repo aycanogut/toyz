@@ -1,1 +1,3 @@
-export const locales = [{ label: 'tr' }, { label: 'en' }]
+const locales = [{ label: 'tr' }, { label: 'en' }]
+
+export default locales

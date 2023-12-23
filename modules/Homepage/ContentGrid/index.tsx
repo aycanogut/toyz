@@ -3,10 +3,8 @@ import { Container, SimpleGrid } from '@mantine/core'
 import { useLocale } from 'next-intl'
 import { getTranslator } from 'next-intl/server'
 
-import { client } from '@/api/contentful'
-import Select from '@/components/Select'
-
-import Post from '../../../components/Post'
+import { client } from '@/api'
+import { Post, Select } from '@/components'
 
 async function ContentGrid() {
   const locale = useLocale()

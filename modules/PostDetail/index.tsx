@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 import { useTranslations } from 'next-intl'
 
-import ScrollAnimation from '@/components/Motion/ScrollAnimation'
+import { ScrollAnimation } from '@/components'
 
 import classes from './index.module.css'
 
