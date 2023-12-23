@@ -1,8 +1,8 @@
-import { Box, List } from '@mantine/core'
-
 import Link from 'next/link'
 
 import { useTranslations } from 'next-intl'
+
+import { Box, List } from '@mantine/core'
 
 import { type NavItemProps } from '@/types'
 
