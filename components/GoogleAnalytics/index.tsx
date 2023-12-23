@@ -2,7 +2,7 @@
 
 import Script from 'next/script'
 
-import * as gtag from '@/helpers/gtag'
+import * as gtag from '@/helpers'
 
 const GoogleAnalytics = () => {
   return (

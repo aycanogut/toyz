@@ -1,4 +1,6 @@
-export const urls = {
+const urls = {
   Toyz: '/',
   About: '/about',
 }
+
+export default urls

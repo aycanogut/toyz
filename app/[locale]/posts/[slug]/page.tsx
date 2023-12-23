@@ -4,8 +4,8 @@ import { type Metadata } from 'next'
 
 import { useLocale } from 'next-intl'
 
-import { client } from '@/api/contentful'
-import PostDetail from '@/modules/PostDetail'
+import { client } from '@/api'
+import { PostDetail } from '@/modules'
 
 interface MetadataProps {
   params: {

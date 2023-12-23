@@ -2,7 +2,7 @@ import { Box } from '@mantine/core'
 
 import Image from 'next/image'
 
-import { BrandAnimation } from '@/components/Motion'
+import { BrandAnimation } from '@/components'
 
 import classes from './index.module.css'
 
