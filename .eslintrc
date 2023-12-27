@@ -3,8 +3,16 @@
     "browser": true,
     "es2021": true
   },
-  "plugins": ["@typescript-eslint", "prettier"],
-  "extends": ["next", "next/core-web-vitals", "plugin:@typescript-eslint/recommended", "prettier"],
+  "plugins": [
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
   "parser": "@typescript-eslint/parser",
   "rules": {
     "import/no-anonymous-default-export": "off",
@@ -37,11 +45,6 @@
             "position": "before"
           },
           {
-            "pattern": "next-intl/*",
-            "group": "external",
-            "position": "before"
-          },
-          {
             "pattern": "@contentful/*",
             "group": "external",
             "position": "before"
@@ -50,11 +53,22 @@
             "pattern": "@mantine/*",
             "group": "external",
             "position": "before"
-          },
-          
+          }
         ],
-        "groups": ["builtin", "external", "type", "object", "internal", "parent", "sibling", "index"],
-        "pathGroupsExcludedImportTypes": ["react", "next"],
+        "groups": [
+          "builtin",
+          "external",
+          "type",
+          "object",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "pathGroupsExcludedImportTypes": [
+          "react",
+          "next"
+        ],
         "newlines-between": "always",
         "alphabetize": {
           "order": "asc"
@@ -68,7 +82,10 @@
   },
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx"],
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
       "rules": {
         "@typescript-eslint/no-unused-vars": "warn",
         "@typescript-eslint/restrict-template-expressions": "off",
