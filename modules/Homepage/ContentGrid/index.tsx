@@ -1,7 +1,8 @@
+import { getTranslator } from 'next-intl/server'
+
 import { Container, SimpleGrid } from '@mantine/core'
 
 import { useLocale } from 'next-intl'
-import { getTranslator } from 'next-intl/server'
 
 import { client } from '@/api'
 import { Post, Select } from '@/components'

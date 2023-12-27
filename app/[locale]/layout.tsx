@@ -1,9 +1,10 @@
-import { MantineProvider } from '@mantine/core'
-
 import { type PropsWithChildren } from 'react'
 
-import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
+
+import { MantineProvider } from '@mantine/core'
+
+import { type Metadata } from 'next'
 
 import { GoogleAnalytics, Header, LanguagePicker } from '@/components'
 import { metadata } from '@/constants'

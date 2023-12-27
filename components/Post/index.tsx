@@ -1,7 +1,7 @@
-import { Anchor, Box, Text, Title } from '@mantine/core'
-
 import Image from 'next/image'
 import Link from 'next/link'
+
+import { Anchor, Box, Text, Title } from '@mantine/core'
 
 import { useLocale } from 'next-intl'
 

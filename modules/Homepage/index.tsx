@@ -2,7 +2,6 @@ import { Box, Container } from '@mantine/core'
 
 import ContentGrid from './ContentGrid'
 import Landing from './Landing'
-
 import classes from './index.module.css'
 
 function Homepage() {

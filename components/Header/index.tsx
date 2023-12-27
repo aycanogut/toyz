@@ -1,6 +1,6 @@
-import { Box, List } from '@mantine/core'
-
 import Link from 'next/link'
+
+import { Box, List } from '@mantine/core'
 
 import { useTranslations } from 'next-intl'
 

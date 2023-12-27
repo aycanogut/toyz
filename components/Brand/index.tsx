@@ -1,6 +1,6 @@
-import { Box } from '@mantine/core'
-
 import Image from 'next/image'
+
+import { Box } from '@mantine/core'
 
 import { BrandAnimation } from '@/components'
 

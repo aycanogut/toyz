@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */ // TODO
+
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 import { type Metadata } from 'next'
-
 import { useLocale } from 'next-intl'
 
 import { client } from '@/api'

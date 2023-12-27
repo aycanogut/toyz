@@ -1,8 +1,8 @@
-import { Box, Container } from '@mantine/core'
-
 import { type ReactNode } from 'react'
 
 import Image from 'next/image'
+
+import { Box, Container } from '@mantine/core'
 
 import { useTranslations } from 'next-intl'
 
