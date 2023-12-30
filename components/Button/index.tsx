@@ -7,20 +7,12 @@ import { cn } from '@/utils';
 import buttonVariants from './buttonVariants';
 
 function Button(
-  {
-    children,
-    variant,
-    size,
-    radius,
-    fullWidth,
-    className,
-    ...props
-  }: PropsWithChildren & ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>,
+  { children, variant, size, className, ...props }: PropsWithChildren & ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>,
   ref: Ref<HTMLButtonElement>
 ) {
   return (
     <button
-      className={cn(buttonVariants({ variant, size, radius, fullWidth, className }))}
+      className={cn(buttonVariants({ variant, size, className }))}
       ref={ref}
       {...props}
     >
