@@ -1,9 +1,0 @@
-.scroll {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: rem(4);
-  transform-origin: left;
-  background-color: var(--mantine-color-white);
-}

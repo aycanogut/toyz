@@ -1,9 +1,3 @@
-export { default as Brand } from './Brand'
-export { default as GoogleAnalytics } from './GoogleAnalytics'
-export { default as Header } from './Header'
-export { default as LanguagePicker } from './LanguagePicker'
-export { default as BrandAnimation } from './Motion/BrandAnimation'
-export { default as ScrollAnimation } from './Motion/ScrollAnimation'
-export { default as Post } from './Post'
-export { default as Select } from './Select'
-export { default as VideoOverlay } from './VideoOverlay'
+export { default as BrandLogo } from './BrandLogo';
+export { default as Button } from './Button';
+export { default as Icon } from './Icon';

@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-background: #161617;
+  --color-background-light: #373737;
+  --color-text-light: #E1E1E1;
+  --color-text-dark: #858585;
+  --color-text-darker: #252525;
+  --color-button-background: #EDEDED;
+  --color-border-dark: #565656;
+}

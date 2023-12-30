@@ -1,2 +1,1 @@
-export { default as Homepage } from './Homepage'
-export { default as PostDetail } from './PostDetail'
+export { default as HomeModule } from './Home';
