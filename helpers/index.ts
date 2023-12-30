@@ -1,1 +1,0 @@
-export { GA_TRACKING_ID, event, pageview } from './gtag'
