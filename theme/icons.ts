@@ -1,19 +1,30 @@
-
-import { GiHamburgerMenu } from 'react-icons/gi';
-
-import {
-  
-  RiCloseFill,
-} from 'react-icons/ri';
+import { AiOutlineTag } from 'react-icons/ai';
+import { RiArrowRightLine, RiUserLine, RiMenuLine, RiCalendarLine, RiCloseFill } from 'react-icons/ri';
 
 const icons = [
   {
     label: 'hamburger',
-    icon: GiHamburgerMenu,
+    icon: RiMenuLine,
   },
   {
     label: 'close',
     icon: RiCloseFill,
+  },
+  {
+    label: 'arrow-right',
+    icon: RiArrowRightLine,
+  },
+  {
+    label: 'calendar',
+    icon: RiCalendarLine,
+  },
+  {
+    label: 'tag',
+    icon: AiOutlineTag,
+  },
+  {
+    label: 'user',
+    icon: RiUserLine,
   },
 ] as const;
 
