@@ -15,6 +15,23 @@ const config: Config = {
       },
     },
     extend: {
+      colors: {
+        background: {
+          dark: 'var(--color-background)',
+          light: 'var(--color-background-light)',
+        },
+        title: {
+          light: 'var(--color-text-light)',
+          dark: 'var(--color-text-dark)',
+          darker: 'var(--color-text-darker)',
+        },
+        button: {
+          background: 'var(--color-button-background)',
+        },
+        border: {
+          dark: 'var(--color-border)',
+        },
+      },
       fontFamily: {
         grotesque: ['var(--font-grotesque)'],
       },
