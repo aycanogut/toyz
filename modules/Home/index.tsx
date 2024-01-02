@@ -1,5 +1,12 @@
+import VideoOverlay from './VideoOverlay';
+
 function HomeModule() {
-  return <h1>home</h1>;
+  return (
+    <div>
+      <VideoOverlay />
+      <div className="h-[1500px] w-full">HOME</div>
+    </div>
+  );
 }
 
 export default HomeModule;
