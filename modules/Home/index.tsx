@@ -1,11 +1,11 @@
-import VideoOverlay from './VideoOverlay';
+import Slider from './Slider';
 
 function HomeModule() {
   return (
-    <div>
-      <VideoOverlay />
+    <>
+      <Slider />
       <div className="h-[1500px] w-full">HOME</div>
-    </div>
+    </>
   );
 }
 
