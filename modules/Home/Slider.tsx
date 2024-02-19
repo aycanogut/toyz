@@ -15,7 +15,6 @@ function Carousel() {
       delay: 300,
       jump: true,
       playOnInit: true,
-      stopOnFocusIn: true,
       stopOnInteraction: false,
       stopOnMouseEnter: false,
       stopOnLastSnap: false,
