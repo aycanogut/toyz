@@ -1,12 +1,20 @@
 {
-  "name": "iso-portal",
+  "name": "toyz",
+  "author": {
+    "name": "Aycan Öğüt",
+    "email": "aycanonfire@gmail.com",
+    "url": "https://aycan.dev",
+    "github":"https://github.com/aycanogut"
+  },
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "checkPackageVersions": "npx npm-check-updates",
+    "updatePackageVersions": "npx npm-check-updates -u && yarn install"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.0",
