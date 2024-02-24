@@ -10,8 +10,8 @@ interface Props {
 
 function Card({ title, image, items }: Props) {
   return (
-    <article className="flex flex-col items-center gap-6">
-      <div className="relative h-52 w-full">
+    <article className="flex h-full flex-col items-center gap-6 md:flex-row md:items-stretch md:gap-10 lg:gap-14">
+      <div className="relative h-52 w-full md:h-[22.5rem]">
         <Image
           src={image}
           alt={title}
@@ -19,17 +19,26 @@ function Card({ title, image, items }: Props) {
           className="object-cover"
         />
       </div>
-      <header className="w-full">
-        <h2 className="text-start font-grotesque text-2xl font-medium text-title-light">{title}</h2>
-      </header>
-      <ArticleDetails items={items} />
-      <Button
-        className="w-full"
-        appendIcon="arrow-right"
-        iconSize={24}
-      >
-        SHOW MORE
-      </Button>
+      <div className="flex w-full flex-col gap-6">
+        <header className="w-full">
+          <h2 className="text-start font-grotesque text-2xl font-medium text-title-light md:text-3xl lg:text-4xl">{title}</h2>
+        </header>
+        <ArticleDetails items={items} />
+
+        {/**
+         * @todo
+         * Add a link to the button to redirect the detail page of the article.
+         */}
+        <div className="w-full md:mt-6 md:w-40">
+          <Button
+            className="w-full"
+            appendIcon="arrow-right"
+            iconSize={24}
+          >
+            SHOW MORE
+          </Button>
+        </div>
+      </div>
     </article>
   );
 }
