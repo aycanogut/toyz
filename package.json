@@ -4,7 +4,7 @@
     "name": "Aycan Öğüt",
     "email": "aycanonfire@gmail.com",
     "url": "https://aycan.dev",
-    "github":"https://github.com/aycanogut"
+    "github": "https://github.com/aycanogut"
   },
   "version": "0.1.0",
   "private": true,
@@ -19,8 +19,8 @@
   "dependencies": {
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "embla-carousel-autoplay": "^8.0.0",
-    "embla-carousel-react": "^8.0.0",
+    "embla-carousel-autoplay": "7.1.0",
+    "embla-carousel-react": "7.1.0",
     "framer-motion": "^11.0.6",
     "next": "14.1.0",
     "react": "18.2.0",
