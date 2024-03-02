@@ -5,7 +5,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: 'bg-button-background text-title-darker',
+        primary: 'bg-button-background text-title-darker hover:bg-background-light hover:text-title-light',
         secondary: 'bg-transparent text-title-light border-border-dark border',
       },
       size: {
