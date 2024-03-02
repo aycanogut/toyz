@@ -33,9 +33,10 @@ const variants: Variants = {
 function HeaderDesktop() {
   const pathname = usePathname();
   const [isScrolling, setIsScrolling] = useState(false);
+  const headerVisibleHeight = 250;
 
   const handleScroll = () => {
-    if (window.scrollY >= window.innerHeight) {
+    if (window.scrollY >= headerVisibleHeight) {
       setIsScrolling(true);
     } else {
       setIsScrolling(false);
@@ -43,6 +44,9 @@ function HeaderDesktop() {
   };
 
   useEffect(() => {
+    console.log(window.scrollY, 'scrollY');
+    console.log(window.innerHeight, 'innerHeight');
+
     window.addEventListener('scroll', handleScroll);
 
     return () => {
