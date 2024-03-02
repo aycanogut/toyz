@@ -2,7 +2,7 @@ interface MockDataProps {
   id: number;
   title: string;
   image: string;
-  items: ArticleDetailsProps[];
+  items: ContentDetailsProps[];
 }
 
 const mockData: MockDataProps[] = [

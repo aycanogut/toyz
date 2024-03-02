@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
-import { ArticleDetails, Button } from '@/components';
+import { ContentDetails, Button } from '@/components';
 
 interface Props {
   title: string;
   image: string;
-  items: ArticleDetailsProps[];
+  items: ContentDetailsProps[];
 }
 
 function Card({ title, image, items }: Props) {
@@ -23,7 +23,7 @@ function Card({ title, image, items }: Props) {
         <header className="w-full">
           <h2 className="text-start font-grotesque text-2xl font-medium text-title-light md:text-3xl lg:text-4xl">{title}</h2>
         </header>
-        <ArticleDetails items={items} />
+        <ContentDetails items={items} />
 
         {/**
          * @todo
