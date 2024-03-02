@@ -1,4 +1,4 @@
-interface ContentDetailsProps {
+interface ContentLabelsProps {
   icon: IconLabelProps;
   label: string;
 }
