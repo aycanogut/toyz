@@ -35,6 +35,18 @@ const images = [
     id: 8,
     url: '/assets/carousel/9.webp',
   },
+  {
+    id: 9,
+    url: '/assets/carousel/10.webp',
+  },
+  {
+    id: 10,
+    url: '/assets/carousel/11.webp',
+  },
+  {
+    id: 11,
+    url: '/assets/carousel/12.webp',
+  },
 ];
 
 export default images;
