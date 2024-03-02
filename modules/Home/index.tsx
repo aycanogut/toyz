@@ -1,11 +1,11 @@
-import Articles from './Articles';
+import Content from './Content';
 import Slider from './Slider';
 
 function HomeModule() {
   return (
     <section>
       <Slider />
-      <Articles />
+      <Content />
     </section>
   );
 }
