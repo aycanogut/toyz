@@ -2,7 +2,7 @@ interface MockDataProps {
   id: number;
   title: string;
   image: string;
-  items: ContentDetailsProps[];
+  items: ContentLabelsProps[];
   slug: string;
 }
 
