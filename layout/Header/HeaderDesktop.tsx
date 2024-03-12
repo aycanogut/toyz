@@ -35,6 +35,8 @@ function HeaderDesktop() {
   const [isScrolling, setIsScrolling] = useState(false);
   const headerVisibleHeight = 250;
 
+  const isHomepage = pathname === '/';
+
   const handleScroll = () => {
     if (window.scrollY >= headerVisibleHeight) {
       setIsScrolling(true);
@@ -44,9 +46,6 @@ function HeaderDesktop() {
   };
 
   useEffect(() => {
-    console.log(window.scrollY, 'scrollY');
-    console.log(window.innerHeight, 'innerHeight');
-
     window.addEventListener('scroll', handleScroll);
 
     return () => {
@@ -60,8 +59,8 @@ function HeaderDesktop() {
         initial="initial"
         animate={isScrolling ? 'animate' : 'initial'}
         exit="exit"
-        variants={variants}
-        className="fixed left-0 right-0 top-0 z-50"
+        variants={isHomepage ? variants : {}}
+        className={cn(isHomepage && 'fixed left-0 right-0 top-0 z-50')}
       >
         <div className="flex w-full px-20 py-4 lg:h-24 lg:bg-background-light">
           <Brand
