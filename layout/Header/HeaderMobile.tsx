@@ -14,16 +14,16 @@ function HeaderMobile() {
   };
 
   return (
-    <header className="absolute left-0 top-0 z-10 px-2 py-4">
+    <header className="relative z-50">
       <Button
         onClick={handleMenuToggle}
-        className="bg-transparent p-0 text-button-background lg:hidden"
+        className="absolute left-4 top-4 bg-transparent p-0 text-button-background md:top-6 lg:hidden"
         appendIcon="hamburger"
         iconSize={48}
       />
 
       {isMenuOpen && (
-        <div className="absolute inset-0 h-screen w-screen bg-background-light px-2 py-4">
+        <div className="absolute inset-0 h-screen w-screen bg-background-light p-4">
           <Button
             onClick={handleMenuToggle}
             className="bg-transparent p-0 text-button-background lg:hidden"
