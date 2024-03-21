@@ -37,7 +37,7 @@ function Carousel() {
           {images.map(item => {
             return (
               <div
-                className="relative h-[34.1875rem] w-full min-w-0 flex-shrink-0 flex-grow-0 md:h-[50.25rem]"
+                className="relative h-[34.1875rem] w-full min-w-0 flex-shrink-0 flex-grow-0 md:h-screen"
                 key={item.id}
               >
                 <Image
