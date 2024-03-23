@@ -1,16 +1,13 @@
-'use client';
-
-import dynamic from 'next/dynamic';
-
-import { useWindowSize } from 'usehooks-ts';
-
-const HeaderMobile = dynamic(() => import('./HeaderMobile'));
-const HeaderDesktop = dynamic(() => import('./HeaderDesktop'));
+import HeaderDesktop from './HeaderDesktop';
+import HeaderMobile from './HeaderMobile';
 
 function Header() {
-  const { width } = useWindowSize();
-
-  return width < 1024 ? <HeaderMobile /> : <HeaderDesktop />;
+  return (
+    <>
+      <HeaderMobile />
+      <HeaderDesktop />
+    </>
+  );
 }
 
 export default Header;

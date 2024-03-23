@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 import Link from 'next/link';
@@ -14,7 +16,7 @@ function HeaderMobile() {
   };
 
   return (
-    <header className="relative z-50">
+    <header className="relative z-50 lg:hidden">
       <Button
         onClick={handleMenuToggle}
         className="absolute left-4 top-4 bg-transparent p-0 text-button-background md:top-6 lg:hidden"
