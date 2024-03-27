@@ -8,10 +8,13 @@ async function getData(): Promise<SliderImageProps[]> {
   return response[0].fields.images as SliderImageProps[];
 }
 
-async function SliderContainer() {
+/**
+ * We are fetching the data from the server on container component and passing it to the client component.
+ */
+async function SliderDataContainer() {
   const data = await getData();
 
   return <Slider images={data ?? []} />;
 }
 
-export default SliderContainer;
+export default SliderDataContainer;
