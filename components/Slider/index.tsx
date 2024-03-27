@@ -9,7 +9,7 @@ async function getData(): Promise<SliderImageProps[]> {
 }
 
 /**
- * We are fetching the data from the server on container component and passing it to the client component.
+ * Fetching the data from the server on the data container component and passing it to the client component.
  */
 async function SliderDataContainer() {
   const data = await getData();
