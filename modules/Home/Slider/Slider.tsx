@@ -11,7 +11,7 @@ interface Props {
   images: SliderImageProps[];
 }
 
-function Carousel({ images }: Props) {
+function Slider({ images }: Props) {
   const [emblaRef] = useEmblaCarousel(OPTIONS, [
     Autoplay({
       delay: 300,
@@ -43,8 +43,8 @@ function Carousel({ images }: Props) {
                 key={item.fields.title}
               >
                 <Image
-                  src={`https://${item.fields.file.url}`}
-                  alt="Your alt text"
+                  src={`https:${item.fields.file.url}`}
+                  alt={item.fields.title}
                   fill
                   className="absolute left-0 top-0 block h-full w-full object-cover"
                 />
@@ -57,4 +57,4 @@ function Carousel({ images }: Props) {
   );
 }
 
-export default Carousel;
+export default Slider;
