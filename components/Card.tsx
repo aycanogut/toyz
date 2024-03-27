@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { Button, ContentLabels } from '@/components';
 
@@ -6,9 +7,10 @@ interface Props {
   title: string;
   image: string;
   items: ContentLabelsProps[];
+  slug: string;
 }
 
-function Card({ title, image, items }: Props) {
+function Card({ title, image, items, slug }: Props) {
   return (
     <article className="flex h-full flex-col items-center gap-6 md:flex-row md:items-stretch md:gap-10 lg:gap-14">
       <div className="relative h-52 w-full md:h-[20rem] lg:h-[22.5rem]">
@@ -25,18 +27,16 @@ function Card({ title, image, items }: Props) {
         </header>
         <ContentLabels items={items} />
 
-        {/**
-         * @todo
-         * Add a link to the button to redirect the detail page of the article.
-         */}
         <div className="w-full md:mt-6 md:w-40">
-          <Button
-            className="w-full"
-            appendIcon="arrow-right"
-            iconSize={24}
-          >
-            SHOW MORE
-          </Button>
+          <Link href={`/content/${slug}`}>
+            <Button
+              className="w-full"
+              appendIcon="arrow-right"
+              iconSize={24}
+            >
+              SHOW MORE
+            </Button>
+          </Link>
         </div>
       </div>
     </article>
