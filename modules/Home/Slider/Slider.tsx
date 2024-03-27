@@ -5,11 +5,13 @@ import Image from 'next/image';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react';
 
-import images from './sliderImages';
-
 const OPTIONS: EmblaOptionsType = { containScroll: 'keepSnaps', dragFree: false, loop: true, align: 'start' };
 
-function Carousel() {
+interface Props {
+  images: SliderImageProps[];
+}
+
+function Carousel({ images }: Props) {
   const [emblaRef] = useEmblaCarousel(OPTIONS, [
     Autoplay({
       delay: 300,
@@ -38,10 +40,10 @@ function Carousel() {
             return (
               <div
                 className="relative h-[34.1875rem] w-full min-w-0 flex-shrink-0 flex-grow-0 md:h-screen"
-                key={item.id}
+                key={item.fields.title}
               >
                 <Image
-                  src={item.url}
+                  src={`https://${item.fields.file.url}`}
                   alt="Your alt text"
                   fill
                   className="absolute left-0 top-0 block h-full w-full object-cover"
