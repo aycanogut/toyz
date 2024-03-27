@@ -5,10 +5,10 @@
 :root {
   --color-background: #161617;
   --color-background-light: #373737;
-  --color-text-light: #E1E1E1;
+  --color-text-light: #e1e1e1;
   --color-text-dark: #858585;
   --color-text-darker: #252525;
-  --color-button-background: #EDEDED;
+  --color-button-background: #ededed;
   --color-border-dark: #565656;
 }
 
@@ -17,13 +17,11 @@ body {
   --sb-thumb-color: var(--color-background);
   --sb-size: 12px;
 
-  scrollbar-color: 
-    var(--sb-thumb-color) 
-    var(--sb-track-color);
+  scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
 }
 
 body::-webkit-scrollbar {
-  width: var(--sb-size) 
+  width: var(--sb-size);
 }
 
 body::-webkit-scrollbar-track {
@@ -35,4 +33,29 @@ body::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
   border-radius: 1px;
   border: 3px solid var(--color-background-light);
+}
+
+/* Defines spacing values for this elements because tailwindcss normalizer removes default margins for typography elements. */
+.rich-text-renderer > h1,
+h2,
+h3,
+h4,
+h5 {
+  @apply mb-5 mt-7;
+}
+
+.rich-text-renderer h6 {
+  @apply my-3;
+}
+
+.rich-text-renderer p {
+  @apply mb-4;
+}
+
+.rich-text-renderer ul li p {
+  @apply mb-4;
+}
+
+.rich-text-renderer ul li h6 {
+  @apply my-3;
 }
