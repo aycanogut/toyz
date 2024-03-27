@@ -1,7 +1,12 @@
-import { HomeModule } from '@/modules';
+import { Slider, Content } from '@/components';
 
 function Home() {
-  return <HomeModule />;
+  return (
+    <>
+      <Slider />
+      <Content />
+    </>
+  );
 }
 
 export default Home;

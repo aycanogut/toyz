@@ -18,3 +18,13 @@ export const getEntriesByType = async (type: string) => {
 
   return response.items;
 };
+
+export const getEntryBySlug = async (type: string, slug: string) => {
+  const queryOptions = {
+    content_type: type,
+    'fields.slug[match]': slug,
+  };
+  const queryResult = await client.getEntries(queryOptions);
+
+  return queryResult.items[0];
+};
