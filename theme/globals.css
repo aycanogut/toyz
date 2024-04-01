@@ -13,11 +13,9 @@
 }
 
 body {
-  --sb-track-color: var(--color-background-light);
-  --sb-thumb-color: var(--color-background);
+  --sb-track-color: var(--color-text-darker);
+  --sb-thumb-color: var(--color-border-dark);
   --sb-size: 12px;
-
-  scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
 }
 
 body::-webkit-scrollbar {
@@ -26,13 +24,18 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-track {
   background: var(--sb-track-color);
-  border-radius: 1px;
+  border-radius: 2px;
 }
 
 body::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
-  border-radius: 1px;
-  border: 3px solid var(--color-background-light);
+  border-radius: 2px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
 }
 
 /* Defines spacing values for this elements because tailwindcss normalizer removes default margins for typography elements. */
