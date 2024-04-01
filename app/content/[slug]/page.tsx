@@ -4,7 +4,6 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 import { ContentLabels } from '@/components';
 import { getEntryBySlug } from '@/contentful/client';
-import { cn } from '@/utils';
 
 async function getData(slug: string): Promise<ContentProps> {
   const response = await getEntryBySlug('content', slug);
@@ -53,7 +52,7 @@ async function ContentDetails({ params }: { params: { slug: string } }) {
             </div>
           </div>
 
-          <div className={cn('text-xl leading-8 text-title-light md:text-2xl lg:leading-9', 'rich-text-renderer')}>
+          <div className="prose min-w-full text-title-light md:prose-lg lg:prose-xl">
             {/* eslint-disable-next-line @typescript-eslint/no-explicit-any  */}
             {documentToReactComponents(data.fields.content as any)}
           </div>
