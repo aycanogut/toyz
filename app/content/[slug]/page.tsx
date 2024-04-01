@@ -52,7 +52,7 @@ async function ContentDetails({ params }: { params: { slug: string } }) {
             </div>
           </div>
 
-          <div className="prose md:prose-lg lg:prose-xl min-w-full text-title-light">
+          <div className="prose min-w-full text-title-light md:prose-lg lg:prose-xl">
             {/* eslint-disable-next-line @typescript-eslint/no-explicit-any  */}
             {documentToReactComponents(data.fields.content as any)}
           </div>
