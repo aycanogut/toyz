@@ -4,7 +4,6 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 import { ContentLabels } from '@/components';
 import { getEntryBySlug } from '@/contentful/client';
-import { cn } from '@/utils';
 
 async function getData(slug: string): Promise<ContentProps> {
   const response = await getEntryBySlug('content', slug);
