@@ -37,28 +37,3 @@ body::-webkit-scrollbar-thumb {
     scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
   }
 }
-
-/* Defines spacing values for this elements because tailwindcss normalizer removes default margins for typography elements. */
-.rich-text-renderer > h1,
-h2,
-h3,
-h4,
-h5 {
-  @apply mb-5 mt-7;
-}
-
-.rich-text-renderer h6 {
-  @apply my-3;
-}
-
-.rich-text-renderer p {
-  @apply mb-4;
-}
-
-.rich-text-renderer ul li p {
-  @apply mb-4;
-}
-
-.rich-text-renderer ul li h6 {
-  @apply my-3;
-}
