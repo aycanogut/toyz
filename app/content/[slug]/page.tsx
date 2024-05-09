@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
@@ -60,7 +61,7 @@ async function ContentDetails({ params }: { params: { slug: string } }) {
                 /**
                  * Converts Contentful embedded asset entry to an Image component
                  */
-                [BLOCKS.EMBEDDED_ASSET]: (node: EmbedImageProps) => {
+                [BLOCKS.EMBEDDED_ASSET]: node => {
                   const url = node.data?.target?.fields?.file?.url;
                   const title = node?.data?.target?.fields?.title;
                   const description = node?.data?.target?.fields?.description;
@@ -80,7 +81,7 @@ async function ContentDetails({ params }: { params: { slug: string } }) {
                 /**
                  * Converts Contentful embedded entry to a Video component
                  */
-                [INLINES.EMBEDDED_ENTRY]: (node: EmbedVideoProps) => {
+                [INLINES.EMBEDDED_ENTRY]: node => {
                   const description = node?.data?.target?.fields?.description;
                   const url = node?.data?.target?.fields?.url ?? '';
 
@@ -89,6 +90,23 @@ async function ContentDetails({ params }: { params: { slug: string } }) {
                       description={description}
                       url={url}
                     />
+                  );
+                },
+
+                /**
+                 * Converts Contentful hyperlink to a Next.js Link component
+                 */
+                [INLINES.HYPERLINK]: node => {
+                  /* eslint-disable-next-line @typescript-eslint/no-explicit-any  */
+                  const { value } = node.content[0] as any;
+
+                  return (
+                    <Link
+                      href={node.data.uri}
+                      target="_blank"
+                    >
+                      {value}
+                    </Link>
                   );
                 },
               },
