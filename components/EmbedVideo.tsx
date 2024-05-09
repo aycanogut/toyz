@@ -5,7 +5,7 @@ interface Props {
 
 function EmbedVideo({ description, url }: Props) {
   return (
-    <div className="flex flex-col justify-center">
+    <>
       <iframe
         src={url}
         title="Iframe video player"
@@ -16,8 +16,8 @@ function EmbedVideo({ description, url }: Props) {
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
       />
-      {description && <span className="mx-auto mt-2 text-sm">{description}</span>}
-    </div>
+      {description && <div className="mt-2 flex justify-center text-sm">{description}</div>}
+    </>
   );
 }
 
