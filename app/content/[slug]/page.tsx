@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS, INLINES } from '@contentful/rich-text-types';
+import { Document, BLOCKS, INLINES } from '@contentful/rich-text-types';
 
 import { ContentLabels, EmbedVideo, ImageAsset } from '@/components';
 import { getEntryBySlug } from '@/contentful/client';
@@ -55,8 +55,7 @@ async function ContentDetails({ params }: { params: { slug: string } }) {
           </div>
 
           <div className="prose min-w-full text-title-light md:prose-lg lg:prose-xl prose-headings:text-title-light prose-a:text-title-light prose-li:-my-5">
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any  */}
-            {documentToReactComponents(data.fields.content as any, {
+            {documentToReactComponents(data.fields.content as unknown as Document, {
               renderNode: {
                 /**
                  * Converts Contentful embedded asset entry to an Image component
@@ -97,8 +96,7 @@ async function ContentDetails({ params }: { params: { slug: string } }) {
                  * Converts Contentful hyperlink to a Next.js Link component
                  */
                 [INLINES.HYPERLINK]: node => {
-                  /* eslint-disable-next-line @typescript-eslint/no-explicit-any  */
-                  const { value } = node.content[0] as any;
+                  const { value } = node.content[0] as unknown as { value: string };
 
                   return (
                     <Link
