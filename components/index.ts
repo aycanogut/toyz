@@ -5,3 +5,5 @@ export { default as Card } from './Card';
 export { default as ContentLabels } from './ContentLabels';
 export { default as Content } from './Content';
 export { default as Slider } from './Slider';
+export { default as ImageAsset } from './ImageAsset';
+export { default as EmbedVideo } from './EmbedVideo';
