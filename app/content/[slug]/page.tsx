@@ -1,7 +1,8 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { BLOCKS, INLINES } from '@contentful/rich-text-types';
+import { Document, BLOCKS, INLINES } from '@contentful/rich-text-types';
 
 import { ContentLabels, EmbedVideo, ImageAsset } from '@/components';
 import { getEntryBySlug } from '@/contentful/client';
@@ -54,13 +55,12 @@ async function ContentDetails({ params }: { params: { slug: string } }) {
           </div>
 
           <div className="prose min-w-full text-title-light md:prose-lg lg:prose-xl prose-headings:text-title-light prose-a:text-title-light prose-li:-my-5">
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any  */}
-            {documentToReactComponents(data.fields.content as any, {
+            {documentToReactComponents(data.fields.content as unknown as Document, {
               renderNode: {
                 /**
                  * Converts Contentful embedded asset entry to an Image component
                  */
-                [BLOCKS.EMBEDDED_ASSET]: (node: EmbedImageProps) => {
+                [BLOCKS.EMBEDDED_ASSET]: node => {
                   const url = node.data?.target?.fields?.file?.url;
                   const title = node?.data?.target?.fields?.title;
                   const description = node?.data?.target?.fields?.description;
@@ -80,7 +80,7 @@ async function ContentDetails({ params }: { params: { slug: string } }) {
                 /**
                  * Converts Contentful embedded entry to a Video component
                  */
-                [INLINES.EMBEDDED_ENTRY]: (node: EmbedVideoProps) => {
+                [INLINES.EMBEDDED_ENTRY]: node => {
                   const description = node?.data?.target?.fields?.description;
                   const url = node?.data?.target?.fields?.url ?? '';
 
@@ -89,6 +89,22 @@ async function ContentDetails({ params }: { params: { slug: string } }) {
                       description={description}
                       url={url}
                     />
+                  );
+                },
+
+                /**
+                 * Converts Contentful hyperlink to a Next.js Link component
+                 */
+                [INLINES.HYPERLINK]: node => {
+                  const { value } = node.content[0] as unknown as { value: string };
+
+                  return (
+                    <Link
+                      href={node.data.uri}
+                      target="_blank"
+                    >
+                      {value}
+                    </Link>
                   );
                 },
               },
