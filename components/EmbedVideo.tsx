@@ -22,7 +22,7 @@ function EmbedVideo({ description, url }: Props) {
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
       />
-      {description && <div className="mt-2 flex justify-center text-sm">{description}</div>}
+      {description && <span className="mt-2 flex justify-center text-sm">{description}</span>}
     </>
   );
 }
