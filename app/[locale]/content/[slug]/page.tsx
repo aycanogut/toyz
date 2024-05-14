@@ -6,18 +6,16 @@ import { Document, BLOCKS, INLINES } from '@contentful/rich-text-types';
 
 import { ContentLabels, EmbedVideo, ImageAsset } from '@/components';
 import { getEntryBySlug } from '@/contentful/client';
+import { Locale } from '@/i18n';
 
-async function getData(slug: string): Promise<ContentProps> {
-  /**
-   * TODO: Burasi locale gore cekilecek
-   */
-  const response = await getEntryBySlug('content', slug);
+async function getData(slug: string, locale: Locale): Promise<ContentProps> {
+  const response = await getEntryBySlug('content', slug, locale);
 
   return response as unknown as ContentProps;
 }
 
-async function ContentDetails({ params }: { params: { slug: string } }) {
-  const data = await getData(params.slug);
+async function ContentDetails({ params }: { params: { slug: string; locale: Locale } }) {
+  const data = await getData(params.slug, params.locale);
 
   return (
     <section className="lg:pb-24 lg:pt-2">
