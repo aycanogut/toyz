@@ -27,31 +27,29 @@ function Slider({ images }: Props) {
   ]);
 
   return (
-    <div>
+    <div
+      className="overflow-hidden"
+      ref={emblaRef}
+    >
       <div
-        className="overflow-hidden"
-        ref={emblaRef}
+        className="flex touch-pan-y"
+        style={{ backfaceVisibility: 'hidden' }}
       >
-        <div
-          className="flex touch-pan-y"
-          style={{ backfaceVisibility: 'hidden' }}
-        >
-          {images.map(item => {
-            return (
-              <div
-                className="relative h-[34.1875rem] w-full min-w-0 flex-shrink-0 flex-grow-0 md:h-screen"
-                key={item.fields.title}
-              >
-                <Image
-                  src={`https:${item.fields.file.url}`}
-                  alt={item.fields.title}
-                  fill
-                  className="absolute left-0 top-0 block h-full w-full object-cover"
-                />
-              </div>
-            );
-          })}
-        </div>
+        {images.map(item => {
+          return (
+            <div
+              className="relative h-[34.1875rem] w-full min-w-0 flex-shrink-0 flex-grow-0 md:h-screen"
+              key={item.fields.title}
+            >
+              <Image
+                src={`https:${item.fields.file.url}`}
+                alt={item.fields.title}
+                fill
+                className="absolute left-0 top-0 block h-full w-full object-cover"
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
