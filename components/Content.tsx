@@ -5,9 +5,6 @@ import { getEntriesByType } from '@/contentful/client';
 import { Locale } from '@/i18n';
 
 async function getData(locale: Locale): Promise<ContentProps[]> {
-  /**
-   * TODO: Burasi locale gore cekilecek
-   */
   const response = await getEntriesByType('content', locale);
 
   return response as unknown as ContentProps[];
