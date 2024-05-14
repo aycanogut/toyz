@@ -60,9 +60,6 @@ function HeaderDesktop() {
             width={100}
             height={200}
           />
-
-          <LanguageSwitcher locale={locale as Locale} />
-
           <nav className="w-full">
             <ul className="flex h-full items-center justify-end gap-8">
               {navigationItems.map(item => (
@@ -84,6 +81,7 @@ function HeaderDesktop() {
               ))}
             </ul>
           </nav>
+          <LanguageSwitcher locale={locale as Locale} />
         </motion.header>
       </AnimatePresence>
     </div>
