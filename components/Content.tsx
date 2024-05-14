@@ -1,14 +1,19 @@
+import { useLocale } from 'next-intl';
+
 import { Card } from '@/components';
 import { getEntriesByType } from '@/contentful/client';
+import { Locale } from '@/i18n';
 
-async function getData(): Promise<ContentProps[]> {
-  const response = await getEntriesByType('content');
+async function getData(locale: Locale): Promise<ContentProps[]> {
+  const response = await getEntriesByType('content', locale);
 
   return response as unknown as ContentProps[];
 }
 
 async function Content() {
-  const data = await getData();
+  const locale = useLocale();
+
+  const data = await getData(locale as Locale);
 
   return (
     <div className="container flex flex-col gap-12 px-4 py-12">
