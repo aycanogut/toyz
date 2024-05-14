@@ -2,24 +2,31 @@
 
 import { useState, useEffect } from 'react';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 
 import { AnimatePresence, motion } from 'framer-motion';
+import { useLocale, useTranslations } from 'next-intl';
 
-import { Brand } from '@/components';
+import { Brand, LanguageSwitcher } from '@/components';
+import { Link, Locale } from '@/i18n';
 import { cn } from '@/utils';
 
 import navigationItems from './navigationItems';
 import variants from './variants';
 
 function HeaderDesktop() {
-  const pathname = usePathname();
   const [isScrolling, setIsScrolling] = useState(false);
 
-  const headerVisibleHeight = 250;
+  const pathnameWithLocale = usePathname();
 
-  const isHomepage = pathname === '/';
+  const locale = useLocale();
+  const t = useTranslations('Navigation');
+
+  const selectedLayoutSegment = useSelectedLayoutSegment();
+  const pathname = selectedLayoutSegment ? `/${selectedLayoutSegment}` : '/';
+  const isHomepage = pathnameWithLocale === `/${locale}`;
+
+  const headerVisibleHeight = 250;
 
   const handleScroll = () => {
     if (window.scrollY >= headerVisibleHeight) {
@@ -45,37 +52,36 @@ function HeaderDesktop() {
           animate={isScrolling ? 'animate' : 'initial'}
           exit="exit"
           variants={isHomepage ? variants : {}}
-          className={cn(isHomepage && 'fixed left-0 right-0 top-0 z-50')}
+          className={cn('flex w-full px-20 py-4 lg:h-24 lg:bg-background-light', isHomepage && 'fixed left-0 right-0 top-0 z-50')}
         >
-          <div className="flex w-full px-20 py-4 lg:h-24 lg:bg-background-light">
-            <Brand
-              src="/assets/logo.png"
-              alt="Brand"
-              width={100}
-              height={200}
-            />
-            <nav className="w-full">
-              <ul className="flex h-full items-center justify-end gap-8">
-                {navigationItems.map(item => (
-                  <li key={item.id}>
-                    <Link
-                      href={item.path}
-                      className="flex items-center gap-2"
+          <Brand
+            src="/assets/logo.png"
+            alt="Brand"
+            width={100}
+            height={200}
+          />
+          <nav className="w-full">
+            <ul className="flex h-full items-center justify-end gap-8">
+              {navigationItems.map(item => (
+                <li key={item.id}>
+                  <Link
+                    href={item.path}
+                    className="flex items-center gap-2"
+                  >
+                    <span
+                      className={cn(
+                        'font-grotesque text-2xl font-bold uppercase text-title-dark transition hover:text-title-light',
+                        pathname === item.path && 'text-title-light'
+                      )}
                     >
-                      <span
-                        className={cn(
-                          'font-grotesque text-2xl font-bold uppercase text-title-light',
-                          pathname === item.path ? 'text-title-light' : 'text-title-dark'
-                        )}
-                      >
-                        {item.name}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
+                      {t(item.name)}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <LanguageSwitcher locale={locale as Locale} />
         </motion.header>
       </AnimatePresence>
     </div>

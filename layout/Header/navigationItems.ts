@@ -1,17 +1,17 @@
 const navigationItems = [
   {
     id: 1,
-    name: 'Home',
+    name: 'home',
     path: '/',
   },
   {
     id: 2,
-    name: 'About',
+    name: 'about',
     path: '/about',
   },
   {
     id: 3,
-    name: 'Contact',
+    name: 'contact',
     path: '/contact',
   },
 ];
