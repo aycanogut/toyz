@@ -8,6 +8,9 @@ import { ContentLabels, EmbedVideo, ImageAsset } from '@/components';
 import { getEntryBySlug } from '@/contentful/client';
 
 async function getData(slug: string): Promise<ContentProps> {
+  /**
+   * TODO: Burasi locale gore cekilecek
+   */
   const response = await getEntryBySlug('content', slug);
 
   return response as unknown as ContentProps;
