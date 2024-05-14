@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { Button, ContentLabels } from '@/components';
+import { Link } from '@/i18n';
 
 interface Props {
   title: string;

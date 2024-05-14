@@ -2,14 +2,17 @@
 
 import { useState } from 'react';
 
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components';
+import { Link } from '@/i18n';
 
 import navigationItems from './navigationItems';
 
 function HeaderMobile() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  const t = useTranslations('Navigation');
 
   const handleMenuToggle = () => {
     setIsMenuOpen(prevState => !prevState);
@@ -48,7 +51,7 @@ function HeaderMobile() {
                     href={item.path}
                     className="flex items-center gap-2"
                   >
-                    <span className="font-grotesque text-2xl font-medium uppercase text-title-light">{item.name}</span>
+                    <span className="font-grotesque text-2xl font-medium uppercase text-title-light">{t(item.name)}</span>
                   </Link>
                 </Button>
               ))}
