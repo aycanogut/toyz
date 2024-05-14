@@ -1,5 +1,6 @@
 import { createClient } from 'contentful';
 
+import { Locale } from '@/i18n';
 import toyzConfig from '@/toyzConfig';
 
 export const createContentClient = () => {
@@ -11,18 +12,20 @@ export const createContentClient = () => {
 
 const client = createContentClient();
 
-export const getEntriesByType = async (type: string) => {
+export const getEntriesByType = async (type: string, locale: Locale) => {
   const response = await client.getEntries({
     content_type: type,
+    locale,
   });
 
   return response.items;
 };
 
-export const getEntryBySlug = async (type: string, slug: string) => {
+export const getEntryBySlug = async (type: string, slug: string, locale: Locale) => {
   const queryOptions = {
     content_type: type,
     'fields.slug[match]': slug,
+    locale,
   };
   const queryResult = await client.getEntries(queryOptions);
 
