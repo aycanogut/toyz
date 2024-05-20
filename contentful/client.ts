@@ -12,9 +12,10 @@ export const createContentClient = () => {
 
 const client = createContentClient();
 
-export const getEntriesByType = async (type: string, locale: Locale) => {
+export const getEntriesByType = async (type: string, locale: Locale, keyword: string) => {
   const response = await client.getEntries({
     content_type: type,
+    'fields.title[match]': keyword,
     locale,
   });
 

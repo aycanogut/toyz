@@ -5,8 +5,8 @@ import { Locale } from '@/i18n';
 
 import Slider from './Slider';
 
-async function getData(locale: Locale): Promise<SliderImageProps[]> {
-  const response = await getEntriesByType('slider', locale);
+async function getData(locale: Locale, query: string): Promise<SliderImageProps[]> {
+  const response = await getEntriesByType('slider', locale, query);
 
   return response[0].fields.images as SliderImageProps[];
 }
@@ -16,7 +16,7 @@ async function getData(locale: Locale): Promise<SliderImageProps[]> {
  */
 async function SliderDataContainer() {
   const locale = useLocale();
-  const data = await getData(locale as Locale);
+  const data = await getData(locale as Locale, '');
 
   return <Slider images={data ?? []} />;
 }
