@@ -16,6 +16,7 @@ export const getEntriesByType = async (type: string, locale: Locale, keyword: st
   const response = await client.getEntries({
     content_type: type,
     'fields.title[match]': keyword,
+    order: ['-sys.createdAt'],
     locale,
   });
 
