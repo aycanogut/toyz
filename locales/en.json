@@ -3,5 +3,10 @@
     "home": "home",
     "about": "about",
     "contact": "contact"
+  },
+  "Search": {
+    "search": "search",
+    "placeholder": "Search for a content",
+    "result": "No results found"
   }
 }

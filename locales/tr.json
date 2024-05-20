@@ -3,5 +3,10 @@
     "home": "anasayfa",
     "about": "hakkımızda",
     "contact": "iletişim"
+  },
+  "Search": {
+    "search": "Ara",
+    "placeholder": "Bir içerik arayın",
+    "result": "Bir sonuç bulunamadı"
   }
 }
