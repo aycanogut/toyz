@@ -1,10 +1,16 @@
 import { Slider, Content } from '@/components';
 
-function Home() {
+function Home({
+  searchParams,
+}: {
+  searchParams?: {
+    query: string;
+  };
+}) {
   return (
     <>
       <Slider />
-      <Content />
+      <Content searchParams={searchParams} />
     </>
   );
 }
