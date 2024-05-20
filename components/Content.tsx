@@ -43,7 +43,7 @@ async function Content({
           />
         ))
       ) : (
-        <div className="font-grotesque text-2xl font-semibold text-title-light lg:text-3xl">{t('result')}</div>
+        <div className="font-grotesque text-2xl font-semibold text-title-light lg:mb-24 lg:text-3xl">{t('result')}</div>
       )}
     </div>
   );
