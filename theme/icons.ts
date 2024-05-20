@@ -1,5 +1,5 @@
 import { AiOutlineTag, AiOutlineLoading3Quarters } from 'react-icons/ai';
-import { RiArrowRightLine, RiUserLine, RiMenuLine, RiCalendarLine, RiCloseFill } from 'react-icons/ri';
+import { RiSearchLine, RiArrowRightLine, RiUserLine, RiMenuLine, RiCalendarLine, RiCloseFill } from 'react-icons/ri';
 
 const icons = [
   {
@@ -29,6 +29,10 @@ const icons = [
   {
     label: 'loading',
     icon: AiOutlineLoading3Quarters,
+  },
+  {
+    label: 'search',
+    icon: RiSearchLine,
   },
 ] as const;
 

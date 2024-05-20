@@ -31,7 +31,7 @@ async function ContentDetails({ params }: { params: { slug: string; locale: Loca
         </div>
 
         <header className="container space-y-6 px-4 pt-8 md:pb-8 lg:space-y-10 xl:px-0">
-          <h1 className=" text-start font-grotesque text-2xl font-medium text-title-light md:text-3xl lg:text-5xl lg:font-semibold">{data.fields.title}</h1>
+          <h1 className="text-start font-grotesque text-2xl font-medium text-title-light md:text-3xl lg:text-5xl lg:font-semibold">{data.fields.title}</h1>
 
           <ContentLabels items={data.fields.details} />
         </header>
