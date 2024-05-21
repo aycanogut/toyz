@@ -6,9 +6,13 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 import { useTranslations } from 'next-intl';
 
-import { Button, Icon } from '@/components';
+import { Button, Categories, Icon } from '@/components';
 
-function Search() {
+interface Props {
+  categories: string[];
+}
+
+function Search({ categories }: Props) {
   const [searchValue, setSearchValue] = useState('');
 
   const searchParams = useSearchParams();
@@ -19,12 +23,20 @@ function Search() {
 
   const handleSubmit = () => {
     const params = new URLSearchParams(searchParams);
-    params && params.set('query', searchValue.toLowerCase());
+
+    if (searchValue.length) {
+      params && params.set('query', searchValue);
+    } else {
+      params.delete('query');
+    }
+
     push(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   return (
-    <div className="flex flex-col gap-5 md:flex-row lg:gap-8">
+    <div className="flex flex-col gap-5 md:flex-row lg:gap-4">
+      <Categories categories={categories} />
+
       <div className="relative flex w-full items-center">
         <Icon
           name="search"

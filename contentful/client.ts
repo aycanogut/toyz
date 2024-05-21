@@ -24,12 +24,20 @@ export const getEntriesByType = async (type: string, locale: Locale, keyword: st
 };
 
 export const getEntryBySlug = async (type: string, slug: string, locale: Locale) => {
-  const queryOptions = {
+  const queryResult = await client.getEntries({
     content_type: type,
     'fields.slug[match]': slug,
     locale,
-  };
-  const queryResult = await client.getEntries(queryOptions);
+  });
 
   return queryResult.items[0];
+};
+
+export const getEntryCategories = async (type: string, locale: Locale) => {
+  const response = await client.getEntries({
+    content_type: type,
+    locale,
+  });
+
+  return response.items;
 };

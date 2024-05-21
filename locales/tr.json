@@ -7,6 +7,7 @@
   "Search": {
     "search": "ara",
     "placeholder": "Bir içerik arayın",
-    "result": "Bir sonuç bulunamadı"
+    "result": "Bir sonuç bulunamadı",
+    "category": "hepsi"
   }
 }

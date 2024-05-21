@@ -5,6 +5,7 @@ function Home({
 }: {
   searchParams?: {
     query: string;
+    category: string;
   };
 }) {
   return (
