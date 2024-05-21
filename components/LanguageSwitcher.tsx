@@ -18,7 +18,7 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
     <select
       value={locale}
       onChange={handleLocale}
-      className="m-auto ml-8 size-10 bg-background-light font-grotesque text-lg font-semibold text-title-light"
+      className="focus-visible:ring-ring m-auto ml-8 size-10 bg-background-light font-grotesque text-lg font-semibold text-title-light focus-visible:outline-none focus-visible:ring-1"
     >
       {locales.map(locale => (
         <option
