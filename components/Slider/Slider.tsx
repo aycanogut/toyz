@@ -28,17 +28,17 @@ function Slider({ images }: Props) {
 
   return (
     <div
-      className="overflow-hidden"
+      className="h-screen overflow-hidden"
       ref={emblaRef}
     >
       <div
-        className="flex touch-pan-y"
+        className="flex h-screen touch-pan-y "
         style={{ backfaceVisibility: 'hidden' }}
       >
         {images.map(item => {
           return (
             <div
-              className="relative h-[34.1875rem] w-full min-w-0 flex-shrink-0 flex-grow-0 md:h-screen"
+              className="relative h-screen w-full min-w-0 flex-shrink-0 flex-grow-0"
               key={item.fields.title}
             >
               <Image
