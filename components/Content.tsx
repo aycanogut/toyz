@@ -1,5 +1,4 @@
 import { useLocale } from 'next-intl';
-import { getTranslations } from 'next-intl/server';
 
 import { Card } from '@/components';
 import { getEntriesByType } from '@/contentful/client';
