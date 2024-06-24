@@ -3,6 +3,7 @@ interface ContentProps {
     id: number;
     title: string;
     content: Document;
+    description: string;
     image: {
       fields: {
         title: string;

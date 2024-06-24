@@ -11,10 +11,21 @@ import { grotesque } from '@/theme';
 
 import '@/theme/globals.css';
 
-export const metadata: Metadata = {
-  title: 'TOYZ',
-  description: 'TOYZ',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: {
+    locale: Locale;
+  };
+}) {
+  const title = 'TOYZ';
+  const description = params.locale === 'en' ? 'TOYZ is a counter-culture themed webzine' : 'TOYZ karşı kültür temalı bir webzindir';
+
+  return {
+    title,
+    description,
+  };
+}
 
 export default async function RootLayout({ children, params: { locale } }: { children: ReactNode; params: { locale: Locale } }) {
   const messages = await getMessages();
