@@ -5,13 +5,15 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components';
-import { Link } from '@/i18n';
+import { Link, useRouter } from '@/i18n';
 import { cn } from '@/utils';
 
 import navigationItems from './navigationItems';
 
 function HeaderMobile() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  const { push } = useRouter();
 
   const t = useTranslations('Navigation');
 
@@ -27,6 +29,11 @@ function HeaderMobile() {
     setIsMenuOpen(prevState => !prevState);
   };
 
+  const handleSearchNavigation = () => {
+    setIsMenuOpen(false);
+    push('/search');
+  };
+
   return (
     <header className="absolute z-50 w-full overflow-x-hidden lg:hidden">
       <Button
@@ -37,12 +44,20 @@ function HeaderMobile() {
       />
 
       <div className={cn('-ml-[-100%] h-screen w-screen bg-background-light p-4 transition-[margin]', isMenuOpen && 'ml-0')}>
-        <Button
-          onClick={handleMenuToggle}
-          className="bg-transparent p-0 text-button-background md:m-2 lg:hidden"
-          appendIcon="close"
-          iconSize={48}
-        />
+        <div className="flex w-full justify-between">
+          <Button
+            className="bg-transparent p-0 text-button-background md:m-2 lg:hidden"
+            appendIcon="close"
+            iconSize={48}
+            onClick={handleMenuToggle}
+          />
+          <Button
+            className="ml-auto mr-2 bg-transparent p-0 text-button-background md:m-2 md:mr-4 lg:hidden"
+            appendIcon="search"
+            iconSize={32}
+            onClick={handleSearchNavigation}
+          />
+        </div>
 
         <nav className="mt-6">
           <ul className="flex flex-col gap-8 pl-2 md:pl-4">

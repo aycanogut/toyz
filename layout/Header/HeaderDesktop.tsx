@@ -7,8 +7,8 @@ import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
 
-import { Brand, LanguageSwitcher } from '@/components';
-import { Link, Locale } from '@/i18n';
+import { Brand, Button, LanguageSwitcher } from '@/components';
+import { Link, Locale, useRouter } from '@/i18n';
 import { cn } from '@/utils';
 
 import navigationItems from './navigationItems';
@@ -17,6 +17,7 @@ import variants from './variants';
 function HeaderDesktop() {
   const [isScrolling, setIsScrolling] = useState(false);
 
+  const { push } = useRouter();
   const pathnameWithLocale = usePathname();
 
   const locale = useLocale();
@@ -81,6 +82,14 @@ function HeaderDesktop() {
               ))}
             </ul>
           </nav>
+
+          <Button
+            className={cn('"mx-4 mt-1 cursor-pointer bg-transparent text-title-dark hover:text-title-light', pathname === '/search' && 'text-title-light')}
+            appendIcon="search"
+            iconSize={28}
+            onClick={() => push('/search')}
+          />
+
           <LanguageSwitcher locale={locale as Locale} />
         </motion.header>
       </AnimatePresence>
