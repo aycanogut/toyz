@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Document, BLOCKS, INLINES } from '@contentful/rich-text-types';
 
-import { ContentLabels, EmbedVideo, ImageAsset } from '@/components';
+import { ContentLabels, EmbedVideo, ImageAsset, SocialMediaShare } from '@/components';
 import { getEntryBySlug } from '@/contentful/client';
 import { Locale } from '@/i18n';
 
@@ -33,7 +33,15 @@ async function ContentDetails({ params }: { params: { slug: string; locale: Loca
         <header className="container space-y-6 px-4 pt-8 md:pb-8 lg:space-y-10 xl:px-0">
           <h1 className="text-start font-grotesque text-2xl font-medium text-title-light md:text-3xl lg:text-5xl lg:font-semibold">{data.fields.title}</h1>
 
-          <ContentLabels items={data.fields.details} />
+          <div className="flex w-full flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+            <ContentLabels items={data.fields.details} />
+
+            <SocialMediaShare
+              title={data.fields.title}
+              slug={params.slug}
+              locale={params.locale}
+            />
+          </div>
         </header>
 
         <div className="container space-y-6 px-4 md:space-y-10 xl:px-0">
