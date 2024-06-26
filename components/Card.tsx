@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+import { useTranslations } from 'next-intl';
+
 import { Button, ContentLabels } from '@/components';
 import { Link } from '@/i18n';
 
@@ -11,6 +13,8 @@ interface Props {
 }
 
 function Card({ title, image, items, slug }: Props) {
+  const t = useTranslations('Content');
+
   return (
     <article className="flex h-full flex-col items-center gap-6 md:flex-row md:items-stretch md:gap-10 lg:gap-14">
       <div className="relative h-52 w-full md:h-[20rem] lg:h-[22.5rem]">
@@ -27,14 +31,14 @@ function Card({ title, image, items, slug }: Props) {
         </header>
         <ContentLabels items={items} />
 
-        <div className="w-full md:mt-6 md:w-40">
+        <div className="w-full md:mt-6 md:w-44">
           <Link href={`/content/${slug}`}>
             <Button
-              className="w-full"
+              className="w-full uppercase"
               appendIcon="arrow-right"
               iconSize={24}
             >
-              SHOW MORE
+              {t('show-more')}
             </Button>
           </Link>
         </div>
