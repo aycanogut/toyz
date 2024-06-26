@@ -10,3 +10,4 @@ export { default as EmbedVideo } from './EmbedVideo';
 export { default as LanguageSwitcher } from './LanguageSwitcher';
 export { default as Search } from './Search';
 export { default as Categories } from './Categories';
+export { default as SocialMediaShare } from './SocialMediaShare';
