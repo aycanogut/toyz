@@ -9,5 +9,8 @@
     "placeholder": "Bir içerik arayın",
     "result": "Bir sonuç bulunamadı",
     "category": "hepsi"
+  },
+  "Content": {
+    "show-more": "devamını gör"
   }
 }
