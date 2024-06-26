@@ -19,6 +19,7 @@
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.19.6",
     "@contentful/rich-text-types": "^16.3.5",
+    "@radix-ui/react-popover": "^1.1.1",
     "class-variance-authority": "^0.7.0",
     "contentful": "^10.10.0",
     "embla-carousel-autoplay": "7.1.0",
@@ -29,6 +30,7 @@
     "react": "18.3.1",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
+    "react-share": "^5.1.0",
     "tailwind-merge": "^2.3.0",
     "usehooks-ts": "^3.1.0"
   },
