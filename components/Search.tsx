@@ -34,7 +34,7 @@ function Search({ categories }: Props) {
   };
 
   return (
-    <div className="flex flex-col gap-5 md:flex-row lg:gap-4">
+    <div className="flex flex-col gap-5 pt-14 md:flex-row md:pt-16 lg:gap-4 lg:pt-0">
       <Categories categories={categories} />
 
       <div className="relative flex w-full items-center">
