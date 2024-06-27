@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
-import { Button } from '@/components';
-import { Link, useRouter } from '@/i18n';
+import { Button, LanguageSwitcher } from '@/components';
+import { Link, Locale, useRouter } from '@/i18n';
 import { cn } from '@/utils';
 
 import navigationItems from './navigationItems';
@@ -16,6 +16,7 @@ function HeaderMobile() {
   const { push } = useRouter();
 
   const t = useTranslations('Navigation');
+  const locale = useLocale();
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -35,10 +36,10 @@ function HeaderMobile() {
   };
 
   return (
-    <header className="absolute z-50 w-full overflow-x-hidden lg:hidden">
+    <header className={cn('absolute w-full overflow-x-hidden overflow-y-hidden lg:hidden', isMenuOpen ? 'z-50 h-screen' : 'h-24')}>
       <Button
         onClick={handleMenuToggle}
-        className={cn('absolute left-4 top-4 bg-transparent p-0 text-button-background md:left-6 md:top-6 lg:hidden', isMenuOpen && 'hidden')}
+        className={cn('absolute left-4 top-4 z-50 bg-transparent p-0 text-button-background md:left-6 md:top-6 lg:hidden', isMenuOpen && 'hidden')}
         appendIcon="hamburger"
         iconSize={48}
       />
@@ -51,12 +52,17 @@ function HeaderMobile() {
             iconSize={48}
             onClick={handleMenuToggle}
           />
-          <Button
-            className="ml-auto mr-2 bg-transparent p-0 text-button-background md:m-2 md:mr-4 lg:hidden"
-            appendIcon="search"
-            iconSize={32}
-            onClick={handleSearchNavigation}
-          />
+
+          <div className="mr-2 flex items-center gap-1">
+            <Button
+              className="ml-auto mr-2 bg-transparent p-0 text-button-background md:m-2 md:mr-4 lg:hidden"
+              appendIcon="search"
+              iconSize={32}
+              onClick={handleSearchNavigation}
+            />
+
+            <LanguageSwitcher locale={locale as Locale} />
+          </div>
         </div>
 
         <nav className="mt-6">
