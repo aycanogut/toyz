@@ -32,6 +32,10 @@ function SocialMediaShare({ title, slug, locale }: Props) {
 
   return (
     <Popover
+      hasCloseIcon
+      contentProps={{
+        className: 'p-10',
+      }}
       trigger={
         <Button
           appendIcon="share"
