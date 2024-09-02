@@ -1,34 +1,46 @@
 'use client';
 
-import { ChangeEvent } from 'react';
+import { usePathname, useRouter, localeNames, locales, type Locale } from '@/i18n';
 
-import { localeNames, locales, usePathname, useRouter, type Locale } from '@/i18n';
+import Button from './Button';
+import Popover from './Popover';
 
 function LanguageSwitcher({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const handleLocale = (event: ChangeEvent<HTMLSelectElement>) => {
-    const newLocale = event.target.value as Locale;
-
-    router.replace(pathname, { locale: newLocale });
+  const handleLocale = (locale: string) => {
+    router.replace(pathname, { locale });
   };
 
   return (
-    <select
-      value={locale}
-      onChange={handleLocale}
-      className="focus-visible:ring-ring m-auto size-10 bg-background-light font-grotesque text-lg font-semibold text-title-light focus-visible:outline-none focus-visible:ring-1"
-    >
-      {locales.map(locale => (
-        <option
-          key={locale}
-          value={locale}
+    <Popover
+      hasCloseIcon={false}
+      contentProps={{
+        className: 'px-3 py-2',
+      }}
+      trigger={
+        <Button
+          variant="secondary"
+          className="my-auto border-none hover:bg-title-light hover:text-title-darker"
         >
-          {localeNames[locale]}
-        </option>
-      ))}
-    </select>
+          {locale}
+        </Button>
+      }
+    >
+      <div className="flex flex-col gap-2">
+        {locales.map(locale => (
+          <Button
+            key={locale}
+            variant="secondary"
+            className="border-none p-2 font-grotesque text-lg font-semibold uppercase text-white"
+            onClick={() => handleLocale(locale)}
+          >
+            {localeNames[locale]}
+          </Button>
+        ))}
+      </div>
+    </Popover>
   );
 }
 
