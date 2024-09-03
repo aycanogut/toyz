@@ -7,6 +7,4 @@ export { default as Content } from './Content';
 export { default as Slider } from './Slider';
 export { default as ImageAsset } from './ImageAsset';
 export { default as EmbedVideo } from './EmbedVideo';
-export { default as Search } from './Search';
-export { default as Categories } from './Categories';
 export { default as Popover } from './Popover';

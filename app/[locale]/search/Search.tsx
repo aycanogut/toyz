@@ -6,7 +6,9 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 import { useTranslations } from 'next-intl';
 
-import { Button, Categories, Icon } from '@/components';
+import { Button, Icon } from '@/components';
+
+import Categories from './Categories';
 
 interface Props {
   categories: string[];

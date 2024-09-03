@@ -1,9 +1,11 @@
 import { useLocale } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 
-import { Card, Search as SearchComponent } from '@/components';
+import { Card } from '@/components';
 import { getEntriesByType, getEntryCategories } from '@/contentful/client';
 import { Locale } from '@/i18n';
+
+import { default as SearchComponent } from './Search';
 
 async function getData(locale: Locale, query: string): Promise<ContentProps[]> {
   const response = await getEntriesByType('content', locale, query);
