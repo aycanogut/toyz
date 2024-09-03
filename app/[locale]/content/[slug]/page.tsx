@@ -4,10 +4,12 @@ import Link from 'next/link';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Document, BLOCKS, INLINES } from '@contentful/rich-text-types';
 
-import { ContentLabels, EmbedVideo, ImageAsset } from '@/components';
+import { ContentLabels } from '@/components';
 import { getEntryBySlug } from '@/contentful/client';
 import { Locale } from '@/i18n';
 
+import EmbedVideo from './EmbedVideo';
+import ImageAsset from './ImageAsset';
 import SocialMediaShare from './SocialMediaShare';
 
 async function getData(slug: string, locale: Locale): Promise<ContentProps> {
