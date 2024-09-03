@@ -6,7 +6,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: 'bg-button-background text-title-darker hover:bg-background-light hover:text-title-light',
-        secondary: 'bg-transparent text-title-light border-border-dark border',
+        secondary: 'bg-transparent text-title-light border-border-dark border hover:bg-title-light hover:text-title-darker',
       },
       size: {
         sm: 'py-3 px-4',
