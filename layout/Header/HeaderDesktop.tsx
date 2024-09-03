@@ -7,10 +7,11 @@ import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
 
-import { Brand, Button, LanguageSwitcher } from '@/components';
+import { Brand, Button } from '@/components';
 import { Link, Locale, useRouter } from '@/i18n';
 import { cn } from '@/utils';
 
+import LanguageSwitcher from './LanguageSwitcher';
 import navigationItems from './navigationItems';
 import variants from './variants';
 

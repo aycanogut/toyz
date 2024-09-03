@@ -1,9 +1,7 @@
 'use client';
 
+import { Button, Popover } from '@/components';
 import { usePathname, useRouter, localeNames, locales, type Locale } from '@/i18n';
-
-import Button from './Button';
-import Popover from './Popover';
 
 function LanguageSwitcher({ locale }: { locale: Locale }) {
   const pathname = usePathname();
