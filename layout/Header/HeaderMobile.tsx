@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react';
 
 import { useLocale, useTranslations } from 'next-intl';
 
-import { Button, LanguageSwitcher } from '@/components';
+import { Button } from '@/components';
 import { Link, Locale, useRouter } from '@/i18n';
 import { cn } from '@/utils';
 
+import LanguageSwitcher from './LanguageSwitcher';
 import navigationItems from './navigationItems';
 
 function HeaderMobile() {
