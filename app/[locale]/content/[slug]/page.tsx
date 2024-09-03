@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Document, BLOCKS, INLINES } from '@contentful/rich-text-types';
 
-import { ContentLabels, EmbedVideo, ImageAsset, SocialMediaShare } from '@/components';
+import { ContentLabels, EmbedVideo, ImageAsset } from '@/components';
 import { getEntryBySlug } from '@/contentful/client';
 import { Locale } from '@/i18n';
+
+import SocialMediaShare from './SocialMediaShare';
 
 async function getData(slug: string, locale: Locale): Promise<ContentProps> {
   const response = await getEntryBySlug('content', slug, locale);

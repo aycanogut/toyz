@@ -9,5 +9,4 @@ export { default as ImageAsset } from './ImageAsset';
 export { default as EmbedVideo } from './EmbedVideo';
 export { default as Search } from './Search';
 export { default as Categories } from './Categories';
-export { default as SocialMediaShare } from './SocialMediaShare';
 export { default as Popover } from './Popover';
