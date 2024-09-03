@@ -1,10 +1,12 @@
 'use client';
 
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 
 import { useTranslations } from 'next-intl';
+
+import { Popover, Button } from '@/components';
 
 interface Props {
   categories: string[];
@@ -31,25 +33,30 @@ function Categories({ categories }: Props) {
     }
   }, [category, pathname, push, searchParams]);
 
-  const handleCategory = (e: ChangeEvent<HTMLSelectElement>) => {
-    setCategory(e.target.value);
-  };
-
   return (
-    <select
-      value={category}
-      onChange={handleCategory}
-      className="focus-visible:ring-ring w-22 h-14 bg-background-light px-4 capitalize text-title-light focus-visible:outline-none focus-visible:ring-1"
+    <Popover
+      hasCloseIcon={false}
+      trigger={<Button>{category || allCategory}</Button>}
+      triggerProps={{
+        className: 'min-w-40',
+      }}
+      contentProps={{
+        className: 'px-3 py-2 bg-black',
+      }}
     >
-      {allCategories.map(category => (
-        <option
-          key={category}
-          value={category}
-        >
-          {category}
-        </option>
-      ))}
-    </select>
+      <div className="flex flex-col gap-2">
+        {allCategories.map(category => (
+          <Button
+            key={category}
+            variant="secondary"
+            className="border-none font-grotesque text-lg font-semibold uppercase text-white"
+            onClick={() => setCategory(category)}
+          >
+            {category}
+          </Button>
+        ))}
+      </div>
+    </Popover>
   );
 }
 

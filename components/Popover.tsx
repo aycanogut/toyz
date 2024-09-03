@@ -36,7 +36,7 @@ function Popover({ trigger, children, rootProps, triggerProps, portalProps, cont
           {...contentProps}
           className={cn(
             contentProps?.className,
-            'w-full bg-background-light data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=top]:animate-slideDownAndFade'
+            '-ml-2 w-[var(--radix-popover-trigger-width)] bg-background-light p-0 data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=top]:animate-slideDownAndFade xl:-ml-0'
           )}
         >
           {children}
