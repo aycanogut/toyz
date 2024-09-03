@@ -1,8 +1,10 @@
 import { useLocale } from 'next-intl';
 
-import { Slider, Content } from '@/components';
+import { Slider } from '@/components';
 import { getEntriesByType } from '@/contentful/client';
 import { Locale } from '@/i18n';
+
+import Content from './Content';
 
 async function getData(locale: Locale, query: string): Promise<SliderImageProps[]> {
   const response = await getEntriesByType('slider', locale, query);
