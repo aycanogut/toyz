@@ -12,6 +12,10 @@
   --color-border-dark: #565656;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   --sb-track-color: var(--color-text-darker);
   --sb-thumb-color: var(--color-border-dark);
