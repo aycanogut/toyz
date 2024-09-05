@@ -32,7 +32,7 @@ function Slider({ images }: Props) {
       ref={emblaRef}
     >
       <div
-        className="flex h-screen touch-pan-y "
+        className="flex h-screen touch-pan-y"
         style={{ backfaceVisibility: 'hidden' }}
       >
         {images.map(item => {

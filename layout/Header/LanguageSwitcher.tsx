@@ -7,7 +7,7 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
   const pathname = usePathname();
   const router = useRouter();
 
-  const handleLocale = (locale: string) => {
+  const handleLocale = (locale: Locale) => {
     router.replace(pathname, { locale });
   };
 

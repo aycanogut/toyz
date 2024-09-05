@@ -17,7 +17,7 @@ export async function generateMetadata({
   params: {
     locale: Locale;
   };
-}) {
+}): Promise<Metadata> {
   const title = 'TOYZ';
   const description = params.locale === 'en' ? 'TOYZ is a counter-culture themed webzine' : 'TOYZ karşı kültür temalı bir webzindir';
 
