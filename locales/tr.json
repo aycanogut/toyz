@@ -13,5 +13,9 @@
   "Content": {
     "show-more": "içeriğe git",
     "share": "paylaş"
+  },
+  "Error": {
+    "404": "Sayfa bulunamadı",
+    "redirect": "Anasayfa"
   }
 }
