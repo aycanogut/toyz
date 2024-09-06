@@ -27,7 +27,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function RootLayout({ children, params: { locale } }: { children: ReactNode; params: { locale: Locale } }) {
+async function RootLayout({ children, params: { locale } }: { children: ReactNode; params: { locale: Locale } }) {
   const messages = await getMessages();
 
   return (
@@ -41,3 +41,5 @@ export default async function RootLayout({ children, params: { locale } }: { chi
     </html>
   );
 }
+
+export default RootLayout;
