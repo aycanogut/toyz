@@ -13,5 +13,9 @@
   "Content": {
     "show-more": "show more",
     "share": "share"
+  },
+  "Error": {
+    "404": "Page not found",
+    "redirect": "Homepage"
   }
 }
