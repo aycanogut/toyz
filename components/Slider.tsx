@@ -2,11 +2,9 @@
 
 import Image from 'next/image';
 
+import { EmblaOptionsType } from 'embla-carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
-import { EmblaOptionsType } from 'embla-carousel';
-
-
 
 const OPTIONS: EmblaOptionsType = { containScroll: 'keepSnaps', dragFree: false, loop: true, align: 'start' };
 
