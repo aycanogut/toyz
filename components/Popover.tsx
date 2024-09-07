@@ -21,6 +21,8 @@ interface Props {
 }
 
 function Popover({ trigger, children, rootProps, triggerProps, portalProps, contentProps, hasCloseIcon }: Props) {
+  const { className: contentClassName, ...restContentProps } = contentProps || {};
+
   return (
     <Root {...rootProps}>
       <Trigger
@@ -33,11 +35,11 @@ function Popover({ trigger, children, rootProps, triggerProps, portalProps, cont
         <Content
           sideOffset={8}
           collisionPadding={24}
-          {...contentProps}
           className={cn(
-            contentProps?.className,
-            '-ml-2 w-[var(--radix-popover-trigger-width)] bg-background-light p-0 data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=top]:animate-slideDownAndFade xl:-ml-0'
+            '-ml-2 bg-background-light p-0 data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=top]:animate-slideDownAndFade xl:-ml-0',
+            contentClassName
           )}
+          {...restContentProps}
         >
           {children}
           {hasCloseIcon && (
