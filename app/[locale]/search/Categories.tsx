@@ -41,7 +41,7 @@ function Categories({ categories }: Props) {
         className: 'min-w-40',
       }}
       contentProps={{
-        className: 'px-3 py-2 bg-black',
+        className: 'w-[var(--radix-popover-trigger-width)]',
       }}
     >
       <div className="flex flex-col gap-2">
