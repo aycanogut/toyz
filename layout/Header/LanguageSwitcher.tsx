@@ -15,7 +15,7 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
     <Popover
       hasCloseIcon={false}
       contentProps={{
-        className: 'px-3 py-2 z-50',
+        className: 'z-50 w-[var(--radix-popover-trigger-width)]',
       }}
       trigger={
         <Button
