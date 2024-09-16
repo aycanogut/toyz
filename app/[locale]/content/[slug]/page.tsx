@@ -3,8 +3,10 @@ import Link from 'next/link';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Document, BLOCKS, INLINES } from '@contentful/rich-text-types';
+import { useLocale } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
-import { ContentLabels } from '@/components';
+import { ContentLabels, Icon } from '@/components';
 import { getEntryBySlug } from '@/contentful/client';
 import { Locale } from '@/i18n';
 
@@ -21,9 +23,13 @@ async function getData(slug: string, locale: Locale): Promise<ContentProps> {
 async function ContentDetails({ params }: { params: { slug: string; locale: Locale } }) {
   const data = await getData(params.slug, params.locale);
 
+  const locale = useLocale();
+  const t = await getTranslations({ locale, namespace: 'Content' });
+
   return (
     <section className="lg:pb-24 lg:pt-2">
       <div className="h-24 bg-background-light lg:hidden" />
+
       <article>
         <div className="container relative h-56 w-full md:hidden">
           <Image
@@ -35,8 +41,19 @@ async function ContentDetails({ params }: { params: { slug: string; locale: Loca
         </div>
 
         <header className="container space-y-6 px-4 pt-8 md:pb-8 lg:space-y-10 xl:px-0">
-          <h1 className="text-start font-grotesque text-2xl font-medium text-title-light md:text-3xl lg:text-5xl lg:font-semibold">{data.fields.title}</h1>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2"
+          >
+            <Icon
+              name="arrow-left"
+              size={24}
+              className="text-title-light"
+            />
+            <span className="mb-1 bg-transparent font-grotesque text-xl font-bold capitalize text-title-light lg:text-2xl">{t('back')}</span>
+          </Link>
 
+          <h1 className="text-start font-grotesque text-2xl font-medium text-title-light md:text-3xl lg:text-5xl lg:font-semibold">{data.fields.title}</h1>
           <div className="flex w-full flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             <ContentLabels items={data.fields.details} />
 
@@ -48,7 +65,7 @@ async function ContentDetails({ params }: { params: { slug: string; locale: Loca
           </div>
         </header>
 
-        <div className="container space-y-6 px-4 md:space-y-10 xl:px-0">
+        <div className="container space-y-6 px-4 pb-12 md:space-y-10 xl:px-0">
           <div className="relative hidden h-80 w-full md:block lg:h-[22.3125rem]">
             <Image
               src={`https:${data.fields.image.fields.file.url}`}
