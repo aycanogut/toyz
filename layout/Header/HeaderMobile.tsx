@@ -37,7 +37,7 @@ function HeaderMobile() {
   };
 
   return (
-    <header className={cn('absolute w-full overflow-x-hidden overflow-y-hidden lg:hidden', isMenuOpen ? 'z-50 h-screen' : 'h-24')}>
+    <header className={cn('absolute w-full overflow-x-hidden overflow-y-hidden lg:hidden', isMenuOpen ? 'z-50 h-screen' : 'h-20')}>
       <Button
         onClick={handleMenuToggle}
         className={cn('absolute left-4 top-4 z-50 bg-transparent p-0 text-button-background md:left-6 md:top-6 lg:hidden', isMenuOpen && 'hidden')}
@@ -73,7 +73,7 @@ function HeaderMobile() {
                 key={item.id}
                 onClick={handleMenuToggle}
                 tabIndex={0}
-                className=" justify-start bg-transparent p-0 text-button-background"
+                className="justify-start bg-transparent p-0 text-button-background"
                 appendIcon="arrow-right"
                 iconSize={24}
               >

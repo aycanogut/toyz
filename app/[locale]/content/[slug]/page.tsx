@@ -28,7 +28,7 @@ async function ContentDetails({ params }: { params: { slug: string; locale: Loca
 
   return (
     <section className="lg:pb-24 lg:pt-2">
-      <div className="h-24 bg-background-light lg:hidden" />
+      <div className="h-20 bg-background-light lg:hidden" />
 
       <article>
         <div className="container relative h-56 w-full md:hidden">
