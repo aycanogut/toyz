@@ -50,7 +50,7 @@ async function ContentDetails({ params }: { params: { slug: string; locale: Loca
               size={24}
               className="text-title-light"
             />
-            <span className="bg-transparent text-sm capitalize text-title-light lg:text-base">{t('back')}</span>
+            <span className="mb-1 bg-transparent font-grotesque text-xl font-bold capitalize text-title-light lg:text-2xl">{t('back')}</span>
           </Link>
 
           <h1 className="text-start font-grotesque text-2xl font-medium text-title-light md:text-3xl lg:text-5xl lg:font-semibold">{data.fields.title}</h1>
