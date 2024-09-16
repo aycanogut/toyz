@@ -12,7 +12,8 @@
   },
   "Content": {
     "show-more": "show more",
-    "share": "share"
+    "share": "share",
+    "back": "back"
   },
   "Error": {
     "404": "Page not found",
