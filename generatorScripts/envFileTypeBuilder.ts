@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-const envs = fs.readFileSync('./.env.development', 'utf-8').split('\n');
+const envs = fs.readFileSync('./.env.local', 'utf-8').split('\n');
 
 const envKeys = envs.map(env => `${env.split('=')[0].trim()}: string;`);
 
