@@ -69,7 +69,7 @@ function HeaderDesktop() {
                 <li key={item.id}>
                   <Link
                     href={item.path}
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-2 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-title-light"
                   >
                     <span
                       className={cn(

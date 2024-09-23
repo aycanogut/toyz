@@ -50,7 +50,7 @@ function Search({ categories }: Props) {
           id="search"
           onChange={e => setSearchValue(e.target.value)}
           defaultValue={searchParams.get('query')?.toString()}
-          className="focus-visible:ring-ring w-full bg-background-light p-4 pl-12 text-title-light focus-visible:outline-none focus-visible:ring-1"
+          className="w-full bg-background-light p-4 pl-12 text-title-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-title-light"
           placeholder={t('placeholder')}
           onKeyDown={e => {
             e.key === 'Enter' && handleSubmit();

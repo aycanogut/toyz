@@ -43,7 +43,7 @@ async function ContentDetails({ params }: { params: { slug: string; locale: Loca
         <header className="container space-y-6 px-4 pt-8 md:pb-8 lg:space-y-10 xl:px-0">
           <Link
             href="/"
-            className="inline-flex items-center gap-2"
+            className="inline-flex items-center gap-2 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-title-light"
           >
             <Icon
               name="arrow-left"
