@@ -4,3 +4,4 @@ export { default as Card } from './Card';
 export { default as ContentLabels } from './ContentLabels';
 export { default as Slider } from './Slider';
 export { default as Popover } from './Popover';
+export { default as Badge } from './Badge';
