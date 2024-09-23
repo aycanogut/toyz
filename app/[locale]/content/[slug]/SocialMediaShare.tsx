@@ -31,6 +31,7 @@ function SocialMediaShare({ title, slug, locale }: Props) {
   return (
     <Popover
       hasCloseIcon
+      hasArrow
       contentProps={{
         className: 'flex p-10',
       }}

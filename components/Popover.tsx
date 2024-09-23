@@ -18,9 +18,10 @@ interface Props {
   portalProps?: RadixPopover.PopoverPortalProps;
   contentProps?: RadixPopover.PopoverContentProps;
   hasCloseIcon: boolean;
+  hasArrow?: boolean;
 }
 
-function Popover({ trigger, children, rootProps, triggerProps, portalProps, contentProps, hasCloseIcon }: Props) {
+function Popover({ trigger, children, rootProps, triggerProps, portalProps, contentProps, hasCloseIcon, hasArrow = false }: Props) {
   const { className: contentClassName, ...restContentProps } = contentProps || {};
 
   return (
@@ -53,7 +54,7 @@ function Popover({ trigger, children, rootProps, triggerProps, portalProps, cont
               />
             </Close>
           )}
-          <Arrow className="fill-background-light" />
+          {hasArrow && <Arrow className="fill-background-light" />}
         </Content>
       </Portal>
     </Root>
