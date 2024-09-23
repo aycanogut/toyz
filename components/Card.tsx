@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { useTranslations } from 'next-intl';
 
-import { Button, ContentLabels } from '@/components';
+import { Badge, ContentLabels } from '@/components';
 import { Link } from '@/i18n';
 
 interface Props {
@@ -31,17 +31,18 @@ function Card({ title, image, items, slug }: Props) {
         </header>
         <ContentLabels items={items} />
 
-        <div className="w-full md:mt-6 md:w-44">
-          <Link href={`/content/${slug}`}>
-            <Button
-              className="w-full uppercase"
-              appendIcon="arrow-right"
-              iconSize={24}
-            >
-              {t('show-more')}
-            </Button>
-          </Link>
-        </div>
+        <Link
+          href={`/content/${slug}`}
+          className="w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-title-light md:mt-6 md:w-44"
+        >
+          <Badge
+            className="w-full uppercase"
+            appendIcon="arrow-right"
+            iconSize={24}
+          >
+            {t('show-more')}
+          </Badge>
+        </Link>
       </div>
     </article>
   );
