@@ -11,7 +11,7 @@ import { grotesque } from '@/theme';
 
 import '@/theme/globals.css';
 
-// TODO: Og image
+// TODO: Update og image and production URL
 export async function generateMetadata({
   params,
 }: {
@@ -26,7 +26,11 @@ export async function generateMetadata({
     params.locale === 'en'
       ? 'toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography '
       : 'toyz, karşı kültür, webzine, graffiti, kaykay, punk rock, sanat, sinema, fotoğrafçılık';
-  const openGraph = { card: 'summary_large_image', site: '@site', creator: '@creator', images: 'https://example.com/og.png' };
+  const openGraph = {
+    siteName: 'TOYZ',
+    url: 'https://toyz-swart.vercel.app/',
+    type: 'website',
+  };
   const authors = {
     name: 'Aycan Öğüt',
     url: 'https://aycan.dev',
