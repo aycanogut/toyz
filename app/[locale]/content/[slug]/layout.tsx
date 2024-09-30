@@ -22,13 +22,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = data.fields.title;
   const description = data.fields.description;
   const image = `https:${data?.fields?.image?.fields?.file.url}`;
+  const applicationName = 'TOYZ';
+  const keywords =
+    params.locale === 'en'
+      ? 'search page, toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography '
+      : 'arama sayfası,  toyz, karşı kültür, webzine, graffiti, kaykay, punk rock, sanat, sinema, fotoğrafçılık';
+  const authors = {
+    name: 'Aycan Öğüt',
+    url: 'https://aycan.dev',
+  };
 
   return {
     title,
     description,
+    applicationName,
+    keywords,
     openGraph: {
       images: [image],
     },
+    authors,
   };
 }
 

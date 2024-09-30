@@ -11,6 +11,7 @@ import { grotesque } from '@/theme';
 
 import '@/theme/globals.css';
 
+// TODO: Og image
 export async function generateMetadata({
   params,
 }: {
@@ -20,10 +21,24 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const title = 'TOYZ';
   const description = params.locale === 'en' ? 'TOYZ is a counter-culture themed webzine' : 'TOYZ karşı kültür temalı bir webzindir';
+  const applicationName = 'TOYZ';
+  const keywords =
+    params.locale === 'en'
+      ? 'toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography '
+      : 'toyz, karşı kültür, webzine, graffiti, kaykay, punk rock, sanat, sinema, fotoğrafçılık';
+  const openGraph = { card: 'summary_large_image', site: '@site', creator: '@creator', images: 'https://example.com/og.png' };
+  const authors = {
+    name: 'Aycan Öğüt',
+    url: 'https://aycan.dev',
+  };
 
   return {
     title,
     description,
+    applicationName,
+    keywords,
+    openGraph,
+    authors,
   };
 }
 
