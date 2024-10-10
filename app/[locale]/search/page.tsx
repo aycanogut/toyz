@@ -1,5 +1,6 @@
-import { useLocale } from 'next-intl';
-import { getTranslations } from 'next-intl/server';
+import { use } from 'react';
+
+import { useLocale, useTranslations } from 'next-intl';
 
 import { Card } from '@/components';
 import { getEntriesByType, getEntryCategories } from '@/contentful/client';
@@ -21,7 +22,7 @@ async function getCategories(locale: Locale): Promise<string[]> {
   return Array.from(new Set(categories));
 }
 
-async function Search({
+function Search({
   searchParams,
 }: {
   searchParams?: {
@@ -30,15 +31,15 @@ async function Search({
   };
 }) {
   const locale = useLocale();
-  const t = await getTranslations({ locale, namespace: 'Search' });
+  const t = useTranslations('Search');
 
   const query = searchParams?.query ?? '';
   const category = searchParams?.category ?? '';
 
   const defaultCategory = locale === 'en' ? 'all' : 'hepsi';
 
-  const data = await getData(locale as Locale, query);
-  const categories = await getCategories(locale as Locale);
+  const data = use(getData(locale as Locale, query));
+  const categories = use(getCategories(locale as Locale));
 
   /**
    *  If the category is the default category, return unfiltered data

@@ -1,10 +1,11 @@
+import { use } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Document, BLOCKS, INLINES } from '@contentful/rich-text-types';
-import { useLocale } from 'next-intl';
-import { getTranslations } from 'next-intl/server';
+import { useTranslations } from 'next-intl';
 
 import { ContentLabels, Icon } from '@/components';
 import { getEntryBySlug } from '@/contentful/client';
@@ -20,11 +21,10 @@ async function getData(slug: string, locale: Locale): Promise<ContentProps> {
   return response as unknown as ContentProps;
 }
 
-async function ContentDetails({ params }: { params: { slug: string; locale: Locale } }) {
-  const data = await getData(params.slug, params.locale);
+function ContentDetails({ params }: { params: { slug: string; locale: Locale } }) {
+  const data = use(getData(params.slug, params.locale));
 
-  const locale = useLocale();
-  const t = await getTranslations({ locale, namespace: 'Content' });
+  const t = useTranslations('Content');
 
   return (
     <section className="lg:pb-24 lg:pt-2">
@@ -94,7 +94,6 @@ async function ContentDetails({ params }: { params: { slug: string; locale: Loca
                   const url = node.data?.target?.fields?.file?.url;
                   const title = node?.data?.target?.fields?.title;
                   const description = node?.data?.target?.fields?.description;
-
                   return (
                     url &&
                     title && (
@@ -106,14 +105,12 @@ async function ContentDetails({ params }: { params: { slug: string; locale: Loca
                     )
                   );
                 },
-
                 /**
                  * Converts Contentful embedded entry to a Video component
                  */
                 [INLINES.EMBEDDED_ENTRY]: node => {
                   const description = node?.data?.target?.fields?.description;
                   const url = node?.data?.target?.fields?.url ?? '';
-
                   return (
                     <EmbedVideo
                       description={description}
@@ -121,13 +118,11 @@ async function ContentDetails({ params }: { params: { slug: string; locale: Loca
                     />
                   );
                 },
-
                 /**
                  * Converts Contentful hyperlink to a Next.js Link component
                  */
                 [INLINES.HYPERLINK]: node => {
                   const { value } = node.content[0] as unknown as { value: string };
-
                   return (
                     <Link
                       href={node.data.uri}
