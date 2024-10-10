@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { Metadata } from 'next';
 
 import { getEntryBySlug } from '@/contentful/client';
@@ -51,6 +53,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function ContentLayout({ children }: { children: React.ReactNode }) {
+export default function ContentLayout({ children }: { children: ReactNode }) {
   return <section>{children}</section>;
 }
