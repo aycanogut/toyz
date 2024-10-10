@@ -1,3 +1,5 @@
+import { use } from 'react';
+
 import { useLocale } from 'next-intl';
 
 import { Slider } from '@/components';
@@ -12,9 +14,9 @@ async function getData(locale: Locale, query: string): Promise<SliderImageProps[
   return response[0].fields.images as SliderImageProps[];
 }
 
-async function Home() {
+function Home() {
   const locale = useLocale();
-  const data = await getData(locale as Locale, '');
+  const data = use(getData(locale as Locale, ''));
 
   return (
     <>

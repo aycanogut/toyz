@@ -11,7 +11,7 @@ import { grotesque } from '@/theme';
 
 import '@/theme/globals.css';
 
-// TODO: Update og image and production URL
+// TODO: Update og image and production URL from config
 export async function generateMetadata({
   params,
 }: {

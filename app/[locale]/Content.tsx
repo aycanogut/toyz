@@ -1,3 +1,5 @@
+import { use } from 'react';
+
 import { useLocale } from 'next-intl';
 
 import { Card } from '@/components';
@@ -10,10 +12,10 @@ async function getData(locale: Locale, query: string): Promise<ContentProps[]> {
   return response as unknown as ContentProps[];
 }
 
-async function Content() {
+function Content() {
   const locale = useLocale();
 
-  const data = await getData(locale as Locale, '');
+  const data = use(getData(locale as Locale, ''));
 
   return (
     <div className="container flex flex-col gap-14 px-4 py-12">
