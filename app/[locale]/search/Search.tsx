@@ -6,7 +6,7 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 import { useTranslations } from 'next-intl';
 
-import { Button, Icon } from '@/components';
+import { Button, Input } from '@/components';
 
 import Categories from './Categories';
 
@@ -40,20 +40,19 @@ function Search({ categories }: Props) {
       <Categories categories={categories} />
 
       <div className="relative flex w-full items-center">
-        <Icon
-          name="search"
-          size={24}
-          className="absolute left-4 text-title-light"
-        />
-        <input
+        <Input
           type="search"
           id="search"
           onChange={e => setSearchValue(e.target.value)}
           defaultValue={searchParams.get('query')?.toString()}
-          className="w-full bg-background-light p-4 pl-12 text-title-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-title-light"
           placeholder={t('placeholder')}
           onKeyDown={e => {
             e.key === 'Enter' && handleSubmit();
+          }}
+          appendIconProps={{
+            name: 'search',
+            size: 24,
+            className: 'absolute top-4 left-3  text-title-light',
           }}
         />
       </div>
