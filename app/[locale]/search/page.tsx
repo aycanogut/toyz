@@ -52,7 +52,7 @@ function Search({
   });
 
   return (
-    <div className="container flex flex-col gap-12 px-4 py-12">
+    <section className="container flex flex-col gap-12 px-4 py-12">
       <SearchComponent categories={categories} />
 
       {filteredData.length > 0 ? (
@@ -66,9 +66,9 @@ function Search({
           />
         ))
       ) : (
-        <div className="font-grotesque text-2xl font-semibold text-title-light lg:mb-24 lg:text-3xl">{t('result')}</div>
+        <p className="font-grotesque text-2xl font-semibold text-title-light lg:mb-24 lg:text-3xl">{t('result')}</p>
       )}
-    </div>
+    </section>
   );
 }
 
