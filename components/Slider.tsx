@@ -28,7 +28,7 @@ function Slider({ images }: Props) {
   ]);
 
   return (
-    <div
+    <section
       className="h-screen overflow-hidden"
       ref={emblaRef}
     >
@@ -52,7 +52,7 @@ function Slider({ images }: Props) {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }
 

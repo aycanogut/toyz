@@ -18,7 +18,7 @@ function Content() {
   const data = use(getData(locale as Locale, ''));
 
   return (
-    <div className="container flex flex-col gap-14 px-4 py-12">
+    <section className="container flex flex-col gap-14 px-4 py-12">
       {data.length > 0 &&
         data.map(item => (
           <Card
@@ -29,7 +29,7 @@ function Content() {
             slug={item.fields.slug}
           />
         ))}
-    </div>
+    </section>
   );
 }
 
