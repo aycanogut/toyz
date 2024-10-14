@@ -15,6 +15,9 @@
     "share": "share",
     "back": "back"
   },
+  "About": {
+    "title": "who we are"
+  },
   "Error": {
     "404": "Page not found",
     "redirect": "Homepage"
