@@ -15,6 +15,9 @@
     "share": "paylaş",
     "back": "geri"
   },
+  "About": {
+    "title": "biz kimiz"
+  },
   "Error": {
     "404": "Sayfa bulunamadı",
     "redirect": "Anasayfa"

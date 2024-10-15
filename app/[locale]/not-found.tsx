@@ -1,8 +1,7 @@
-import Link from 'next/link';
-
 import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components';
+import { Link } from '@/i18n';
 
 function NotFoundPage() {
   const t = useTranslations('Error');
