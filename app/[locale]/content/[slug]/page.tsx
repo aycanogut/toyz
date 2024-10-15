@@ -1,7 +1,6 @@
 import { use } from 'react';
 
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Document, BLOCKS, INLINES } from '@contentful/rich-text-types';
@@ -9,6 +8,7 @@ import { useTranslations } from 'next-intl';
 
 import { ContentLabels, Icon } from '@/components';
 import { getEntryBySlug } from '@/contentful/client';
+import { Link } from '@/i18n';
 import { Locale } from '@/i18n';
 
 import EmbedVideo from './EmbedVideo';
@@ -94,6 +94,7 @@ function ContentDetails({ params }: { params: { slug: string; locale: Locale } }
                   const url = node.data?.target?.fields?.file?.url;
                   const title = node?.data?.target?.fields?.title;
                   const description = node?.data?.target?.fields?.description;
+
                   return (
                     url &&
                     title && (
@@ -111,6 +112,7 @@ function ContentDetails({ params }: { params: { slug: string; locale: Locale } }
                 [INLINES.EMBEDDED_ENTRY]: node => {
                   const description = node?.data?.target?.fields?.description;
                   const url = node?.data?.target?.fields?.url ?? '';
+
                   return (
                     <EmbedVideo
                       description={description}
@@ -123,6 +125,7 @@ function ContentDetails({ params }: { params: { slug: string; locale: Locale } }
                  */
                 [INLINES.HYPERLINK]: node => {
                   const { value } = node.content[0] as unknown as { value: string };
+
                   return (
                     <Link
                       href={node.data.uri}
