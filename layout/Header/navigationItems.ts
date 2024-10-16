@@ -1,4 +1,10 @@
-const navigationItems = [
+interface NavigationItemProps {
+  id: number;
+  name: 'home' | 'about' | 'contact';
+  path: string;
+}
+
+const navigationItems: NavigationItemProps[] = [
   {
     id: 1,
     name: 'home',
