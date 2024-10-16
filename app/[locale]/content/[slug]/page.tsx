@@ -8,8 +8,7 @@ import { useTranslations } from 'next-intl';
 
 import { ContentLabels, Icon } from '@/components';
 import { getEntryBySlug } from '@/contentful/client';
-import { Link } from '@/i18n';
-import { Locale } from '@/i18n';
+import { Link, Locale } from '@/i18n';
 
 import EmbedVideo from './EmbedVideo';
 import ImageAsset from './ImageAsset';
