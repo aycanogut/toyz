@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from 'react';
 
-import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
+import { useSelectedLayoutSegment } from 'next/navigation';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
 
 import { Button } from '@/components';
+import { usePathname } from '@/i18n';
 import { Link, Locale, useRouter } from '@/i18n';
 import { cn } from '@/utils';
 

@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from 'react';
 
-import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 import { useTranslations } from 'next-intl';
 
 import { Popover, Button } from '@/components';
+import { useRouter, usePathname } from '@/i18n';
 
 interface Props {
   categories: string[];

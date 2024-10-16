@@ -1,7 +1,7 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "extends": ["next", "next/core-web-vitals", "plugin:@typescript-eslint/recommended", "prettier"],
@@ -19,8 +19,8 @@
       "error",
       {
         "props": "never",
-        "children": "never"
-      }
+        "children": "never",
+      },
     ],
     "import/order": [
       "error",
@@ -29,26 +29,39 @@
           {
             "pattern": "react",
             "group": "builtin",
-            "position": "after"
+            "position": "after",
           },
           {
             "pattern": "next/*",
             "group": "external",
-            "position": "before"
-          }
+            "position": "before",
+          },
         ],
         "groups": ["builtin", "external", "type", "object", "internal", "parent", "sibling", "index"],
         "pathGroupsExcludedImportTypes": ["react", "next"],
         "newlines-between": "always",
         "alphabetize": {
-          "order": "asc"
-        }
-      }
-    ]
+          "order": "asc",
+        },
+      },
+    ],
+    "react/jsx-no-literals": "error",
+    "no-restricted-imports": [
+      "error",
+      {
+        "name": "next/link",
+        "message": "Please import from `@/i18n` instead.",
+      },
+      {
+        "name": "next/navigation",
+        "importNames": ["redirect", "permanentRedirect", "useRouter", "usePathname"],
+        "message": "Please import from `@/i18n` instead.",
+      },
+    ],
   },
   "globals": {
     "JSX": "readonly",
-    "React": "readonly"
+    "React": "readonly",
   },
   "overrides": [
     {
@@ -57,8 +70,8 @@
         "@typescript-eslint/no-unused-vars": "warn",
         "@typescript-eslint/restrict-template-expressions": "off",
         "@next/next/no-img-element": "off",
-        "@typescript-eslint/no-floating-promises": "off"
-      }
-    }
-  ]
+        "@typescript-eslint/no-floating-promises": "off",
+      },
+    },
+  ],
 }
