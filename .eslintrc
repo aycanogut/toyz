@@ -45,7 +45,6 @@
         },
       },
     ],
-    "react/jsx-no-literals": "error",
     "no-restricted-imports": [
       "error",
       {
