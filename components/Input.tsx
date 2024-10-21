@@ -31,14 +31,14 @@ function Input(
   ref: InputRef
 ) {
   return (
-    <div className="flex w-full flex-col gap-2">
-      {ariaLabel && <label className="mb-1 font-grotesque text-3xl font-medium text-title-light">{ariaLabel}</label>}
+    <div className="flex w-full flex-col gap-1">
+      {ariaLabel && <label className="mb-3 font-grotesque text-xl font-medium text-title-light first-letter:capitalize lg:text-3.5">{ariaLabel}</label>}
       <div className="relative">
         {prependIconProps && <Icon {...prependIconProps} />}
 
         <input
           className={cn(
-            'focus-visible:ring-primary-blue-100 w-full border bg-background-light p-4 pl-12 text-sm text-title-light placeholder:text-sm placeholder:font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-title-light disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-40',
+            'focus-visible:ring-primary-blue-100 w-full border bg-background-light p-4 text-sm text-title-light placeholder:text-sm placeholder:font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-title-light disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-40',
             prependIconProps && 'pl-11',
             className
           )}
