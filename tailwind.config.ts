@@ -35,6 +35,9 @@ const config: Config = {
       fontFamily: {
         grotesque: ['var(--font-grotesque)'],
       },
+      fontSize: {
+        '3.5': ['2rem', { lineHeight: '1.75rem' }],
+      },
       keyframes: {
         slideUpAndFade: {
           from: { opacity: '0', transform: 'translateY(2px)' },
