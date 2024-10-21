@@ -50,6 +50,7 @@ function Search({ categories }: Props) {
           onKeyDown={e => {
             e.key === 'Enter' && handleSubmit();
           }}
+          className="pl-12"
           appendIconProps={{
             name: 'search',
             size: 24,
