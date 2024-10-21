@@ -45,7 +45,7 @@ function About() {
           <h1 className="font-grotesque text-2xl font-medium uppercase text-title-light lg:hidden">{t('title')}</h1>
         </header>
 
-        <div className="space-y-4 font-grotesque text-xl text-title-light lg:space-y-6 lg:text-[2rem] lg:leading-10">
+        <div className="space-y-4 font-grotesque text-xl text-title-light lg:space-y-6 lg:text-3.5 lg:leading-10">
           {documentToReactComponents(data.fields.description as unknown as Document)}
         </div>
       </div>

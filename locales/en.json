@@ -18,6 +18,14 @@
   "About": {
     "title": "who we are"
   },
+  "Contact": {
+    "title": "contact",
+    "message": "send us your message",
+    "name": "name",
+    "email": "e-mail",
+    "subject": "message",
+    "send": "send"
+  },
   "Error": {
     "404": "Page not found",
     "redirect": "Homepage"

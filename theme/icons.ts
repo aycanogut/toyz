@@ -1,4 +1,5 @@
-import { AiOutlineTag, AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { AiOutlineTag, AiOutlineLoading3Quarters, AiOutlineInstagram } from 'react-icons/ai';
+import { PiEnvelopeSimple } from 'react-icons/pi';
 import { RiShareBoxLine, RiSearchLine, RiArrowRightLine, RiArrowLeftLine, RiUserLine, RiMenuLine, RiCalendarLine, RiCloseFill } from 'react-icons/ri';
 
 const icons = [
@@ -41,6 +42,14 @@ const icons = [
   {
     label: 'share',
     icon: RiShareBoxLine,
+  },
+  {
+    label: 'instagram',
+    icon: AiOutlineInstagram,
+  },
+  {
+    label: 'envelope',
+    icon: PiEnvelopeSimple,
   },
 ] as const;
 

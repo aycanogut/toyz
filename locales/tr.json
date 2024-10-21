@@ -18,6 +18,14 @@
   "About": {
     "title": "biz kimiz"
   },
+  "Contact": {
+    "title": "iletişim",
+    "message": "bize ulaşın",
+    "name": "İsim",
+    "email": "e-posta",
+    "subject": "mesaj",
+    "send": "gönder"
+  },
   "Error": {
     "404": "Sayfa bulunamadı",
     "redirect": "Anasayfa"
