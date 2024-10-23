@@ -1,10 +1,8 @@
 import { use } from 'react';
 
-import Image from 'next/image';
-
 import { useLocale, useTranslations } from 'next-intl';
 
-import { Button, Icon, Input } from '@/components';
+import { Button, Icon, Input, PageHeader } from '@/components';
 import { getEntriesByType } from '@/contentful/client';
 import { Link, Locale } from '@/i18n';
 
@@ -23,22 +21,14 @@ function Contact() {
 
   return (
     <section>
-      <span className="block h-20 bg-background-light md:h-24 lg:hidden lg:pt-2" />
+      <PageHeader
+        image={{
+          src: `https:${data.fields.image.fields.file.url}`,
+          alt: data.fields.image.fields.title,
+        }}
+        title={t('title')}
+      />
 
-      <div className="relative h-[7.5rem] lg:h-[11.375rem]">
-        <Image
-          src={`https:${data.fields.image.fields.file.url}`}
-          alt={data.fields.image.fields.title}
-          fill
-          className="object-cover"
-        />
-
-        <header className="container relative hidden h-full lg:block">
-          <h1 className="absolute left-4 top-1/4 font-grotesque text-[4rem] font-medium uppercase leading-[5.375rem] text-title-light [text-shadow:_0_1px_0_rgb(0_0_0_/_100%)]">
-            {t('title')}
-          </h1>
-        </header>
-      </div>
       <div className="container flex flex-col gap-6 p-4 pb-14 lg:gap-0 lg:pb-40 lg:pt-12">
         <header>
           <h1 className="font-grotesque text-2xl font-medium uppercase text-title-light lg:hidden">{t('title')}</h1>
