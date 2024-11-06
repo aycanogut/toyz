@@ -5,6 +5,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Input, Button } from '@/components';
 
+import { mailAction } from './mailAction';
+
 interface FormInputProps {
   name: string;
   email: string;
@@ -21,7 +23,7 @@ function ContactForm() {
   const subject = watch('subject');
 
   const onSubmit: SubmitHandler<FormInputProps> = async inputValues => {
-    console.log(inputValues);
+    mailAction();
   };
 
   return (
