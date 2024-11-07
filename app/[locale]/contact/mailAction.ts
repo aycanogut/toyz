@@ -4,12 +4,15 @@ import * as sgMail from '@sendgrid/mail';
 
 import toyzConfig from '@/toyzConfig';
 
-export async function mailAction() {
+/**
+ * TODO: Update mail information with the correct fields and sendgrid sender with production url
+ */
+export async function mailAction(name: string, email: string, subject: string) {
   sgMail.setApiKey(toyzConfig.sendGridApiKey);
 
   const msg = {
-    to: 'toyzcontent@gmail.com', // Change to your recipient
-    from: 'toyzcontent@gmail.com', // Change to your verified sender
+    to: 'toyzcontent@gmail.com',
+    from: 'toyzcontent@gmail.com',
     subject: 'This is a simple message',
     text: 'which contains some text',
     html: '<strong>and some html</strong>',

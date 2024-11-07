@@ -23,7 +23,7 @@ function ContactForm() {
   const subject = watch('subject');
 
   const onSubmit: SubmitHandler<FormInputProps> = async inputValues => {
-    mailAction();
+    mailAction(name, email, subject);
   };
 
   return (
