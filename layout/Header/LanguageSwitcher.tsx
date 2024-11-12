@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, Popover } from '@/components';
-import { usePathname, useRouter, localeNames, locales, type Locale } from '@/i18n';
+import { routing, localeNames, usePathname, useRouter } from '@/i18n/routing';
 
 function LanguageSwitcher({ locale }: { locale: Locale }) {
   const pathname = usePathname();
@@ -27,7 +27,7 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
       }
     >
       <div className="flex flex-col gap-2">
-        {locales.map(locale => (
+        {routing.locales.map(locale => (
           <Button
             key={locale}
             variant="secondary"

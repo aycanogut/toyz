@@ -3,7 +3,6 @@ import { ReactNode } from 'react';
 import { Metadata } from 'next';
 
 import { getEntryBySlug } from '@/contentful/client';
-import { Locale } from '@/i18n';
 
 type Props = {
   params: {

@@ -54,7 +54,7 @@
       {
         "name": "next/navigation",
         "importNames": ["redirect", "permanentRedirect", "useRouter", "usePathname"],
-        "message": "Please import from `@/i18n` instead.",
+        "message": "Please import from `@/i18n/routing` instead.",
       },
     ],
   },

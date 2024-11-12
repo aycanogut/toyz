@@ -8,8 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
 
 import { Button } from '@/components';
-import { usePathname } from '@/i18n';
-import { Link, Locale, useRouter } from '@/i18n';
+import { Link, useRouter, usePathname } from '@/i18n/routing';
 import { cn } from '@/utils';
 
 import Brand from './Brand';

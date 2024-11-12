@@ -4,7 +4,6 @@ import { useLocale } from 'next-intl';
 
 import { Card } from '@/components';
 import { getEntriesByType } from '@/contentful/client';
-import { Locale } from '@/i18n';
 
 async function getData(locale: Locale, query: string): Promise<ContentProps[]> {
   const response = await getEntriesByType('content', locale, query);

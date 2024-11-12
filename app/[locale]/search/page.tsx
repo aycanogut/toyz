@@ -4,7 +4,6 @@ import { useLocale, useTranslations } from 'next-intl';
 
 import { Card } from '@/components';
 import { getEntriesByType, getEntryCategories } from '@/contentful/client';
-import { Locale } from '@/i18n';
 
 import { default as SearchComponent } from './Search';
 
