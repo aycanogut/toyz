@@ -4,7 +4,6 @@ import { useLocale } from 'next-intl';
 
 import { Slider } from '@/components';
 import { getEntriesByType } from '@/contentful/client';
-import { Locale } from '@/i18n';
 
 import Content from './Content';
 

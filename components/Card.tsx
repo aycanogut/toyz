@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 import { Badge, ContentLabels } from '@/components';
-import { Link } from '@/i18n';
+import { Link } from '@/i18n/routing';
 
 interface Props {
   title: string;

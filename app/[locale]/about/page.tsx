@@ -6,7 +6,6 @@ import { useLocale, useTranslations } from 'next-intl';
 
 import { PageHeader } from '@/components';
 import { getEntriesByType } from '@/contentful/client';
-import { Locale } from '@/i18n';
 
 async function getData(locale: Locale, query: string): Promise<AboutProps> {
   const response = await getEntriesByType('about', locale, query);

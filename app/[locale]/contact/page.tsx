@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from 'next-intl';
 
 import { Icon, PageHeader } from '@/components';
 import { getEntriesByType } from '@/contentful/client';
-import { Link, Locale } from '@/i18n';
+import { Link } from '@/i18n/routing';
 
 import ContactForm from './ContactForm';
 

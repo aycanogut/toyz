@@ -1,11 +1,13 @@
 import { ReactNode } from 'react';
 
+import { notFound } from 'next/navigation';
+
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 
 import type { Metadata } from 'next';
 
-import { Locale } from '@/i18n';
+import { routing } from '@/i18n/routing';
 import Layout from '@/layout';
 import { grotesque } from '@/theme';
 
@@ -48,6 +50,10 @@ export async function generateMetadata({
 
 async function RootLayout({ children, params: { locale } }: { children: ReactNode; params: { locale: Locale } }) {
   const messages = await getMessages();
+
+  if (!routing.locales.includes(locale as Locale)) {
+    notFound();
+  }
 
   return (
     <html

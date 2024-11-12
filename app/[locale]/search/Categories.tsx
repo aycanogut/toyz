@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import { Popover, Button } from '@/components';
-import { useRouter, usePathname } from '@/i18n';
+import { useRouter, usePathname } from '@/i18n/routing';
 
 interface Props {
   categories: string[];

@@ -1,7 +1,5 @@
 import { ReactNode } from 'react';
 
-import { Locale } from '@/i18n';
-
 // TODO: Update og image and production URL
 export async function generateMetadata({
   params,

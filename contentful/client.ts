@@ -1,6 +1,5 @@
 import { createClient } from 'contentful';
 
-import { Locale } from '@/i18n';
 import toyzConfig from '@/toyzConfig';
 
 export const createContentClient = () => {

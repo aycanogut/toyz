@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 
 import { Button } from '@/components';
-import { Link, Locale, useRouter } from '@/i18n';
+import { Link, useRouter } from '@/i18n/routing';
 import { cn } from '@/utils';
 
 import LanguageSwitcher from './LanguageSwitcher';
