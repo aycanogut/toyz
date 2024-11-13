@@ -22,7 +22,7 @@ function PageHeader({ image, title }: PageHeaderProps) {
         />
 
         <header className="container relative hidden h-full lg:block">
-          <h1 className="absolute left-4 top-1/4 font-grotesque text-[4rem] font-medium uppercase leading-[5.375rem] text-title-light [text-shadow:_0_1px_0_rgb(0_0_0_/_100%)]">
+          <h1 className="absolute left-4 top-1/4 font-grotesque text-[4rem] font-medium uppercase leading-[5.375rem] text-title-light [text-shadow:_0_0_7px_rgb(0_0_0_/_100%)]">
             {title}
           </h1>
         </header>
