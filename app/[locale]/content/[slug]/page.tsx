@@ -12,6 +12,7 @@ import { Link } from '@/i18n/routing';
 
 import EmbedVideo from './EmbedVideo';
 import ImageAsset from './ImageAsset';
+import ScrollProgressAnimation from './ScrollProgressAnimation';
 import SocialMediaShare from './SocialMediaShare';
 
 async function getData(slug: string, locale: Locale): Promise<ContentProps> {
@@ -27,8 +28,9 @@ function ContentDetails({ params }: { params: { slug: string; locale: Locale } }
 
   return (
     <section className="lg:pb-24 lg:pt-2">
-      <span className="block h-20 bg-background-light lg:hidden" />
+      <ScrollProgressAnimation />
 
+      <span className="block h-20 bg-background-light lg:hidden" />
       <article>
         <div className="container relative h-56 w-full md:hidden">
           <Image
