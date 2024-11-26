@@ -18,6 +18,7 @@ async function getData(slug: string, locale: Locale): Promise<ContentProps> {
 }
 
 // TODO: Update production URL
+// TODO: keyword from CMS
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await getData(params.slug, params.locale);
 

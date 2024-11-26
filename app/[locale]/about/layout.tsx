@@ -14,7 +14,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = params;
 
-  const t = await getTranslations({ locale, namespace: 'Search.Meta' });
+  const t = await getTranslations({ locale, namespace: 'About.Meta' });
 
   const title = t('title');
   const description = t('description');
@@ -40,6 +40,6 @@ export async function generateMetadata({
   };
 }
 
-export default function SearchLayout({ children }: { children: ReactNode }) {
+export default function AboutLayout({ children }: { children: ReactNode }) {
   return <section>{children}</section>;
 }

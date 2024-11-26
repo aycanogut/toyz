@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, getTranslations } from 'next-intl/server';
 
 import type { Metadata } from 'next';
 
@@ -14,6 +14,8 @@ import { grotesque } from '@/theme';
 import '@/theme/globals.css';
 
 // TODO: Update og image and production URL from config
+// TODO: Update metadata description and keywords
+
 export async function generateMetadata({
   params,
 }: {
@@ -21,13 +23,14 @@ export async function generateMetadata({
     locale: Locale;
   };
 }): Promise<Metadata> {
-  const title = 'TOYZ';
-  const description = params.locale === 'en' ? 'TOYZ is a counter-culture themed webzine' : 'TOYZ karşı kültür temalı bir webzindir';
+  const { locale } = params;
+
+  const t = await getTranslations({ locale, namespace: 'Homepage.Meta' });
+
+  const title = t('title');
+  const description = t('description');
   const applicationName = 'TOYZ';
-  const keywords =
-    params.locale === 'en'
-      ? 'toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography '
-      : 'toyz, karşı kültür, webzine, graffiti, kaykay, punk rock, sanat, sinema, fotoğrafçılık';
+  const keywords = t('keywords');
   const openGraph = {
     siteName: 'TOYZ',
     url: 'https://toyz-swart.vercel.app/',
