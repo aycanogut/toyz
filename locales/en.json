@@ -4,11 +4,23 @@
     "about": "about",
     "contact": "contact"
   },
+  "Homepage": {
+    "Meta": {
+      "title": "Homepage",
+      "description": "Homepage TOYZ is a counter-culture themed webzine",
+      "keywords": "homepage, toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography"
+    }
+  },
   "Search": {
     "search": "search",
     "placeholder": "Search for a content",
     "result": "No results found",
-    "category": "all"
+    "category": "all",
+    "Meta": {
+      "title": "Search",
+      "description": "Search TOYZ is a counter-culture themed webzine",
+      "keywords": "Search, toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography"
+    }
   },
   "Content": {
     "show-more": "show more",
@@ -16,7 +28,12 @@
     "back": "back"
   },
   "About": {
-    "title": "who we are"
+    "title": "who we are",
+    "Meta": {
+      "title": "About",
+      "description": "About TOYZ is a counter-culture themed webzine",
+      "keywords": "About, toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography"
+    }
   },
   "Contact": {
     "title": "contact",
@@ -24,7 +41,12 @@
     "name": "name",
     "email": "e-mail",
     "subject": "message",
-    "send": "send"
+    "send": "send",
+    "Meta": {
+      "title": "Contact",
+      "description": "Contact TOYZ is a counter-culture themed webzine",
+      "keywords": "Contact, toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography"
+    }
   },
   "Error": {
     "404": "Page not found",
