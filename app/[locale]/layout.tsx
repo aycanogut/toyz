@@ -15,7 +15,16 @@ import '@/theme/globals.css';
 
 // TODO: Update og image and production URL from config
 // TODO: Update metadata description and keywords
-export async function generateMetadata({ locale }: { locale: Locale }): Promise<Metadata> {
+
+export async function generateMetadata({
+  params,
+}: {
+  params: {
+    locale: Locale;
+  };
+}): Promise<Metadata> {
+  const { locale } = params;
+
   const t = await getTranslations({ locale, namespace: 'Homepage.Meta' });
 
   const title = t('title');

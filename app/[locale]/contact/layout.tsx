@@ -1,10 +1,19 @@
 import { ReactNode } from 'react';
 
+import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 // TODO: Update og image and production URL
 // TODO: Update metadata description and keywords
-export async function generateMetadata({ locale }: { locale: Locale }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: {
+    locale: Locale;
+  };
+}): Promise<Metadata> {
+  const { locale } = params;
+
   const t = await getTranslations({ locale, namespace: 'Contact.Meta' });
 
   const title = t('title');
