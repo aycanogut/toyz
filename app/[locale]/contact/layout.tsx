@@ -5,7 +5,7 @@ import { getTranslations } from 'next-intl/server';
 // TODO: Update og image and production URL
 // TODO: Update metadata description and keywords
 export async function generateMetadata({ locale }: { locale: Locale }) {
-  const t = await getTranslations({ locale, namespace: 'Search.Meta' });
+  const t = await getTranslations({ locale, namespace: 'Contact.Meta' });
 
   const title = t('title');
   const description = t('description');
@@ -31,6 +31,6 @@ export async function generateMetadata({ locale }: { locale: Locale }) {
   };
 }
 
-export default function SearchLayout({ children }: { children: ReactNode }) {
+export default function ContactLayout({ children }: { children: ReactNode }) {
   return <section>{children}</section>;
 }
