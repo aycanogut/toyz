@@ -3,7 +3,9 @@ import { ReactNode } from 'react';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-// TODO: Update og image and production URL
+import toyzConfig from '@/toyzConfig';
+
+// TODO: Update og image
 // TODO: Update metadata description and keywords
 export async function generateMetadata({
   params,
@@ -18,11 +20,11 @@ export async function generateMetadata({
 
   const title = t('title');
   const description = t('description');
-  const applicationName = 'TOYZ';
+  const applicationName = toyzConfig.title;
   const keywords = t('keywords');
   const openGraph = {
-    siteName: 'TOYZ',
-    url: 'https://toyz-swart.vercel.app/',
+    siteName: toyzConfig.title,
+    url: toyzConfig.baseUrl,
     type: 'website',
   };
   const authors = {
