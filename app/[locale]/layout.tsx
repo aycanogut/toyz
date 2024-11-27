@@ -10,10 +10,11 @@ import type { Metadata } from 'next';
 import { routing } from '@/i18n/routing';
 import Layout from '@/layout';
 import { grotesque } from '@/theme';
+import toyzConfig from '@/toyzConfig';
 
 import '@/theme/globals.css';
 
-// TODO: Update og image and production URL from config
+// TODO: Update og image
 // TODO: Update metadata description and keywords
 
 export async function generateMetadata({
@@ -29,11 +30,11 @@ export async function generateMetadata({
 
   const title = t('title');
   const description = t('description');
-  const applicationName = 'TOYZ';
+  const applicationName = toyzConfig.title;
   const keywords = t('keywords');
   const openGraph = {
-    siteName: 'TOYZ',
-    url: 'https://toyz-swart.vercel.app/',
+    siteName: toyzConfig.title,
+    url: toyzConfig.baseUrl,
     type: 'website',
   };
   const authors = {

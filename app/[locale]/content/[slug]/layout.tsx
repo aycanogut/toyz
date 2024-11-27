@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { Metadata } from 'next';
 
 import { getEntryBySlug } from '@/contentful/client';
+import toyzConfig from '@/toyzConfig';
 
 type Props = {
   params: {
@@ -17,7 +18,6 @@ async function getData(slug: string, locale: Locale): Promise<ContentProps> {
   return response as unknown as ContentProps;
 }
 
-// TODO: Update production URL
 // TODO: keyword from CMS
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await getData(params.slug, params.locale);
@@ -25,14 +25,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = data.fields.title;
   const description = data.fields.description;
   const image = `https:${data?.fields?.image?.fields?.file.url}`;
-  const applicationName = 'TOYZ';
+  const applicationName = toyzConfig.title;
   const keywords =
     params.locale === 'en'
       ? 'search page, toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography '
       : 'arama sayfası,  toyz, karşı kültür, webzine, graffiti, kaykay, punk rock, sanat, sinema, fotoğrafçılık';
   const openGraph = {
-    siteName: 'TOYZ',
-    url: 'https://toyz-swart.vercel.app/',
+    siteName: toyzConfig.title,
+    url: toyzConfig.baseUrl,
     type: 'website',
   };
   const authors = {
