@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from 'react';
 
-import { useSelectedLayoutSegment } from 'next/navigation';
-
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
 
@@ -20,15 +18,12 @@ function HeaderDesktop() {
   const [isScrolling, setIsScrolling] = useState(false);
 
   const { push } = useRouter();
-  const pathnameWithLocale = usePathname();
+  const pathname = usePathname();
 
   const locale = useLocale();
   const t = useTranslations('Navigation');
 
-  const selectedLayoutSegment = useSelectedLayoutSegment();
-  const pathname = selectedLayoutSegment ? `/${selectedLayoutSegment}` : '/';
-  const isHomepage = pathnameWithLocale === `/${locale}`;
-
+  const isHomepage = pathname === '/';
   const headerVisibleHeight = 250;
 
   const handleScroll = () => {
