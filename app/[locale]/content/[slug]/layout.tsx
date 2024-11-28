@@ -26,10 +26,7 @@ export async function generateMetadata({
   const description = data.fields.description;
   const image = `https:${data?.fields?.image?.fields?.file.url}`;
   const applicationName = toyzConfig.title;
-  const keywords =
-    params.locale === 'en'
-      ? 'search page, toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography '
-      : 'arama sayfası,  toyz, karşı kültür, webzine, graffiti, kaykay, punk rock, sanat, sinema, fotoğrafçılık';
+  const keywords = data.fields.keywords.join(', ');
   const openGraph = {
     siteName: toyzConfig.title,
     url: toyzConfig.baseUrl,
