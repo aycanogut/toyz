@@ -14,5 +14,6 @@ interface ContentProps {
     };
     details: ContentLabelsProps[];
     slug: string;
+    keywords: string[];
   };
 }
