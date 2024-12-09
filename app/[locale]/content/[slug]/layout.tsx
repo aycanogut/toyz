@@ -11,7 +11,6 @@ async function getData(slug: string, locale: Locale): Promise<ContentProps> {
   return response as unknown as ContentProps;
 }
 
-// TODO: keyword from CMS
 export async function generateMetadata({
   params,
 }: {
@@ -30,11 +29,10 @@ export async function generateMetadata({
   const openGraph = {
     siteName: toyzConfig.title,
     url: toyzConfig.baseUrl,
-    type: 'website',
+    type: 'article',
   };
   const authors = {
-    name: 'Aycan Öğüt',
-    url: 'https://aycan.dev',
+    name: data.fields.details.find(detail => detail.icon === 'user')?.label,
   };
 
   return {
