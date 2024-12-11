@@ -1,9 +1,30 @@
 import type { MetadataRoute } from 'next';
 
+import { getEntriesByType } from '@/contentful/client';
 import toyzConfig from '@/toyzConfig';
 
-// TODO: try to add dynamic content
-export default function sitemap(): MetadataRoute.Sitemap {
+async function getData(locale: Locale, query: string): Promise<ContentProps[]> {
+  const response = await getEntriesByType('content', locale, query);
+
+  return response as unknown as ContentProps[];
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const data = await getData('en', '');
+
+  const dynamicPages = data.map(item => {
+    return {
+      url: `${toyzConfig.baseUrl}/en/${item.fields.slug}`,
+      lastModified: new Date(),
+      alternates: {
+        languages: {
+          en: `${toyzConfig.baseUrl}/en/${item.fields.slug}`,
+          tr: `${toyzConfig.baseUrl}/tr/${item.fields.slug}`,
+        },
+      },
+    };
+  });
+
   return [
     {
       url: `${toyzConfig.baseUrl}/en`,
@@ -45,5 +66,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       },
     },
+    ...dynamicPages,
   ];
 }
