@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-import toyzConfig from './toyzConfig';
+import toyzConfig from '@/toyzConfig';
 
 // TODO: try to add dynamic content
 export default function sitemap(): MetadataRoute.Sitemap {
