@@ -12,8 +12,8 @@ function ImageAsset({ title, description, url }: Props) {
       <Image
         src={`https:${url}`}
         alt={title}
-        width={800}
-        height={400}
+        width={480}
+        height={640}
         className="mx-auto object-contain"
       />
       {description && <figcaption>{description}</figcaption>}
