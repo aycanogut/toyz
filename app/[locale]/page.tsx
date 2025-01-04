@@ -19,7 +19,7 @@ function Home() {
 
   return (
     <>
-      <Slider images={data ?? []} />
+      <Slider images={data} />
       <Content />
     </>
   );
