@@ -112,7 +112,7 @@ function ContentDetails({ params }: { params: { slug: string; locale: Locale } }
                  */
                 [INLINES.EMBEDDED_ENTRY]: node => {
                   const description = node?.data?.target?.fields?.description;
-                  const url = node?.data?.target?.fields?.url ?? '';
+                  const url = node?.data?.target?.fields?.url;
 
                   return (
                     <EmbedVideo
