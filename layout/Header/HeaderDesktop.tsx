@@ -9,7 +9,6 @@ import { Button } from '@/components';
 import { Link, useRouter, usePathname } from '@/i18n/routing';
 import { cn } from '@/utils';
 
-import Brand from './Brand';
 import LanguageSwitcher from './LanguageSwitcher';
 import navigationItems from './navigationItems';
 import variants from './variants';
@@ -52,12 +51,19 @@ function HeaderDesktop() {
           variants={isHomepage ? variants : {}}
           className={cn('flex w-full px-20 py-4 lg:h-24 lg:bg-background-light', isHomepage && 'fixed left-0 right-0 top-0 z-50')}
         >
-          <Brand
-            src="/assets/logo.png"
-            alt="Brand"
-            width={100}
-            height={200}
-          />
+          <Link
+            href="/"
+            className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-title-light"
+          >
+            <h1
+              className="font-nabla text-[2.5rem] font-extrabold text-title-light"
+              style={{
+                filter: 'hue-rotate(310deg) saturate(2.2)',
+              }}
+            >
+              TOYZ
+            </h1>
+          </Link>
           <nav className="w-full">
             <ul className="flex h-full items-center justify-end gap-8">
               {navigationItems.map(item => (

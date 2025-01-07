@@ -9,9 +9,9 @@ import type { Metadata } from 'next';
 
 import { routing } from '@/i18n/routing';
 import Layout from '@/layout';
-import { grotesque } from '@/theme';
+import { grotesque, nabla } from '@/theme';
 import toyzConfig from '@/toyzConfig';
-
+import { cn } from '@/utils';
 import '@/theme/globals.css';
 
 // TODO: Update og image
@@ -62,7 +62,7 @@ async function RootLayout({ children, params: { locale } }: { children: ReactNod
   return (
     <html
       lang={locale}
-      className={grotesque.variable}
+      className={cn(grotesque.variable, nabla.variable)}
     >
       <NextIntlClientProvider messages={messages}>
         <Layout>{children}</Layout>
