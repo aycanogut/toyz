@@ -34,6 +34,7 @@ const config: Config = {
       },
       fontFamily: {
         grotesque: ['var(--font-grotesque)'],
+        nabla: ['var(--font-nabla)'],
       },
       fontSize: {
         '3.5': ['2rem', { lineHeight: '1.75rem' }],
