@@ -15,6 +15,7 @@ interface Props {
 
 function Categories({ categories }: Props) {
   const [category, setCategory] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -37,6 +38,10 @@ function Categories({ categories }: Props) {
   return (
     <Popover
       hasCloseIcon={false}
+      rootProps={{
+        open: isOpen,
+        onOpenChange: setIsOpen,
+      }}
       trigger={<Button>{category || allCategory}</Button>}
       triggerProps={{
         className: 'min-w-40',
@@ -51,7 +56,10 @@ function Categories({ categories }: Props) {
             key={category}
             variant="secondary"
             className="border-none font-grotesque text-lg font-semibold uppercase text-white"
-            onClick={() => setCategory(category)}
+            onClick={() => {
+              setCategory(category);
+              setIsOpen(false);
+            }}
           >
             {category}
           </Button>
