@@ -28,12 +28,10 @@ function Categories({ categories }: Props) {
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
+    const selectedCategory = params.get('category') ?? '';
 
-    if (category.length) {
-      params && params.set('category', category);
-      push(`${pathname}?${params.toString()}`, { scroll: false });
-    }
-  }, [category, pathname, push, searchParams]);
+    setCategory(selectedCategory);
+  }, [searchParams]);
 
   return (
     <Popover
@@ -51,17 +49,27 @@ function Categories({ categories }: Props) {
       }}
     >
       <div className="flex flex-col gap-2">
-        {allCategories.map(category => (
+        {allCategories.map(selectedCategory => (
           <Button
-            key={category}
+            key={selectedCategory}
             variant="secondary"
             className="border-none font-grotesque text-lg font-semibold uppercase text-white"
             onClick={() => {
-              setCategory(category);
+              const params = new URLSearchParams(searchParams);
+
+              if (selectedCategory === allCategory) {
+                params.delete('category');
+              } else {
+                params.set('category', selectedCategory);
+              }
+
+              push(`${pathname}?${params.toString()}`, { scroll: false });
+
+              setCategory(selectedCategory);
               setIsOpen(false);
             }}
           >
-            {category}
+            {selectedCategory}
           </Button>
         ))}
       </div>
