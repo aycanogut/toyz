@@ -1,5 +1,6 @@
-import Image from 'next/image';
+'use client';
 
+import { EasyZoomOnHover } from 'easy-magnify';
 interface Props {
   title: string;
   description?: string;
@@ -8,13 +9,19 @@ interface Props {
 
 function ImageAsset({ title, description, url }: Props) {
   return (
-    <figure className="mx-auto flex flex-col text-center prose-figcaption:mt-2 prose-figcaption:text-base prose-figcaption:text-title-light">
-      <Image
-        src={`https:${url}`}
-        alt={title}
-        width={480}
-        height={640}
-        className="mx-auto object-contain"
+    <figure className="flex flex-col items-center text-center prose-figcaption:mt-2 prose-figcaption:text-base prose-figcaption:text-title-light">
+      <EasyZoomOnHover
+        delayTimer={2000}
+        mainImage={{
+          src: `https:${url}`,
+          alt: title,
+          width: 480,
+          height: 640,
+        }}
+        zoomImage={{
+          src: `https:${url}`,
+          alt: title,
+        }}
       />
       {description && <figcaption>{description}</figcaption>}
     </figure>

@@ -1,5 +1,6 @@
 import { use } from 'react';
 
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
@@ -11,9 +12,12 @@ import { getEntryBySlug } from '@/contentful/client';
 import { Link } from '@/i18n/routing';
 
 import EmbedVideo from './EmbedVideo';
-import ImageAsset from './ImageAsset';
 import ScrollProgressAnimation from './ScrollProgressAnimation';
 import SocialMediaShare from './SocialMediaShare';
+
+const ImageAsset = dynamic(() => import('./ImageAsset'), {
+  ssr: false,
+});
 
 async function getData(slug: string, locale: Locale): Promise<ContentProps> {
   const response = await getEntryBySlug('content', slug, locale);
