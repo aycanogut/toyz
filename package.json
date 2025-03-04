@@ -24,6 +24,7 @@
     "@sendgrid/mail": "^8.1.4",
     "class-variance-authority": "^0.7.1",
     "contentful": "^11.5.3",
+    "easy-magnify": "^1.1.4",
     "embla-carousel": "^8.5.2",
     "embla-carousel-autoplay": "^8.5.2",
     "embla-carousel-react": "^8.5.2",
