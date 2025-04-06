@@ -1,7 +1,5 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
 import Image from 'next/image';
 
 import { EmblaOptionsType } from 'embla-carousel';
@@ -29,16 +27,6 @@ function Slider({ images }: Props) {
     }),
   ]);
 
-  const [opacity, setOpacity] = useState(100);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setOpacity(0);
-    }, 0);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <section
       className="relative h-screen overflow-hidden"
@@ -60,16 +48,13 @@ function Slider({ images }: Props) {
         ))}
       </div>
 
-      <div
-        className="absolute inset-0 bg-background-dark transition-opacity duration-[8000ms] ease-in-out"
-        style={{ opacity: opacity / 100 }}
-      />
+      <div className="absolute inset-0 bg-background-dark opacity-15" />
       <Image
         src="/animation.gif"
         alt="Animation"
         width={200}
         height={200}
-        className="absolute inset-0 size-full object-contain"
+        className="absolute inset-0 m-auto size-[60rem] object-contain"
       />
     </section>
   );
