@@ -54,7 +54,7 @@ function Slider({ images }: Props) {
         alt="Animation"
         width={200}
         height={200}
-        className="absolute inset-0 m-auto size-[60rem] object-contain"
+        className="absolute inset-0 m-auto size-[60rem] object-contain drop-shadow-lg"
         unoptimized
       />
     </section>
