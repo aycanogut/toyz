@@ -31,16 +31,16 @@ function Contact() {
         title={t('title')}
       />
 
-      <div className="container flex flex-col gap-6 p-4 pb-14 lg:gap-0 lg:pb-40 lg:pt-12">
+      <div className="container flex flex-col gap-6 p-4 pb-14 lg:gap-0 lg:pt-12 lg:pb-40">
         <header>
-          <h1 className="font-grotesque text-2xl font-medium uppercase text-title-light lg:hidden">{t('title')}</h1>
+          <h1 className="font-grotesque text-title-light text-2xl font-medium uppercase lg:hidden">{t('title')}</h1>
         </header>
 
         <div className="flex flex-col gap-4 sm:flex-row">
           <Link
             href="https://www.instagram.com/"
             target="_blank"
-            className="flex gap-2 rounded-e rounded-s bg-background-light p-2.5 md:inline-flex"
+            className="bg-background-light flex gap-2 rounded-s rounded-e p-2.5 md:inline-flex"
           >
             <Icon
               name="instagram"
@@ -54,7 +54,7 @@ function Contact() {
           <Link
             href="mailto:toyzcontent@gmail.com"
             target="_blank"
-            className="flex gap-2 rounded-e rounded-s bg-background-light p-2.5 md:inline-flex"
+            className="bg-background-light flex gap-2 rounded-s rounded-e p-2.5 md:inline-flex"
           >
             <Icon
               name="envelope"
