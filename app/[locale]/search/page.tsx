@@ -65,7 +65,7 @@ function Search({
           />
         ))
       ) : (
-        <p className="font-grotesque text-2xl font-semibold text-title-light lg:mb-24 lg:text-3xl">{t('result')}</p>
+        <p className="font-grotesque text-title-light text-2xl font-semibold lg:mb-24 lg:text-3xl">{t('result')}</p>
       )}
     </section>
   );

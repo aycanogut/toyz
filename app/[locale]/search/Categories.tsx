@@ -53,7 +53,7 @@ function Categories({ categories }: Props) {
           <Button
             key={selectedCategory}
             variant="secondary"
-            className="border-none font-grotesque text-lg font-semibold uppercase text-white"
+            className="font-grotesque border-none text-lg font-semibold text-white uppercase"
             onClick={() => {
               const params = new URLSearchParams(searchParams);
 
