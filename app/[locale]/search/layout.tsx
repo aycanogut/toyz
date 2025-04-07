@@ -7,13 +7,12 @@ import toyzConfig from '@/toyzConfig';
 
 // TODO: Update og image
 // TODO: Update metadata description and keywords
-export async function generateMetadata({
-  params,
-}: {
-  params: {
+export async function generateMetadata(props: {
+  params: Promise<{
     locale: Locale;
-  };
+  }>;
 }): Promise<Metadata> {
+  const params = await props.params;
   const { locale } = params;
 
   const t = await getTranslations({ locale, namespace: 'Search.Meta' });

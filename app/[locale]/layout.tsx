@@ -17,13 +17,12 @@ import '@/theme/globals.css';
 // TODO: Update og image
 // TODO: Update metadata description and keywords
 
-export async function generateMetadata({
-  params,
-}: {
-  params: {
+export async function generateMetadata(props: {
+  params: Promise<{
     locale: Locale;
-  };
+  }>;
 }): Promise<Metadata> {
+  const params = await props.params;
   const { locale } = params;
 
   const t = await getTranslations({ locale, namespace: 'Homepage.Meta' });
@@ -52,7 +51,13 @@ export async function generateMetadata({
   };
 }
 
-async function RootLayout({ children, params: { locale } }: { children: ReactNode; params: { locale: Locale } }) {
+async function RootLayout(props: { children: ReactNode; params: Promise<{ locale: Locale }> }) {
+  const params = await props.params;
+
+  const { locale } = params;
+
+  const { children } = props;
+
   const messages = await getMessages();
 
   if (!routing.locales.includes(locale as Locale)) {

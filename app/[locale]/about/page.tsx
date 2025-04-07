@@ -1,8 +1,6 @@
-import { use } from 'react';
-
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Document } from '@contentful/rich-text-types';
-import { useLocale, useTranslations } from 'next-intl';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 import { PageHeader } from '@/components';
 import { getEntriesByType } from '@/contentful/client';
@@ -13,12 +11,12 @@ async function getData(locale: Locale, query: string): Promise<AboutProps> {
   return response[0] as unknown as AboutProps;
 }
 
-function About() {
-  const locale = useLocale();
+async function About() {
+  const locale = await getLocale();
 
-  const data = use(getData(locale as Locale, ''));
+  const data = await getData(locale as Locale, '');
 
-  const t = useTranslations('About');
+  const t = await getTranslations('About');
 
   return (
     <section>
