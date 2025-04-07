@@ -37,7 +37,7 @@ function Popover({ trigger, children, rootProps, triggerProps, portalProps, cont
           sideOffset={8}
           collisionPadding={24}
           className={cn(
-            '-ml-2 bg-background-light p-0 data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=top]:animate-slideDownAndFade xl:-ml-0',
+            'bg-background-light data-[state=open]:data-[side=bottom]:animate-slide-up-and-fade data-[state=open]:data-[side=left]:animate-slide-right-and-fade data-[state=open]:data-[side=right]:animate-slide-left-and-fade data-[state=open]:data-[side=top]:animate-slide-down-and-fade -ml-2 p-0 xl:-ml-0',
             contentClassName
           )}
           {...restContentProps}
@@ -45,7 +45,7 @@ function Popover({ trigger, children, rootProps, triggerProps, portalProps, cont
           {children}
           {hasCloseIcon && (
             <Close
-              className="absolute right-1 top-1 inline-flex items-center justify-center text-white"
+              className="absolute top-1 right-1 inline-flex items-center justify-center text-white"
               aria-label="Close"
             >
               <Icon

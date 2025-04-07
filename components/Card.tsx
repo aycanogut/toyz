@@ -27,13 +27,13 @@ function Card({ title, image, items, slug }: Props) {
       </div>
       <div className="flex w-full flex-col gap-6">
         <header className="w-full">
-          <h2 className="text-start font-grotesque text-2xl font-medium text-title-light md:text-3xl lg:text-4xl">{title}</h2>
+          <h2 className="font-grotesque text-title-light text-start text-2xl font-medium md:text-3xl lg:text-4xl">{title}</h2>
         </header>
         <ContentLabels items={items} />
 
         <Link
           href={`/content/${slug}`}
-          className="w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-title-light md:mt-6 md:w-44"
+          className="focus-visible:ring-title-light w-full focus-visible:ring-2 focus-visible:outline-hidden md:mt-6 md:w-44"
         >
           <Badge
             className="w-full uppercase"

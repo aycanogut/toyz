@@ -9,7 +9,7 @@ interface Props {
 
 function ImageAsset({ title, description, url }: Props) {
   return (
-    <figure className="flex flex-col items-center text-center prose-figcaption:mt-2 prose-figcaption:text-base prose-figcaption:text-title-light">
+    <figure className="prose-figcaption:mt-2 prose-figcaption:text-base prose-figcaption:text-title-light flex flex-col items-center text-center">
       <EasyZoomOnHover
         delayTimer={2000}
         mainImage={{

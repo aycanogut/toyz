@@ -72,7 +72,7 @@ function Search({ categories }: Props) {
 
         {searchValue && (
           <Button
-            className="absolute right-0 top-0 bg-transparent text-title-light hover:bg-transparent"
+            className="text-title-light absolute top-0 right-0 bg-transparent hover:bg-transparent"
             appendIcon="close"
             iconSize={32}
             onClick={() => {

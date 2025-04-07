@@ -31,12 +31,12 @@ function ContentDetails({ params }: { params: { slug: string; locale: Locale } }
   const t = useTranslations('Content');
 
   return (
-    <section className="lg:pb-24 lg:pt-2">
+    <section className="lg:pt-2 lg:pb-24">
       <ScrollProgressAnimation />
 
-      <span className="block h-20 bg-background-light lg:hidden" />
+      <span className="bg-background-light block h-20 lg:hidden" />
       <article>
-        <div className="container relative h-56 w-full md:hidden">
+        <div className="relative container h-56 w-full md:hidden">
           <Image
             src={`https:${data.fields.image.fields.file.url}`}
             alt={data.fields.title}
@@ -48,17 +48,17 @@ function ContentDetails({ params }: { params: { slug: string; locale: Locale } }
         <header className="container space-y-6 px-4 pt-8 md:pb-8 lg:space-y-10 xl:px-0">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-title-light"
+            className="focus-visible:ring-title-light inline-flex items-center gap-2 p-2 focus-visible:ring-2 focus-visible:outline-hidden"
           >
             <Icon
               name="arrow-left"
               size={24}
               className="text-title-light"
             />
-            <span className="mb-1 bg-transparent font-grotesque text-xl font-bold capitalize text-title-light lg:text-2xl">{t('back')}</span>
+            <span className="font-grotesque text-title-light mb-1 bg-transparent text-xl font-bold capitalize lg:text-2xl">{t('back')}</span>
           </Link>
 
-          <h1 className="text-start font-grotesque text-2xl font-medium text-title-light md:text-3xl lg:text-5xl lg:font-semibold">{data.fields.title}</h1>
+          <h1 className="font-grotesque text-title-light text-start text-2xl font-medium md:text-3xl lg:text-5xl lg:font-semibold">{data.fields.title}</h1>
           <div className="flex w-full flex-col items-start justify-between gap-6 md:flex-row md:items-center">
             <ContentLabels items={data.fields.details} />
 
@@ -76,7 +76,7 @@ function ContentDetails({ params }: { params: { slug: string; locale: Locale } }
               src={`https:${data.fields.image.fields.file.url}`}
               alt={data.fields.title}
               fill
-              className="object-cover opacity-70 blur-sm"
+              className="object-cover opacity-70 blur-xs"
             />
 
             <div className="absolute inset-0 m-auto h-[19.3125rem] w-[31.625rem]">
@@ -89,7 +89,7 @@ function ContentDetails({ params }: { params: { slug: string; locale: Locale } }
             </div>
           </div>
 
-          <div className="prose min-w-full text-title-light md:prose-lg lg:prose-xl prose-headings:text-title-light prose-a:text-title-light prose-li:-my-5">
+          <div className="prose text-title-light md:prose-lg lg:prose-xl prose-headings:text-title-light prose-a:text-title-light prose-li:-my-5 min-w-full">
             {documentToReactComponents(data.fields.content as unknown as Document, {
               renderNode: {
                 /**
