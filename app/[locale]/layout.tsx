@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, getTranslations } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 
 import type { Metadata } from 'next';
 
@@ -58,8 +58,6 @@ async function RootLayout(props: { children: ReactNode; params: Promise<{ locale
 
   const { children } = props;
 
-  const messages = await getMessages();
-
   if (!routing.locales.includes(locale as Locale)) {
     notFound();
   }
@@ -69,7 +67,7 @@ async function RootLayout(props: { children: ReactNode; params: Promise<{ locale
       lang={locale}
       className={cn(grotesque.variable, nabla.variable)}
     >
-      <NextIntlClientProvider messages={messages}>
+      <NextIntlClientProvider>
         <Layout>{children}</Layout>
       </NextIntlClientProvider>
     </html>
