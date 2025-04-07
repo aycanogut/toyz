@@ -1,4 +1,4 @@
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 import { Card } from '@/components';
 import { getEntriesByType, getEntryCategories } from '@/contentful/client';
@@ -23,19 +23,16 @@ async function Search(props: {
   searchParams?: Promise<{
     query: string;
     category: string;
-    locale: string;
   }>;
 }) {
   const searchParams = await props.searchParams;
-  const locale = searchParams?.locale ?? '';
-
-  console.log(locale);
 
   const t = await getTranslations('Search');
 
   const query = searchParams?.query ?? '';
   const category = searchParams?.category ?? '';
 
+  const locale = await getLocale();
   const defaultCategory = locale === 'en' ? 'all' : 'hepsi';
 
   const data = await getData(locale as Locale, query);
