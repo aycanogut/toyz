@@ -11,14 +11,13 @@ async function getData(slug: string, locale: Locale): Promise<ContentProps> {
   return response as unknown as ContentProps;
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: {
+export async function generateMetadata(props: {
+  params: Promise<{
     locale: Locale;
     slug: string;
-  };
+  }>;
 }): Promise<Metadata> {
+  const params = await props.params;
   const data = await getData(params.slug, params.locale);
 
   const title = data.fields.title;

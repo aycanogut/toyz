@@ -1,23 +1,17 @@
-import { use } from 'react';
-
-import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { Document, BLOCKS, INLINES } from '@contentful/rich-text-types';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
 import { ContentLabels, Icon } from '@/components';
 import { getEntryBySlug } from '@/contentful/client';
 import { Link } from '@/i18n/routing';
 
 import EmbedVideo from './EmbedVideo';
+import ImageAsset from './ImageAsset';
 import ScrollProgressAnimation from './ScrollProgressAnimation';
 import SocialMediaShare from './SocialMediaShare';
-
-const ImageAsset = dynamic(() => import('./ImageAsset'), {
-  ssr: false,
-});
 
 async function getData(slug: string, locale: Locale): Promise<ContentProps> {
   const response = await getEntryBySlug('content', slug, locale);
@@ -25,10 +19,11 @@ async function getData(slug: string, locale: Locale): Promise<ContentProps> {
   return response as unknown as ContentProps;
 }
 
-function ContentDetails({ params }: { params: { slug: string; locale: Locale } }) {
-  const data = use(getData(params.slug, params.locale));
+async function ContentDetails(props: { params: Promise<{ slug: string; locale: Locale }> }) {
+  const params = await props.params;
+  const data = await getData(params.slug, params.locale);
 
-  const t = useTranslations('Content');
+  const t = await getTranslations('Content');
 
   return (
     <section className="lg:pt-2 lg:pb-24">
