@@ -20,7 +20,7 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
       trigger={
         <Button
           variant="secondary"
-          className="my-auto border-none hover:bg-title-light hover:text-title-darker"
+          className="hover:bg-title-light hover:text-title-darker my-auto border-none"
         >
           {locale}
         </Button>
@@ -31,7 +31,7 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
           <Button
             key={locale}
             variant="secondary"
-            className="border-none p-2 font-grotesque text-lg font-semibold uppercase text-white"
+            className="font-grotesque border-none p-2 text-lg font-semibold text-white uppercase"
             onClick={() => handleLocale(locale)}
           >
             {localeNames[locale]}
