@@ -40,15 +40,15 @@ function HeaderMobile() {
     <header className={cn('absolute w-full overflow-x-hidden overflow-y-hidden lg:hidden', isMenuOpen ? 'z-50 h-screen' : 'h-20')}>
       <Button
         onClick={handleMenuToggle}
-        className={cn('absolute left-4 top-4 z-50 bg-transparent p-0 text-button-background md:left-6 md:top-6 lg:hidden', isMenuOpen && 'hidden')}
+        className={cn('text-button-background absolute top-4 left-4 z-50 bg-transparent p-0 md:top-6 md:left-6 lg:hidden', isMenuOpen && 'hidden')}
         appendIcon="hamburger"
         iconSize={48}
       />
 
-      <div className={cn('-ml-[-100%] h-screen w-screen bg-background-light p-4 transition-[margin]', isMenuOpen && 'ml-0')}>
+      <div className={cn('bg-background-light -ml-[-100%] h-screen w-screen p-4 transition-[margin]', isMenuOpen && 'ml-0')}>
         <div className="flex w-full justify-between">
           <Button
-            className="bg-transparent p-0 text-button-background md:m-2 lg:hidden"
+            className="text-button-background bg-transparent p-0 md:m-2 lg:hidden"
             appendIcon="close"
             iconSize={48}
             onClick={handleMenuToggle}
@@ -56,7 +56,7 @@ function HeaderMobile() {
 
           <div className="mr-2 flex items-center gap-1">
             <Button
-              className="ml-auto mr-2 bg-transparent p-0 text-button-background md:m-2 md:mr-4 lg:hidden"
+              className="text-button-background mr-2 ml-auto bg-transparent p-0 md:m-2 md:mr-4 lg:hidden"
               appendIcon="search"
               iconSize={32}
               onClick={handleSearchNavigation}
@@ -73,7 +73,7 @@ function HeaderMobile() {
                 key={item.id}
                 onClick={handleMenuToggle}
                 tabIndex={0}
-                className="justify-start bg-transparent p-0 text-button-background"
+                className="text-button-background justify-start bg-transparent p-0"
                 appendIcon="arrow-right"
                 iconSize={24}
               >
@@ -81,7 +81,7 @@ function HeaderMobile() {
                   href={item.path}
                   className="flex items-center gap-2"
                 >
-                  <span className="font-grotesque text-2xl font-medium uppercase text-title-light">{t(item.name)}</span>
+                  <span className="font-grotesque text-title-light text-2xl font-medium uppercase">{t(item.name)}</span>
                 </Link>
               </Button>
             ))}
