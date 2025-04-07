@@ -49,14 +49,14 @@ function HeaderDesktop() {
           animate={isScrolling ? 'animate' : 'initial'}
           exit="exit"
           variants={isHomepage ? variants : {}}
-          className={cn('flex w-full px-20 py-4 lg:h-24 lg:bg-background-light', isHomepage && 'fixed left-0 right-0 top-0 z-50')}
+          className={cn('lg:bg-background-light flex w-full px-20 py-4 lg:h-24', isHomepage && 'fixed top-0 right-0 left-0 z-50')}
         >
           <Link
             href="/"
-            className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-title-light"
+            className="focus-visible:ring-title-light flex items-center focus-visible:ring-2 focus-visible:outline-hidden"
           >
             <h1
-              className="font-nabla text-[2.5rem] font-extrabold text-title-light"
+              className="font-nabla text-title-light text-[2.5rem] font-extrabold"
               style={{
                 filter: 'hue-rotate(310deg) saturate(2.2)',
               }}
@@ -70,11 +70,11 @@ function HeaderDesktop() {
                 <li key={item.id}>
                   <Link
                     href={item.path}
-                    className="flex items-center gap-2 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-title-light"
+                    className="focus-visible:ring-title-light flex items-center gap-2 p-2 focus-visible:ring-2 focus-visible:outline-hidden"
                   >
                     <span
                       className={cn(
-                        'font-grotesque text-2xl font-bold uppercase text-title-dark transition hover:text-title-light',
+                        'font-grotesque text-title-dark hover:text-title-light text-2xl font-bold uppercase transition',
                         pathname === item.path && 'text-title-light'
                       )}
                     >
@@ -87,7 +87,7 @@ function HeaderDesktop() {
           </nav>
 
           <Button
-            className={cn('"mx-4 mt-1 cursor-pointer bg-transparent text-title-dark hover:text-title-light', pathname === '/search' && 'text-title-light')}
+            className={cn('"mx-4 text-title-dark hover:text-title-light mt-1 cursor-pointer bg-transparent', pathname === '/search' && 'text-title-light')}
             appendIcon="search"
             iconSize={28}
             onClick={() => push('/search')}

@@ -15,9 +15,9 @@ function ContentLabels({ items }: Props) {
           <Icon
             name={item.icon}
             size={18}
-            className="mt-1 text-title-light"
+            className="text-title-light mt-1"
           />
-          <span className="font-grotesque text-lg font-medium text-title-light md:text-xl">{item.label}</span>
+          <span className="font-grotesque text-title-light text-lg font-medium md:text-xl">{item.label}</span>
         </div>
       ))}
     </div>

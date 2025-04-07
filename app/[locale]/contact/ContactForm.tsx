@@ -31,7 +31,7 @@ function ContactForm() {
       onSubmit={handleSubmit(onSubmit)}
       className="flex max-w-[40rem] flex-col gap-6 lg:mt-6 lg:gap-7"
     >
-      <h2 className="font-grotesque text-2xl font-medium text-title-light first-letter:capitalize lg:text-6xl">{t('message')}</h2>
+      <h2 className="font-grotesque text-title-light text-2xl font-medium first-letter:capitalize lg:text-6xl">{t('message')}</h2>
 
       <Input
         aria-label={t('name')}
@@ -45,7 +45,7 @@ function ContactForm() {
       <div className="flex flex-col gap-4">
         <label
           htmlFor="subject"
-          className="font-grotesque text-xl font-medium capitalize text-title-light lg:text-3.5"
+          className="font-grotesque text-title-light text-xl font-medium capitalize lg:text-3xl"
         >
           {t('subject')}
         </label>
@@ -53,7 +53,7 @@ function ContactForm() {
           id="subject"
           {...register('subject')}
           rows={10}
-          className="focus-visible:ring-primary-blue-100 w-full border bg-background-light p-4 text-sm text-title-light placeholder:text-sm placeholder:font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-title-light disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-40"
+          className="focus-visible:ring-primary-blue-100 bg-background-light text-title-light focus-visible:ring-title-light w-full border p-4 text-sm placeholder:text-sm placeholder:font-normal focus-visible:ring-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-40"
         />
       </div>
 
