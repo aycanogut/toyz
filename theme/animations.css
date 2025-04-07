@@ -1,0 +1,50 @@
+@theme {
+  --animate-slide-up-and-fade: slide-up-and-fade 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-right-and-fade: slide-right-and-fade 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-down-and-fade: slide-down-and-fade 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-slide-left-and-fade: slide-left-and-fade 400ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  @keyframes slide-up-and-fade {
+    0% {
+      opacity: 0;
+      transform: translateY(2px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-right-and-fade {
+    0% {
+      opacity: 0;
+      transform: translateY(-2px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-down-and-fade {
+    0% {
+      opacity: 0;
+      transform: translateY(-2px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-left-and-fade {
+    0% {
+      opacity: 0;
+      transform: translateY(-2px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
