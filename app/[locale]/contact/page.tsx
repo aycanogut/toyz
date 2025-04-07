@@ -1,6 +1,4 @@
-import { use } from 'react';
-
-import { useLocale, useTranslations } from 'next-intl';
+import { getLocale, getTranslations } from 'next-intl/server';
 
 import { Icon, PageHeader } from '@/components';
 import { getEntriesByType } from '@/contentful/client';
@@ -14,12 +12,12 @@ async function getData(locale: Locale, query: string): Promise<ContactProps> {
   return response[0] as unknown as ContactProps;
 }
 
-function Contact() {
-  const locale = useLocale();
+async function Contact() {
+  const locale = await getLocale();
 
-  const data = use(getData(locale as Locale, ''));
+  const data = await getData(locale as Locale, '');
 
-  const t = useTranslations('Contact');
+  const t = await getTranslations('Contact');
 
   return (
     <section>
