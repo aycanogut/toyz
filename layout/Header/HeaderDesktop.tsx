@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
 
 import { Button } from '@/components';
