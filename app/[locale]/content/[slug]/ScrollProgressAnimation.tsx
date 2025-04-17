@@ -1,7 +1,6 @@
 'use client';
 
-
-import { motion, useScroll, useSpring } from "motion/react"
+import { motion, useScroll, useSpring } from 'motion/react';
 
 function ScrollProgressAnimation() {
   const { scrollYProgress } = useScroll();

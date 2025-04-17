@@ -4,7 +4,7 @@ import Header from './Header';
 
 function Layout({ children }: PropsWithChildren) {
   return (
-    <body className="bg-background w-full">
+    <body>
       <Header />
       <main>{children}</main>
     </body>
