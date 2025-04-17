@@ -3,7 +3,7 @@ import { getLocale } from 'next-intl/server';
 import { Slider } from '@/components';
 import { getEntriesByType } from '@/contentful/client';
 
-import ContentView from './Content';
+import ContentView from './ContentView';
 
 interface DataProps {
   slider: SliderImageProps[];
