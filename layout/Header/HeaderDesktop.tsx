@@ -49,7 +49,10 @@ function HeaderDesktop() {
           animate={isScrolling ? 'animate' : 'initial'}
           exit="exit"
           variants={isHomepage ? variants : {}}
-          className={cn('lg:bg-background-light flex w-full px-20 py-4 lg:h-24', isHomepage && 'fixed top-0 right-0 left-0 z-50')}
+          className={cn(
+            'bg-background flex w-full px-20 py-4 lg:h-24',
+            isHomepage && 'border-background-light fixed top-0 right-0 left-0 z-50 border-b drop-shadow-lg'
+          )}
         >
           <Link
             href="/"
