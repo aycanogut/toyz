@@ -5,7 +5,7 @@ import { Card } from '@/components';
 // }
 
 function ContentView() {
-// : ContentViewProps
+  // : ContentViewProps
   return null;
 
   // return (

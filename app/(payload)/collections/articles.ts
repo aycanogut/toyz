@@ -1,0 +1,67 @@
+import type { CollectionConfig } from 'payload';
+import slugField from '../fields/slug';
+
+export const Articles: CollectionConfig = {
+  slug: 'articles',
+  fields: [
+    {
+      name: 'id',
+      type: 'number',
+      required: true,
+    },
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+      localized: true,
+    },
+    {
+      name: 'description',
+      type: 'text',
+      required: true,
+      localized: true,
+    },
+    {
+      name: 'images',
+      type: 'relationship',
+      relationTo: 'media',
+      hasMany: true,
+      required: true,
+    },
+    {
+      name: 'content',
+      type: 'richText',
+      required: true,
+      localized: true,
+    },
+    {
+      name: 'details',
+      type: 'group',
+      fields: [
+        {
+          name: 'date',
+          type: 'date',
+          required: true,
+        },
+        {
+          name: 'tag',
+          type: 'text',
+          required: true,
+          localized: true,
+        },
+        {
+          name: 'author',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
+    {
+      name: 'keywords',
+      type: 'text',
+      hasMany: true,
+      localized: true,
+    },
+    slugField('title'),
+  ],
+};
