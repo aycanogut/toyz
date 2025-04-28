@@ -9,14 +9,15 @@ import { Media } from './app/(payload)/collections/media';
 import { About } from './app/(payload)/globals/about';
 import { Contact } from './app/(payload)/globals/contact';
 import { Slider } from './app/(payload)/globals/slider';
+import toyzConfig from './toyzConfig';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: toyzConfig.payloadSecret || '',
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
+    url: toyzConfig.databaseUri || '',
   }),
   sharp,
   typescript: {

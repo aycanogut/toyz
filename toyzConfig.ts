@@ -1,13 +1,17 @@
 interface ToyzConfigProps {
   title: string;
   baseUrl: string;
-  sendGridApiKey: string;
+  resendApiKey: string;
+  databaseUri: string;
+  payloadSecret: string;
 }
 
 const toyzConfig: ToyzConfigProps = {
   title: process.env.NEXT_PUBLIC_TITLE,
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-  sendGridApiKey: process.env.NEXT_PUBLIC_SENDGRID_API_KEY,
+  resendApiKey: process.env.NEXT_PUBLIC_RESEND_API_KEY,
+  databaseUri: process.env.DATABASE_URI,
+  payloadSecret: process.env.PAYLOAD_SECRET
 };
 
 export default toyzConfig;
