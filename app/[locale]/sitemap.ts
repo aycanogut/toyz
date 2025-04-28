@@ -1,29 +1,22 @@
 import type { MetadataRoute } from 'next';
 
-import { getEntriesByType } from '@/contentful/client';
 import toyzConfig from '@/toyzConfig';
 
-async function getData(locale: Locale, query: string): Promise<ContentProps[]> {
-  const response = await getEntriesByType('content', locale, query);
-
-  return response as unknown as ContentProps[];
-}
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const data = await getData('en', '');
+  // TODO: sluglari cekip maple
 
-  const dynamicPages = data.map(item => {
-    return {
-      url: `${toyzConfig.baseUrl}/en/${item.fields.slug}`,
-      lastModified: new Date(),
-      alternates: {
-        languages: {
-          en: `${toyzConfig.baseUrl}/en/${item.fields.slug}`,
-          tr: `${toyzConfig.baseUrl}/tr/${item.fields.slug}`,
-        },
-      },
-    };
-  });
+  // const dynamicPages = data.map(item => {
+  //   return {
+  //     url: `${toyzConfig.baseUrl}/en/${item.fields.slug}`,
+  //     lastModified: new Date(),
+  //     alternates: {
+  //       languages: {
+  //         en: `${toyzConfig.baseUrl}/en/${item.fields.slug}`,
+  //         tr: `${toyzConfig.baseUrl}/tr/${item.fields.slug}`,
+  //       },
+  //     },
+  //   };
+  // });
 
   return [
     {
@@ -66,6 +59,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
       },
     },
-    ...dynamicPages,
+    // ...dynamicPages,
   ];
 }
