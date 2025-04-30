@@ -8,7 +8,7 @@ import toyzConfig from '@/toyzConfig';
  * TODO: Update mail information with the correct fields and sendgrid sender with production url
  */
 export async function mailAction(name: string, email: string, subject: string) {
-  sgMail.setApiKey(toyzConfig.sendGridApiKey);
+  // sgMail.setApiKey(toyzConfig.sendGridApiKey);
 
   const msg = {
     to: 'toyzcontent@gmail.com',
