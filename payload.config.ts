@@ -35,4 +35,11 @@ export default buildConfig({
       fileSize: 1000000,
     },
   },
+  admin: {
+    livePreview: {
+      url: 'http://localhost:3000',
+      collections: ['articles'],
+      globals: ['slider', 'about', 'contact']
+    },
+  },
 });
