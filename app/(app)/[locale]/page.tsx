@@ -1,20 +1,17 @@
 import { getLocale } from 'next-intl/server';
 
-import { Slider } from '@/components';
-
 import ContentView from './ContentView';
+import Slider from './Slider';
 
 async function Home() {
   const locale = await getLocale();
 
-  return null;
-
-  // return (
-  //   <>
-  //     <Slider images={slider} />
-  //     <ContentView content={content} />
-  //   </>
-  // );
+  return (
+    <>
+      <Slider />
+      {/* <ContentView content={content} /> */}
+    </>
+  );
 }
 
 export default Home;
