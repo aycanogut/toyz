@@ -5,16 +5,15 @@ export const Slider: GlobalConfig = {
   fields: [
     {
       name: 'images',
-      type: 'relationship',
+      type: 'upload',
       relationTo: 'media',
       hasMany: true,
       required: true,
     },
     {
       name: 'animation',
-      type: 'relationship',
+      type: 'upload',
       relationTo: 'media',
-      hasMany: false,
       required: true,
     },
   ],
