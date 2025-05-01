@@ -39,7 +39,7 @@ export default buildConfig({
     livePreview: {
       url: 'http://localhost:3000',
       collections: ['articles'],
-      globals: ['slider', 'about', 'contact']
+      globals: ['slider', 'about', 'contact'],
     },
   },
 });
