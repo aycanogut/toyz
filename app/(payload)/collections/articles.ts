@@ -5,11 +5,6 @@ export const Articles: CollectionConfig = {
   slug: 'articles',
   fields: [
     {
-      name: 'id',
-      type: 'number',
-      required: true,
-    },
-    {
       name: 'title',
       type: 'text',
       required: true,
