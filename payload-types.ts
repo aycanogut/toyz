@@ -128,7 +128,7 @@ export interface UserAuthOperations {
  * via the `definition` "articles".
  */
 export interface Article {
-  id: number;
+  id: string;
   title: string;
   description: string;
   images: (string | Media)[];
@@ -202,7 +202,7 @@ export interface PayloadLockedDocument {
   document?:
     | ({
         relationTo: 'articles';
-        value: number | Article;
+        value: string | Article;
       } | null)
     | ({
         relationTo: 'media';
@@ -259,7 +259,6 @@ export interface PayloadMigration {
  * via the `definition` "articles_select".
  */
 export interface ArticlesSelect<T extends boolean = true> {
-  id?: T;
   title?: T;
   description?: T;
   images?: T;
@@ -416,6 +415,7 @@ export interface ContactSelect<T extends boolean = true> {
 export interface Auth {
   [k: string]: unknown;
 }
+
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}
