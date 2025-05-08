@@ -17,7 +17,7 @@ export const About: GlobalConfig = {
     },
     {
       name: 'image',
-      type: 'relationship',
+      type: 'upload',
       relationTo: 'media',
       required: true,
     },
