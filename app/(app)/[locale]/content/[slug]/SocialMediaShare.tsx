@@ -39,7 +39,7 @@ function SocialMediaShare({ title, slug, locale }: Props) {
         <Button
           appendIcon="share"
           iconSize={24}
-          className="h-fit"
+          className="h-fit cursor-pointer"
         >
           {t('share')}
         </Button>
