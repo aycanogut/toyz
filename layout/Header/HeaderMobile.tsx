@@ -38,16 +38,16 @@ function HeaderMobile() {
 
   return (
     <header className={cn('absolute w-full overflow-x-hidden overflow-y-hidden lg:hidden', isMenuOpen ? 'z-50 h-screen' : 'h-20')}>
-      <div className="absolute top-4 right-4 left-0 z-50 flex w-full items-center gap-1 px-4">
+      <div className="absolute top-4 right-4 left-0 z-50 flex w-full items-center gap-1 px-4 md:top-6">
         <Button
           onClick={handleMenuToggle}
-          className={cn('text-button-background bg-transparent p-0 md:top-6 md:left-6 lg:hidden', isMenuOpen && 'hidden')}
+          className={cn('text-button-background bg-transparent p-0 lg:hidden', isMenuOpen && 'hidden')}
           appendIcon="hamburger"
           iconSize={48}
         />
 
         <Button
-          className="text-button-background mr-2 ml-auto bg-transparent p-0 md:m-2 md:mr-4 lg:hidden"
+          className="text-button-background mr-2 ml-auto bg-transparent p-0 lg:hidden"
           appendIcon="search"
           iconSize={32}
           onClick={handleSearchNavigation}
@@ -58,7 +58,7 @@ function HeaderMobile() {
 
       <div className={cn('bg-background-light -ml-[-100%] h-screen w-screen p-4 transition-[margin]', isMenuOpen && 'ml-0')}>
         <Button
-          className="text-button-background relative z-50 bg-transparent p-0 md:m-2 lg:hidden"
+          className="text-button-background relative z-50 bg-transparent p-0 md:mt-2 lg:hidden"
           appendIcon="close"
           iconSize={48}
           onClick={handleMenuToggle}
