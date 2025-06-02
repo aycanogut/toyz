@@ -20,7 +20,7 @@ const icons = [
     icon: RiArrowLeftLine,
   },
   {
-    label: 'calendar',
+    label: 'date',
     icon: RiCalendarLine,
   },
   {
@@ -28,7 +28,7 @@ const icons = [
     icon: AiOutlineTag,
   },
   {
-    label: 'user',
+    label: 'author',
     icon: RiUserLine,
   },
   {
