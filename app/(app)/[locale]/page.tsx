@@ -2,8 +2,7 @@ import { getLocale } from 'next-intl/server';
 
 import { getPayload } from 'payload';
 
-// import ContentView from './ContentView';
-
+import ContentView from './ContentView';
 import Slider from './Slider';
 import payloadConfig from '@/payload.config';
 
@@ -17,10 +16,15 @@ async function Home() {
     depth: 2,
   });
 
+  const articles = await payload.find({
+    collection: 'articles',
+    locale: locale as Locale,
+  });
+
   return (
     <>
       <Slider slider={slider} />
-      {/* <ContentView content={content} /> */}
+      <ContentView articles={articles.docs} />
     </>
   );
 }

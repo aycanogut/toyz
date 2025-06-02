@@ -8,11 +8,15 @@ import { Link } from '@/i18n/routing';
 interface Props {
   title: string;
   image: string;
-  items: ContentLabelsProps[];
+  details: {
+    date: string;
+    tag: string;
+    author: string;
+  };
   slug: string;
 }
 
-function Card({ title, image, items, slug }: Props) {
+function Card({ title, image, details, slug }: Props) {
   const t = useTranslations('Content');
 
   return (
@@ -29,7 +33,7 @@ function Card({ title, image, items, slug }: Props) {
         <header className="w-full">
           <h2 className="font-grotesque text-title-light text-start text-2xl font-medium md:text-3xl lg:text-4xl">{title}</h2>
         </header>
-        <ContentLabels items={items} />
+        <ContentLabels items={details} />
 
         <Link
           href={`/content/${slug}`}
