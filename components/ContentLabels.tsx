@@ -1,4 +1,5 @@
 import { Icon } from '@/components';
+import formatDate from '@/utils/formatDate';
 import { getLocale } from 'next-intl/server';
 
 interface Props {
@@ -14,16 +15,12 @@ async function ContentLabels({ items }: Props) {
 
   const computedItems = {
     ...items,
-    date: new Date(items.date).toLocaleDateString(locale as Locale, {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    }),
+    date: formatDate(items.date, locale as Locale),
   };
 
   return (
     <div className="border-border-light flex w-full max-w-[28.625rem] flex-wrap gap-x-7 gap-y-2 border px-6 py-2 md:w-fit md:max-w-fit lg:py-6">
-      {Object.entries(items).map(([item, value]) => {
+      {Object.entries(computedItems).map(([item, value]) => {
         return (
           <div
             className="flex items-center gap-2"
