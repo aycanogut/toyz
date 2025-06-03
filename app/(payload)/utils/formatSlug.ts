@@ -37,12 +37,8 @@ const format = (val: string): string =>
 
 const formatSlug =
   (fallback: string): FieldHook =>
-  ({ data, operation, originalDoc, value }) => {
-    if (typeof value === 'string') {
-      return format(value);
-    }
-
-    if (operation === 'create' || operation === 'update') {
+  ({ data, operation, originalDoc, value, req }) => {
+    if ((operation === 'create' || operation === 'update') && req.locale === 'en') {
       const fallbackData = data?.[fallback] || originalDoc?.[fallback];
 
       if (fallbackData && typeof fallbackData === 'string') {

@@ -13,12 +13,12 @@ const slugField: Slug = (fieldToUse = 'title', overrides = {}) =>
         position: 'sidebar',
       },
       hooks: {
-        beforeValidate: [formatSlug(fieldToUse)],
+        beforeChange: [formatSlug(fieldToUse)],
       },
       index: true,
       label: 'Slug',
       type: 'text',
-      localized: true,
+      localized: false,
     },
     overrides
   );
