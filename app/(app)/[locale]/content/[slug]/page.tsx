@@ -5,18 +5,20 @@ import { getTranslations } from 'next-intl/server';
 import { getPayload } from 'payload';
 
 import { ContentLabels, Icon } from '@/components';
-
 import { Link } from '@/i18n/routing';
-
-import EmbedVideo from './EmbedVideo';
-import ImageAsset from './ImageAsset';
-import ScrollProgressAnimation from './ScrollProgressAnimation';
-import SocialMediaShare from './SocialMediaShare';
 import payloadConfig from '@/payload.config';
 import { Media } from '@/payload-types';
 
-async function ContentDetails(props: { params: Promise<{ slug: string; locale: Locale }> }) {
-  const { locale, slug } = await props.params;
+import ScrollProgressAnimation from './ScrollProgressAnimation';
+import SocialMediaShare from './SocialMediaShare';
+import RichText from './RichText';
+
+interface ContentDetailsProps {
+  params: Promise<{ slug: string; locale: Locale }>;
+}
+
+async function ContentDetails({ params }: ContentDetailsProps) {
+  const { locale, slug } = await params;
 
   const t = await getTranslations('Content');
 
@@ -28,11 +30,9 @@ async function ContentDetails(props: { params: Promise<{ slug: string; locale: L
     where: { slug: { equals: slug } },
   });
 
-  const { title, images, details } = article.docs[0];
+  const { title, images, details, content } = article.docs[0];
 
   const media = images[0] as Media;
-
-  console.log(media.url);
 
   return (
     <section className="lg:pt-2 lg:pb-24">
@@ -93,51 +93,10 @@ async function ContentDetails(props: { params: Promise<{ slug: string; locale: L
             </div>
           </div>
 
-          {/* <div className="prose text-title-light md:prose-lg lg:prose-xl prose-headings:text-title-light prose-a:text-title-light prose-li:-my-5 min-w-full">
-            {documentToReactComponents(data.fields.content as unknown as Document, {
-              renderNode: {
-                [BLOCKS.EMBEDDED_ASSET]: node => {
-                  const url = node.data?.target?.fields?.file?.url;
-                  const title = node?.data?.target?.fields?.title;
-                  const description = node?.data?.target?.fields?.description;
-
-                  return (
-                    url &&
-                    title && (
-                      <ImageAsset
-                        title={title}
-                        description={description}
-                        url={url}
-                      />
-                    )
-                  );
-                },
-                [INLINES.EMBEDDED_ENTRY]: node => {
-                  const description = node?.data?.target?.fields?.description;
-                  const url = node?.data?.target?.fields?.url;
-
-                  return (
-                    <EmbedVideo
-                      description={description}
-                      url={url}
-                    />
-                  );
-                },
-                [INLINES.HYPERLINK]: node => {
-                  const { value } = node.content[0] as unknown as { value: string };
-
-                  return (
-                    <Link
-                      href={node.data.uri}
-                      target="_blank"
-                    >
-                      {value}
-                    </Link>
-                  );
-                },
-              },
-            })}
-          </div> */}
+          <RichText
+            data={content}
+            className="prose text-title-light md:prose-lg lg:prose-xl w-full max-w-none"
+          />
         </div>
       </article>
     </section>
