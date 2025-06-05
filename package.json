@@ -24,7 +24,6 @@
     "@radix-ui/react-popover": "^1.1.14",
     "@sendgrid/mail": "^8.1.5",
     "class-variance-authority": "^0.7.1",
-    "easy-magnify": "^1.1.4",
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
@@ -38,8 +37,7 @@
     "react-icons": "^5.5.0",
     "react-share": "^5.2.2",
     "sharp": "^0.34.2",
-    "tailwind-merge": "^3.3.0",
-    "usehooks-ts": "^3.1.1"
+    "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.1",
