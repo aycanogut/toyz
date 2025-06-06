@@ -39,10 +39,15 @@ export const Articles: CollectionConfig = {
           required: true,
         },
         {
-          name: 'tag',
-          type: 'text',
+          name: 'category',
+          type: 'relationship',
+          relationTo: 'categories',
           required: true,
           localized: true,
+          hasMany: false,
+          admin: {
+            appearance: 'select',
+          },
         },
         {
           name: 'author',
@@ -50,6 +55,13 @@ export const Articles: CollectionConfig = {
           required: true,
         },
       ],
+    },
+    {
+      name: 'categories',
+      type: 'relationship',
+      relationTo: 'categories',
+      hasMany: true,
+      required: true,
     },
     {
       name: 'keywords',

@@ -1,10 +1,13 @@
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
-import { mongooseAdapter } from '@payloadcms/db-mongodb';
-import { buildConfig } from 'payload';
 import path from 'path';
-import sharp from 'sharp';
 import { fileURLToPath } from 'url';
+
+import { mongooseAdapter } from '@payloadcms/db-mongodb';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { buildConfig } from 'payload';
+import sharp from 'sharp';
+
 import { Articles } from './app/(payload)/collections/articles';
+import { Categories } from './app/(payload)/collections/categories';
 import { Media } from './app/(payload)/collections/media';
 import { About } from './app/(payload)/globals/about';
 import { Contact } from './app/(payload)/globals/contact';
@@ -24,7 +27,7 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   editor: lexicalEditor(),
-  collections: [Articles, Media],
+  collections: [Articles, Media, Categories],
   globals: [Slider, About, Contact],
   localization: {
     locales: ['en', 'tr'],
