@@ -16,14 +16,18 @@ const compat = new FlatCompat({
 });
 
 export default [
-  ...compat.extends('next', 'next/core-web-vitals', 'prettier'),
+  ...compat.extends('next', 'next/core-web-vitals', 'prettier', 'plugin:@typescript-eslint/recommended', 'prettier'),
   {
     plugins: {
       prettier,
+      '@typescript-eslint': typescriptEslintEslintPlugin,
+    },
+    languageOptions: {
+      parser: tsParser,
     },
     rules: {
-      'prettier/prettier': 'error',
       camelcase: 'off',
+      'prettier/prettier': 'error',
       'import/prefer-default-export': 'off',
       'react/jsx-filename-extension': 'off',
       'react/jsx-props-no-spreading': 'off',
@@ -40,28 +44,12 @@ export default [
           jsx: 'never',
         },
       ],
-    },
-  },
-  ...compat.extends('plugin:@typescript-eslint/recommended', 'prettier').map(config => ({
-    ...config,
-    files: ['**/*.+(ts|tsx)'],
-  })),
-  {
-    files: ['**/*.+(ts|tsx)'],
-    plugins: {
-      '@typescript-eslint': typescriptEslintEslintPlugin,
-    },
-    languageOptions: {
-      parser: tsParser,
-    },
-    rules: {
       'import/no-anonymous-default-export': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/display-name': 'off',
       'react-hooks/exhaustive-deps': 'warn',
       'react-hooks/rules-of-hooks': 'error',
       'react/self-closing-comp': 'error',
-      'prettier/prettier': 'error',
       'object-shorthand': 'error',
       'react/jsx-curly-brace-presence': [
         'error',
@@ -106,5 +94,6 @@ export default [
         },
       ],
     },
+    ignores: ['app/(payload)/**/*'],
   },
 ];
