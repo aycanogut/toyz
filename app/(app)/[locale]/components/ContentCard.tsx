@@ -2,10 +2,12 @@ import Image from 'next/image';
 
 import { useTranslations } from 'next-intl';
 
-import { Badge, ContentLabels } from '@/components';
+import { Badge } from '@/components';
 import { Link } from '@/i18n/routing';
 
-interface CardProps {
+import ContentLabels from './ContentLabels';
+
+interface ContentCardProps {
   title: string;
   image: string;
   details: {
@@ -16,7 +18,7 @@ interface CardProps {
   slug: string;
 }
 
-function Card({ title, image, details, slug }: CardProps) {
+function ContentCard({ title, image, details, slug }: ContentCardProps) {
   const t = useTranslations('Content');
 
   return (
@@ -52,4 +54,4 @@ function Card({ title, image, details, slug }: CardProps) {
   );
 }
 
-export default Card;
+export default ContentCard;

@@ -1,7 +1,7 @@
 import { getLocale } from 'next-intl/server';
 
 import { Icon } from '@/components';
-import formatDate from '@/utils/formatDate';
+import { formatDate } from '@/utils';
 
 interface ContentLabelProps {
   items: {

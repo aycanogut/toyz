@@ -3,8 +3,8 @@ import { getPayload } from 'payload';
 
 import payloadConfig from '@/payload.config';
 
-import ContentView from './ContentView';
-import Slider from './Slider';
+import ContentView from './components/ContentView';
+import Slider from './components/Slider';
 
 async function Home() {
   const locale = await getLocale();

@@ -1,5 +1,6 @@
-import { Card } from '@/components';
 import { Article, Category, Media } from '@/payload-types';
+
+import ContentCard from './ContentCard';
 
 interface ContentViewProps {
   articles: Article[];
@@ -15,7 +16,7 @@ function ContentView({ articles }: ContentViewProps) {
             const category = item.details.category as Category;
 
             return (
-              <Card
+              <ContentCard
                 key={item.id}
                 title={item.title}
                 image={media.url ?? ''}

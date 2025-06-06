@@ -94,6 +94,13 @@ export default [
         },
       ],
     },
+    settings: {
+      'import/resolver': {
+        typescript: {
+          project: './tsconfig.json',
+        },
+      },
+    },
     ignores: ['app/(payload)/**/*'],
   },
 ];
