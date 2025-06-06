@@ -1,6 +1,16 @@
 import { AiOutlineTag, AiOutlineLoading3Quarters, AiOutlineInstagram } from 'react-icons/ai';
 import { PiEnvelopeSimple } from 'react-icons/pi';
-import { RiShareBoxLine, RiSearchLine, RiArrowRightLine, RiArrowLeftLine, RiUserLine, RiMenuLine, RiCalendarLine, RiCloseFill } from 'react-icons/ri';
+import {
+  RiShareBoxLine,
+  RiSearchLine,
+  RiArrowRightLine,
+  RiArrowLeftLine,
+  RiUserLine,
+  RiMenuLine,
+  RiCalendarLine,
+  RiCloseFill,
+  RiArrowDownLine,
+} from 'react-icons/ri';
 
 const icons = [
   {
@@ -20,11 +30,15 @@ const icons = [
     icon: RiArrowLeftLine,
   },
   {
+    label: 'arrow-down',
+    icon: RiArrowDownLine,
+  },
+  {
     label: 'date',
     icon: RiCalendarLine,
   },
   {
-    label: 'tag',
+    label: 'category',
     icon: AiOutlineTag,
   },
   {
