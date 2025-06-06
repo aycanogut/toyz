@@ -2,8 +2,9 @@ import { ButtonHTMLAttributes, PropsWithChildren, Ref, forwardRef } from 'react'
 
 import { VariantProps } from 'class-variance-authority';
 
-import { Icon } from '@/components';
-import { cn } from '@/utils';
+import cn from '@/utils/cn';
+
+import Icon from '../Icon';
 
 import buttonVariants from './buttonVariants';
 

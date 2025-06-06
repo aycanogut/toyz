@@ -1,7 +1,7 @@
 import { getLocale } from 'next-intl/server';
 import { getPayload } from 'payload';
 
-import { PageHeader } from '@/components';
+import PageHeader from '@/components/PageHeader';
 import { Media } from '@/payload-types';
 import payloadConfig from '@/payload.config';
 

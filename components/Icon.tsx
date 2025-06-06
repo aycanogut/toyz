@@ -1,6 +1,6 @@
 import { IconBaseProps } from 'react-icons';
 
-import { icons } from '@/theme';
+import icons from '@/theme/icons';
 
 export interface IconProps extends IconBaseProps {
   name: IconLabelProps;

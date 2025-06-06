@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { useTranslations } from 'next-intl';
 
-import { Badge } from '@/components';
+import Badge from '@/components/Badge';
 import { Link } from '@/i18n/routing';
 
 import ContentLabels from './ContentLabels';

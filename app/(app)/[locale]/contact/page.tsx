@@ -1,7 +1,8 @@
-import { getLocale, getTranslations } from 'next-intl/server';
+import { getLocale } from 'next-intl/server';
 import { getPayload } from 'payload';
 
-import { Icon, PageHeader } from '@/components';
+import Icon from '@/components/Icon';
+import PageHeader from '@/components/PageHeader';
 import { Link } from '@/i18n/routing';
 import { Media } from '@/payload-types';
 import payloadConfig from '@/payload.config';

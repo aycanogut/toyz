@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 import * as RadixPopover from '@radix-ui/react-popover';
 
-import { cn } from '@/utils';
+import cn from '@/utils/cn';
 
 import Icon from './Icon';
 

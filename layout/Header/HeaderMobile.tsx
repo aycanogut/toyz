@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 
 import { useLocale, useTranslations } from 'next-intl';
 
-import { Button } from '@/components';
+import Button from '@/components/Button';
 import { Link, useRouter } from '@/i18n/routing';
-import { cn } from '@/utils';
+import cn from '@/utils/cn';
 
 import LanguageSwitcher from './LanguageSwitcher';
 import navigationItems from './navigationItems';

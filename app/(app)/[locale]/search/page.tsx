@@ -1,7 +1,5 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 
-import { Card } from '@/components';
-
 import { default as SearchComponent } from './Search';
 
 async function Search(props: {
@@ -40,7 +38,7 @@ async function Search(props: {
 
   //     {filteredData.length > 0 ? (
   //       filteredData.map(item => (
-  //         <Card
+  //         <ContentCard
   //           key={item.fields.id}
   //           title={item.fields.title}
   //           image={`https:${item.fields.image.fields.file.url}`}

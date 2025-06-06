@@ -1,6 +1,7 @@
 'use client';
 
-import { Button, Popover } from '@/components';
+import Button from '@/components/Button';
+import Popover from '@/components/Popover';
 import { routing, localeNames, usePathname, useRouter } from '@/i18n/routing';
 
 function LanguageSwitcher({ locale }: { locale: Locale }) {

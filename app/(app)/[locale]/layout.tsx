@@ -9,10 +9,11 @@ import type { Metadata } from 'next';
 
 import { routing } from '@/i18n/routing';
 import Layout from '@/layout';
-import { grotesque, nabla } from '@/theme';
+import { grotesque, nabla } from '@/theme/fonts';
 import toyzConfig from '@/toyzConfig';
-import { cn } from '@/utils';
+
 import '@/theme/globals.css';
+import cn from '@/utils/cn';
 
 // TODO: Bu alan için payloadcms kullanılarak yeniden kullanılabilir bir yapı oluşturulacak.
 // export async function generateMetadata(props: {

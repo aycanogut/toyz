@@ -6,7 +6,8 @@ import { useSearchParams } from 'next/navigation';
 
 import { useTranslations } from 'next-intl';
 
-import { Popover, Button } from '@/components';
+import Button from '@/components/Button';
+import Popover from '@/components/Popover';
 import { useRouter, usePathname } from '@/i18n/routing';
 
 interface Props {

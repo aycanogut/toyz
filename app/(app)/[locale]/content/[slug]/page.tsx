@@ -3,10 +3,12 @@ import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { getPayload } from 'payload';
 
-import { ContentLabels, Icon } from '@/components';
+import Icon from '@/components/Icon';
 import { Link } from '@/i18n/routing';
 import { Category, Media } from '@/payload-types';
 import payloadConfig from '@/payload.config';
+
+import ContentLabels from '../../components/ContentLabels';
 
 import RichText from './RichText';
 import ScrollProgressAnimation from './ScrollProgressAnimation';

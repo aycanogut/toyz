@@ -3,7 +3,8 @@
 import { useTranslations } from 'next-intl';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { Input, Button } from '@/components';
+import Button from '@/components/Button';
+import Input from '@/components/Input';
 
 import { mailAction } from './mailAction';
 

@@ -12,7 +12,8 @@ import {
   TwitterIcon,
 } from 'react-share';
 
-import { Button, Popover } from '@/components';
+import Button from '@/components/Button';
+import Popover from '@/components/Popover';
 import toyzConfig from 'toyzConfig';
 
 const { baseUrl } = toyzConfig;

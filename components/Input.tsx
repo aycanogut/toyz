@@ -2,7 +2,7 @@
 
 import { InputHTMLAttributes, Ref, forwardRef } from 'react';
 
-import { cn } from '@/utils';
+import cn from '@/utils/cn';
 
 import Icon, { IconProps } from './Icon';
 
