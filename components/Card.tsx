@@ -5,18 +5,18 @@ import { useTranslations } from 'next-intl';
 import { Badge, ContentLabels } from '@/components';
 import { Link } from '@/i18n/routing';
 
-interface Props {
+interface CardProps {
   title: string;
   image: string;
   details: {
     date: string;
-    tag: string;
+    category: string;
     author: string;
   };
   slug: string;
 }
 
-function Card({ title, image, details, slug }: Props) {
+function Card({ title, image, details, slug }: CardProps) {
   const t = useTranslations('Content');
 
   return (

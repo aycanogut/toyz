@@ -1,17 +1,16 @@
 import Image from 'next/image';
 
 import { getTranslations } from 'next-intl/server';
-
 import { getPayload } from 'payload';
 
 import { ContentLabels, Icon } from '@/components';
 import { Link } from '@/i18n/routing';
+import { Category, Media } from '@/payload-types';
 import payloadConfig from '@/payload.config';
-import { Media } from '@/payload-types';
 
+import RichText from './RichText';
 import ScrollProgressAnimation from './ScrollProgressAnimation';
 import SocialMediaShare from './SocialMediaShare';
-import RichText from './RichText';
 
 interface ContentDetailsProps {
   params: Promise<{ slug: string; locale: Locale }>;
@@ -33,6 +32,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
   const { title, images, details, content } = article.docs[0];
 
   const media = images[0] as Media;
+  const category = details.category as Category;
 
   return (
     <section className="lg:pt-2 lg:pb-24">
@@ -64,7 +64,12 @@ async function ContentDetails({ params }: ContentDetailsProps) {
 
           <h1 className="font-grotesque text-title-light text-start text-2xl font-medium md:text-3xl lg:text-5xl lg:font-semibold">{title}</h1>
           <div className="flex w-full flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-            <ContentLabels items={details} />
+            <ContentLabels
+              items={{
+                ...details,
+                category: category.name,
+              }}
+            />
 
             <SocialMediaShare
               title={title}

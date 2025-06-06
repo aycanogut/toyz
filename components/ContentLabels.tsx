@@ -1,16 +1,17 @@
-import { Icon } from '@/components';
-import formatDate from '@/utils/formatDate';
 import { getLocale } from 'next-intl/server';
 
-interface Props {
+import { Icon } from '@/components';
+import formatDate from '@/utils/formatDate';
+
+interface ContentLabelProps {
   items: {
     date: string;
-    tag: string;
+    category: string;
     author: string;
   };
 }
 
-async function ContentLabels({ items }: Props) {
+async function ContentLabels({ items }: ContentLabelProps) {
   const locale = await getLocale();
 
   const computedItems = {
