@@ -1,6 +1,6 @@
-/* eslint-disable import/no-anonymous-default-export */
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import typescriptEslintEslintPlugin from '@typescript-eslint/eslint-plugin';

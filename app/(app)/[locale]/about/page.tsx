@@ -1,9 +1,9 @@
 import { getLocale } from 'next-intl/server';
+import { getPayload } from 'payload';
 
 import { PageHeader } from '@/components';
-import payloadConfig from '@/payload.config';
-import { getPayload } from 'payload';
 import { Media } from '@/payload-types';
+import payloadConfig from '@/payload.config';
 
 async function About() {
   const locale = await getLocale();

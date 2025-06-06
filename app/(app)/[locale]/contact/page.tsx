@@ -1,13 +1,12 @@
 import { getLocale, getTranslations } from 'next-intl/server';
+import { getPayload } from 'payload';
 
 import { Icon, PageHeader } from '@/components';
-
 import { Link } from '@/i18n/routing';
-
-import ContactForm from './ContactForm';
 import { Media } from '@/payload-types';
 import payloadConfig from '@/payload.config';
-import { getPayload } from 'payload';
+
+import ContactForm from './ContactForm';
 
 async function Contact() {
   const locale = await getLocale();

@@ -1,4 +1,5 @@
 import React, { HTMLAttributes } from 'react';
+
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical';
 import { JSXConvertersFunction, RichText as RichTextWithoutBlocks } from '@payloadcms/richtext-lexical/react';
 

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { EmblaOptionsType } from 'embla-carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import useEmblaCarousel from 'embla-carousel-react';
+
 import { Media, Slider as SliderType } from 'payload-types';
 
 const OPTIONS: EmblaOptionsType = { containScroll: 'keepSnaps', dragFree: false, loop: true, align: 'start' };

@@ -1,10 +1,10 @@
 import { getLocale } from 'next-intl/server';
-
 import { getPayload } from 'payload';
+
+import payloadConfig from '@/payload.config';
 
 import ContentView from './ContentView';
 import Slider from './Slider';
-import payloadConfig from '@/payload.config';
 
 async function Home() {
   const locale = await getLocale();

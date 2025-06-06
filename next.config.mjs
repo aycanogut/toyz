@@ -1,5 +1,5 @@
-import createNextIntlPlugin from 'next-intl/plugin';
 import { withPayload } from '@payloadcms/next/withPayload';
+import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin();
 
