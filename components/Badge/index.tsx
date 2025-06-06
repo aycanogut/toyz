@@ -8,13 +8,13 @@ import Icon from '../Icon';
 
 import badgeVariants from './badgeVariants';
 
-export interface Props extends HTMLAttributes<HTMLSpanElement>, VariantProps<typeof badgeVariants> {
+export interface BadgeProps extends HTMLAttributes<HTMLSpanElement>, VariantProps<typeof badgeVariants> {
   appendIcon?: IconLabelProps;
   iconSize?: number;
   loading?: boolean;
 }
 
-function Badge({ children, appendIcon, iconSize = 16, loading, variant, size, className, ...props }: Props) {
+function Badge({ children, appendIcon, iconSize = 16, loading, variant, size, className, ...props }: BadgeProps) {
   return (
     <span
       className={cn(badgeVariants({ variant, size, className }))}

@@ -12,11 +12,11 @@ import { useRouter, usePathname } from '@/i18n/routing';
 
 import Categories from './Categories';
 
-interface Props {
+interface SearchProps {
   categories: string[];
 }
 
-function Search({ categories }: Props) {
+function Search({ categories }: SearchProps) {
   const [searchValue, setSearchValue] = useState('');
 
   const searchParams = useSearchParams();

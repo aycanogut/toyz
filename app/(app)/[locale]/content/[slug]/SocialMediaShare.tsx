@@ -18,13 +18,13 @@ import toyzConfig from 'toyzConfig';
 
 const { baseUrl } = toyzConfig;
 
-interface Props {
+interface SocialMediaShare {
   title: string;
   slug: string;
   locale: string;
 }
 
-function SocialMediaShare({ title, slug, locale }: Props) {
+function SocialMediaShare({ title, slug, locale }: SocialMediaShare) {
   const shareUrl = `${baseUrl}/${locale}/content/${slug}`;
 
   const t = useTranslations('Content');

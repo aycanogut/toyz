@@ -10,11 +10,11 @@ import Button from '@/components/Button';
 import Popover from '@/components/Popover';
 import { useRouter, usePathname } from '@/i18n/routing';
 
-interface Props {
+interface CategoriesProps {
   categories: string[];
 }
 
-function Categories({ categories }: Props) {
+function Categories({ categories }: CategoriesProps) {
   const [category, setCategory] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 

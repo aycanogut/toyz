@@ -20,11 +20,11 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
   // },
 });
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+interface RichTextProps extends HTMLAttributes<HTMLDivElement> {
   data: SerializedEditorState;
 }
 
-function RichText({ data, ...props }: Props) {
+function RichText({ data, ...props }: RichTextProps) {
   return (
     <RichTextWithoutBlocks
       data={data}

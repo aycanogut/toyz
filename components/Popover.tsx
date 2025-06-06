@@ -10,7 +10,7 @@ import Icon from './Icon';
 
 const { Root, Trigger, Portal, Content, Close, Arrow } = RadixPopover;
 
-interface Props {
+interface PopoverProps {
   trigger: ReactNode;
   children: ReactNode;
   rootProps?: RadixPopover.PopoverProps;
@@ -21,7 +21,7 @@ interface Props {
   hasArrow?: boolean;
 }
 
-function Popover({ trigger, children, rootProps, triggerProps, portalProps, contentProps, hasCloseIcon, hasArrow = false }: Props) {
+function Popover({ trigger, children, rootProps, triggerProps, portalProps, contentProps, hasCloseIcon, hasArrow = false }: PopoverProps) {
   const { className: contentClassName, ...restContentProps } = contentProps || {};
 
   return (

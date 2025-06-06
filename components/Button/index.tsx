@@ -8,13 +8,13 @@ import Icon from '../Icon';
 
 import buttonVariants from './buttonVariants';
 
-interface Props extends PropsWithChildren, ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+interface ButtonProps extends PropsWithChildren, ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   appendIcon?: IconLabelProps;
   iconSize?: number;
   loading?: boolean;
 }
 
-function Button({ children, appendIcon, iconSize = 16, loading, variant, size, className, ...props }: Props, ref: Ref<HTMLButtonElement>) {
+function Button({ children, appendIcon, iconSize = 16, loading, variant, size, className, ...props }: ButtonProps, ref: Ref<HTMLButtonElement>) {
   return (
     <button
       className={cn(buttonVariants({ variant, size, className }))}

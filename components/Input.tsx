@@ -6,7 +6,7 @@ import cn from '@/utils/cn';
 
 import Icon, { IconProps } from './Icon';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   prependIconProps?: IconProps;
   appendIconProps?: IconProps;
@@ -27,7 +27,7 @@ function Input(
     'aria-label': ariaLabel,
     'aria-autocomplete': ariaAutocomplete = 'list',
     ...props
-  }: Props,
+  }: InputProps,
   ref: InputRef
 ) {
   return (
