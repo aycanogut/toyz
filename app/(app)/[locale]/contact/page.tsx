@@ -1,18 +1,17 @@
 import { getLocale } from 'next-intl/server';
-import { getPayload } from 'payload';
 
 import Icon from '@/components/Icon';
 import PageHeader from '@/components/PageHeader';
 import { Link } from '@/i18n/routing';
 import { Media } from '@/payload-types';
-import payloadConfig from '@/payload.config';
+import { getPayloadClient } from '@/utils/payloadClient';
 
 import ContactForm from './ContactForm';
 
 async function Contact() {
   const locale = await getLocale();
 
-  const payload = await getPayload({ config: payloadConfig });
+  const payload = await getPayloadClient();
 
   const contact = await payload.findGlobal({
     slug: 'contact',

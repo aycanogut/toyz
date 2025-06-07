@@ -1,7 +1,6 @@
 import { getLocale } from 'next-intl/server';
-import { getPayload } from 'payload';
 
-import payloadConfig from '@/payload.config';
+import { getPayloadClient } from '@/utils/payloadClient';
 
 import ContentView from './components/ContentView';
 import Slider from './components/Slider';
@@ -9,7 +8,7 @@ import Slider from './components/Slider';
 async function Home() {
   const locale = await getLocale();
 
-  const payload = await getPayload({ config: payloadConfig });
+  const payload = await getPayloadClient();
 
   const slider = await payload.findGlobal({
     slug: 'slider',

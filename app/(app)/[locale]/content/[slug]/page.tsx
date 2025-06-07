@@ -1,12 +1,11 @@
 import Image from 'next/image';
 
 import { getTranslations } from 'next-intl/server';
-import { getPayload } from 'payload';
 
 import Icon from '@/components/Icon';
 import { Link } from '@/i18n/routing';
 import { Category, Media } from '@/payload-types';
-import payloadConfig from '@/payload.config';
+import { getPayloadClient } from '@/utils/payloadClient';
 
 import ContentLabels from '../../components/ContentLabels';
 
@@ -23,7 +22,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
 
   const t = await getTranslations('Content');
 
-  const payload = await getPayload({ config: payloadConfig });
+  const payload = await getPayloadClient();
 
   const article = await payload.find({
     collection: 'articles',

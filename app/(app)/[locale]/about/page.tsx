@@ -1,14 +1,13 @@
 import { getLocale } from 'next-intl/server';
-import { getPayload } from 'payload';
 
 import PageHeader from '@/components/PageHeader';
 import { Media } from '@/payload-types';
-import payloadConfig from '@/payload.config';
+import { getPayloadClient } from '@/utils/payloadClient';
 
 async function About() {
   const locale = await getLocale();
 
-  const payload = await getPayload({ config: payloadConfig });
+  const payload = await getPayloadClient();
 
   const about = await payload.findGlobal({
     slug: 'about',
