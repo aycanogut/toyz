@@ -18,9 +18,10 @@
     "generateEnvKeyTypes": "npx ts-node ./generatorScripts/envFileTypeBuilder.ts && npx prettier --w types/EnvFileTypes.d.ts"
   },
   "dependencies": {
-    "@payloadcms/db-mongodb": "^3.41.0",
-    "@payloadcms/next": "^3.41.0",
-    "@payloadcms/richtext-lexical": "^3.41.0",
+    "@payloadcms/db-mongodb": "^3.43.0",
+    "@payloadcms/next": "^3.43.0",
+    "@payloadcms/richtext-lexical": "^3.43.0",
+    "@payloadcms/storage-vercel-blob": "^3.43.0",
     "@radix-ui/react-popover": "^1.1.14",
     "@sendgrid/mail": "^8.1.5",
     "class-variance-authority": "^0.7.1",
@@ -30,7 +31,7 @@
     "motion": "^12.16.0",
     "next": "15.3.3",
     "next-intl": "^4.1.0",
-    "payload": "^3.41.0",
+    "payload": "^3.43.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.57.0",
@@ -62,7 +63,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@10.11.1",
+  "packageManager": "pnpm@10.12.1",
   "pnpm": {
     "overrides": {
       "@types/react": "19.1.6",
