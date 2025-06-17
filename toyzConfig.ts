@@ -4,6 +4,7 @@ interface ToyzConfigProps {
   resendApiKey: string;
   databaseUri: string;
   payloadSecret: string;
+  vercelBlobReadWriteToken: string;
 }
 
 const toyzConfig: ToyzConfigProps = {
@@ -12,6 +13,7 @@ const toyzConfig: ToyzConfigProps = {
   resendApiKey: process.env.NEXT_PUBLIC_RESEND_API_KEY,
   databaseUri: process.env.DATABASE_URI,
   payloadSecret: process.env.PAYLOAD_SECRET,
+  vercelBlobReadWriteToken: process.env.VERCEL_BLOB_READ_WRITE_TOKEN,
 };
 
 export default toyzConfig;
