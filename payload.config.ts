@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
@@ -22,6 +23,15 @@ export default buildConfig({
   db: mongooseAdapter({
     url: toyzConfig.databaseUri || '',
   }),
+  plugins: [
+    vercelBlobStorage({
+      collections: {
+        media: true,
+      },
+
+      token: toyzConfig.vercelBlobReadWriteToken,
+    }),
+  ],
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
