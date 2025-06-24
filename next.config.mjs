@@ -9,7 +9,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.ctfassets.net',
+        hostname: '0zbkpiidudauav03.public.blob.vercel-storage.com',
       },
     ],
   },
