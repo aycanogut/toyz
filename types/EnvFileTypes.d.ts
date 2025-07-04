@@ -5,6 +5,6 @@ namespace NodeJS {
     NEXT_PUBLIC_RESEND_API_KEY: string;
     DATABASE_URI: string;
     PAYLOAD_SECRET: string;
-    VERCEL_BLOB_READ_WRITE_TOKEN: string;
+    BLOB_READ_WRITE_TOKEN: string;
   }
 }
