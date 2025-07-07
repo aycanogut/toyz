@@ -57,7 +57,7 @@ function Slider({ slider }: SliderProps) {
         <div className="bg-background-dark absolute inset-0 opacity-15" />
         <Image
           src={(slider.animation as Media).url ?? ''}
-          alt="Animation"
+          alt=""
           width={200}
           height={200}
           className="absolute inset-0 m-auto size-[60rem] object-contain drop-shadow-lg"
