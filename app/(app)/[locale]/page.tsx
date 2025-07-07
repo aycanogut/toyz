@@ -12,7 +12,6 @@ async function Home() {
 
   const slider = await payload.findGlobal({
     slug: 'slider',
-    depth: 2,
   });
 
   const articles = await payload.find({
