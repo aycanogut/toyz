@@ -9,11 +9,12 @@ import { useTranslations } from 'next-intl';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { useRouter, usePathname } from '@/i18n/routing';
+import { Category } from '@/payload-types';
 
 import Categories from './Categories';
 
 interface SearchProps {
-  categories: string[];
+  categories: Category[];
 }
 
 function Search({ categories }: SearchProps) {
@@ -29,7 +30,7 @@ function Search({ categories }: SearchProps) {
     const params = new URLSearchParams(searchParams);
 
     if (searchValue.length) {
-      params && params.set('query', searchValue);
+      params.set('query', searchValue);
     } else {
       params.delete('query');
     }
@@ -53,7 +54,7 @@ function Search({ categories }: SearchProps) {
             const params = new URLSearchParams(searchParams);
 
             if (e.target.value) {
-              params && params.set('query', e.target.value);
+              params.set('query', e.target.value);
             } else {
               params.delete('query');
             }
@@ -61,7 +62,7 @@ function Search({ categories }: SearchProps) {
             push(`${pathname}?${params.toString()}`, { scroll: false });
           }}
           onKeyDown={e => {
-            e.key === 'Enter' && handleSubmit();
+            if (e.key === 'Enter') handleSubmit();
           }}
           className="pl-12"
           appendIconProps={{

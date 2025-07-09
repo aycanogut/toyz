@@ -9,13 +9,14 @@ import { useTranslations } from 'next-intl';
 import Button from '@/components/Button';
 import Popover from '@/components/Popover';
 import { useRouter, usePathname } from '@/i18n/routing';
+import { Category } from '@/payload-types';
 
 interface CategoriesProps {
-  categories: string[];
+  categories: Category[];
 }
 
 function Categories({ categories }: CategoriesProps) {
-  const [category, setCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [isOpen, setIsOpen] = useState(false);
 
   const searchParams = useSearchParams();
@@ -23,16 +24,18 @@ function Categories({ categories }: CategoriesProps) {
   const { push } = useRouter();
 
   const t = useTranslations('Search');
+  const allCategoryLabel = t('category');
 
-  const allCategory = t('category');
-  const allCategories = [allCategory, ...categories];
+  const allCategories = [{ label: allCategoryLabel, value: '' }, ...categories.map(item => ({ label: item.name, value: item.slug }))];
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
-    const selectedCategory = params.get('category') ?? '';
-
-    setCategory(selectedCategory);
+    const paramCategory = params.get('category') ?? '';
+    setSelectedCategory(paramCategory);
   }, [searchParams]);
+
+  const selected = allCategories.find(item => item.value === selectedCategory);
+  const buttonLabel = selected ? selected.label : allCategoryLabel;
 
   return (
     <Popover
@@ -41,7 +44,7 @@ function Categories({ categories }: CategoriesProps) {
         open: isOpen,
         onOpenChange: setIsOpen,
       }}
-      trigger={<Button>{category || allCategory}</Button>}
+      trigger={<Button>{buttonLabel}</Button>}
       triggerProps={{
         className: 'min-w-40',
       }}
@@ -50,27 +53,27 @@ function Categories({ categories }: CategoriesProps) {
       }}
     >
       <div className="flex flex-col gap-2">
-        {allCategories.map(selectedCategory => (
+        {allCategories.map(category => (
           <Button
-            key={selectedCategory}
+            key={category.value || 'all'}
             variant="secondary"
             className="font-grotesque border-none text-lg font-semibold text-white uppercase"
             onClick={() => {
               const params = new URLSearchParams(searchParams);
 
-              if (selectedCategory === allCategory) {
+              if (!category.value) {
                 params.delete('category');
               } else {
-                params.set('category', selectedCategory);
+                params.set('category', category.value);
               }
 
               push(`${pathname}?${params.toString()}`, { scroll: false });
 
-              setCategory(selectedCategory);
+              setSelectedCategory(category.value);
               setIsOpen(false);
             }}
           >
-            {selectedCategory}
+            {category.label}
           </Button>
         ))}
       </div>

@@ -1,56 +1,72 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 
+import { Media, Category } from '@/payload-types';
+import { getPayloadClient } from '@/utils/payloadClient';
+
+import ContentCard from '../components/ContentCard';
+
 import { default as SearchComponent } from './Search';
 
-async function Search(props: {
-  searchParams?: Promise<{
-    query: string;
-    category: string;
-  }>;
-}) {
-  return null;
-  // const searchParams = await props.searchParams;
+interface SearchProps {
+  searchParams?: { query?: string; category?: string };
+}
 
-  // const t = await getTranslations('Search');
+async function Search({ searchParams }: SearchProps) {
+  const params = await searchParams;
 
-  // const query = searchParams?.query ?? '';
-  // const category = searchParams?.category ?? '';
+  const query = params?.query ?? '';
+  const category = params?.category ?? '';
 
-  // const locale = await getLocale();
-  // const defaultCategory = locale === 'en' ? 'all' : 'hepsi';
+  const locale = await getLocale();
 
-  // const data = await getData(locale as Locale, query);
-  // const categories = await getCategories(locale as Locale);
+  const t = await getTranslations('Search');
 
-  // /**
-  //  *  If the category is the default category, return unfiltered data
-  //  *  Otherwise, filter the data by the selected category
-  //  */
-  // const filteredData = data.filter(item => {
-  //   if (!category || category === defaultCategory) return data;
+  const payload = await getPayloadClient();
 
-  //   return item.fields.details[1].label.slice(1) === category;
-  // });
+  const categories = await payload.find({
+    collection: 'categories',
+    depth: 1,
+    locale: locale as Locale,
+  });
 
-  // return (
-  //   <section className="container flex flex-col gap-12 px-4 py-12">
-  //     <SearchComponent categories={categories} />
+  const articles = await payload.find({
+    collection: 'articles',
+    where: {
+      ...(query && { title: { contains: query } }),
+      ...(category && { 'details.category.slug': { equals: category } }),
+    },
+    depth: 1,
+    locale: locale as Locale,
+  });
 
-  //     {filteredData.length > 0 ? (
-  //       filteredData.map(item => (
-  //         <ContentCard
-  //           key={item.fields.id}
-  //           title={item.fields.title}
-  //           image={`https:${item.fields.image.fields.file.url}`}
-  //           items={item.fields.details}
-  //           slug={item.fields.slug}
-  //         />
-  //       ))
-  //     ) : (
-  //       <p className="font-grotesque text-title-light text-2xl font-semibold lg:mb-24 lg:text-3xl">{t('result')}</p>
-  //     )}
-  //   </section>
-  // );
+  return (
+    <section className="container flex flex-col gap-12 px-4 py-12">
+      <SearchComponent categories={categories.docs} />
+
+      {articles.docs.length > 0 ? (
+        articles.docs.map(item => {
+          const media = item.images[0] as Media;
+          const category = item.details.category as Category;
+
+          return (
+            <ContentCard
+              key={item.id}
+              title={item.title}
+              image={media.url ?? ''}
+              details={{
+                date: item.details.date,
+                category: category.name,
+                author: item.details.author,
+              }}
+              slug={item.slug ?? ''}
+            />
+          );
+        })
+      ) : (
+        <p className="font-grotesque text-title-light text-2xl font-semibold lg:mb-24 lg:text-3xl">{t('result')}</p>
+      )}
+    </section>
+  );
 }
 
 export default Search;
