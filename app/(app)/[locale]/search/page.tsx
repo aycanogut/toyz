@@ -8,7 +8,7 @@ import ContentCard from '../components/ContentCard';
 import { default as SearchComponent } from './Search';
 
 interface SearchProps {
-  searchParams?: { query?: string; category?: string };
+  searchParams?: Promise<{ query?: string; category?: string }>;
 }
 
 async function Search({ searchParams }: SearchProps) {
