@@ -43,7 +43,6 @@ async function Contact() {
           >
             <Icon
               name="instagram"
-              size={24}
               className="size-6 text-white lg:size-9"
             />
 
@@ -57,7 +56,6 @@ async function Contact() {
           >
             <Icon
               name="envelope"
-              size={24}
               className="size-6 text-white lg:size-9"
             />
 

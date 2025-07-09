@@ -91,8 +91,10 @@ function HeaderDesktop() {
 
           <Button
             className={cn('"mx-4 text-title-dark hover:text-title-light mt-1 cursor-pointer bg-transparent', pathname === '/search' && 'text-title-light')}
-            appendIcon="search"
-            iconSize={28}
+            appendIconProps={{
+              name: 'search',
+              className: 'size-7',
+            }}
             onClick={() => push('/search')}
           />
 

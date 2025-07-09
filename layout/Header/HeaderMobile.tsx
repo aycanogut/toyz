@@ -42,14 +42,18 @@ function HeaderMobile() {
         <Button
           onClick={handleMenuToggle}
           className={cn('text-button-background bg-transparent p-0 lg:hidden', isMenuOpen && 'hidden')}
-          appendIcon="hamburger"
-          iconSize={48}
+          appendIconProps={{
+            name: 'hamburger',
+            className: 'size-12',
+          }}
         />
 
         <Button
           className="text-button-background mr-2 ml-auto bg-transparent p-0 lg:hidden"
-          appendIcon="search"
-          iconSize={32}
+          appendIconProps={{
+            name: 'search',
+            className: 'size-8',
+          }}
           onClick={handleSearchNavigation}
         />
 
@@ -59,8 +63,10 @@ function HeaderMobile() {
       <div className={cn('bg-background-light -ml-[-100%] h-screen w-screen p-4 transition-[margin]', isMenuOpen && 'ml-0')}>
         <Button
           className="text-button-background relative z-50 bg-transparent p-0 md:mt-2 lg:hidden"
-          appendIcon="close"
-          iconSize={48}
+          appendIconProps={{
+            name: 'close',
+            className: 'size-12',
+          }}
           onClick={handleMenuToggle}
         />
 
@@ -72,8 +78,10 @@ function HeaderMobile() {
                 onClick={handleMenuToggle}
                 tabIndex={0}
                 className="text-button-background justify-start bg-transparent p-0"
-                appendIcon="arrow-right"
-                iconSize={24}
+                appendIconProps={{
+                  name: 'arrow-right',
+                  className: 'size-6',
+                }}
               >
                 <Link
                   href={item.path}

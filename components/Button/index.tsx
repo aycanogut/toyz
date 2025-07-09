@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, PropsWithChildren, Ref, forwardRef } from 'react';
+import { ButtonHTMLAttributes, ComponentPropsWithoutRef, PropsWithChildren, Ref, forwardRef } from 'react';
 
 import { VariantProps } from 'class-variance-authority';
 
@@ -8,13 +8,14 @@ import Icon from '../Icon';
 
 import buttonVariants from './buttonVariants';
 
+type IconProps = ComponentPropsWithoutRef<typeof Icon>;
+
 interface ButtonProps extends PropsWithChildren, ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
-  appendIcon?: IconLabelProps;
-  iconSize?: number;
+  appendIconProps?: IconProps;
   loading?: boolean;
 }
 
-function Button({ children, appendIcon, iconSize = 16, loading, variant, size, className, ...props }: ButtonProps, ref: Ref<HTMLButtonElement>) {
+function Button({ children, appendIconProps, loading, variant, size, className, ...props }: ButtonProps, ref: Ref<HTMLButtonElement>) {
   return (
     <button
       className={cn(buttonVariants({ variant, size, className }))}
@@ -24,19 +25,13 @@ function Button({ children, appendIcon, iconSize = 16, loading, variant, size, c
       {loading ? (
         <Icon
           name="loading"
-          size={iconSize}
-          className="animate-spin"
+          className="size-4 animate-spin"
         />
       ) : (
         children
       )}
 
-      {appendIcon && (
-        <Icon
-          name={appendIcon}
-          size={iconSize}
-        />
-      )}
+      {appendIconProps && <Icon {...appendIconProps} />}
     </button>
   );
 }

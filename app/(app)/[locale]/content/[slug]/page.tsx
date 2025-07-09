@@ -58,8 +58,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
           >
             <Icon
               name="arrow-left"
-              size={24}
-              className="text-title-light"
+              className="text-title-light size-6"
             />
             <span className="font-grotesque text-title-light mb-1 bg-transparent text-xl font-bold capitalize lg:text-2xl">{t('back')}</span>
           </Link>

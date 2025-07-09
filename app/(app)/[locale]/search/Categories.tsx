@@ -10,6 +10,7 @@ import Button from '@/components/Button';
 import Popover from '@/components/Popover';
 import { useRouter, usePathname } from '@/i18n/routing';
 import { Category } from '@/payload-types';
+import cn from '@/utils/cn';
 
 interface CategoriesProps {
   categories: Category[];
@@ -44,7 +45,16 @@ function Categories({ categories }: CategoriesProps) {
         open: isOpen,
         onOpenChange: setIsOpen,
       }}
-      trigger={<Button>{buttonLabel}</Button>}
+      trigger={
+        <Button
+          appendIconProps={{
+            name: 'arrow-down',
+            className: cn('size-5 transition-transform', isOpen && 'rotate-180'),
+          }}
+        >
+          {buttonLabel}
+        </Button>
+      }
       triggerProps={{
         className: 'min-w-40',
       }}

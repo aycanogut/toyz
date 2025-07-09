@@ -29,8 +29,7 @@ async function ContentLabels({ items }: ContentLabelProps) {
           >
             <Icon
               name={item as IconLabelProps}
-              size={18}
-              className="text-title-light mt-1"
+              className="text-title-light mt-1 size-5"
             />
             <span className="font-grotesque text-title-light text-lg font-medium md:text-xl">{value}</span>
           </div>
