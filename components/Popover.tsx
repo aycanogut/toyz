@@ -45,12 +45,12 @@ function Popover({ trigger, children, rootProps, triggerProps, portalProps, cont
           {children}
           {hasCloseIcon && (
             <Close
-              className="absolute top-1 right-1 inline-flex items-center justify-center text-white"
+              className="absolute top-1 right-1 inline-flex cursor-pointer items-center justify-center text-white"
               aria-label="Close"
             >
               <Icon
                 name="close"
-                size={28}
+                className="size-7"
               />
             </Close>
           )}

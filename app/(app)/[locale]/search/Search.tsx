@@ -75,8 +75,10 @@ function Search({ categories }: SearchProps) {
         {searchValue && (
           <Button
             className="text-title-light absolute top-0 right-0 bg-transparent hover:bg-transparent"
-            appendIcon="close"
-            iconSize={32}
+            appendIconProps={{
+              name: 'close',
+              className: 'size-8',
+            }}
             onClick={() => {
               setSearchValue('');
 

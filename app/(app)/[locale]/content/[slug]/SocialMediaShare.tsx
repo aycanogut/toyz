@@ -38,8 +38,10 @@ function SocialMediaShare({ title, slug, locale }: SocialMediaShare) {
       }}
       trigger={
         <Button
-          appendIcon="share"
-          iconSize={24}
+          appendIconProps={{
+            name: 'share',
+            className: 'size-5',
+          }}
           className="h-fit cursor-pointer"
         >
           {t('share')}

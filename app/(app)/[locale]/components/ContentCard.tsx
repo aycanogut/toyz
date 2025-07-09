@@ -43,8 +43,10 @@ function ContentCard({ title, image, details, slug }: ContentCardProps) {
         >
           <Badge
             className="w-full uppercase"
-            appendIcon="arrow-right"
-            iconSize={24}
+            appendIconProps={{
+              name: 'arrow-right',
+              className: 'size-6',
+            }}
           >
             {t('show-more')}
           </Badge>
