@@ -51,6 +51,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
         </div>
 
         <header className="container space-y-6 px-4 pt-8 md:pb-8 lg:space-y-10 xl:px-0">
+          {/* TODO: Bu buton anasayfa degil bir onceki sayfaya geri dönmeli. */}
           <Link
             href="/"
             className="focus-visible:ring-title-light inline-flex items-center gap-2 p-2 focus-visible:ring-2 focus-visible:outline-hidden"
