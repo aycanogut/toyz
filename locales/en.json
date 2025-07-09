@@ -27,16 +27,7 @@
     "share": "share",
     "back": "back"
   },
-  "About": {
-    "title": "who we are",
-    "Meta": {
-      "title": "About",
-      "description": "About TOYZ is a counter-culture themed webzine",
-      "keywords": "About, toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography"
-    }
-  },
   "Contact": {
-    "title": "contact",
     "message": "send us your message",
     "name": "name",
     "email": "e-mail",
