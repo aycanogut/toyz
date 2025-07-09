@@ -2,6 +2,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
+import { searchPlugin } from '@payloadcms/plugin-search';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 import { buildConfig } from 'payload';
@@ -19,11 +20,16 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
+  collections: [Articles, Media, Categories],
+  globals: [Slider, About, Contact],
   secret: toyzConfig.payloadSecret || '',
   db: mongooseAdapter({
     url: toyzConfig.databaseUri || '',
   }),
   plugins: [
+    searchPlugin({
+      collections: ['articles'],
+    }),
     vercelBlobStorage({
       collections: {
         media: true,
@@ -37,8 +43,6 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   editor: lexicalEditor(),
-  collections: [Articles, Media, Categories],
-  globals: [Slider, About, Contact],
   localization: {
     locales: ['en', 'tr'],
     defaultLocale: 'en',
