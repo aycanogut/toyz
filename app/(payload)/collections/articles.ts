@@ -57,13 +57,6 @@ export const Articles: CollectionConfig = {
       ],
     },
     {
-      name: 'categories',
-      type: 'relationship',
-      relationTo: 'categories',
-      hasMany: true,
-      required: true,
-    },
-    {
       name: 'keywords',
       type: 'text',
       hasMany: true,
