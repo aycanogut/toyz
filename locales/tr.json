@@ -27,16 +27,7 @@
     "share": "paylaş",
     "back": "geri"
   },
-  "About": {
-    "title": "biz kimiz",
-    "Meta": {
-      "title": "Hakkımızda",
-      "description": "Hakkımızda TOYZ is a counter-culture themed webzine",
-      "keywords": "Hakkımızda, toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography"
-    }
-  },
   "Contact": {
-    "title": "iletişim",
     "message": "bize ulaşın",
     "name": "İsim",
     "email": "e-posta",
