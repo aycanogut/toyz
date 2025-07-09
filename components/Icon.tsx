@@ -4,11 +4,9 @@ import icons from '@/theme/icons';
 
 export interface IconProps extends IconBaseProps {
   name: IconLabelProps;
-  size: number;
-  className?: string;
 }
 
-function Icon({ name, size, className, ...props }: IconProps) {
+function Icon({ name, className, ...props }: IconProps) {
   const selectedIcon = icons.find(icon => icon.label === name);
 
   if (!selectedIcon) return null;
@@ -18,7 +16,6 @@ function Icon({ name, size, className, ...props }: IconProps) {
   return (
     <IconElement
       name={name}
-      size={size}
       className={className}
       {...props}
     />

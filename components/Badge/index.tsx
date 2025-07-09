@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import { ComponentPropsWithoutRef, HTMLAttributes } from 'react';
 
 import { VariantProps } from 'class-variance-authority';
 
@@ -8,13 +8,14 @@ import Icon from '../Icon';
 
 import badgeVariants from './badgeVariants';
 
+type IconProps = ComponentPropsWithoutRef<typeof Icon>;
+
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement>, VariantProps<typeof badgeVariants> {
-  appendIcon?: IconLabelProps;
-  iconSize?: number;
+  appendIconProps?: IconProps;
   loading?: boolean;
 }
 
-function Badge({ children, appendIcon, iconSize = 16, loading, variant, size, className, ...props }: BadgeProps) {
+function Badge({ children, appendIconProps, loading, variant, size, className, ...props }: BadgeProps) {
   return (
     <span
       className={cn(badgeVariants({ variant, size, className }))}
@@ -23,19 +24,13 @@ function Badge({ children, appendIcon, iconSize = 16, loading, variant, size, cl
       {loading ? (
         <Icon
           name="loading"
-          size={iconSize}
-          className="animate-spin"
+          className="size-4 animate-spin"
         />
       ) : (
         children
       )}
 
-      {appendIcon && (
-        <Icon
-          name={appendIcon}
-          size={iconSize}
-        />
-      )}
+      {appendIconProps && <Icon {...appendIconProps} />}
     </span>
   );
 }
