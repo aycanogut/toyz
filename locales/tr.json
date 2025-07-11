@@ -4,13 +4,6 @@
     "about": "hakkımızda",
     "contact": "iletişim"
   },
-  "Homepage": {
-    "Meta": {
-      "title": "Anasayfa",
-      "description": "TOYZ karşı kültür temalı bir webzindir",
-      "keywords": "toyz, karşı kültür, webzine, graffiti, kaykay, punk rock, sanat, sinema, fotoğrafçılıktoyz, karşı kültür, webzine, graffiti, kaykay, punk rock, sanat, sinema, fotoğrafçılık"
-    }
-  },
   "Search": {
     "search": "ara",
     "placeholder": "Bir içerik arayın",

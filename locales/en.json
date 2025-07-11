@@ -4,13 +4,6 @@
     "about": "about",
     "contact": "contact"
   },
-  "Homepage": {
-    "Meta": {
-      "title": "Homepage",
-      "description": "Homepage TOYZ is a counter-culture themed webzine",
-      "keywords": "homepage, toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography"
-    }
-  },
   "Search": {
     "search": "search",
     "placeholder": "Search for a content",
