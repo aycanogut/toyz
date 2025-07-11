@@ -11,8 +11,10 @@ import sharp from 'sharp';
 import { Articles } from './app/(payload)/collections/articles';
 import { Categories } from './app/(payload)/collections/categories';
 import { Media } from './app/(payload)/collections/media';
+import SEO from './app/(payload)/collections/seo';
 import { About } from './app/(payload)/globals/about';
 import { Contact } from './app/(payload)/globals/contact';
+import { Home } from './app/(payload)/globals/home';
 import { Slider } from './app/(payload)/globals/slider';
 import toyzConfig from './toyzConfig';
 
@@ -20,8 +22,8 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
-  collections: [Articles, Media, Categories],
-  globals: [Slider, About, Contact],
+  collections: [Articles, Media, Categories, SEO],
+  globals: [Home, Slider, About, Contact],
   secret: toyzConfig.payloadSecret || '',
   db: mongooseAdapter({
     url: toyzConfig.databaseUri || '',
