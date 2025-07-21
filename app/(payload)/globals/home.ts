@@ -16,10 +16,21 @@ export const Home: GlobalConfig = {
       localized: true,
     },
     {
-      name: 'seo',
-      type: 'relationship',
-      relationTo: 'seo',
-      required: true,
+      name: 'keywords',
+      type: 'text',
+      hasMany: true,
+      localized: true,
+    },
+    {
+      name: 'openGraph',
+      type: 'group',
+      fields: [
+        {
+          name: 'images',
+          type: 'relationship',
+          relationTo: 'media',
+        },
+      ],
     },
   ],
 };

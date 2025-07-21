@@ -70,7 +70,6 @@ export interface Config {
     articles: Article;
     media: Media;
     categories: Category;
-    seo: Seo;
     search: Search;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
@@ -82,7 +81,6 @@ export interface Config {
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
-    seo: SeoSelect<false> | SeoSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -97,12 +95,14 @@ export interface Config {
     slider: Slider;
     about: About;
     contact: Contact;
+    searchPage: SearchPage;
   };
   globalsSelect: {
     home: HomeSelect<false> | HomeSelect<true>;
     slider: SliderSelect<false> | SliderSelect<true>;
     about: AboutSelect<false> | AboutSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
+    searchPage: SearchPageSelect<false> | SearchPageSelect<true>;
   };
   locale: 'en' | 'tr';
   user: User & {
@@ -196,21 +196,6 @@ export interface Category {
   createdAt: string;
 }
 /**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "seo".
- */
-export interface Seo {
-  id: string;
-  title: string;
-  description: string;
-  keywords?: string[] | null;
-  openGraph?: {
-    images?: (string | null) | Media;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * This is a collection of automatically created search results. These results are used by the global site search and will be updated automatically as documents in the CMS are created or updated.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -269,10 +254,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: string | Category;
-      } | null)
-    | ({
-        relationTo: 'seo';
-        value: string | Seo;
       } | null)
     | ({
         relationTo: 'search';
@@ -375,22 +356,6 @@ export interface CategoriesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "seo_select".
- */
-export interface SeoSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  keywords?: T;
-  openGraph?:
-    | T
-    | {
-        images?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "search_select".
  */
 export interface SearchSelect<T extends boolean = true> {
@@ -462,7 +427,10 @@ export interface Home {
   id: string;
   title: string;
   description: string;
-  seo: string | Seo;
+  keywords?: string[] | null;
+  openGraph?: {
+    images?: (string | null) | Media;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -486,6 +454,10 @@ export interface About {
   title: string;
   description: string;
   image: string | Media;
+  keywords?: string[] | null;
+  openGraph?: {
+    images?: (string | null) | Media;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -496,7 +468,28 @@ export interface About {
 export interface Contact {
   id: string;
   title: string;
+  description: string;
   image: string | Media;
+  keywords?: string[] | null;
+  openGraph?: {
+    images?: (string | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "searchPage".
+ */
+export interface SearchPage {
+  id: string;
+  title: string;
+  description: string;
+  image: string | Media;
+  keywords?: string[] | null;
+  openGraph?: {
+    images?: (string | null) | Media;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -507,7 +500,12 @@ export interface Contact {
 export interface HomeSelect<T extends boolean = true> {
   title?: T;
   description?: T;
-  seo?: T;
+  keywords?: T;
+  openGraph?:
+    | T
+    | {
+        images?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -531,6 +529,12 @@ export interface AboutSelect<T extends boolean = true> {
   title?: T;
   description?: T;
   image?: T;
+  keywords?: T;
+  openGraph?:
+    | T
+    | {
+        images?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -541,7 +545,32 @@ export interface AboutSelect<T extends boolean = true> {
  */
 export interface ContactSelect<T extends boolean = true> {
   title?: T;
+  description?: T;
   image?: T;
+  keywords?: T;
+  openGraph?:
+    | T
+    | {
+        images?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "searchPage_select".
+ */
+export interface SearchPageSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  image?: T;
+  keywords?: T;
+  openGraph?:
+    | T
+    | {
+        images?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

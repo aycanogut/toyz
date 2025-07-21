@@ -1,10 +1,7 @@
-import { CollectionConfig } from 'payload';
+import { GlobalConfig } from 'payload';
 
-const SEO: CollectionConfig = {
-  slug: 'seo',
-  admin: {
-    useAsTitle: 'title',
-  },
+export const SearchPage: GlobalConfig = {
+  slug: 'searchPage',
   fields: [
     {
       name: 'title',
@@ -37,5 +34,3 @@ const SEO: CollectionConfig = {
     },
   ],
 };
-
-export default SEO;

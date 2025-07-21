@@ -8,7 +8,7 @@ import type { Metadata } from 'next';
 
 import { routing } from '@/i18n/routing';
 import Layout from '@/layout';
-import { Media, Seo } from '@/payload-types';
+import { Media } from '@/payload-types';
 import { grotesque, nabla } from '@/theme/fonts';
 import '@/theme/globals.css';
 import toyzConfig from '@/toyzConfig';
@@ -30,21 +30,20 @@ export async function generateMetadata(props: {
     depth: 1,
   });
 
-  const seo = home.seo as Seo;
-  const images = seo.openGraph?.images as Media;
+  const images = home.openGraph?.images as Media;
 
   return {
-    title: seo.title,
-    description: seo.description,
+    title: home.title,
+    description: home.description,
     applicationName: toyzConfig.title,
-    keywords: seo.keywords,
+    keywords: home.keywords,
     openGraph: {
       siteName: toyzConfig.title,
-      title: seo.title,
-      description: seo.description,
+      title: home.title,
+      description: home.description,
       type: 'website',
       images: [images.url ?? ''],
-      url: toyzConfig.baseUrl,
+      url: `${toyzConfig.baseUrl}/${locale}`,
       locale,
     },
     authors: [
@@ -53,6 +52,9 @@ export async function generateMetadata(props: {
         url: 'https://aycan.dev',
       },
     ],
+    alternates: {
+      canonical: `${toyzConfig.baseUrl}/${locale}`,
+    },
   };
 }
 
