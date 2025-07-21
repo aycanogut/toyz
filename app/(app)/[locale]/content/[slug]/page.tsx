@@ -80,7 +80,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
           </div>
         </header>
 
-        <div className="container space-y-6 px-4 pb-12 md:space-y-10 xl:px-0">
+        <div className="container mt-4 space-y-6 px-4 pb-12 md:space-y-10 xl:px-0">
           <div className="relative hidden h-80 w-full md:block lg:h-[22.3125rem]">
             <Image
               src={media.url ?? ''}
