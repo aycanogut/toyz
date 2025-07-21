@@ -1,7 +1,7 @@
 import { GlobalConfig } from 'payload';
 
-export const Contact: GlobalConfig = {
-  slug: 'contact',
+export const Home: GlobalConfig = {
+  slug: 'home',
   fields: [
     {
       name: 'title',
@@ -14,12 +14,6 @@ export const Contact: GlobalConfig = {
       type: 'textarea',
       required: true,
       localized: true,
-    },
-    {
-      name: 'image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
     },
     {
       name: 'keywords',

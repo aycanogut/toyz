@@ -13,6 +13,8 @@ import { Categories } from './app/(payload)/collections/categories';
 import { Media } from './app/(payload)/collections/media';
 import { About } from './app/(payload)/globals/about';
 import { Contact } from './app/(payload)/globals/contact';
+import { Home } from './app/(payload)/globals/home';
+import { SearchPage } from './app/(payload)/globals/searchPage';
 import { Slider } from './app/(payload)/globals/slider';
 import toyzConfig from './toyzConfig';
 
@@ -21,7 +23,7 @@ const dirname = path.dirname(filename);
 
 export default buildConfig({
   collections: [Articles, Media, Categories],
-  globals: [Slider, About, Contact],
+  globals: [Home, Slider, About, Contact, SearchPage],
   secret: toyzConfig.payloadSecret || '',
   db: mongooseAdapter({
     url: toyzConfig.databaseUri || '',
