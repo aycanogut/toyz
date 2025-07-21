@@ -8,12 +8,7 @@
     "search": "search",
     "placeholder": "Search for a content",
     "result": "No results found",
-    "category": "all",
-    "Meta": {
-      "title": "Search",
-      "description": "Search TOYZ is a counter-culture themed webzine",
-      "keywords": "Search, toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography"
-    }
+    "category": "all"
   },
   "Content": {
     "show-more": "show more",
@@ -25,12 +20,7 @@
     "name": "name",
     "email": "e-mail",
     "subject": "message",
-    "send": "send",
-    "Meta": {
-      "title": "Contact",
-      "description": "Contact TOYZ is a counter-culture themed webzine",
-      "keywords": "Contact, toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography"
-    }
+    "send": "send"
   },
   "Error": {
     "404": "Page not found",
