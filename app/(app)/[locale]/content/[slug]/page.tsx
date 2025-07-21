@@ -1,14 +1,11 @@
 import Image from 'next/image';
 
-import { getTranslations } from 'next-intl/server';
-
-import Icon from '@/components/Icon';
-import { Link } from '@/i18n/routing';
 import { Category, Media } from '@/payload-types';
 import { getPayloadClient } from '@/utils/payloadClient';
 
 import ContentLabels from '../../components/ContentLabels';
 
+import BackButton from './BackButton';
 import RichText from './RichText';
 import ScrollProgressAnimation from './ScrollProgressAnimation';
 import SocialMediaShare from './SocialMediaShare';
@@ -19,8 +16,6 @@ interface ContentDetailsProps {
 
 async function ContentDetails({ params }: ContentDetailsProps) {
   const { locale, slug } = await params;
-
-  const t = await getTranslations('Content');
 
   const payload = await getPayloadClient();
 
@@ -51,17 +46,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
         </div>
 
         <header className="container space-y-6 px-4 pt-8 md:pb-8 lg:space-y-10 xl:px-0">
-          {/* TODO: Bu buton anasayfa degil bir onceki sayfaya geri dönmeli. */}
-          <Link
-            href="/"
-            className="focus-visible:ring-title-light inline-flex items-center gap-2 p-2 focus-visible:ring-2 focus-visible:outline-hidden"
-          >
-            <Icon
-              name="arrow-left"
-              className="text-title-light size-6"
-            />
-            <span className="font-grotesque text-title-light mb-1 bg-transparent text-xl font-bold capitalize lg:text-2xl">{t('back')}</span>
-          </Link>
+          <BackButton />
 
           <h1 className="font-grotesque text-title-light text-start text-2xl font-medium md:text-3xl lg:text-5xl lg:font-semibold">{title}</h1>
           <div className="flex w-full flex-col items-start justify-between gap-6 md:flex-row md:items-center">
@@ -80,7 +65,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
           </div>
         </header>
 
-        <div className="container space-y-6 px-4 pb-12 md:space-y-10 xl:px-0">
+        <div className="container mt-4 space-y-6 px-4 pb-12 md:space-y-10 xl:px-0">
           <div className="relative hidden h-80 w-full md:block lg:h-[22.3125rem]">
             <Image
               src={media.url ?? ''}

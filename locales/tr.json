@@ -4,23 +4,11 @@
     "about": "hakkımızda",
     "contact": "iletişim"
   },
-  "Homepage": {
-    "Meta": {
-      "title": "Anasayfa",
-      "description": "TOYZ karşı kültür temalı bir webzindir",
-      "keywords": "toyz, karşı kültür, webzine, graffiti, kaykay, punk rock, sanat, sinema, fotoğrafçılıktoyz, karşı kültür, webzine, graffiti, kaykay, punk rock, sanat, sinema, fotoğrafçılık"
-    }
-  },
   "Search": {
     "search": "ara",
     "placeholder": "Bir içerik arayın",
     "result": "Bir sonuç bulunamadı",
-    "category": "hepsi",
-    "Meta": {
-      "title": "Arama",
-      "description": "Arama TOYZ is a counter-culture themed webzine",
-      "keywords": "Arama, toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography"
-    }
+    "category": "hepsi"
   },
   "Content": {
     "show-more": "içeriğe git",
@@ -32,12 +20,7 @@
     "name": "İsim",
     "email": "e-posta",
     "subject": "mesaj",
-    "send": "gönder",
-    "Meta": {
-      "title": "İletişim",
-      "description": "İletişim TOYZ is a counter-culture themed webzine",
-      "keywords": "İletişim, toyz, counter-culture, webzine, graffiti, skateboarding, punk rock, art, cinema, photography"
-    }
+    "send": "gönder"
   },
   "Error": {
     "404": "Sayfa bulunamadı",
