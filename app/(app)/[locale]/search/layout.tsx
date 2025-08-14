@@ -33,7 +33,7 @@ export async function generateMetadata(props: {
       title: search.title,
       description: search.description,
       type: 'website',
-      images: [images.url ?? ''],
+      images: images ? [images.url ?? ''] : undefined,
       url: `${toyzConfig.baseUrl}/${locale}/search`,
       locale,
     },

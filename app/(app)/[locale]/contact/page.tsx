@@ -20,12 +20,14 @@ async function Contact() {
 
   const media = contact.image as Media;
 
+  if (!media) return null;
+
   return (
     <section>
       <PageHeader
         image={{
           src: media.url ?? '',
-          alt: media.alt ?? '',
+          alt: media.alt,
         }}
         title={contact.title}
       />

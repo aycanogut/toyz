@@ -16,12 +16,14 @@ async function About() {
 
   const media = about.image as Media;
 
+  if (!media) return null;
+
   return (
     <section>
       <PageHeader
         image={{
           src: media.url ?? '',
-          alt: media.alt ?? '',
+          alt: media.alt,
         }}
         title={about.title}
       />
