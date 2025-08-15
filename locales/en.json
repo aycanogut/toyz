@@ -25,5 +25,9 @@
   "Error": {
     "404": "Page not found",
     "redirect": "Homepage"
+  },
+  "GlobalError": {
+    "500": "Something went wrong!",
+    "try-again": "Try Again"
   }
 }
