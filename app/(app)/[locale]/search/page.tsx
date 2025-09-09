@@ -56,6 +56,7 @@ async function Search({ searchParams }: SearchProps) {
               details={{
                 date: item.details.date,
                 category: category.name,
+                categorySlug: category.slug,
                 author: item.details.author,
               }}
               slug={item.slug ?? ''}

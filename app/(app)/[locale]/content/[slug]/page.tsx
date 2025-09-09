@@ -54,6 +54,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
               items={{
                 ...details,
                 category: category.name,
+                categorySlug: category.slug,
               }}
             />
 
