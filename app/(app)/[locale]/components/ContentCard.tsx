@@ -5,16 +5,12 @@ import { useTranslations } from 'next-intl';
 import Badge from '@/components/Badge';
 import { Link } from '@/i18n/routing';
 
-import ContentLabels from './ContentLabels';
+import ContentLabels, { ContentLabelItem } from './ContentLabels';
 
 interface ContentCardProps {
   title: string;
   image: string;
-  details: {
-    date: string;
-    category: string;
-    author: string;
-  };
+  details: ContentLabelItem;
   slug: string;
 }
 
