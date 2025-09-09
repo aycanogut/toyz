@@ -13,6 +13,7 @@ export const Categories: CollectionConfig = {
       name: 'slug',
       type: 'text',
       required: true,
+      localized: false,
       unique: true,
     },
   ],
