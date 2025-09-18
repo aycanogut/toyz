@@ -96,6 +96,7 @@ function HeaderDesktop() {
               className: 'size-7',
             }}
             onClick={() => push('/search')}
+            aria-label={t('search')}
           />
 
           <LanguageSwitcher locale={locale as Locale} />
