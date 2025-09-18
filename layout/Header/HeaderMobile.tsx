@@ -46,6 +46,7 @@ function HeaderMobile() {
             name: 'hamburger',
             className: 'size-12',
           }}
+          aria-label="Menu"
         />
 
         <Button
@@ -55,6 +56,7 @@ function HeaderMobile() {
             className: 'size-8',
           }}
           onClick={handleSearchNavigation}
+          aria-label={t('search')}
         />
 
         <LanguageSwitcher locale={locale as Locale} />
