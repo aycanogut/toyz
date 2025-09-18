@@ -73,23 +73,24 @@ function HeaderMobile() {
         <nav className="mt-6">
           <ul className="flex flex-col gap-8 pl-2 md:pl-4">
             {navigationItems.map(item => (
-              <Button
-                key={item.id}
-                onClick={handleMenuToggle}
-                tabIndex={0}
-                className="text-button-background justify-start bg-transparent p-0"
-                appendIconProps={{
-                  name: 'arrow-right',
-                  className: 'size-6',
-                }}
-              >
-                <Link
-                  href={item.path}
-                  className="flex items-center gap-2"
+              <li key={item.id}>
+                <Button
+                  onClick={handleMenuToggle}
+                  tabIndex={0}
+                  className="text-button-background justify-start bg-transparent p-0"
+                  appendIconProps={{
+                    name: 'arrow-right',
+                    className: 'size-6',
+                  }}
                 >
-                  <span className="font-grotesque text-title-light text-2xl font-medium uppercase">{t(item.name)}</span>
-                </Link>
-              </Button>
+                  <Link
+                    href={item.path}
+                    className="flex items-center gap-2"
+                  >
+                    <span className="font-grotesque text-title-light text-2xl font-medium uppercase">{t(item.name)}</span>
+                  </Link>
+                </Button>
+              </li>
             ))}
           </ul>
         </nav>
