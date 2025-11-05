@@ -2,7 +2,8 @@
   "Navigation": {
     "home": "home",
     "about": "about",
-    "contact": "contact"
+    "contact": "contact",
+    "search": "search"
   },
   "Search": {
     "search": "search",

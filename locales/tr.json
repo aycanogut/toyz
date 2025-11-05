@@ -2,7 +2,8 @@
   "Navigation": {
     "home": "anasayfa",
     "about": "hakkımızda",
-    "contact": "iletişim"
+    "contact": "iletişim",
+    "search": "ara"
   },
   "Search": {
     "search": "ara",
