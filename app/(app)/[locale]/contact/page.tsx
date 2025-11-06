@@ -27,7 +27,7 @@ async function Contact() {
       <PageHeader
         image={{
           src: media.url ?? '',
-          alt: media.alt,
+          alt: media.alt ?? '',
         }}
         title={contact.title}
       />
