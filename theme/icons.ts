@@ -1,5 +1,5 @@
 import { AiOutlineTag, AiOutlineLoading3Quarters, AiOutlineInstagram } from 'react-icons/ai';
-import { PiEnvelopeSimple } from 'react-icons/pi';
+import { PiEnvelopeSimple, PiCamera } from 'react-icons/pi';
 import {
   RiShareBoxLine,
   RiSearchLine,
@@ -64,6 +64,10 @@ const icons = [
   {
     label: 'envelope',
     icon: PiEnvelopeSimple,
+  },
+  {
+    label: 'camera',
+    icon: PiCamera,
   },
 ] as const;
 
