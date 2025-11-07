@@ -23,7 +23,7 @@ async function About() {
       <PageHeader
         image={{
           src: media.url ?? '',
-          alt: media.alt,
+          alt: media.alt ?? '',
         }}
         title={about.title}
       />

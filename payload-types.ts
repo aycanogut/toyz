@@ -171,7 +171,8 @@ export interface Article {
  */
 export interface Media {
   id: string;
-  alt: string;
+  alt?: string | null;
+  photographer?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -332,6 +333,7 @@ export interface ArticlesSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  photographer?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -485,7 +487,6 @@ export interface SearchPage {
   id: string;
   title: string;
   description: string;
-  image: string | Media;
   keywords?: string[] | null;
   openGraph?: {
     images?: (string | null) | Media;
@@ -564,7 +565,6 @@ export interface ContactSelect<T extends boolean = true> {
 export interface SearchPageSelect<T extends boolean = true> {
   title?: T;
   description?: T;
-  image?: T;
   keywords?: T;
   openGraph?:
     | T

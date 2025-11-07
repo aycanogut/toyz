@@ -14,7 +14,11 @@ export const Media: CollectionConfig = {
       name: 'alt',
       type: 'text',
       localized: true,
-      required: true,
+    },
+    {
+      name: 'photographer',
+      type: 'text',
+      localized: false,
     },
   ],
 };
