@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
@@ -18,7 +18,9 @@ interface SliderProps {
 }
 
 function Slider({ slider }: SliderProps) {
-  const autoplay = useRef(
+  const [isMouseDown, setIsMouseDown] = useState(false);
+
+  const [emblaRef] = useEmblaCarousel(OPTIONS, [
     Autoplay({
       delay: 300,
       jump: true,
@@ -29,30 +31,28 @@ function Slider({ slider }: SliderProps) {
       rootNode: null,
       active: true,
       breakpoints: {},
-    })
-  );
-
-  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS, [autoplay.current]);
-
-  const [isPlaying, setIsPlaying] = useState(false);
+    }),
+  ]);
 
   useEffect(() => {
-    if (!emblaApi) return;
-
-    const updatePlayingStatus = () => {
-      setIsPlaying(autoplay.current.isPlaying());
+    const handleMouseDown = (e: MouseEvent) => {
+      if (e.button === 0) {
+        setIsMouseDown(true);
+      }
     };
 
-    emblaApi.on('autoplay:play', updatePlayingStatus);
-    emblaApi.on('autoplay:stop', updatePlayingStatus);
+    const handleMouseUp = () => {
+      setIsMouseDown(false);
+    };
 
-    updatePlayingStatus();
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
 
     return () => {
-      emblaApi.off('autoplay:play', updatePlayingStatus);
-      emblaApi.off('autoplay:stop', updatePlayingStatus);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [emblaApi]);
+  }, []);
 
   if (!slider.images) return null;
 
@@ -81,7 +81,7 @@ function Slider({ slider }: SliderProps) {
                   className="absolute top-0 left-0 block h-full w-full object-cover"
                 />
 
-                {isPlaying && photographer && (
+                {isMouseDown && photographer && (
                   <div className="bg-background/70 absolute right-4 bottom-4 flex items-center justify-center gap-2 p-2">
                     <Icon
                       name="camera"
