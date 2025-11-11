@@ -56,13 +56,17 @@ function HeaderDesktop() {
             isHomepage && 'border-background-light fixed top-0 right-0 left-0 z-50 border-b drop-shadow-lg'
           )}
         >
-          <Image
-            src="/brand-logo.webp"
-            alt="TOYZ Logo"
-            className="object-contain"
-            width={135}
-            height={43}
-          />
+          <Link
+            href="/"
+            className="relative flex aspect-video w-40 items-center justify-center"
+          >
+            <Image
+              src="/brand-logo.webp"
+              alt="TOYZ Logo"
+              fill
+              className="absolute top-0 left-0 object-contain"
+            />
+          </Link>
           <nav className="w-full">
             <ul className="flex h-full items-center justify-end gap-8">
               {navigationItems.map(item => (
