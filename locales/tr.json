@@ -6,7 +6,6 @@
     "search": "ara"
   },
   "Search": {
-    "search": "ara",
     "placeholder": "Bir içerik arayın",
     "result": "Bir sonuç bulunamadı",
     "category": "hepsi"
@@ -20,8 +19,12 @@
     "message": "bize ulaşın",
     "name": "İsim",
     "email": "e-posta",
-    "subject": "mesaj",
-    "send": "gönder"
+    "subject": "konu",
+    "messageLabel": "mesaj",
+    "send": "gönder",
+    "error": "Bir şeyler ters gitti!",
+    "success": "Mesaj başarıyla gönderildi!",
+    "contact-form": "İletişim Formu"
   },
   "Error": {
     "404": "Sayfa bulunamadı",
