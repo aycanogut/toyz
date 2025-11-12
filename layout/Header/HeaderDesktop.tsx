@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 
+import Image from 'next/image';
+
 import { AnimatePresence, motion } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
 
@@ -56,16 +58,14 @@ function HeaderDesktop() {
         >
           <Link
             href="/"
-            className="focus-visible:ring-title-light flex items-center focus-visible:ring-2 focus-visible:outline-hidden"
+            className="relative flex aspect-video w-40 items-center justify-center"
           >
-            <h1
-              className="font-nabla text-title-light text-[2.5rem] font-extrabold"
-              style={{
-                filter: 'hue-rotate(310deg) saturate(2.2)',
-              }}
-            >
-              TOYZ
-            </h1>
+            <Image
+              src="/brand-logo.webp"
+              alt="TOYZ Logo"
+              fill
+              className="absolute top-0 left-0 object-contain"
+            />
           </Link>
           <nav className="w-full">
             <ul className="flex h-full items-center justify-end gap-8">

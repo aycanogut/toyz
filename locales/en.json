@@ -6,7 +6,6 @@
     "search": "search"
   },
   "Search": {
-    "search": "search",
     "placeholder": "Search for a content",
     "result": "No results found",
     "category": "all"
@@ -20,8 +19,12 @@
     "message": "send us your message",
     "name": "name",
     "email": "e-mail",
-    "subject": "message",
-    "send": "send"
+    "subject": "subject",
+    "messageLabel": "message",
+    "send": "send",
+    "error": "Something went wrong!",
+    "success": "Message sent successfully!",
+    "contact-form": "Contact Form"
   },
   "Error": {
     "404": "Page not found",

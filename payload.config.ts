@@ -2,6 +2,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
+import { resendAdapter } from '@payloadcms/email-resend';
 import { searchPlugin } from '@payloadcms/plugin-search';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
@@ -61,4 +62,9 @@ export default buildConfig({
       globals: ['slider', 'about', 'contact'],
     },
   },
+  email: resendAdapter({
+    defaultFromAddress: toyzConfig.contactEmail,
+    defaultFromName: toyzConfig.title,
+    apiKey: toyzConfig.resendApiKey,
+  }),
 });
