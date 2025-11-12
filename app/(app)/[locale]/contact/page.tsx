@@ -6,6 +6,8 @@ import { Link } from '@/i18n/routing';
 import { Media } from '@/payload-types';
 import { getPayloadClient } from '@/utils/payloadClient';
 
+import ReCaptchaProvider from '../components/ReCaptchaProvider';
+
 import ContactForm from './ContactForm';
 
 async function Contact() {
@@ -39,7 +41,7 @@ async function Contact() {
 
         <div className="flex flex-col gap-4 sm:flex-row">
           <Link
-            href="https://www.instagram.com/"
+            href="https://www.instagram.com/toyzwebzine"
             target="_blank"
             className="bg-background-light flex gap-2 rounded-s rounded-e p-2.5 md:inline-flex"
           >
@@ -48,11 +50,11 @@ async function Contact() {
               className="size-6 text-white lg:size-9"
             />
 
-            <span className="font-grotesque text-base font-medium text-white lg:text-2xl">toyzzapp</span>
+            <span className="font-grotesque text-base font-medium text-white lg:text-2xl">toyzwebzine</span>
           </Link>
 
           <Link
-            href="mailto:toyzcontent@gmail.com"
+            href="mailto:info@toyzwebzine.com"
             target="_blank"
             className="bg-background-light flex gap-2 rounded-s rounded-e p-2.5 md:inline-flex"
           >
@@ -61,11 +63,13 @@ async function Contact() {
               className="size-6 text-white lg:size-9"
             />
 
-            <span className="font-grotesque text-base font-medium text-white lg:text-2xl">toyzcontent@gmail.com</span>
+            <span className="font-grotesque text-base font-medium text-white lg:text-2xl">info@toyzwebzine.com</span>
           </Link>
         </div>
 
-        <ContactForm />
+        <ReCaptchaProvider>
+          <ContactForm />
+        </ReCaptchaProvider>
       </div>
     </section>
   );
