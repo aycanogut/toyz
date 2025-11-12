@@ -25,7 +25,7 @@ function Button({ children, appendIconProps, loading, variant, size, className, 
       {loading ? (
         <Icon
           name="loading"
-          className="size-4 animate-spin"
+          className="size-5 animate-spin"
         />
       ) : (
         children
