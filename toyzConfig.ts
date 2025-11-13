@@ -8,6 +8,7 @@ interface ToyzConfigProps {
   vercelBlobReadWriteToken: string;
   reCaptchaSiteKey: string;
   reCaptchaSecretKey: string;
+  gaId: string;
 }
 
 const toyzConfig: ToyzConfigProps = {
@@ -20,6 +21,7 @@ const toyzConfig: ToyzConfigProps = {
   vercelBlobReadWriteToken: process.env.BLOB_READ_WRITE_TOKEN,
   reCaptchaSiteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
   reCaptchaSecretKey: process.env.RECAPTCHA_SECRET_KEY,
+  gaId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
 };
 
 export default toyzConfig;
