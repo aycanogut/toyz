@@ -16,6 +16,8 @@ import toyzConfig from '@/toyzConfig';
 import cn from '@/utils/cn';
 import { getPayloadClient } from '@/utils/payloadClient';
 
+import GoogleAnalytics from './components/GoogleAnalytics';
+
 export async function generateMetadata(props: {
   params: Promise<{
     locale: Locale;
@@ -79,6 +81,7 @@ async function RootLayout(props: { children: ReactNode; params: Promise<{ locale
         <NextIntlClientProvider>
           <Layout>{children}</Layout>
           <Toaster theme="dark" />
+          <GoogleAnalytics />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -7,8 +7,8 @@ namespace NodeJS {
     BLOB_READ_WRITE_TOKEN: string;
     RESEND_API_KEY: string;
     NEXT_PUBLIC_CONTACT_EMAIL: string;
-    NEXT_PUBLIC_CONTACT_FROM: string;
     NEXT_PUBLIC_RECAPTCHA_SITE_KEY: string;
     RECAPTCHA_SECRET_KEY: string;
+    NEXT_PUBLIC_GA_MEASUREMENT_ID: string;
   }
 }
