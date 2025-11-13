@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 
 import { NextIntlClientProvider } from 'next-intl';
+import { Toaster } from 'sonner';
 
 import type { Metadata } from 'next';
 
@@ -74,9 +75,12 @@ async function RootLayout(props: { children: ReactNode; params: Promise<{ locale
       lang={locale}
       className={cn(grotesque.variable, nabla.variable)}
     >
-      <NextIntlClientProvider>
-        <Layout>{children}</Layout>
-      </NextIntlClientProvider>
+      <body className="bg-background">
+        <NextIntlClientProvider>
+          <Layout>{children}</Layout>
+          <Toaster theme="dark" />
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }
