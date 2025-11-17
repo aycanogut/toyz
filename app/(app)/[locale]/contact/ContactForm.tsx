@@ -94,7 +94,7 @@ function ContactForm() {
           htmlFor="message"
           className="font-grotesque text-title-light text-xl font-medium capitalize lg:text-3xl"
         >
-          {t('messageLabel')}
+          {t('message-label')}
         </label>
         <textarea
           id="message"

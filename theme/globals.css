@@ -23,6 +23,25 @@
   margin-inline: auto;
 }
 
+@utility prose {
+  --tw-prose-body: var(--color-title-light);
+  --tw-prose-headings: var(--color-title-light);
+  --tw-prose-lead: var(--color-title-light);
+  --tw-prose-links: var(--color-title-light);
+  --tw-prose-bold: var(--color-title-light);
+  --tw-prose-counters: var(--color-title-light);
+  --tw-prose-bullets: var(--color-title-light);
+  --tw-prose-hr: var(--color-border-dark);
+  --tw-prose-quotes: var(--color-title-light);
+  --tw-prose-quote-borders: var(--color-border-dark);
+  --tw-prose-captions: var(--color-title-dark);
+  --tw-prose-code: var(--color-title-light);
+  --tw-prose-pre-code: var(--color-title-light);
+  --tw-prose-pre-bg: var(--color-background-light);
+  --tw-prose-th-borders: var(--color-border-dark);
+  --tw-prose-td-borders: var(--color-border-dark);
+}
+
 html {
   scrollbar-gutter: stable;
 }

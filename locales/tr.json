@@ -20,7 +20,7 @@
     "name": "İsim",
     "email": "e-posta",
     "subject": "konu",
-    "messageLabel": "mesaj",
+    "message-label": "mesaj",
     "send": "gönder",
     "error": "Bir şeyler ters gitti!",
     "success": "Mesaj başarıyla gönderildi!",
@@ -28,9 +28,7 @@
   },
   "Error": {
     "404": "Sayfa bulunamadı",
-    "redirect": "Anasayfa"
-  },
-  "GlobalError": {
+    "redirect": "Anasayfa",
     "500": "Bir şeyler ters gitti!",
     "try-again": "Tekrar Dene"
   }
