@@ -20,7 +20,7 @@
     "name": "name",
     "email": "e-mail",
     "subject": "subject",
-    "messageLabel": "message",
+    "message-label": "message",
     "send": "send",
     "error": "Something went wrong!",
     "success": "Message sent successfully!",
@@ -28,9 +28,7 @@
   },
   "Error": {
     "404": "Page not found",
-    "redirect": "Homepage"
-  },
-  "GlobalError": {
+    "redirect": "Homepage",
     "500": "Something went wrong!",
     "try-again": "Try Again"
   }

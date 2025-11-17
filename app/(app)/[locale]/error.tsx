@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import Button from '@/components/Button';
 
 export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
-  const t = useTranslations('GlobalError');
+  const t = useTranslations('Error');
 
   return (
     <div className="flex h-screen flex-col items-center justify-center gap-4 px-12 md:gap-8 lg:p-40">
