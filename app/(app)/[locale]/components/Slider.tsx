@@ -79,6 +79,7 @@ function Slider({ slider }: SliderProps) {
                   alt={media.alt ?? ''}
                   fill
                   className="absolute top-0 left-0 block h-full w-full object-cover"
+                  fetchPriority="high"
                 />
 
                 {isMouseDown && photographer && (
@@ -102,9 +103,8 @@ function Slider({ slider }: SliderProps) {
           alt=""
           width={200}
           height={200}
-          className="absolute inset-0 m-auto size-[60rem] object-contain drop-shadow-lg"
-          unoptimized
-          priority
+          className="absolute inset-0 m-auto size-240 object-contain drop-shadow-lg"
+          fetchPriority="high"
         />
       </div>
     </section>

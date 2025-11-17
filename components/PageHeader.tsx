@@ -11,9 +11,9 @@ interface PageHeaderProps {
 function PageHeader({ image, title }: PageHeaderProps) {
   return (
     <>
-      <span className="bg-background-light block h-20 md:h-24 lg:hidden" />
+      <span className="bg-background block h-20 md:h-24 lg:hidden" />
 
-      <div className="relative h-[7.5rem] lg:h-[11.375rem]">
+      <div className="relative h-30 lg:h-45.5">
         <Image
           src={image.src}
           alt={image.alt}
@@ -22,7 +22,7 @@ function PageHeader({ image, title }: PageHeaderProps) {
         />
 
         <header className="relative container hidden h-full lg:block">
-          <h1 className="font-grotesque text-title-light absolute top-1/4 left-4 text-[4rem] leading-[5.375rem] font-medium uppercase [text-shadow:_0_0_7px_rgb(0_0_0_/_100%)]">
+          <h1 className="font-grotesque text-title-light absolute top-1/4 left-4 text-[4rem] leading-21.5 font-medium uppercase [text-shadow:0_0_7px_rgb(0_0_0/100%)]">
             {title}
           </h1>
         </header>

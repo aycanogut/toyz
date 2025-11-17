@@ -26,7 +26,7 @@ async function ContentLabels({ items }: ContentLabelProps) {
   const { categorySlug, ...displayItems } = computedItems;
 
   return (
-    <div className="border-border-light flex w-full max-w-[28.625rem] flex-wrap gap-x-7 gap-y-2 border px-6 py-2 md:w-fit md:max-w-fit lg:py-6">
+    <div className="border-border-light flex w-full max-w-114.5 flex-wrap gap-x-7 gap-y-2 border px-6 py-2 md:w-fit md:max-w-fit lg:py-6">
       {Object.entries(displayItems).map(([item, value]) => {
         return item === 'category' ? (
           <Link
