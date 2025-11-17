@@ -1,23 +1,32 @@
 import React, { HTMLAttributes } from 'react';
 
+import Image from 'next/image';
+
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical';
 import { JSXConvertersFunction, RichText as RichTextWithoutBlocks } from '@payloadcms/richtext-lexical/react';
+
+import { Media } from '@/payload-types';
 
 const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
   ...defaultConverters,
 
-  // TODO: Some example of how to use custom components
-  // myTextBlock: ({ node }) => <div style={{ backgroundColor: 'red' }}>{node.fields.text}</div>,
-  // upload: ({ node }) => {
-  //   const { url, alt } = node.value as Media;
+  upload: ({ node }) => {
+    const media = node.value as Media;
 
-  //   return (
-  //     <ImageAsset
-  //       url={url ?? ''}
-  //       alt={alt ?? ''}
-  //     />
-  //   );
-  // },
+    if (!media || !media.url) return null;
+
+    const { url, alt } = media;
+
+    return (
+      <Image
+        src={url}
+        alt={alt ?? ''}
+        width={800}
+        height={600}
+        className="mx-auto"
+      />
+    );
+  },
 });
 
 interface RichTextProps extends HTMLAttributes<HTMLDivElement> {
