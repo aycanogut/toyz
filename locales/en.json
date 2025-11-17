@@ -1,4 +1,7 @@
 {
+  "Global": {
+    "scroll-up": "Scroll to top"
+  },
   "Navigation": {
     "home": "home",
     "about": "about",
