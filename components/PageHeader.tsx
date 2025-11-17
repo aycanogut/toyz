@@ -11,7 +11,7 @@ interface PageHeaderProps {
 function PageHeader({ image, title }: PageHeaderProps) {
   return (
     <>
-      <span className="bg-background-light block h-20 md:h-24 lg:hidden" />
+      <span className="bg-background block h-20 md:h-24 lg:hidden" />
 
       <div className="relative h-30 lg:h-45.5">
         <Image

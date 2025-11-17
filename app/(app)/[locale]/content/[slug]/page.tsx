@@ -34,7 +34,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
     <section className="lg:pt-2 lg:pb-24">
       <ScrollProgressAnimation />
 
-      <span className="bg-background-light block h-20 lg:hidden" />
+      <span className="bg-background block h-20 lg:hidden" />
       <article>
         <div className="relative container h-56 w-full md:hidden">
           <Image
