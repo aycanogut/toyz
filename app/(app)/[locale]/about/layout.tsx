@@ -46,6 +46,9 @@ export async function generateMetadata(props: {
     alternates: {
       canonical: `${toyzConfig.baseUrl}/${locale}/about`,
     },
+    other: {
+      'og:logo': `${toyzConfig.baseUrl}/brand-logo.webp`,
+    },
   };
 }
 
