@@ -67,7 +67,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
         </header>
 
         <div className="container mt-4 space-y-6 px-4 pb-12 md:space-y-10 xl:px-0">
-          <div className="relative hidden h-80 w-full md:block lg:h-[22.3125rem]">
+          <div className="relative hidden h-80 w-full md:block lg:h-89.25">
             <Image
               src={media.url ?? ''}
               alt={title}
@@ -75,7 +75,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
               className="object-cover opacity-70 blur-xs"
             />
 
-            <div className="absolute inset-0 m-auto h-[19.3125rem] w-[31.625rem]">
+            <div className="absolute inset-0 m-auto h-77.25 w-126.5">
               <Image
                 src={media.url ?? ''}
                 alt={title}

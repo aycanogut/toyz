@@ -19,7 +19,7 @@ function ContentCard({ title, image, details, slug }: ContentCardProps) {
 
   return (
     <article className="flex h-full flex-col items-center gap-6 md:flex-row md:items-stretch md:gap-10 lg:gap-14">
-      <div className="relative h-52 w-full md:h-[20rem] lg:h-[22.5rem]">
+      <div className="relative h-52 w-full md:h-80 lg:h-90">
         <Image
           src={image}
           alt={title}
