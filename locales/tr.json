@@ -1,4 +1,7 @@
 {
+  "Global": {
+    "scroll-up": "Sayfanın başına dön"
+  },
   "Navigation": {
     "home": "anasayfa",
     "about": "hakkımızda",

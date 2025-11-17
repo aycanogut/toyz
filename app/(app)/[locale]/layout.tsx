@@ -17,6 +17,7 @@ import cn from '@/utils/cn';
 import { getPayloadClient } from '@/utils/payloadClient';
 
 import GoogleAnalytics from './components/GoogleAnalytics';
+import ScrollUp from './components/ScrollUp';
 
 export async function generateMetadata(props: {
   params: Promise<{
@@ -82,6 +83,7 @@ async function RootLayout(props: { children: ReactNode; params: Promise<{ locale
           <Layout>{children}</Layout>
           <Toaster theme="dark" />
           <GoogleAnalytics />
+          <ScrollUp />
         </NextIntlClientProvider>
       </body>
     </html>

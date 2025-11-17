@@ -5,11 +5,12 @@ import {
   RiSearchLine,
   RiArrowRightLine,
   RiArrowLeftLine,
+  RiArrowDownLine,
+  RiArrowUpLine,
   RiUserLine,
   RiMenuLine,
   RiCalendarLine,
   RiCloseFill,
-  RiArrowDownLine,
 } from 'react-icons/ri';
 
 const icons = [
@@ -32,6 +33,10 @@ const icons = [
   {
     label: 'arrow-down',
     icon: RiArrowDownLine,
+  },
+  {
+    label: 'arrow-up',
+    icon: RiArrowUpLine,
   },
   {
     label: 'date',
