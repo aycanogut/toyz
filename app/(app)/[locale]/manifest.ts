@@ -1,11 +1,11 @@
 import type { MetadataRoute } from 'next';
 
-// TODO: Update the manifest with your own app details
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'TOYZ',
+    name: 'TOYZ – Independent Webzine on Skateboarding, Graffiti, Music & Underground Culture',
     short_name: 'TOYZ',
-    description: 'TOYZ is a counter-culture themed webzine',
+    description:
+      'TOYZ is an independent webzine exploring skateboarding culture, graffiti, underground music, film, photography, and alternative art through scene-based stories and artist interviews.',
     start_url: '/',
     display: 'standalone',
     background_color: '#161617',
