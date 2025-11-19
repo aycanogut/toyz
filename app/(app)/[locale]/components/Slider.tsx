@@ -65,7 +65,7 @@ function Slider({ slider }: SliderProps) {
         <div className="flex h-screen touch-pan-y">
           {slider.images.map((image, index) => {
             const media = image as Media;
-            const { photographer } = media;
+            const { credits } = media;
 
             if (!media.url) return null;
 
@@ -82,13 +82,13 @@ function Slider({ slider }: SliderProps) {
                   fetchPriority="high"
                 />
 
-                {isMouseDown && photographer && (
+                {isMouseDown && credits && (
                   <div className="bg-background/70 absolute right-4 bottom-4 flex items-center justify-center gap-2 p-2">
                     <Icon
                       name="camera"
                       className="text-title-light size-5"
                     />
-                    <span className="font-grotesque text-title-light text-md font-medium">{photographer}</span>
+                    <span className="font-grotesque text-title-light text-md font-medium">{credits}</span>
                   </div>
                 )}
               </div>
