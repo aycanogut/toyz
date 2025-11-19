@@ -1,8 +1,8 @@
 import type { MetadataRoute } from 'next';
 
 import { routing } from '@/i18n/routing';
+import getSitemap from '@/services/sitemap';
 import toyzConfig from '@/toyzConfig';
-import { getPayloadClient } from '@/utils/payloadClient';
 
 const locales = routing.locales as ReadonlyArray<Locale>;
 
@@ -50,18 +50,10 @@ const staticRoutes: MetadataRoute.Sitemap = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const payload = await getPayloadClient();
+  const articles = await getSitemap();
   const baseUrl = toyzConfig.baseUrl ?? '';
 
-  const { docs } = await payload.find({
-    collection: 'articles',
-    select: {
-      slug: true,
-      updatedAt: true,
-    },
-  });
-
-  const dynamicRoutes: MetadataRoute.Sitemap = docs
+  const dynamicRoutes: MetadataRoute.Sitemap = articles
     .filter(doc => Boolean(doc.slug))
     .flatMap(doc => {
       const slug = doc.slug as string;

@@ -1,6 +1,7 @@
 import { getLocale, getTranslations } from 'next-intl/server';
 
 import { Media, Category } from '@/payload-types';
+import getCategories from '@/services/categories';
 import { getPayloadClient } from '@/utils/payloadClient';
 
 import ContentCard from '../components/ContentCard';
@@ -13,27 +14,21 @@ interface SearchProps {
 
 async function Search({ searchParams }: SearchProps) {
   const params = await searchParams;
-
   const query = params?.query ?? '';
-  const category = params?.category ?? '';
+  const categorySlug = params?.category ?? '';
 
   const locale = await getLocale();
-
   const t = await getTranslations('Search');
 
   const payload = await getPayloadClient();
 
-  const categories = await payload.find({
-    collection: 'categories',
-    depth: 1,
-    locale: locale as Locale,
-  });
+  const categories = await getCategories(locale);
 
   const articles = await payload.find({
     collection: 'articles',
     where: {
       ...(query && { title: { contains: query } }),
-      ...(category && { 'details.category.slug': { equals: category } }),
+      ...(categorySlug && { 'details.category.slug': { equals: categorySlug } }),
     },
     depth: 1,
     locale: locale as Locale,
@@ -41,12 +36,12 @@ async function Search({ searchParams }: SearchProps) {
 
   return (
     <section className="container flex flex-col gap-12 px-4 py-12">
-      <SearchComponent categories={categories.docs} />
+      <SearchComponent categories={categories} />
 
       {articles.docs.length > 0 ? (
         articles.docs.map(item => {
           const media = item.images[0] as Media;
-          const category = item.details.category as Category;
+          const itemCategory = item.details.category as Category;
 
           return (
             <ContentCard
@@ -55,8 +50,8 @@ async function Search({ searchParams }: SearchProps) {
               image={media.url ?? ''}
               details={{
                 date: item.details.date,
-                category: category.name,
-                categorySlug: category.slug,
+                category: itemCategory.name,
+                categorySlug: itemCategory.slug,
                 author: item.details.author,
               }}
               slug={item.slug ?? ''}

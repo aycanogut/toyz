@@ -3,8 +3,8 @@ import { ReactNode } from 'react';
 import { Metadata } from 'next';
 
 import { Media } from '@/payload-types';
+import getContact from '@/services/contact';
 import toyzConfig from '@/toyzConfig';
-import { getPayloadClient } from '@/utils/payloadClient';
 
 export async function generateMetadata(props: {
   params: Promise<{
@@ -13,13 +13,7 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const { locale } = await props.params;
 
-  const payload = await getPayloadClient();
-
-  const contact = await payload.findGlobal({
-    slug: 'contact',
-    locale: locale as Locale,
-    depth: 1,
-  });
+  const contact = await getContact(locale);
 
   const images = contact.openGraph?.images as Media;
 

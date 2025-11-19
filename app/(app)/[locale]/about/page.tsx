@@ -2,17 +2,12 @@ import { getLocale } from 'next-intl/server';
 
 import PageHeader from '@/components/PageHeader';
 import { Media } from '@/payload-types';
-import { getPayloadClient } from '@/utils/payloadClient';
+import getAbout from '@/services/about';
 
 async function About() {
   const locale = await getLocale();
 
-  const payload = await getPayloadClient();
-
-  const about = await payload.findGlobal({
-    slug: 'about',
-    locale: locale as Locale,
-  });
+  const about = await getAbout(locale);
 
   const media = about.image as Media;
 
