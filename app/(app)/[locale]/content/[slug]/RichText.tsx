@@ -15,7 +15,22 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
 
     if (!media || !media.url) return null;
 
-    const { url, alt } = media;
+    const { url, alt, credits } = media;
+
+    if (credits) {
+      return (
+        <figure className="flex flex-col items-center justify-center">
+          <Image
+            src={url}
+            alt={alt ?? ''}
+            width={800}
+            height={600}
+            className="mx-auto"
+          />
+          <figcaption className="font-grotesque text-title-light mt-2 max-w-3xl text-center text-base leading-5 lg:text-lg">{credits}</figcaption>
+        </figure>
+      );
+    }
 
     return (
       <Image
