@@ -16,7 +16,7 @@ export const Media: CollectionConfig = {
       localized: true,
     },
     {
-      name: 'photographer',
+      name: 'credits',
       type: 'text',
       localized: false,
     },
