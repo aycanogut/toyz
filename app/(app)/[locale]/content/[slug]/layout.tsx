@@ -19,7 +19,6 @@ export async function generateMetadata(props: {
   const media = article.images[0] as Media;
 
   return {
-    metadataBase: new URL(toyzConfig.baseUrl),
     title: article.title,
     description: article.description,
     applicationName: toyzConfig.title,
@@ -40,12 +39,8 @@ export async function generateMetadata(props: {
         name: article.details.author,
       },
     ],
-    robots: 'index, follow',
     alternates: {
       canonical: `${toyzConfig.baseUrl}/${locale}/content/${slug}`,
-    },
-    other: {
-      'og:logo': `${toyzConfig.baseUrl}/brand-logo.webp`,
     },
   };
 }

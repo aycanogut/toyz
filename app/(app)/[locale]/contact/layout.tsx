@@ -18,7 +18,6 @@ export async function generateMetadata(props: {
   const images = contact.openGraph?.images as Media;
 
   return {
-    metadataBase: new URL(toyzConfig.baseUrl),
     title: contact.title,
     description: contact.description,
     applicationName: toyzConfig.title,
@@ -32,17 +31,8 @@ export async function generateMetadata(props: {
       url: `${toyzConfig.baseUrl}/${locale}/contact`,
       locale,
     },
-    authors: [
-      {
-        name: 'Aycan Öğüt',
-        url: 'https://aycan.dev',
-      },
-    ],
     alternates: {
       canonical: `${toyzConfig.baseUrl}/${locale}/contact`,
-    },
-    other: {
-      'og:logo': `${toyzConfig.baseUrl}/brand-logo.webp`,
     },
   };
 }

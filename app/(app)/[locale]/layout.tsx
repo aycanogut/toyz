@@ -45,6 +45,11 @@ export async function generateMetadata(props: {
       url: `${toyzConfig.baseUrl}/${locale}`,
       locale,
     },
+    icons: {
+      icon: '/icon.png',
+      shortcut: '/favicon.ico',
+      apple: '/apple-icon.png',
+    },
     authors: [
       {
         name: 'Aycan Öğüt',
@@ -53,6 +58,17 @@ export async function generateMetadata(props: {
     ],
     alternates: {
       canonical: `${toyzConfig.baseUrl}/${locale}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
     },
     other: {
       'og:logo': `${toyzConfig.baseUrl}/brand-logo.webp`,
