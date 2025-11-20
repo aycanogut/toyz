@@ -27,7 +27,12 @@
     "send": "send",
     "error": "Something went wrong!",
     "success": "Message sent successfully!",
-    "contact-form": "Contact Form"
+    "contact-form": "Contact Form",
+    "invalid-data": "Invalid data format.",
+    "validation-name-error": "Name must be at least 2 characters long.",
+    "validation-email-error": "Invalid email address.",
+    "validation-subject-error": "Subject must be at least 3 characters long.",
+    "validation-message-error": "Message must be at least 10 characters long."
   },
   "Error": {
     "404": "Page not found",
