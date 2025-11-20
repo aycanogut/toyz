@@ -18,6 +18,7 @@ export async function generateMetadata(props: {
   const images = contact.openGraph?.images as Media;
 
   return {
+    metadataBase: new URL(toyzConfig.baseUrl),
     title: contact.title,
     description: contact.description,
     applicationName: toyzConfig.title,

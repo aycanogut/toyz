@@ -19,6 +19,7 @@ export async function generateMetadata(props: {
   const media = article.images[0] as Media;
 
   return {
+    metadataBase: new URL(toyzConfig.baseUrl),
     title: article.title,
     description: article.description,
     applicationName: toyzConfig.title,
