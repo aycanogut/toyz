@@ -1,6 +1,7 @@
 'use server';
 
 import { getTranslations } from 'next-intl/server';
+import { z } from 'zod';
 
 import toyzConfig from '@/toyzConfig';
 import { getPayloadClient } from '@/utils/payloadClient';
@@ -15,13 +16,26 @@ interface MailActionProps {
   token: string;
 }
 
+const ContactSchema = z.object({
+  name: z.string().min(2).max(50),
+  email: z.email(),
+  subject: z.string().min(3).max(100),
+  message: z.string().min(10).max(5000),
+  token: z.string().min(1),
+});
+
 export async function mailAction({ name, email, subject, message, token }: MailActionProps) {
   const t = await getTranslations('Contact');
 
   const { isValid, score } = await verifyReCaptcha(token);
 
-  if (!isValid) {
-    console.error('reCAPTCHA verification failed. Score:', score);
+  const result = ContactSchema.safeParse({ name, email, subject, message, token });
+
+  if (!result.success) {
+    return { success: false, message: t('invalid-data') };
+  }
+
+  if (!isValid || (score && score < 0.5)) {
     return {
       success: false,
       message: t('error'),

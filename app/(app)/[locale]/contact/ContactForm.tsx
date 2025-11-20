@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
-
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import z from 'zod';
 
 import Button from '@/components/Button';
 import Input from '@/components/Input';
@@ -13,28 +13,32 @@ import useReCaptcha from '../hooks/useReCaptcha';
 
 import { mailAction } from './mailAction';
 
-interface FormInputProps {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
+const ContactSchema = z.object({
+  name: z.string().min(2, { message: 'validation-name-error' }),
+  email: z.email({ message: 'validation-email-error' }),
+  subject: z.string().min(3, { message: 'validation-subject-error' }),
+  message: z.string().min(10, { message: 'validation-message-error' }),
+});
+
+export type ContactFormSchema = z.infer<typeof ContactSchema>;
 
 function ContactForm() {
-  const [isLoading, setIsLoading] = useState(false);
-
   const { getRecapthcaToken } = useReCaptcha();
 
   const t = useTranslations('Contact');
 
-  const { register, watch, reset, handleSubmit } = useForm<FormInputProps>();
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactFormSchema>({
+    resolver: zodResolver(ContactSchema),
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
+  });
 
-  const name = watch('name');
-  const email = watch('email');
-  const subject = watch('subject');
-  const message = watch('message');
-
-  const onSubmit: SubmitHandler<FormInputProps> = async inputValues => {
+  const onSubmit: SubmitHandler<ContactFormSchema> = async inputValues => {
     const token = await getRecapthcaToken();
 
     if (!token) {
@@ -43,14 +47,9 @@ function ContactForm() {
     }
 
     try {
-      setIsLoading(true);
-
       const response = await mailAction({
-        name: inputValues.name,
-        email: inputValues.email,
-        subject: inputValues.subject,
-        message: inputValues.message,
-        token: token ?? '',
+        ...inputValues,
+        token,
       });
 
       if (response?.success) {
@@ -62,8 +61,6 @@ function ContactForm() {
     } catch (error) {
       console.error('Form submission error:', error);
       toast.error(t('error'));
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -77,16 +74,19 @@ function ContactForm() {
       <Input
         aria-label={t('name')}
         {...register('name')}
+        error={errors.name?.message && t(errors.name.message)}
       />
       <Input
         aria-label={t('email')}
         type="email"
         {...register('email')}
+        error={errors.email?.message && t(errors.email.message)}
       />
 
       <Input
         aria-label={t('subject')}
         {...register('subject')}
+        error={errors.subject?.message && t(errors.subject.message)}
       />
 
       <div className="flex flex-col gap-4">
@@ -96,17 +96,20 @@ function ContactForm() {
         >
           {t('message-label')}
         </label>
-        <textarea
-          id="message"
-          {...register('message')}
-          rows={10}
-          className="focus-visible:ring-primary-blue-100 bg-background-light text-title-light focus-visible:ring-title-light w-full border p-4 text-sm placeholder:text-sm placeholder:font-normal focus-visible:ring-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-40"
-        />
+        <div className="flex flex-col gap-1">
+          <textarea
+            id="message"
+            {...register('message')}
+            rows={10}
+            className="focus-visible:ring-primary-blue-100 bg-background-light text-title-light focus-visible:ring-title-light w-full border p-4 text-sm placeholder:text-sm placeholder:font-normal focus-visible:ring-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-40"
+          />
+          {errors.message?.message && <span className="font-inter text-md text-red-500">{t(errors.message.message)}</span>}
+        </div>
       </div>
 
       <Button
-        disabled={!name || !email || !subject || !message}
-        loading={isLoading}
+        disabled={isSubmitting}
+        loading={isSubmitting}
         className="h-12 cursor-pointer"
       >
         {t('send')}
