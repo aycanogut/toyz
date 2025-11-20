@@ -18,6 +18,7 @@
     "generateEnvKeyTypes": "npx ts-node ./generatorScripts/envFileTypeBuilder.ts && npx prettier --w types/EnvFileTypes.d.ts"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "@payloadcms/db-mongodb": "^3.63.0",
     "@payloadcms/email-resend": "^3.63.0",
     "@payloadcms/next": "^3.63.0",
@@ -43,7 +44,8 @@
     "react-share": "^5.2.2",
     "sharp": "^0.34.5",
     "sonner": "^2.0.7",
-    "tailwind-merge": "^3.4.0"
+    "tailwind-merge": "^3.4.0",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.1",
@@ -68,7 +70,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@10.21.0",
+  "packageManager": "pnpm@10.23.0",
   "pnpm": {
     "overrides": {
       "@types/react": "19.1.12",
