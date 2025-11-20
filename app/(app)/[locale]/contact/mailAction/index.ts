@@ -8,6 +8,9 @@ import { getPayloadClient } from '@/utils/payloadClient';
 
 import verifyReCaptcha from './verifyReCaptcha';
 
+const escapeHtml = (str: string): string =>
+  str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
 interface MailActionProps {
   name: string;
   email: string;
@@ -53,11 +56,11 @@ export async function mailAction({ name, email, subject, message, token }: MailA
       text: `İsim: ${name}\nEmail: ${email}\nKonu: ${subject}\n\nMesaj:\n${message}`,
       html: `
         <div>
-          <p><strong>İsim:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Konu:</strong> ${subject}</p>
+          <p><strong>İsim:</strong> ${escapeHtml(name)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+          <p><strong>Konu:</strong> ${escapeHtml(subject)}</p>
           <p><strong>Mesaj:</strong></p>
-          <p>${message.replace(/\n/g, '<br>')}</p>
+          <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>
         </div>
       `,
     });
