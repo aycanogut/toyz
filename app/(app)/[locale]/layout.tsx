@@ -10,11 +10,11 @@ import type { Metadata } from 'next';
 import { routing } from '@/i18n/routing';
 import Layout from '@/layout';
 import { Media } from '@/payload-types';
+import getHome from '@/services/home';
 import { grotesque, nabla } from '@/theme/fonts';
 import '@/theme/globals.css';
 import toyzConfig from '@/toyzConfig';
 import cn from '@/utils/cn';
-import { getPayloadClient } from '@/utils/payloadClient';
 
 import GoogleAnalytics from './components/GoogleAnalytics';
 import ScrollUp from './components/ScrollUp';
@@ -26,17 +26,12 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const { locale } = await props.params;
 
-  const payload = await getPayloadClient();
-
-  const home = await payload.findGlobal({
-    slug: 'home',
-    locale: locale as Locale,
-    depth: 1,
-  });
+  const home = await getHome(locale);
 
   const images = home.openGraph?.images as Media;
 
   return {
+    metadataBase: new URL(toyzConfig.baseUrl),
     title: home.title,
     description: home.description,
     applicationName: toyzConfig.title,

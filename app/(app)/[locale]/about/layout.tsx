@@ -3,8 +3,8 @@ import { ReactNode } from 'react';
 import { Metadata } from 'next';
 
 import { Media } from '@/payload-types';
+import getAbout from '@/services/about';
 import toyzConfig from '@/toyzConfig';
-import { getPayloadClient } from '@/utils/payloadClient';
 
 export async function generateMetadata(props: {
   params: Promise<{
@@ -13,17 +13,12 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const { locale } = await props.params;
 
-  const payload = await getPayloadClient();
-
-  const about = await payload.findGlobal({
-    slug: 'about',
-    locale: locale as Locale,
-    depth: 1,
-  });
+  const about = await getAbout(locale);
 
   const images = about.openGraph?.images as Media;
 
   return {
+    metadataBase: new URL(toyzConfig.baseUrl),
     title: about.title,
     description: about.description,
     applicationName: toyzConfig.title,

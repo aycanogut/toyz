@@ -3,8 +3,8 @@ import { ReactNode } from 'react';
 import { Metadata } from 'next';
 
 import { Media } from '@/payload-types';
+import getArticle from '@/services/article';
 import toyzConfig from '@/toyzConfig';
-import { getPayloadClient } from '@/utils/payloadClient';
 
 export async function generateMetadata(props: {
   params: Promise<{
@@ -14,35 +14,30 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const { locale, slug } = await props.params;
 
-  const payload = await getPayloadClient();
+  const article = await getArticle(slug, locale);
 
-  const article = await payload.find({
-    collection: 'articles',
-    locale: locale as Locale,
-    where: { slug: { equals: slug } },
-  });
-
-  const media = article.docs[0].images[0] as Media;
+  const media = article.images[0] as Media;
 
   return {
-    title: article.docs[0].title,
-    description: article.docs[0].description,
+    metadataBase: new URL(toyzConfig.baseUrl),
+    title: article.title,
+    description: article.description,
     applicationName: toyzConfig.title,
-    keywords: article.docs[0].keywords?.join(', ') ?? '',
+    keywords: article.keywords?.join(', ') ?? '',
     openGraph: {
       siteName: toyzConfig.title,
-      title: article.docs[0].title,
-      description: article.docs[0].description,
+      title: article.title,
+      description: article.description,
       type: 'article',
       images: [media.url ?? ''],
       url: `${toyzConfig.baseUrl}/${locale}/content/${slug}`,
       locale,
-      modifiedTime: article.docs[0].updatedAt,
-      authors: [article.docs[0].details.author],
+      modifiedTime: article.updatedAt,
+      authors: [article.details.author],
     },
     authors: [
       {
-        name: article.docs[0].details.author,
+        name: article.details.author,
       },
     ],
     robots: 'index, follow',

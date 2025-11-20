@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import { Category, Media } from '@/payload-types';
-import { getPayloadClient } from '@/utils/payloadClient';
+import getArticle from '@/services/article';
 
 import ContentLabels from '../../components/ContentLabels';
 
@@ -17,15 +17,9 @@ interface ContentDetailsProps {
 async function ContentDetails({ params }: ContentDetailsProps) {
   const { locale, slug } = await params;
 
-  const payload = await getPayloadClient();
+  const article = await getArticle(slug, locale);
 
-  const article = await payload.find({
-    collection: 'articles',
-    locale: locale as Locale,
-    where: { slug: { equals: slug } },
-  });
-
-  const { title, images, details, content } = article.docs[0];
+  const { title, images, details, content } = article;
 
   const media = images[0] as Media;
   const category = details.category as Category;

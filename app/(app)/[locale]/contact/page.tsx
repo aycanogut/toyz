@@ -4,7 +4,7 @@ import Icon from '@/components/Icon';
 import PageHeader from '@/components/PageHeader';
 import { Link } from '@/i18n/routing';
 import { Media } from '@/payload-types';
-import { getPayloadClient } from '@/utils/payloadClient';
+import getContact from '@/services/contact';
 
 import ReCaptchaProvider from '../components/ReCaptchaProvider';
 
@@ -13,12 +13,7 @@ import ContactForm from './ContactForm';
 async function Contact() {
   const locale = await getLocale();
 
-  const payload = await getPayloadClient();
-
-  const contact = await payload.findGlobal({
-    slug: 'contact',
-    locale: locale as Locale,
-  });
+  const contact = await getContact(locale);
 
   const media = contact.image as Media;
 
