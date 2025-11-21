@@ -45,11 +45,6 @@ export async function generateMetadata(props: {
       url: `${toyzConfig.baseUrl}/${locale}`,
       locale,
     },
-    icons: {
-      icon: '/icon.png',
-      shortcut: '/favicon.ico',
-      apple: '/apple-icon.png',
-    },
     authors: [
       {
         name: 'Aycan Öğüt',

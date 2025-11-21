@@ -1,13 +1,44 @@
 import { getPayload } from 'payload';
 
-import payloadConfig from '@/payload.config';
+import type { Payload } from 'payload';
 
-let payloadClient: Awaited<ReturnType<typeof getPayload>> | null = null;
+import configPromise from '@/payload.config';
 
-export async function getPayloadClient() {
-  if (!payloadClient) {
-    payloadClient = await getPayload({ config: payloadConfig });
+interface GlobalPayload {
+  client: Payload | null;
+  promise: Promise<Payload> | null;
+}
+
+declare global {
+  var payload: GlobalPayload;
+}
+
+let cached = global.payload;
+
+if (!cached) {
+  cached = global.payload = {
+    client: null,
+    promise: null,
+  };
+}
+
+export const getPayloadClient = async (): Promise<Payload> => {
+  if (cached.client) {
+    return cached.client;
   }
 
-  return payloadClient;
-}
+  if (!cached.promise) {
+    cached.promise = getPayload({
+      config: configPromise,
+    });
+  }
+
+  try {
+    cached.client = await cached.promise;
+  } catch (error) {
+    cached.promise = null;
+    throw error;
+  }
+
+  return cached.client;
+};
