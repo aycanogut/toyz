@@ -35,9 +35,9 @@ export const getPayloadClient = async (): Promise<Payload> => {
 
   try {
     cached.client = await cached.promise;
-  } catch (e) {
+  } catch (error) {
     cached.promise = null;
-    throw e;
+    throw error;
   }
 
   return cached.client;
