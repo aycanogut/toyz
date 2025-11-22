@@ -28,6 +28,11 @@ export default buildConfig({
   secret: toyzConfig.payloadSecret || '',
   db: mongooseAdapter({
     url: toyzConfig.databaseUri || '',
+    connectOptions: {
+      serverSelectionTimeoutMS: 10000, // 10s
+      socketTimeoutMS: 45000, // 45s
+      maxPoolSize: 10,
+    },
   }),
   plugins: [
     searchPlugin({
