@@ -26,6 +26,7 @@
     "@payloadcms/richtext-lexical": "^3.63.0",
     "@payloadcms/storage-vercel-blob": "^3.63.0",
     "@radix-ui/react-popover": "^1.1.15",
+    "@sentry/nextjs": "^10.26.0",
     "@vercel/blob": "^1.1.1",
     "class-variance-authority": "^0.7.1",
     "embla-carousel": "^8.6.0",
