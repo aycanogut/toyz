@@ -37,6 +37,7 @@ export const getPayloadClient = async (): Promise<Payload> => {
     cached.client = await cached.promise;
   } catch (error) {
     cached.promise = null;
+    console.error('🔴 DB Bağlantı Hatası (Cold Start):', error);
     throw error;
   }
 

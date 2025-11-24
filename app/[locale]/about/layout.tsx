@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { Metadata } from 'next';
 
 import { Media } from '@/payload-types';
-import getSearch from '@/services/search';
+import getAbout from '@/services/about';
 import toyzConfig from '@/toyzConfig';
 
 export async function generateMetadata(props: {
@@ -13,30 +13,30 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const { locale } = await props.params;
 
-  const search = await getSearch(locale);
+  const about = await getAbout(locale);
 
-  const images = search.openGraph?.images as Media;
+  const images = about.openGraph?.images as Media;
 
   return {
-    title: search.title,
-    description: search.description,
+    title: `${about.title} - ${toyzConfig.title}`,
+    description: about.description,
     applicationName: toyzConfig.title,
-    keywords: search.keywords,
+    keywords: about.keywords,
     openGraph: {
       siteName: toyzConfig.title,
-      title: search.title,
-      description: search.description,
+      title: about.title,
+      description: about.description,
       type: 'website',
       images: images ? [images.url ?? ''] : undefined,
-      url: `${toyzConfig.baseUrl}/${locale}/search`,
+      url: `${toyzConfig.baseUrl}/${locale}/about`,
       locale,
     },
     alternates: {
-      canonical: `${toyzConfig.baseUrl}/${locale}/search`,
+      canonical: `${toyzConfig.baseUrl}/${locale}/about`,
     },
   };
 }
 
-export default function SearchLayout({ children }: { children: ReactNode }) {
+export default function AboutLayout({ children }: { children: ReactNode }) {
   return <section>{children}</section>;
 }

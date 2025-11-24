@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { Metadata } from 'next';
 
 import { Media } from '@/payload-types';
-import getAbout from '@/services/about';
+import getContact from '@/services/contact';
 import toyzConfig from '@/toyzConfig';
 
 export async function generateMetadata(props: {
@@ -13,30 +13,30 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const { locale } = await props.params;
 
-  const about = await getAbout(locale);
+  const contact = await getContact(locale);
 
-  const images = about.openGraph?.images as Media;
+  const images = contact.openGraph?.images as Media;
 
   return {
-    title: about.title,
-    description: about.description,
+    title: `${contact.title} - ${toyzConfig.title}`,
+    description: contact.description,
     applicationName: toyzConfig.title,
-    keywords: about.keywords,
+    keywords: contact.keywords,
     openGraph: {
       siteName: toyzConfig.title,
-      title: about.title,
-      description: about.description,
+      title: contact.title,
+      description: contact.description,
       type: 'website',
       images: images ? [images.url ?? ''] : undefined,
-      url: `${toyzConfig.baseUrl}/${locale}/about`,
+      url: `${toyzConfig.baseUrl}/${locale}/contact`,
       locale,
     },
     alternates: {
-      canonical: `${toyzConfig.baseUrl}/${locale}/about`,
+      canonical: `${toyzConfig.baseUrl}/${locale}/contact`,
     },
   };
 }
 
-export default function AboutLayout({ children }: { children: ReactNode }) {
+export default function ContactLayout({ children }: { children: ReactNode }) {
   return <section>{children}</section>;
 }
