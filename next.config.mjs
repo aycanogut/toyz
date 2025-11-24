@@ -79,8 +79,8 @@ export default withSentryConfig(
   },
   {
     tunnelRoute: '/monitoring',
-    disableLogger: true, // Konsolu temiz tutar
-    hideSourceMaps: true, // Kaynak kodları gizler
+    disableLogger: true,
+    hideSourceMaps: true,
     automaticVercelMonitors: true,
     transpileClientSDK: true,
   }
