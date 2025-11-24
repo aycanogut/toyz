@@ -32,7 +32,7 @@ export async function generateMetadata(props: {
 
   return {
     metadataBase: new URL(toyzConfig.baseUrl),
-    title: home.title,
+    title: `${toyzConfig.title} - ${home.title}`,
     description: home.description,
     applicationName: toyzConfig.title,
     keywords: home.keywords,

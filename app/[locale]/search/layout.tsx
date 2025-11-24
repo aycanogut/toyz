@@ -18,7 +18,7 @@ export async function generateMetadata(props: {
   const images = search.openGraph?.images as Media;
 
   return {
-    title: search.title,
+    title: `${toyzConfig.title} - ${search.title}`,
     description: search.description,
     applicationName: toyzConfig.title,
     keywords: search.keywords,
