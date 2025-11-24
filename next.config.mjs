@@ -69,9 +69,10 @@ const nextConfig = {
 export default withSentryConfig(withNextIntl(withPayload(nextConfig)), {
   org: 'aycanogut',
   project: 'toyz',
-  silent: !process.env.CI,
-  widenClientFileUpload: true,
+  silent: true,
   disableLogger: true,
+  hideSourceMaps: true,
+  widenClientFileUpload: true,
   automaticVercelMonitors: true,
   tunnelRoute: '/monitoring',
 });
