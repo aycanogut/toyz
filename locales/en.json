@@ -36,8 +36,6 @@
   },
   "Error": {
     "404": "Page not found",
-    "redirect": "Homepage",
-    "500": "Something went wrong!",
-    "try-again": "Try Again"
+    "redirect": "Homepage"
   }
 }

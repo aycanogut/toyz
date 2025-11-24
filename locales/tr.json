@@ -36,8 +36,6 @@
     },
     "Error": {
       "404": "Sayfa bulunamadı",
-      "redirect": "Anasayfa",
-      "500": "Bir şeyler ters gitti!",
-      "try-again": "Tekrar Dene"
+      "redirect": "Anasayfa"
     }
   }
