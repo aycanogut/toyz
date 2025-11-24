@@ -29,9 +29,10 @@ export default buildConfig({
   db: mongooseAdapter({
     url: toyzConfig.databaseUri || '',
     connectOptions: {
-      serverSelectionTimeoutMS: 10000, // 10s
-      socketTimeoutMS: 45000, // 45s
+      serverSelectionTimeoutMS: 10000,
+      socketTimeoutMS: 45000,
       maxPoolSize: 10,
+      family: 4,
     },
   }),
   plugins: [
