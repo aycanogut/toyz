@@ -1,4 +1,5 @@
 import { withPayload } from '@payloadcms/next/withPayload';
+import { withSentryConfig } from '@sentry/nextjs';
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin();
@@ -65,4 +66,11 @@ const nextConfig = {
   },
 };
 
-export default withNextIntl(withPayload(nextConfig));
+export default withSentryConfig(withNextIntl(withPayload(nextConfig)), {
+  org: 'javascript-react',
+  project: 'toyz',
+  silent: !process.env.CI,
+  widenClientFileUpload: true,
+  disableLogger: true,
+  automaticVercelMonitors: true,
+});
