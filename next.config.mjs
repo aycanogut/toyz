@@ -66,13 +66,22 @@ const nextConfig = {
   },
 };
 
-export default withSentryConfig(withNextIntl(withPayload(nextConfig)), {
-  org: 'aycanogut',
-  project: 'toyz',
-  silent: true,
-  disableLogger: true,
-  hideSourceMaps: true,
-  widenClientFileUpload: true,
-  automaticVercelMonitors: true,
-  tunnelRoute: '/monitoring',
-});
+const payloadConfig = withPayload(nextConfig);
+const intlConfig = withNextIntl(payloadConfig);
+
+export default withSentryConfig(
+  intlConfig,
+  {
+    org: 'aycanogut',
+    project: 'toyz',
+    silent: true,
+    widenClientFileUpload: true,
+  },
+  {
+    tunnelRoute: '/monitoring',
+    disableLogger: true, // Konsolu temiz tutar
+    hideSourceMaps: true, // Kaynak kodları gizler
+    automaticVercelMonitors: true,
+    transpileClientSDK: true,
+  }
+);
