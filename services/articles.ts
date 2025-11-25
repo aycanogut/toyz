@@ -11,8 +11,8 @@ const getArticles = unstable_cache(
       locale: locale as Locale,
     });
   },
-  ['articles']
-  // { revalidate: 3600 }
+  ['articles-2'],
+  { revalidate: 60 }
 );
 
 export default getArticles;

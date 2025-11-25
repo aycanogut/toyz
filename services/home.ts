@@ -12,8 +12,8 @@ const getHome = unstable_cache(
       depth: 1,
     });
   },
-  ['home']
-  // { revalidate: 3600 }
+  ['home'],
+  { revalidate: 3600 }
 );
 
 export default getHome;
