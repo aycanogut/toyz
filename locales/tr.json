@@ -1,43 +1,43 @@
-  {
-    "Global": {
-      "scroll-up": "Sayfanın başına dön"
-    },
-    "Navigation": {
-      "home": "anasayfa",
-      "about": "hakkımızda",
-      "contact": "iletişim",
-      "search": "ara"
-    },
-    "Search": {
-      "placeholder": "Bir içerik arayın",
-      "result": "Bir sonuç bulunamadı",
-      "category": "hepsi"
-    },
-    "Content": {
-      "show-more": "içeriğe git",
-      "share": "paylaş",
-      "back": "geri"
-    },
-    "Contact": {
-      "message": "bize ulaşın",
-      "name": "İsim",
-      "email": "e-posta",
-      "subject": "konu",
-      "message-label": "mesaj",
-      "send": "gönder",
-      "error": "Bir şeyler ters gitti!",
-      "success": "Mesaj başarıyla gönderildi!",
-      "contact-form": "İletişim Formu",
-      "invalid-data": "Geçersiz veri formatı.",
-      "validation-name-error": "İsim en az 2 karakter olmalıdır.",
-      "validation-email-error": "Geçersiz e-posta adresi.",
-      "validation-subject-error": "Konu en az 3 karakter olmalıdır.",
-      "validation-message-error": "Mesaj en az 10 karakter olmalıdır."
-    },
-    "Error": {
-      "404": "Sayfa bulunamadı",
-      "redirect": "Anasayfa",
-      "500": "Bir şeyler ters gitti!",
-      "try-again": "Tekrar Dene"
-    }
+{
+  "Global": {
+    "scroll-up": "Sayfanın başına dön"
+  },
+  "Navigation": {
+    "home": "anasayfa",
+    "about": "hakkımızda",
+    "contact": "iletişim",
+    "search": "ara"
+  },
+  "Search": {
+    "placeholder": "Bir içerik arayın",
+    "result": "Bir sonuç bulunamadı",
+    "category": "hepsi"
+  },
+  "Content": {
+    "show-more": "içeriğe git",
+    "share": "paylaş",
+    "back": "geri"
+  },
+  "Contact": {
+    "message": "bize ulaşın",
+    "name": "İsim",
+    "email": "e-posta",
+    "subject": "konu",
+    "message-label": "mesaj",
+    "send": "gönder",
+    "error": "Bir şeyler ters gitti!",
+    "success": "Mesaj başarıyla gönderildi!",
+    "contact-form": "İletişim Formu",
+    "invalid-data": "Geçersiz veri formatı.",
+    "validation-name-error": "İsim en az 2 karakter olmalıdır.",
+    "validation-email-error": "Geçersiz e-posta adresi.",
+    "validation-subject-error": "Konu en az 3 karakter olmalıdır.",
+    "validation-message-error": "Mesaj en az 10 karakter olmalıdır."
+  },
+  "Error": {
+    "404": "Sayfa bulunamadı",
+    "redirect": "Anasayfa",
+    "500": "Bir şeyler ters gitti!",
+    "try-again": "Tekrar Dene"
   }
+}
