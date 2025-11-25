@@ -141,7 +141,7 @@ export interface Article {
   id: string;
   title: string;
   description: string;
-  images: (string | Media)[];
+  images: string | Media;
   content: {
     root: {
       type: string;

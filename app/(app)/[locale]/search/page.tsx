@@ -40,7 +40,7 @@ async function Search({ searchParams }: SearchProps) {
 
       {articles.docs.length > 0 ? (
         articles.docs.map(item => {
-          const media = item.images[0] as Media;
+          const media = item.images as Media;
           const itemCategory = item.details.category as Category;
 
           return (

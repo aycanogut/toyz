@@ -20,7 +20,6 @@ export const Articles: CollectionConfig = {
       name: 'images',
       type: 'relationship',
       relationTo: 'media',
-      hasMany: true, // TODO: Change to false
       required: true,
     },
     {

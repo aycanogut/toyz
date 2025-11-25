@@ -12,8 +12,10 @@ function ContentView({ articles }: ContentViewProps) {
       <div className="container flex flex-col gap-14">
         {articles.length > 0 &&
           articles.map(item => {
-            const media = item.images[0] as Media;
+            const media = item.images as Media;
             const category = item.details.category as Category;
+
+            console.log(item);
 
             return (
               <ContentCard
