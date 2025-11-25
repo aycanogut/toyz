@@ -16,7 +16,7 @@ export async function generateMetadata(props: {
 
   const article = await getArticle(slug, locale);
 
-  const media = article.images[0] as Media;
+  const media = article.images as Media;
 
   return {
     title: article.title,
