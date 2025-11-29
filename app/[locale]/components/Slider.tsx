@@ -103,7 +103,7 @@ function Slider({ slider }: SliderProps) {
           alt=""
           width={200}
           height={200}
-          className="absolute inset-0 m-auto size-240 object-contain drop-shadow-lg"
+          className="pointer-events-none absolute inset-0 m-auto size-240 object-contain drop-shadow-lg"
           fetchPriority="high"
         />
       </div>

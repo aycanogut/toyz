@@ -15,8 +15,6 @@ function ContentView({ articles }: ContentViewProps) {
             const media = item.images as Media;
             const category = item.details.category as Category;
 
-            console.log(item);
-
             return (
               <ContentCard
                 key={item.id}
