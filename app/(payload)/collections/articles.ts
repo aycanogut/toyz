@@ -3,6 +3,13 @@ import slugField from '../fields/slug';
 
 export const Articles: CollectionConfig = {
   slug: 'articles',
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'createdAt', 'updatedAt'],
+  },
+  versions: {
+    drafts: true,
+  },
   fields: [
     {
       name: 'title',
