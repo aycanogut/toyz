@@ -1,6 +1,6 @@
 interface NavigationItemProps {
   id: number;
-  name: 'home' | 'about' | 'contact';
+  name: 'home' | 'about' | 'events' | 'contact';
   path: string;
 }
 
@@ -17,6 +17,11 @@ const navigationItems: NavigationItemProps[] = [
   },
   {
     id: 3,
+    name: 'events',
+    path: '/events',
+  },
+  {
+    id: 4,
     name: 'contact',
     path: '/contact',
   },
