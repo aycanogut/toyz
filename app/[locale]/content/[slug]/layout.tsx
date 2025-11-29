@@ -19,7 +19,7 @@ export async function generateMetadata(props: {
   const media = article.images as Media;
 
   return {
-    title: article.title,
+    title: `${article.title} - ${toyzConfig.title}`,
     description: article.description,
     applicationName: toyzConfig.title,
     keywords: article.keywords?.join(', ') ?? '',
