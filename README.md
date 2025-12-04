@@ -80,7 +80,7 @@ Admin panel: [http://localhost:3000/admin](http://localhost:3000/admin)
 
 ```
 app/
-├── (app)/[locale]/     # Localized app routes
+├── [locale]/     # Localized app routes
 └── (payload)/          # Payload CMS routes
 components/             # Shared UI components
 locales/                # Translation files
