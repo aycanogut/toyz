@@ -2,9 +2,9 @@ import { GlobalConfig } from 'payload';
 
 export const Slider: GlobalConfig = {
   slug: 'slider',
-  versions: {
-    drafts: true,
-  },
+  // versions: {
+  //   drafts: true,
+  // },
   fields: [
     {
       name: 'images',

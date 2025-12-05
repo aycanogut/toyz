@@ -7,9 +7,9 @@ export const Articles: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'createdAt', 'updatedAt'],
   },
-  versions: {
-    drafts: true,
-  },
+  // versions: {
+  //   drafts: true,
+  // },
   fields: [
     {
       name: 'title',

@@ -2,9 +2,9 @@ import type { CollectionConfig } from 'payload';
 
 export const Categories: CollectionConfig = {
   slug: 'categories',
-  versions: {
-    drafts: true,
-  },
+  // versions: {
+  //   drafts: true,
+  // },
   fields: [
     {
       name: 'name',
