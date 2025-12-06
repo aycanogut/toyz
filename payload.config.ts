@@ -5,7 +5,7 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { resendAdapter } from '@payloadcms/email-resend';
 import { searchPlugin } from '@payloadcms/plugin-search';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
+import { s3Storage } from '@payloadcms/storage-s3';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
@@ -29,8 +29,8 @@ export default buildConfig({
   db: mongooseAdapter({
     url: toyzConfig.databaseUri || '',
     connectOptions: {
-      serverSelectionTimeoutMS: 10000, // 10s
-      socketTimeoutMS: 45000, // 45s
+      serverSelectionTimeoutMS: 10000,
+      socketTimeoutMS: 45000,
       maxPoolSize: 10,
     },
   }),
@@ -38,12 +38,25 @@ export default buildConfig({
     searchPlugin({
       collections: ['articles'],
     }),
-    vercelBlobStorage({
+    s3Storage({
       collections: {
-        media: true,
-      },
+        media: {
+          generateFileURL: ({ filename }) => {
+            return `https://pub-cd16781be9924a9487a27c25c2aca029.r2.dev/${filename}`;
+          },
 
-      token: toyzConfig.vercelBlobReadWriteToken,
+          disableLocalStorage: true,
+        },
+      },
+      bucket: toyzConfig.r2BucketName,
+      config: {
+        credentials: {
+          accessKeyId: toyzConfig.r2AccessKeyId,
+          secretAccessKey: toyzConfig.r2SecretAccessKey,
+        },
+        region: 'auto',
+        endpoint: toyzConfig.r2Endpoint,
+      },
     }),
   ],
   sharp,

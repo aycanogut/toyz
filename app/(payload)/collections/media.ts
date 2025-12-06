@@ -8,6 +8,7 @@ export const Media: CollectionConfig = {
   upload: {
     adminThumbnail: 'thumbnail',
     mimeTypes: ['image/*'],
+    disableLocalStorage: true,
   },
   access: {
     read: () => true,
