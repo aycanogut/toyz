@@ -44,7 +44,6 @@ export default buildConfig({
           generateFileURL: ({ filename }) => {
             return `https://pub-cd16781be9924a9487a27c25c2aca029.r2.dev/${filename}`;
           },
-
           disableLocalStorage: true,
         },
       },
