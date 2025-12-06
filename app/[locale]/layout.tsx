@@ -76,6 +76,10 @@ export async function generateMetadata(props: {
   };
 }
 
+export function generateStaticParams() {
+  return routing.locales.map(locale => ({ locale }));
+}
+
 async function RootLayout(props: { children: ReactNode; params: Promise<{ locale: Locale }> }) {
   const params = await props.params;
 

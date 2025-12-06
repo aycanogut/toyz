@@ -1,7 +1,9 @@
 import Image from 'next/image';
 
+import { routing } from '@/i18n/routing';
 import { Category, Media } from '@/payload-types';
 import getArticle from '@/services/article';
+import getAllArticleSlugs from '@/services/slugs';
 
 import ContentLabels from '../../components/ContentLabels';
 
@@ -13,6 +15,25 @@ import SocialMediaShare from './SocialMediaShare';
 interface ContentDetailsProps {
   params: Promise<{ slug: string; locale: Locale }>;
 }
+
+export async function generateStaticParams() {
+  const allArticlesPromises = routing.locales.map(async locale => {
+    const articles = await getAllArticleSlugs(locale);
+
+    return articles
+      .filter(article => article.slug)
+      .map(article => ({
+        locale,
+        slug: article.slug!,
+      }));
+  });
+
+  const results = await Promise.all(allArticlesPromises);
+
+  return results.flat();
+}
+
+export const dynamicParams = true;
 
 async function ContentDetails({ params }: ContentDetailsProps) {
   const { locale, slug } = await params;
