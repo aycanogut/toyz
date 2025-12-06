@@ -10,7 +10,8 @@ A collective and webzine platform about graffiti, street art, underground music,
 - **TypeScript** - Type safety
 - **Tailwind CSS** - Styling
 - **next-intl** - Internationalization (en, tr)
-- **Vercel Blob Storage** - Media storage
+- **Cloudflare R2 Blob Storage** - Media storage
+- **Resend** - Email service
 
 ## Getting Started
 
@@ -19,7 +20,7 @@ A collective and webzine platform about graffiti, street art, underground music,
 - Node.js 18.x or higher
 - pnpm 10.21.0 or higher
 - MongoDB database
-- Vercel Blob Storage account
+- Cloudflare R2 Bucket account
 - Resend API key
 - Google reCAPTCHA keys
 
@@ -41,16 +42,19 @@ pnpm install
 3. Create `.env.local` file with the following variables:
 
 ```env
-NEXT_PUBLIC_TITLE=Toyz
+NEXT_PUBLIC_TITLE=TOYZ
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
 NEXT_PUBLIC_CONTACT_EMAIL=contact@example.com
 DATABASE_URI=mongodb://localhost:27017/toyz
 PAYLOAD_SECRET=your-secret-key
-BLOB_READ_WRITE_TOKEN=your-vercel-blob-token
 RESEND_API_KEY=your-resend-key
 NEXT_PUBLIC_RECAPTCHA_SITE_KEY=your-site-key
 RECAPTCHA_SECRET_KEY=your-secret-key
 NEXT_PUBLIC_GA_MEASUREMENT_ID=your-ga-id
+R2_BUCKET_NAME=your-r2-bucket-name
+R2_ACCESS_KEY_ID=your-acces-key-id
+R2_SECRET_ACCESS_KEY=your-secret-access-okey
+R2_ENDPOINT=your-endpoint
 ```
 
 4. Generate environment variable types:

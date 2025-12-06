@@ -5,10 +5,13 @@ interface ToyzConfigProps {
   contactEmail: string;
   databaseUri: string;
   payloadSecret: string;
-  vercelBlobReadWriteToken: string;
   reCaptchaSiteKey: string;
   reCaptchaSecretKey: string;
   gaId: string;
+  r2BucketName: string;
+  r2AccessKeyId: string;
+  r2SecretAccessKey: string;
+  r2Endpoint: string;
 }
 
 const toyzConfig: ToyzConfigProps = {
@@ -18,10 +21,13 @@ const toyzConfig: ToyzConfigProps = {
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL,
   databaseUri: process.env.DATABASE_URI,
   payloadSecret: process.env.PAYLOAD_SECRET,
-  vercelBlobReadWriteToken: process.env.BLOB_READ_WRITE_TOKEN,
   reCaptchaSiteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
   reCaptchaSecretKey: process.env.RECAPTCHA_SECRET_KEY,
   gaId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
+  r2BucketName: process.env.R2_BUCKET_NAME,
+  r2AccessKeyId: process.env.R2_ACCESS_KEY_ID,
+  r2SecretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
+  r2Endpoint: process.env.R2_ENDPOINT,
 };
 
 export default toyzConfig;
