@@ -16,11 +16,11 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
         <text
           x="50%"
           y="50%"
-          dominant-baseline="middle"
-          text-anchor="middle"
-          font-family="Arial, sans-serif"
-          font-weight="bold"
-          font-size="150"
+          dominantBaseline="middle"
+          textAnchor="middle"
+          fontFamily="Arial, sans-serif"
+          fontWeight="bold"
+          fontSize="150"
           fill="#373737"
         >
           500
