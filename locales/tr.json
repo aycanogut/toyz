@@ -9,6 +9,7 @@
     "search": "ara"
   },
   "Search": {
+    "title": "Arama Sonuçları",
     "placeholder": "Bir içerik arayın",
     "result": "Bir sonuç bulunamadı",
     "category": "hepsi"

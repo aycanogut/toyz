@@ -1,6 +1,7 @@
+import Image from 'next/image';
+
 import { getLocale } from 'next-intl/server';
 
-import PageHeader from '@/components/PageHeader';
 import { Media } from '@/payload-types';
 import getAbout from '@/services/about';
 
@@ -15,17 +16,20 @@ async function About() {
 
   return (
     <section>
-      <PageHeader
-        image={{
-          src: media.url ?? '',
-          alt: media.alt ?? '',
-        }}
-        title={about.title}
-      />
+      <span className="bg-background block h-20 md:h-24 lg:hidden" />
 
-      <div className="container flex flex-col gap-6 p-4 pb-14 lg:gap-0 lg:pt-8 lg:pb-28">
+      <div className="relative h-30 lg:h-45.5">
+        <Image
+          src={media.url ?? ''}
+          alt={media.alt ?? ''}
+          fill
+          className="object-cover"
+        />
+      </div>
+
+      <div className="container flex flex-col gap-2 p-4 pt-4 pb-14 lg:gap-8 lg:pt-10 lg:pb-28">
         <header>
-          <h1 className="font-grotesque text-title-light text-2xl font-medium uppercase lg:hidden">{about.title}</h1>
+          <h1 className="font-grotesque text-title-light text-2xl leading-10 font-medium uppercase lg:text-6xl">{about.title}</h1>
         </header>
 
         <div className="font-grotesque text-title-light space-y-4 text-xl lg:space-y-6 lg:text-3xl lg:leading-10">{about.description}</div>

@@ -9,6 +9,7 @@
     "search": "search"
   },
   "Search": {
+    "title": "Search Results",
     "placeholder": "Search for a content",
     "result": "No results found",
     "category": "all"
