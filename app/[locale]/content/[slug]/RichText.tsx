@@ -10,6 +10,37 @@ import { Media } from '@/payload-types';
 const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
   ...defaultConverters,
 
+  blocks: {
+    youtube: ({ node }: { node: { fields: { videoId: string; title: string } } }) => {
+      const { videoId, title } = node.fields;
+
+      if (title) {
+        return (
+          <figure className="mx-auto aspect-video max-w-200">
+            <iframe
+              key={videoId}
+              src={`https://www.youtube.com/embed/${videoId}`}
+              title={title ?? 'YouTube Video'}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="size-full"
+            />
+            <figcaption className="font-grotesque text-title-light mt-20 max-w-3xl text-center text-base leading-5 lg:text-lg">{title}</figcaption>
+          </figure>
+        );
+      }
+
+      <iframe
+        key={videoId}
+        src={`https://www.youtube.com/embed/${videoId}`}
+        title={title ?? 'YouTube Video'}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        className="size-full"
+      />;
+    },
+  },
+
   upload: ({ node }) => {
     const media = node.value as Media;
 
