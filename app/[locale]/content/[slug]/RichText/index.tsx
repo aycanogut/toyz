@@ -23,7 +23,7 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
               videoId={videoId}
               title={title}
             />
-            <figcaption className="font-grotesque text-title-light mt-20 max-w-3xl text-center text-base leading-5 lg:text-lg">{title}</figcaption>
+            <figcaption className="font-grotesque text-title-light mt-2 max-w-3xl text-center text-base leading-5 lg:text-lg">{title}</figcaption>
           </figure>
         );
       }
