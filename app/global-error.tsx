@@ -23,7 +23,7 @@ function GlobalError({ error, reset }: GlobalErrorProps) {
               y="50%"
               dominantBaseline="middle"
               textAnchor="middle"
-              font-family="Arial, sans-serif"
+              fontFamily="Arial, sans-serif"
               fontWeight="bold"
               fontSize="150"
               fill="#373737"
