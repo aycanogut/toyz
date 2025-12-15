@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/private/',
     },
-    sitemap: `${toyzConfig.baseUrl}/en/sitemap.xml`,
+    sitemap: `${toyzConfig.baseUrl}/sitemap.xml`,
   };
 }
