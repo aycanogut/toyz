@@ -67,7 +67,7 @@ function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex max-w-160 flex-col gap-6 lg:mt-6 lg:gap-7"
+      className="flex max-w-160 flex-col gap-6"
     >
       <h2 className="font-grotesque text-title-light text-2xl font-medium first-letter:capitalize lg:text-6xl">{t('message')}</h2>
 
