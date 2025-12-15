@@ -1,7 +1,16 @@
+import { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 
 import Button from '@/components/Button';
 import { Link } from '@/i18n/routing';
+
+export const metadata: Metadata = {
+  title: '404 - Page Not Found',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 function NotFoundPage() {
   const t = useTranslations('Error');

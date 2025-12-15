@@ -14,6 +14,7 @@ const staticRoutes: MetadataRoute.Sitemap = [
       languages: {
         en: `${toyzConfig.baseUrl}/en`,
         tr: `${toyzConfig.baseUrl}/tr`,
+        'x-default': `${toyzConfig.baseUrl}/en`,
       },
     },
   },
@@ -24,6 +25,7 @@ const staticRoutes: MetadataRoute.Sitemap = [
       languages: {
         en: `${toyzConfig.baseUrl}/en/about`,
         tr: `${toyzConfig.baseUrl}/tr/about`,
+        'x-default': `${toyzConfig.baseUrl}/en/about`,
       },
     },
   },
@@ -34,6 +36,7 @@ const staticRoutes: MetadataRoute.Sitemap = [
       languages: {
         en: `${toyzConfig.baseUrl}/en/contact`,
         tr: `${toyzConfig.baseUrl}/tr/contact`,
+        'x-default': `${toyzConfig.baseUrl}/en/contact`,
       },
     },
   },
@@ -44,6 +47,7 @@ const staticRoutes: MetadataRoute.Sitemap = [
       languages: {
         en: `${toyzConfig.baseUrl}/en/search`,
         tr: `${toyzConfig.baseUrl}/tr/search`,
+        'x-default': `${toyzConfig.baseUrl}/en/search`,
       },
     },
   },
@@ -57,13 +61,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .filter(doc => Boolean(doc.slug))
     .flatMap(doc => {
       const slug = doc.slug as string;
-      const languages = locales.reduce<Record<string, string>>((acc, locale) => {
-        acc[locale] = `${baseUrl}/${locale}/content/${slug}`;
-        return acc;
-      }, {});
+      const languages: Record<string, string> = {
+        ...locales.reduce<Record<string, string>>((acc, locale) => {
+          acc[locale] = `${baseUrl}/${locale}/content/${slug}`;
+          return acc;
+        }, {}),
+        'x-default': `${baseUrl}/en/content/${slug}`,
+      };
 
       return locales.map(locale => ({
-        url: languages[locale],
+        url: `${baseUrl}/${locale}/content/${slug}`,
         lastModified: doc.updatedAt ? new Date(doc.updatedAt) : new Date(),
         alternates: {
           languages,

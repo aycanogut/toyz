@@ -1,7 +1,5 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-
 import Button from '@/components/Button';
 
 interface GlobalErrorProps {
@@ -12,8 +10,6 @@ interface GlobalErrorProps {
 }
 
 function GlobalError({ error, reset }: GlobalErrorProps) {
-  const t = useTranslations('GlobalError');
-
   return (
     <html>
       <body>
@@ -25,18 +21,18 @@ function GlobalError({ error, reset }: GlobalErrorProps) {
             <text
               x="50%"
               y="50%"
-              dominant-baseline="middle"
-              text-anchor="middle"
+              dominantBaseline="middle"
+              textAnchor="middle"
               font-family="Arial, sans-serif"
-              font-weight="bold"
-              font-size="150"
+              fontWeight="bold"
+              fontSize="150"
               fill="#373737"
             >
               500
             </text>
           </svg>
-          <h1 className="font-grotesque text-title-light text-4xl md:text-6xl lg:text-7xl">{error?.message ?? t('500')}</h1>
-          <Button onClick={reset}>{t('try-again')}</Button>
+          <h1 className="font-grotesque text-title-light text-4xl md:text-6xl lg:text-7xl">{error?.message ?? '500'}</h1>
+          <Button onClick={reset}>Reset</Button>
         </div>
       </body>
     </html>

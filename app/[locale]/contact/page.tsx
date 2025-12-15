@@ -1,7 +1,8 @@
+import Image from 'next/image';
+
 import { getLocale } from 'next-intl/server';
 
 import Icon from '@/components/Icon';
-import PageHeader from '@/components/PageHeader';
 import { Link } from '@/i18n/routing';
 import { Media } from '@/payload-types';
 import getContact from '@/services/contact';
@@ -21,17 +22,20 @@ async function Contact() {
 
   return (
     <section>
-      <PageHeader
-        image={{
-          src: media.url ?? '',
-          alt: media.alt ?? '',
-        }}
-        title={contact.title}
-      />
+      <span className="bg-background block h-20 md:h-24 lg:hidden" />
 
-      <div className="container flex flex-col gap-6 p-4 pb-14 lg:gap-0 lg:pt-12 lg:pb-40">
+      <div className="relative h-30 lg:h-45.5">
+        <Image
+          src={media.url ?? ''}
+          alt={media.alt ?? ''}
+          fill
+          className="object-cover"
+        />
+      </div>
+
+      <div className="container flex flex-col gap-3 p-4 pt-4 pb-14 lg:gap-11 lg:pt-10 lg:pb-28">
         <header>
-          <h1 className="font-grotesque text-title-light text-2xl font-medium uppercase lg:hidden">{contact.title}</h1>
+          <h1 className="font-grotesque text-title-light text-2xl leading-10 font-medium uppercase lg:text-6xl">{contact.title}</h1>
         </header>
 
         <div className="flex flex-col gap-4 sm:flex-row">

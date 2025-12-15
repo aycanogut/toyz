@@ -36,6 +36,8 @@ async function Search({ searchParams }: SearchProps) {
 
   return (
     <section className="container flex flex-col gap-12 px-4 py-12">
+      <h1 className="sr-only">{t('title')}</h1>
+
       <SearchComponent categories={categories} />
 
       {articles.docs.length > 0 ? (

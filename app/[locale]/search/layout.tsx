@@ -33,6 +33,11 @@ export async function generateMetadata(props: {
     },
     alternates: {
       canonical: `${toyzConfig.baseUrl}/${locale}/search`,
+      languages: {
+        en: `${toyzConfig.baseUrl}/en/search`,
+        tr: `${toyzConfig.baseUrl}/tr/search`,
+        'x-default': `${toyzConfig.baseUrl}/en/search`,
+      },
     },
   };
 }
