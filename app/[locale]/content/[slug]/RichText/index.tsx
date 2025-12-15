@@ -7,6 +7,8 @@ import { JSXConvertersFunction, RichText as RichTextWithoutBlocks } from '@paylo
 
 import { Media } from '@/payload-types';
 
+import Video from './Video';
+
 const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
   ...defaultConverters,
 
@@ -17,26 +19,18 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
       if (title) {
         return (
           <figure className="mx-auto aspect-video max-w-200">
-            <iframe
-              key={videoId}
-              src={`https://www.youtube.com/embed/${videoId}`}
-              title={title ?? 'YouTube Video'}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="size-full"
+            <Video
+              videoId={videoId}
+              title={title}
             />
             <figcaption className="font-grotesque text-title-light mt-20 max-w-3xl text-center text-base leading-5 lg:text-lg">{title}</figcaption>
           </figure>
         );
       }
 
-      <iframe
-        key={videoId}
-        src={`https://www.youtube.com/embed/${videoId}`}
-        title={title ?? 'YouTube Video'}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        className="size-full"
+      <Video
+        videoId={videoId}
+        title={title}
       />;
     },
   },
@@ -54,9 +48,6 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
           <Image
             src={url}
             alt={alt ?? ''}
-            width={800}
-            height={600}
-            className="mx-auto"
           />
           <figcaption className="font-grotesque text-title-light mt-2 max-w-3xl text-center text-base leading-5 lg:text-lg">{credits}</figcaption>
         </figure>
@@ -67,9 +58,6 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
       <Image
         src={url}
         alt={alt ?? ''}
-        width={800}
-        height={600}
-        className="mx-auto"
       />
     );
   },
