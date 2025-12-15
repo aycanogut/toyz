@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 
 import Button from '@/components/Button';
-import { Link, useRouter } from '@/i18n/routing';
+import Icon from '@/components/Icon';
+import { Link } from '@/i18n/routing';
 import cn from '@/utils/cn';
 
 import LanguageSwitcher from './LanguageSwitcher';
@@ -13,8 +14,6 @@ import navigationItems from './navigationItems';
 
 function HeaderMobile() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-
-  const { push } = useRouter();
 
   const t = useTranslations('Navigation');
   const locale = useLocale();
@@ -31,11 +30,6 @@ function HeaderMobile() {
     setIsMenuOpen(prevState => !prevState);
   };
 
-  const handleSearchNavigation = () => {
-    setIsMenuOpen(false);
-    push('/search');
-  };
-
   return (
     <header className={cn('absolute w-full overflow-hidden lg:hidden', isMenuOpen ? 'z-50 h-screen' : 'h-20')}>
       <div className="absolute top-4 right-4 left-0 z-50 flex w-full items-center gap-1 px-4 md:top-6">
@@ -49,15 +43,16 @@ function HeaderMobile() {
           aria-label="Menu"
         />
 
-        <Button
-          className="text-button-background mr-2 ml-auto bg-transparent p-0 lg:hidden"
-          appendIconProps={{
-            name: 'search',
-            className: 'size-8',
-          }}
-          onClick={handleSearchNavigation}
+        <Link
+          href="/search"
+          className="text-button-background mr-2 ml-auto lg:hidden"
           aria-label={t('search')}
-        />
+        >
+          <Icon
+            name="search"
+            className="size-8"
+          />
+        </Link>
 
         <LanguageSwitcher locale={locale as Locale} />
       </div>

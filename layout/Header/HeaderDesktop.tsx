@@ -7,8 +7,8 @@ import Image from 'next/image';
 import { AnimatePresence, motion } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
 
-import Button from '@/components/Button';
-import { Link, useRouter, usePathname } from '@/i18n/routing';
+import Icon from '@/components/Icon';
+import { Link, usePathname } from '@/i18n/routing';
 import cn from '@/utils/cn';
 
 import LanguageSwitcher from './LanguageSwitcher';
@@ -18,7 +18,6 @@ import variants from './variants';
 function HeaderDesktop() {
   const [isScrolling, setIsScrolling] = useState(false);
 
-  const { push } = useRouter();
   const pathname = usePathname();
 
   const locale = useLocale();
@@ -89,15 +88,16 @@ function HeaderDesktop() {
             </ul>
           </nav>
 
-          <Button
-            className={cn('"mx-4 text-title-dark hover:text-title-light mt-1 cursor-pointer bg-transparent', pathname === '/search' && 'text-title-light')}
-            appendIconProps={{
-              name: 'search',
-              className: 'size-7',
-            }}
-            onClick={() => push('/search')}
+          <Link
+            href="/search"
+            className={cn('text-title-dark hover:text-title-light mx-4 mt-1 flex items-center transition', pathname === '/search' && 'text-title-light')}
             aria-label={t('search')}
-          />
+          >
+            <Icon
+              name="search"
+              className="size-7"
+            />
+          </Link>
 
           <LanguageSwitcher locale={locale as Locale} />
         </motion.header>
