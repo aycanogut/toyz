@@ -4,11 +4,12 @@ import { fileURLToPath } from 'url';
 import { mongooseAdapter } from '@payloadcms/db-mongodb';
 import { resendAdapter } from '@payloadcms/email-resend';
 import { searchPlugin } from '@payloadcms/plugin-search';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import { s3Storage } from '@payloadcms/storage-s3';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
+import { YouTubeBlock } from './app/(payload)/blocks/youtube';
 import { Articles } from './app/(payload)/collections/articles';
 import { Categories } from './app/(payload)/collections/categories';
 import { Media } from './app/(payload)/collections/media';
@@ -62,7 +63,9 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  editor: lexicalEditor(),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [...defaultFeatures, BlocksFeature({ blocks: [YouTubeBlock] })],
+  }),
   localization: {
     locales: ['en', 'tr'],
     defaultLocale: 'en',
