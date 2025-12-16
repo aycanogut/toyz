@@ -6,52 +6,23 @@ import toyzConfig from '@/toyzConfig';
 
 const locales = routing.locales as ReadonlyArray<Locale>;
 
-const staticRoutes: MetadataRoute.Sitemap = [
-  {
-    url: `${toyzConfig.baseUrl}/en`,
+const staticPaths = ['', '/about', '/contact', '/search'];
+
+const staticRoutes: MetadataRoute.Sitemap = staticPaths.flatMap(path => {
+  const languages: Record<string, string> = {
+    en: `${toyzConfig.baseUrl}/en${path}`,
+    tr: `${toyzConfig.baseUrl}/tr${path}`,
+    'x-default': `${toyzConfig.baseUrl}/en${path}`,
+  };
+
+  return locales.map(locale => ({
+    url: `${toyzConfig.baseUrl}/${locale}${path}`,
     lastModified: new Date(),
     alternates: {
-      languages: {
-        en: `${toyzConfig.baseUrl}/en`,
-        tr: `${toyzConfig.baseUrl}/tr`,
-        'x-default': `${toyzConfig.baseUrl}/en`,
-      },
+      languages,
     },
-  },
-  {
-    url: `${toyzConfig.baseUrl}/en/about`,
-    lastModified: new Date(),
-    alternates: {
-      languages: {
-        en: `${toyzConfig.baseUrl}/en/about`,
-        tr: `${toyzConfig.baseUrl}/tr/about`,
-        'x-default': `${toyzConfig.baseUrl}/en/about`,
-      },
-    },
-  },
-  {
-    url: `${toyzConfig.baseUrl}/en/contact`,
-    lastModified: new Date(),
-    alternates: {
-      languages: {
-        en: `${toyzConfig.baseUrl}/en/contact`,
-        tr: `${toyzConfig.baseUrl}/tr/contact`,
-        'x-default': `${toyzConfig.baseUrl}/en/contact`,
-      },
-    },
-  },
-  {
-    url: `${toyzConfig.baseUrl}/en/search`,
-    lastModified: new Date(),
-    alternates: {
-      languages: {
-        en: `${toyzConfig.baseUrl}/en/search`,
-        tr: `${toyzConfig.baseUrl}/tr/search`,
-        'x-default': `${toyzConfig.baseUrl}/en/search`,
-      },
-    },
-  },
-];
+  }));
+});
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articles = await getSitemap();
