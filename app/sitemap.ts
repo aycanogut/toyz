@@ -6,7 +6,6 @@ import toyzConfig from '@/toyzConfig';
 
 const locales = routing.locales as ReadonlyArray<Locale>;
 
-
 const staticPaths = ['', '/about', '/contact', '/search'];
 
 const staticRoutes: MetadataRoute.Sitemap = staticPaths.flatMap(path => {
