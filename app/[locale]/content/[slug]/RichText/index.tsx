@@ -1,12 +1,11 @@
 import React, { HTMLAttributes } from 'react';
 
-import Image from 'next/image';
-
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical';
 import { JSXConvertersFunction, RichText as RichTextWithoutBlocks } from '@payloadcms/richtext-lexical/react';
 
 import { Media } from '@/payload-types';
 
+import Image from './Image';
 import Video from './Video';
 
 const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
