@@ -43,7 +43,7 @@ export default buildConfig({
       collections: {
         media: {
           generateFileURL: ({ filename }) => {
-            return `https://pub-cd16781be9924a9487a27c25c2aca029.r2.dev/${filename}`;
+            return `https://cdn.toyzwebzine.com/${filename}`;
           },
           disableLocalStorage: true,
         },
