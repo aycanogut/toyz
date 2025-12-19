@@ -66,6 +66,11 @@ body::-webkit-scrollbar-thumb {
   border-radius: 2px;
 }
 
+::selection {
+  background: var(--color-title-light);
+  color: var(--color-title-darker);
+}
+
 @supports not selector(::-webkit-scrollbar) {
   body {
     scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
