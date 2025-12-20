@@ -66,10 +66,6 @@ body::-webkit-scrollbar-thumb {
   border-radius: 2px;
 }
 
-strong {
-  @apply font-extrabold;
-}
-
 ::selection {
   background: var(--color-title-light);
   color: var(--color-title-darker);
