@@ -31,7 +31,18 @@ function ContentCard({ title, image, details, slug }: ContentCardProps) {
         <header className="w-full">
           <h2 className="font-grotesque text-title-light text-start text-2xl font-medium md:text-3xl lg:text-4xl">{title}</h2>
         </header>
-        <ContentLabels items={details} />
+        <ContentLabels
+          rootProps={{
+            className: 'border-border-light flex w-full max-w-114.5 flex-wrap gap-x-7 gap-y-2 border px-6 py-2 md:w-fit md:max-w-fit lg:py-6',
+          }}
+          iconProps={{
+            className: 'mt-1 size-5',
+          }}
+          labelProps={{
+            className: 'text-lg md:text-xl',
+          }}
+          items={details}
+        />
 
         <Link
           href={`/content/${slug}`}
