@@ -1,7 +1,10 @@
+import { HTMLAttributes } from 'react';
+
 import { getLocale } from 'next-intl/server';
 
 import Icon from '@/components/Icon';
 import { Link } from '@/i18n/routing';
+import cn from '@/utils/cn';
 import formatDate from '@/utils/formatDate';
 
 export interface ContentLabelItem {
@@ -11,11 +14,14 @@ export interface ContentLabelItem {
   author: string;
 }
 
-interface ContentLabelProps {
+interface ContentLabelsProps {
+  rootProps?: HTMLAttributes<HTMLDivElement>;
+  iconProps?: HTMLAttributes<SVGElement>;
+  labelProps?: HTMLAttributes<HTMLSpanElement>;
   items: ContentLabelItem;
 }
 
-async function ContentLabels({ items }: ContentLabelProps) {
+async function ContentLabels({ rootProps, iconProps, labelProps, items }: ContentLabelsProps) {
   const locale = await getLocale();
 
   const computedItems = {
@@ -26,30 +32,30 @@ async function ContentLabels({ items }: ContentLabelProps) {
   const { categorySlug, ...displayItems } = computedItems;
 
   return (
-    <div className="border-border-light flex w-full max-w-114.5 flex-wrap gap-x-7 gap-y-2 border px-6 py-2 md:w-fit md:max-w-fit lg:py-6">
+    <div className={rootProps?.className}>
       {Object.entries(displayItems).map(([item, value]) => {
         return item === 'category' ? (
           <Link
             key={item}
             href={`/search?category=${categorySlug}`}
-            className="flex items-center gap-2"
+            className="flex h-full items-center gap-2"
           >
             <Icon
               name={item as IconLabelProps}
-              className="text-title-light mt-1 size-5"
+              className={cn(`text-title-light`, iconProps?.className)}
             />
-            <span className="font-grotesque text-title-light text-lg font-medium md:text-xl">{value}</span>
+            <span className={cn('font-grotesque text-title-light font-medium whitespace-nowrap', labelProps?.className)}>{value}</span>
           </Link>
         ) : (
           <div
-            className="flex items-center gap-2"
+            className="flex h-full items-center gap-2"
             key={item}
           >
             <Icon
               name={item as IconLabelProps}
-              className="text-title-light mt-1 size-5"
+              className={cn(`text-title-light`, iconProps?.className)}
             />
-            <span className="font-grotesque text-title-light text-lg font-medium md:text-xl">{value}</span>
+            <span className={cn('font-grotesque text-title-light font-medium whitespace-nowrap', labelProps?.className)}>{value}</span>
           </div>
         );
       })}
