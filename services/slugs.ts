@@ -6,6 +6,11 @@ const getAllArticleSlugs = async (locale: string) => {
   const result = await payload.find({
     collection: 'articles',
     locale: locale as Locale,
+    where: {
+      _status: {
+        equals: 'published',
+      },
+    },
     limit: 0,
     pagination: false,
     select: {

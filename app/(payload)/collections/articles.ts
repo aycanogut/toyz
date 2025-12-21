@@ -7,9 +7,25 @@ export const Articles: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'createdAt', 'updatedAt'],
   },
-  // versions: {
-  //   drafts: true,
-  // },
+  access: {
+    read: ({ req }) => {
+      if (req.user) return true;
+
+      return {
+        _status: {
+          equals: 'published',
+        },
+      };
+    },
+  },
+  versions: {
+    drafts: {
+      autosave: true,
+      schedulePublish: true,
+      validate: false,
+    },
+    maxPerDoc: 10,
+  },
   fields: [
     {
       name: 'title',
