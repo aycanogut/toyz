@@ -46,65 +46,74 @@ async function ContentDetails({ params }: ContentDetailsProps) {
   const category = details.category as Category;
 
   return (
-    <section className="lg:pt-2 lg:pb-24">
+    <section className="pb-24 md:pb-28 lg:pb-32">
       <ScrollProgressAnimation />
 
       <span className="bg-background block h-20 lg:hidden" />
-      <article>
-        <div className="relative container h-56 w-full md:hidden">
-          <Image
-            src={media.url ?? ''}
-            alt={title}
-            fill
-            className="object-cover"
-          />
-        </div>
 
-        <header className="container space-y-6 px-4 pt-8 md:pb-8 lg:space-y-10 xl:px-0">
-          <BackButton />
-
-          <h1 className="font-grotesque text-title-light text-start text-2xl font-medium md:text-3xl lg:text-5xl lg:font-semibold">{title}</h1>
-          <div className="flex w-full flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-            <ContentLabels
-              items={{
-                ...details,
-                category: category.name,
-                categorySlug: category.slug,
-              }}
+      <article className="flex flex-col gap-8 md:gap-10 lg:gap-12">
+        <div className="relative min-w-full">
+          <div className="h-80 md:h-100 lg:h-160">
+            <Image
+              src={media.url ?? ''}
+              alt={title}
+              fill
+              className="object-cover"
             />
 
+            <header className="absolute inset-0 mx-auto flex size-full max-w-96 flex-col items-center justify-between p-4 md:mx-0 md:max-w-lg md:items-start md:p-5 lg:max-w-4xl lg:p-6">
+              <div className="bg-background/80 size-auto p-2 md:p-3 lg:p-4">
+                <h1 className="font-grotesque text-title-light max-w-3xl text-center text-2xl font-medium uppercase text-shadow-md md:text-start md:text-4xl lg:text-6xl lg:font-semibold">
+                  {title}
+                </h1>
+              </div>
+
+              <div className="bg-background/80 size-auto p-2 md:p-3 lg:p-4">
+                <ContentLabels
+                  rootProps={{
+                    className: 'flex gap-8',
+                  }}
+                  iconProps={{
+                    className: 'size-4 md:size-5 lg:size-6 mt-1.5',
+                  }}
+                  labelProps={{
+                    className: 'text-base md:text-lg lg:text-2xl text-shadow-md',
+                  }}
+                  items={{
+                    ...details,
+                    category: category.name,
+                    categorySlug: category.slug,
+                  }}
+                />
+              </div>
+            </header>
+          </div>
+
+          <div className="absolute right-0 bottom-0 hidden md:block md:p-5 lg:p-6">
             <SocialMediaShare
               title={title}
               slug={slug}
               locale={locale}
             />
           </div>
-        </header>
-
-        <div className="container mt-4 space-y-6 px-4 pb-12 md:space-y-10 xl:px-0">
-          <div className="relative hidden h-80 w-full md:block lg:h-89.25">
-            <Image
-              src={media.url ?? ''}
-              alt={title}
-              fill
-              className="object-cover opacity-70 blur-xs"
-            />
-
-            <div className="absolute inset-0 m-auto h-77.25 w-126.5">
-              <Image
-                src={media.url ?? ''}
-                alt={title}
-                fill
-                className="object-contain"
-              />
-            </div>
-          </div>
-
-          <RichText
-            data={content}
-            className="prose text-title-light md:prose-lg lg:prose-xl prose-strong:font-extrabold prose-p:leading-8 max-w-none"
-          />
         </div>
+
+        <div className="mx-auto flex w-full max-w-3xl justify-between px-4 lg:px-0">
+          <BackButton />
+
+          <div className="md:hidden">
+            <SocialMediaShare
+              title={title}
+              slug={slug}
+              locale={locale}
+            />
+          </div>
+        </div>
+
+        <RichText
+          data={content}
+          className="prose text-title-light md:prose-lg lg:prose-xl prose-strong:font-extrabold prose-p:leading-8 mx-auto max-w-3xl px-4 lg:px-0"
+        />
       </article>
     </section>
   );
