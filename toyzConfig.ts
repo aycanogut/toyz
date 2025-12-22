@@ -13,6 +13,7 @@ interface ToyzConfigProps {
   r2SecretAccessKey: string;
   r2Endpoint: string;
   sentryAuthToken: string;
+  sentryDsn: string;
 }
 
 const toyzConfig: ToyzConfigProps = {
@@ -30,6 +31,7 @@ const toyzConfig: ToyzConfigProps = {
   r2SecretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
   r2Endpoint: process.env.R2_ENDPOINT,
   sentryAuthToken: process.env.SENTRY_AUTH_TOKEN,
+  sentryDsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
 };
 
 export default toyzConfig;

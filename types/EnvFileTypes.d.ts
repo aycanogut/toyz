@@ -14,5 +14,6 @@ namespace NodeJS {
     R2_SECRET_ACCESS_KEY: string;
     R2_ENDPOINT: string;
     SENTRY_AUTH_TOKEN: string;
+    NEXT_PUBLIC_SENTRY_DSN: string;
   }
 }
