@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 
 import { routing } from '@/i18n/routing';
 import { Category, Media } from '@/payload-types';
@@ -44,6 +45,10 @@ async function ContentDetails({ params }: ContentDetailsProps) {
 
   const media = images as Media;
   const category = details.category as Category;
+
+  if (!article) {
+    notFound();
+  }
 
   return (
     <section className="pb-24 md:pb-28 lg:pb-32">
