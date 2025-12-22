@@ -27,10 +27,12 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
         );
       }
 
-      <Video
-        videoId={videoId}
-        title={title}
-      />;
+      return (
+        <Video
+          videoId={videoId}
+          title={title}
+        />
+      );
     },
   },
 

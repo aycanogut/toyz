@@ -11,7 +11,7 @@ function Video({ videoId, title }: VideoProps) {
       title={title ?? 'YouTube Video'}
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen
-      className="size-full"
+      className="aspect-video size-full"
     />
   );
 }
