@@ -9,6 +9,11 @@ const getArticles = unstable_cache(
     return await payload.find({
       collection: 'articles',
       locale: locale as Locale,
+      where: {
+        _status: {
+          equals: 'published',
+        },
+      },
     });
   },
   ['articles'],

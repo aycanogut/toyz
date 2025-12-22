@@ -27,8 +27,15 @@ async function Search({ searchParams }: SearchProps) {
   const articles = await payload.find({
     collection: 'articles',
     where: {
-      ...(query && { title: { contains: query } }),
-      ...(categorySlug && { 'details.category.slug': { equals: categorySlug } }),
+      and: [
+        {
+          _status: {
+            equals: 'published',
+          },
+        },
+        ...(query ? [{ title: { contains: query } }] : []),
+        ...(categorySlug ? [{ 'details.category.slug': { equals: categorySlug } }] : []),
+      ],
     },
     depth: 1,
     locale: locale as Locale,
