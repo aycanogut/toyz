@@ -16,7 +16,7 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
     <Popover
       hasCloseIcon={false}
       contentProps={{
-        className: 'z-50 w-[var(--radix-popover-trigger-width)]',
+        className: 'z-50 bg-background w-[var(--radix-popover-trigger-width)]',
       }}
       trigger={
         <Button
@@ -32,7 +32,7 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
           <Button
             key={locale}
             variant="secondary"
-            className="font-grotesque cursor-pointer border-none p-2 text-lg font-semibold text-white uppercase"
+            className="font-grotesque bg-background cursor-pointer border-none p-2 text-lg font-semibold text-white uppercase"
             onClick={() => handleLocale(locale)}
           >
             {localeNames[locale]}
