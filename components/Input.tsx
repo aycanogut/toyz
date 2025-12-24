@@ -1,6 +1,6 @@
 'use client';
 
-import { InputHTMLAttributes, Ref, forwardRef } from 'react';
+import { InputHTMLAttributes } from 'react';
 
 import cn from '@/utils/cn';
 
@@ -12,24 +12,19 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   appendIconProps?: IconProps;
 }
 
-type InputRef = Ref<HTMLInputElement>;
-
-function Input(
-  {
-    className,
-    type,
-    placeholder,
-    autoComplete = 'off',
-    error,
-    onKeyDown,
-    prependIconProps,
-    appendIconProps,
-    'aria-label': ariaLabel,
-    'aria-autocomplete': ariaAutocomplete = 'list',
-    ...props
-  }: InputProps,
-  ref: InputRef
-) {
+function Input({
+  className,
+  type,
+  placeholder,
+  autoComplete = 'off',
+  error,
+  onKeyDown,
+  prependIconProps,
+  appendIconProps,
+  'aria-label': ariaLabel,
+  'aria-autocomplete': ariaAutocomplete = 'list',
+  ...props
+}: InputProps) {
   return (
     <div className="flex w-full flex-col gap-1">
       {ariaLabel && <label className="font-grotesque text-title-light mb-3 text-xl font-medium first-letter:capitalize lg:text-3xl">{ariaLabel}</label>}
@@ -42,7 +37,6 @@ function Input(
             prependIconProps && 'pl-11',
             className
           )}
-          ref={ref}
           aria-label={ariaLabel}
           aria-autocomplete={ariaAutocomplete}
           autoComplete={autoComplete}
@@ -73,4 +67,4 @@ function Input(
   );
 }
 
-export default forwardRef(Input);
+export default Input;

@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ComponentPropsWithoutRef, PropsWithChildren, Ref, forwardRef } from 'react';
+import { ButtonHTMLAttributes, ComponentPropsWithoutRef, PropsWithChildren } from 'react';
 
 import { VariantProps } from 'class-variance-authority';
 
@@ -15,11 +15,10 @@ interface ButtonProps extends PropsWithChildren, ButtonHTMLAttributes<HTMLButton
   loading?: boolean;
 }
 
-function Button({ children, appendIconProps, loading, variant, size, className, ...props }: ButtonProps, ref: Ref<HTMLButtonElement>) {
+function Button({ children, appendIconProps, loading, variant, size, className, ...props }: ButtonProps) {
   return (
     <button
       className={cn(buttonVariants({ variant, size, className }))}
-      ref={ref}
       {...props}
     >
       {loading ? (
@@ -36,4 +35,4 @@ function Button({ children, appendIconProps, loading, variant, size, className, 
   );
 }
 
-export default forwardRef(Button);
+export default Button;
