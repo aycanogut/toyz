@@ -1,6 +1,6 @@
 # TOYZ
 
-A collective and webzine platform about graffiti, street art, underground music, skateboarding, cinema, photography, and art — all rooted in counter-culture.
+A webzine platform about graffiti, street art, underground music, skateboarding, cinema, photography, and art — all rooted in counter-culture.
 
 ## Tech Stack
 
