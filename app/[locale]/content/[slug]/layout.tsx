@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+import { notFound } from 'next/navigation';
+
 import { Metadata } from 'next';
 
 import { Media } from '@/payload-types';
@@ -15,6 +17,10 @@ export async function generateMetadata(props: {
   const { locale, slug } = await props.params;
 
   const article = await getArticle(slug, locale);
+
+  if (!article) {
+    return notFound();
+  }
 
   const media = article.images as Media;
 
