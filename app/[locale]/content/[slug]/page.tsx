@@ -41,14 +41,14 @@ async function ContentDetails({ params }: ContentDetailsProps) {
 
   const article = await getArticle(slug, locale);
 
+  if (!article) {
+    return notFound();
+  }
+
   const { title, images, details, content } = article;
 
   const media = images as Media;
   const category = details.category as Category;
-
-  if (!article) {
-    notFound();
-  }
 
   return (
     <section className="pb-24 md:pb-28 lg:pb-32">
