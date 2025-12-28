@@ -10,16 +10,8 @@ const getArticle = unstable_cache(
       collection: 'articles',
       locale: locale as Locale,
       where: {
-        and: [
-          {
-            slug: { equals: slug },
-          },
-          {
-            _status: {
-              equals: 'published',
-            },
-          },
-        ],
+        slug: { equals: slug },
+        _status: { equals: 'published' },
       },
       limit: 1,
       depth: 1,
