@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     categories: Category;
     search: Search;
+    events: Event;
     'payload-kv': PayloadKv;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
@@ -164,6 +165,22 @@ export interface Article {
   };
   keywords?: string[] | null;
   slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: string;
+  title: string;
+  poster: string | Media;
+  eventDate: string;
+  gallery: (string | Media)[];
+  location?: string | null;
+  slug?: string | null;
+  _status?: ('draft' | 'published') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -329,6 +346,22 @@ export interface PayloadMigration {
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "articles_select".
  */
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  poster?: T;
+  eventDate?: T;
+  gallery?: T;
+  location?: T;
+  slug?: T;
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
 export interface ArticlesSelect<T extends boolean = true> {
   title?: T;
   description?: T;
