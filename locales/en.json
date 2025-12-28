@@ -4,6 +4,7 @@
   },
   "Navigation": {
     "home": "home",
+    "events": "events",
     "about": "about",
     "contact": "contact",
     "search": "search"

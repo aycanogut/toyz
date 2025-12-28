@@ -4,6 +4,7 @@
   },
   "Navigation": {
     "home": "anasayfa",
+    "events": "etkinlikler",
     "about": "hakkımızda",
     "contact": "iletişim",
     "search": "ara"
