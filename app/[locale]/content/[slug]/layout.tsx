@@ -57,5 +57,5 @@ export async function generateMetadata(props: {
 }
 
 export default function ContentLayout({ children }: { children: ReactNode }) {
-  return <section>{children}</section>;
+  return <>{children}</>;
 }
