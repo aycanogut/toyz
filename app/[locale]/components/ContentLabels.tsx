@@ -27,7 +27,7 @@ async function ContentLabels({ rootProps, iconProps, labelProps, items }: Conten
 
   const computedItems = {
     ...items,
-    date: formatDate(items.date, locale as Locale),
+    date: items.date ? formatDate(items.date, locale as Locale) : undefined,
   };
 
   const { categorySlug, ...displayItems } = computedItems;
