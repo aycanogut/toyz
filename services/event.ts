@@ -14,6 +14,7 @@ const getEvent = unstable_cache(
         _status: { equals: 'published' },
       },
       limit: 1,
+      depth: 1,
     });
     return result.docs[0] ?? null;
   },
