@@ -5,7 +5,6 @@ import { routing } from '@/i18n/routing';
 import { Media } from '@/payload-types';
 import getEvent from '@/services/event';
 import getAllEventSlugs from '@/services/event-slugs';
-import formatDate from '@/utils/formatDate';
 
 import BackButton from '../../components/BackButton';
 import ContentLabels from '../../components/ContentLabels';
@@ -49,10 +48,6 @@ async function EventDetails({ params }: EventDetailsProps) {
 
   const posterMedia = poster as Media;
   const galleryItems = (gallery ?? []) as Media[];
-
-  const formattedDate = formatDate(details.date, locale);
-
-  console.log(formattedDate);
 
   return (
     <section className="pb-24 md:pb-28 lg:pb-32">
