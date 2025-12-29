@@ -15,9 +15,11 @@
     "lint": "next lint",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "checkPackageVersions": "npx npm-check-updates",
-    "updatePackageVersions": "npx npm-check-updates -u && pnpm install",
-    "generateEnvKeyTypes": "npx ts-node ./generatorScripts/envFileTypeBuilder.ts && npx prettier --w types/EnvFileTypes.d.ts"
+    "test:e2e": "exec playwright test",
+    "test:e2e:ui": "exec playwright test --ui",
+    "check:deps": "npx npm-check-updates",
+    "update:deps": "npx npm-check-updates -u && pnpm install",
+    "generate:env-key-types": "npx ts-node ./generatorScripts/envFileTypeBuilder.ts && npx prettier --w types/EnvFileTypes.d.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -53,6 +55,7 @@
     "@eslint/eslintrc": "3.3.3",
     "@eslint/js": "9.39.1",
     "@next/eslint-plugin-next": "^15.5.6",
+    "@playwright/test": "^1.57.0",
     "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/typography": "^0.5.19",
     "@testing-library/jest-dom": "^6.9.1",
