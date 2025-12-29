@@ -6,12 +6,12 @@ import { Category, Media } from '@/payload-types';
 import getArticle from '@/services/article';
 import getAllArticleSlugs from '@/services/slugs';
 
+import BackButton from '../../components/BackButton';
 import ContentLabels from '../../components/ContentLabels';
+import SocialMediaShare from '../../components/SocialMediaShare';
 
-import BackButton from './BackButton';
 import RichText from './RichText';
 import ScrollProgressAnimation from './ScrollProgressAnimation';
-import SocialMediaShare from './SocialMediaShare';
 
 interface ContentDetailsProps {
   params: Promise<{ slug: string; locale: Locale }>;
