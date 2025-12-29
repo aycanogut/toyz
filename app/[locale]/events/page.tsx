@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import { getLocale } from 'next-intl/server';
 
+import { Link } from '@/i18n/routing';
 import { Media } from '@/payload-types';
 import getEventGlobal from '@/services/event-global';
 import getEvents from '@/services/events';
@@ -41,17 +42,18 @@ async function Events() {
             const poster = event.poster as Media;
 
             return (
-              <div
+              <Link
                 key={event.id}
-                className="relative aspect-3/4 w-full"
+                href={`/events/${event.slug}`}
+                className="group relative aspect-3/4 w-full transition-transform hover:scale-101"
               >
                 <Image
                   src={poster.url ?? ''}
-                  alt={poster.alt ?? ''}
+                  alt={poster.alt ?? event.title}
                   className="object-cover"
                   fill
                 />
-              </div>
+              </Link>
             );
           })}
         </div>
