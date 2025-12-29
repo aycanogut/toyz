@@ -36,20 +36,26 @@ export const Events: CollectionConfig = {
       required: true,
     },
     {
-      name: 'eventDate',
-      type: 'date',
-      required: true,
+      name: 'details',
+      type: 'group',
+      fields: [
+        {
+          name: 'date',
+          type: 'date',
+          required: true,
+        },
+        {
+          name: 'location',
+          type: 'text',
+          required: true,
+        },
+      ],
     },
     {
       name: 'gallery',
       type: 'relationship',
       relationTo: 'media',
       hasMany: true,
-      required: true,
-    },
-    {
-      name: 'location',
-      type: 'text',
       required: true,
     },
     slugField('title'),

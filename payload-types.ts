@@ -178,9 +178,11 @@ export interface Event {
   id: string;
   title: string;
   poster: string | Media;
-  eventDate: string;
+  details: {
+    date: string;
+    location: string;
+  };
   gallery: (string | Media)[];
-  location?: string | null;
   slug?: string | null;
   _status?: ('draft' | 'published') | null;
   updatedAt: string;
