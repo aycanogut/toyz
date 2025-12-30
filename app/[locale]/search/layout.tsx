@@ -43,5 +43,5 @@ export async function generateMetadata(props: {
 }
 
 export default function SearchLayout({ children }: { children: ReactNode }) {
-  return <section>{children}</section>;
+  return <>{children}</>;
 }
