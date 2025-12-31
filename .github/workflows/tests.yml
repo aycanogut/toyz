@@ -12,7 +12,7 @@ jobs:
     
     env:
       PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
-      MONGODB_URI: ${{ secrets.DATABASE_URI }}
+      DATABASE_URI: ${{ secrets.DATABASE_URI }}
 
     steps:
     - uses: actions/checkout@v4
