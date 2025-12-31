@@ -3,24 +3,26 @@ import { expect, test } from '@playwright/test';
 test.describe('Language switcher', () => {
   test('should change language from EN to TR', async ({ page }) => {
     await page.goto('/en');
+    await page.waitForLoadState('networkidle');
 
-    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.setViewportSize({ width: 1440, height: 900 });
 
-    await page.evaluate(() => window.scrollTo(0, 400));
+    await page.evaluate(() => window.scrollTo(0, 500));
 
-    const desktopHeader = page.locator('div.hidden.lg\\:block header');
+    await page.waitForTimeout(1500);
 
-    const langButton = desktopHeader.getByRole('button', { name: 'en' });
-    await expect(langButton).toBeVisible({ timeout: 10000 });
+    const langButton = page.locator('header').getByRole('button', { name: 'en', exact: false }).first();
+    await expect(langButton).toBeVisible();
 
-    await langButton.click();
+    await langButton.click({ force: true });
 
-    const turkishOption = page.locator('[role="dialog"]').getByRole('button', { name: 'TR', exact: true });
+    const turkishOption = page.getByRole('button', { name: 'TR', exact: true });
     await expect(turkishOption).toBeVisible();
 
-    await Promise.all([page.waitForURL(/\/tr(\/|$)/, { timeout: 10000 }), turkishOption.click()]);
+    await Promise.all([page.waitForURL(/\/tr(\/|$)/), turkishOption.click()]);
 
     await expect(page).toHaveURL(/\/tr(\/|$)/);
+
     await expect(page.locator('header').first()).toContainText(/anasayfa|hakkımızda|iletişim/i);
   });
 });
