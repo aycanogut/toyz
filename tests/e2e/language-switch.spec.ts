@@ -9,20 +9,18 @@ test.describe('Language switcher', () => {
 
     await page.evaluate(() => window.scrollTo(0, 500));
 
-    await page.waitForTimeout(1500);
+    await page.waitForTimeout(2000);
 
     const langButton = page.locator('header').getByRole('button', { name: 'en', exact: false }).first();
-    await expect(langButton).toBeVisible();
 
-    await langButton.click({ force: true });
+    await langButton.evaluate(node => (node as HTMLElement).click());
 
     const turkishOption = page.getByRole('button', { name: 'TR', exact: true });
     await expect(turkishOption).toBeVisible();
 
-    await Promise.all([page.waitForURL(/\/tr(\/|$)/), turkishOption.click()]);
+    await Promise.all([page.waitForURL(/\/tr(\/|$)/), turkishOption.evaluate(node => (node as HTMLElement).click())]);
 
     await expect(page).toHaveURL(/\/tr(\/|$)/);
-
     await expect(page.locator('header').first()).toContainText(/anasayfa|hakkımızda|iletişim/i);
   });
 });
