@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
-import { Button } from '@payloadcms/ui';
 import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import { useTranslations } from 'next-intl';
 
+import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import { Media } from '@/payload-types';
 
