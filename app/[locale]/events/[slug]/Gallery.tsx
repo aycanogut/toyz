@@ -94,10 +94,12 @@ function Gallery({ images }: GalleryProps) {
 
   if (images.length === 0) return null;
 
+  const sortedImages = [...images].sort((a, b) => (a.filename ?? '').localeCompare(b.filename ?? '', undefined, { numeric: true }));
+
   return (
     <section>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {images.map((image, index) => (
+        {sortedImages.map((image, index) => (
           <Button
             key={image.id}
             type="button"
@@ -133,7 +135,7 @@ function Gallery({ images }: GalleryProps) {
               ref={emblaRef}
             >
               <div className="flex h-full items-center">
-                {images.map((image, index) => (
+                {sortedImages.map((image, index) => (
                   <div
                     key={image.id}
                     className="relative flex h-full w-full min-w-0 shrink-0 grow-0 items-center justify-center"
