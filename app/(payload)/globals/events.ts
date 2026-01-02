@@ -11,12 +11,6 @@ export const EventsGlobal: GlobalConfig = {
       localized: true,
     },
     {
-      name: 'description',
-      type: 'textarea',
-      required: true,
-      localized: true,
-    },
-    {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
