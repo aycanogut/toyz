@@ -564,7 +564,6 @@ export interface SearchPage {
 export interface EventsGlobal {
   id: string;
   title: string;
-  description: string;
   image: string | Media;
   keywords?: string[] | null;
   openGraph?: {
