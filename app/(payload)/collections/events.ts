@@ -32,7 +32,7 @@ export const Events: CollectionConfig = {
     {
       name: 'poster',
       type: 'relationship',
-      relationTo: 'media',
+      relationTo: 'event-media',
       required: true,
     },
     {
