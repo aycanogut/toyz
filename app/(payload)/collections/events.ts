@@ -5,7 +5,7 @@ export const Events: CollectionConfig = {
   slug: 'events',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'eventDate', 'createdAt'],
+    defaultColumns: ['title', 'createdAt'],
   },
   access: {
     read: ({ req }) => {
