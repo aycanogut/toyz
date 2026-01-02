@@ -2,65 +2,62 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 import { routing } from '@/i18n/routing';
-import { Category, Media } from '@/payload-types';
-import getArticle from '@/services/article';
-import getAllArticleSlugs from '@/services/slugs';
+import { Media } from '@/payload-types';
+import getEvent from '@/services/event';
+import getAllEventSlugs from '@/services/event-slugs';
 
 import BackButton from '../../components/BackButton';
 import ContentLabels from '../../components/ContentLabels';
 import SocialMediaShare from '../../components/SocialMediaShare';
 
-import RichText from './RichText';
-import ScrollProgressAnimation from './ScrollProgressAnimation';
+import Gallery from './Gallery';
 
-interface ContentDetailsProps {
+interface EventDetailsProps {
   params: Promise<{ slug: string; locale: Locale }>;
 }
 
 export async function generateStaticParams() {
-  const allArticlesPromises = routing.locales.map(async locale => {
-    const articles = await getAllArticleSlugs(locale);
+  const allEventsPromises = routing.locales.map(async locale => {
+    const events = await getAllEventSlugs(locale);
 
-    return articles
-      .filter(article => article.slug)
-      .map(article => ({
+    return events
+      .filter(event => event.slug)
+      .map(event => ({
         locale,
-        slug: article.slug!,
+        slug: event.slug!,
       }));
   });
 
-  const results = await Promise.all(allArticlesPromises);
+  const results = await Promise.all(allEventsPromises);
 
   return results.flat();
 }
 
 export const dynamicParams = true;
 
-async function ContentDetails({ params }: ContentDetailsProps) {
+async function EventDetails({ params }: EventDetailsProps) {
   const { locale, slug } = await params;
 
-  const article = await getArticle(slug, locale);
+  const event = await getEvent(slug, locale);
 
-  if (!article) {
+  if (!event) {
     return notFound();
   }
 
-  const { title, images, details, content } = article;
+  const { title, poster, details, gallery } = event;
 
-  const media = images as Media;
-  const category = details.category as Category;
+  const posterMedia = poster as Media;
+  const galleryItems = (gallery ?? []) as Media[];
 
   return (
     <section className="pb-24 md:pb-28 lg:pb-32">
-      <ScrollProgressAnimation />
-
       <span className="bg-background block h-20 lg:hidden" />
 
       <article className="flex flex-col gap-8 md:gap-10 lg:gap-12">
         <div className="relative min-w-full">
           <div className="h-80 md:h-100 lg:h-160">
             <Image
-              src={media.url ?? ''}
+              src={posterMedia.url ?? ''}
               alt={title}
               fill
               className="object-cover"
@@ -86,8 +83,6 @@ async function ContentDetails({ params }: ContentDetailsProps) {
                   }}
                   items={{
                     ...details,
-                    category: category.name,
-                    categorySlug: category.slug,
                   }}
                 />
               </div>
@@ -103,25 +98,18 @@ async function ContentDetails({ params }: ContentDetailsProps) {
           </div>
         </div>
 
-        <div className="mx-auto flex w-full max-w-3xl justify-between px-4 lg:px-0">
+        <div className="mx-auto flex w-full max-w-7xl justify-between px-4 lg:px-0">
           <BackButton />
-
-          <div className="md:hidden">
-            <SocialMediaShare
-              title={title}
-              slug={slug}
-              locale={locale}
-            />
-          </div>
         </div>
 
-        <RichText
-          data={content}
-          className="prose text-title-light md:prose-lg lg:prose-xl prose-strong:font-extrabold prose-p:leading-8 mx-auto max-w-3xl px-4 lg:px-0"
-        />
+        {galleryItems.length > 0 && (
+          <div className="mx-auto w-full max-w-7xl px-4 lg:px-0">
+            <Gallery images={galleryItems} />
+          </div>
+        )}
       </article>
     </section>
   );
 }
 
-export default ContentDetails;
+export default EventDetails;

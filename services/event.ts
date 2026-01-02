@@ -2,12 +2,12 @@ import { unstable_cache } from 'next/cache';
 
 import { getPayloadClient } from '@/utils/payloadClient';
 
-const getArticle = unstable_cache(
+const getEvent = unstable_cache(
   async (slug: string, locale: string) => {
     const payload = await getPayloadClient();
 
     const result = await payload.find({
-      collection: 'articles',
+      collection: 'events',
       locale: locale as Locale,
       where: {
         slug: { equals: slug },
@@ -16,11 +16,10 @@ const getArticle = unstable_cache(
       limit: 1,
       depth: 1,
     });
-
     return result.docs[0] ?? null;
   },
-  ['article'],
+  ['event'],
   { revalidate: 3600 }
 );
 
-export default getArticle;
+export default getEvent;

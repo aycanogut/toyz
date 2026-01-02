@@ -65,16 +65,8 @@ describe('getArticle', () => {
       collection: 'articles',
       locale: 'en',
       where: {
-        and: [
-          {
-            slug: { equals: 'test-article' },
-          },
-          {
-            _status: {
-              equals: 'published',
-            },
-          },
-        ],
+        slug: { equals: 'test-article' },
+        _status: { equals: 'published' },
       },
       limit: 1,
       depth: 1,
@@ -92,13 +84,8 @@ describe('getArticle', () => {
     expect(mockPayloadFind).toHaveBeenCalledWith(
       expect.objectContaining({
         where: {
-          and: expect.arrayContaining([
-            {
-              _status: {
-                equals: 'published',
-              },
-            },
-          ]),
+          slug: { equals: 'draft-article' },
+          _status: { equals: 'published' },
         },
       })
     );
