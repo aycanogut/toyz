@@ -10,10 +10,10 @@ import { useTranslations } from 'next-intl';
 
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
-import { Media } from '@/payload-types';
+import { EventMedia } from '@/payload-types';
 
 interface GalleryProps {
-  images: Media[];
+  images: EventMedia[];
 }
 
 const OPTIONS: EmblaOptionsType = {

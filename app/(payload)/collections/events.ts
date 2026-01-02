@@ -53,10 +53,10 @@ export const Events: CollectionConfig = {
     },
     {
       name: 'gallery',
-      type: 'relationship',
-      relationTo: 'media',
-      hasMany: true,
-      required: true,
+      type: 'join',
+      collection: 'event-media',
+      on: 'event',
+      defaultSort: 'filename',
     },
      {
       name: 'keywords',

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 import { routing } from '@/i18n/routing';
-import { Media } from '@/payload-types';
+import { EventMedia, Media } from '@/payload-types';
 import getEvent from '@/services/event';
 import getAllEventSlugs from '@/services/event-slugs';
 
@@ -47,7 +47,7 @@ async function EventDetails({ params }: EventDetailsProps) {
   const { title, poster, details, gallery } = event;
 
   const posterMedia = poster as Media;
-  const galleryItems = (gallery ?? []) as Media[];
+  const galleryItems = (gallery?.docs ?? []) as EventMedia[];
 
   return (
     <section className="pb-24 md:pb-28 lg:pb-32">
