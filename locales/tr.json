@@ -1,9 +1,13 @@
 {
   "Global": {
-    "scroll-up": "Sayfanın başına dön"
+    "scroll-up": "Sayfanın başına dön",
+    "close-gallery": "Galeriyi kapat",
+    "previous-image": "Önceki resim",
+    "next-image": "Sonraki resim"
   },
   "Navigation": {
     "home": "anasayfa",
+    "events": "etkinlikler",
     "about": "hakkımızda",
     "contact": "iletişim",
     "search": "ara"

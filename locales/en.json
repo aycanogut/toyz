@@ -1,9 +1,13 @@
 {
   "Global": {
-    "scroll-up": "Scroll to top"
+    "scroll-up": "Scroll to top",
+    "close-gallery": "Close gallery",
+    "previous-image": "Previous image",
+    "next-image": "Next image"
   },
   "Navigation": {
     "home": "home",
+    "events": "events",
     "about": "about",
     "contact": "contact",
     "search": "search"

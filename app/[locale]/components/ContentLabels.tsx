@@ -9,9 +9,10 @@ import formatDate from '@/utils/formatDate';
 
 export interface ContentLabelItem {
   date: string;
-  category: string;
-  categorySlug: string;
-  author: string;
+  category?: string;
+  categorySlug?: string;
+  author?: string;
+  location?: string;
 }
 
 interface ContentLabelsProps {
@@ -26,7 +27,7 @@ async function ContentLabels({ rootProps, iconProps, labelProps, items }: Conten
 
   const computedItems = {
     ...items,
-    date: formatDate(items.date, locale as Locale),
+    date: items.date ? formatDate(items.date, locale as Locale) : undefined,
   };
 
   const { categorySlug, ...displayItems } = computedItems;
