@@ -35,8 +35,6 @@ async function Events() {
           <h1 className="font-grotesque text-title-light text-2xl leading-10 font-medium uppercase lg:text-6xl">{event.title}</h1>
         </header>
 
-        <div className="font-grotesque text-title-light space-y-4 text-xl lg:space-y-6 lg:text-3xl lg:leading-10">{event.description}</div>
-
         <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {events.docs.map(event => {
             const poster = event.poster as Media;
@@ -45,7 +43,7 @@ async function Events() {
               <Link
                 key={event.id}
                 href={`/events/${event.slug}`}
-                className="group relative aspect-3/4 w-full transition-transform hover:scale-101"
+                className="group relative aspect-3/4 w-full transition-transform hover:scale-102"
               >
                 <Image
                   src={poster.url ?? ''}
