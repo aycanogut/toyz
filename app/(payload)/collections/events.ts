@@ -58,6 +58,12 @@ export const Events: CollectionConfig = {
       hasMany: true,
       required: true,
     },
+     {
+      name: 'keywords',
+      type: 'text',
+      hasMany: true,
+      localized: true,
+    },
     slugField('title'),
   ],
 };
