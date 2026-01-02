@@ -19,13 +19,11 @@ export async function generateMetadata(props: {
 
   return {
     title: `${events.title} - ${toyzConfig.title}`,
-    description: events.description,
     applicationName: toyzConfig.title,
     keywords: events.keywords,
     openGraph: {
       siteName: toyzConfig.title,
       title: events.title,
-      description: events.description,
       type: 'website',
       images: images ? [images.url ?? ''] : undefined,
       url: `${toyzConfig.baseUrl}/${locale}/events`,
