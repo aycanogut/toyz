@@ -56,7 +56,7 @@ export const Events: CollectionConfig = {
       type: 'join',
       collection: 'event-media',
       on: 'event',
-      defaultSort: 'filename',
+      defaultLimit: 50
     },
      {
       name: 'keywords',
