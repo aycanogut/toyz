@@ -225,6 +225,7 @@ export interface Event {
     location: string;
   };
   gallery: (string | Media)[];
+  keywords?: string[] | null;
   slug?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -518,6 +519,7 @@ export interface EventsSelect<T extends boolean = true> {
         location?: T;
       };
   gallery?: T;
+  keywords?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
