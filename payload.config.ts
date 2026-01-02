@@ -12,6 +12,7 @@ import sharp from 'sharp';
 import { YouTubeBlock } from './app/(payload)/blocks/youtube';
 import { Articles } from './app/(payload)/collections/articles';
 import { Categories } from './app/(payload)/collections/categories';
+import { EventMedia } from './app/(payload)/collections/event-media';
 import { Events } from './app/(payload)/collections/events';
 import { Media } from './app/(payload)/collections/media';
 import { About } from './app/(payload)/globals/about';
@@ -26,7 +27,7 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
-  collections: [Articles, Media, Categories, Events],
+  collections: [Articles, Media, Categories, Events, EventMedia],
   globals: [Home, Slider, About, Contact, SearchPage, EventsGlobal],
   secret: toyzConfig.payloadSecret || '',
   db: mongooseAdapter({
@@ -44,6 +45,12 @@ export default buildConfig({
     s3Storage({
       collections: {
         media: {
+          generateFileURL: ({ filename }) => {
+            return `https://cdn.toyzwebzine.com/${filename}`;
+          },
+          disableLocalStorage: true,
+        },
+        'event-media': {
           generateFileURL: ({ filename }) => {
             return `https://cdn.toyzwebzine.com/${filename}`;
           },

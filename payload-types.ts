@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     categories: Category;
     events: Event;
+    'event-media': EventMedia;
     search: Search;
     'payload-kv': PayloadKv;
     users: User;
@@ -79,12 +80,17 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    events: {
+      gallery: 'event-media';
+    };
+  };
   collectionsSelect: {
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
+    'event-media': EventMediaSelect<false> | EventMediaSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -224,12 +230,37 @@ export interface Event {
     date: string;
     location: string;
   };
-  gallery: (string | Media)[];
+  gallery?: {
+    docs?: (string | EventMedia)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   keywords?: string[] | null;
   slug?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "event-media".
+ */
+export interface EventMedia {
+  id: string;
+  event: string | Event;
+  alt?: string | null;
+  credits?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This is a collection of automatically created search results. These results are used by the global site search and will be updated automatically as documents in the CMS are created or updated.
@@ -405,6 +436,10 @@ export interface PayloadLockedDocument {
         value: string | Event;
       } | null)
     | ({
+        relationTo: 'event-media';
+        value: string | EventMedia;
+      } | null)
+    | ({
         relationTo: 'search';
         value: string | Search;
       } | null)
@@ -524,6 +559,26 @@ export interface EventsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "event-media_select".
+ */
+export interface EventMediaSelect<T extends boolean = true> {
+  event?: T;
+  alt?: T;
+  credits?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

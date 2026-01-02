@@ -10,10 +10,10 @@ import { useTranslations } from 'next-intl';
 
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
-import { Media } from '@/payload-types';
+import { EventMedia } from '@/payload-types';
 
 interface GalleryProps {
-  images: Media[];
+  images: EventMedia[];
 }
 
 const OPTIONS: EmblaOptionsType = {
@@ -33,7 +33,7 @@ function Gallery({ images }: GalleryProps) {
 
   useEffect(() => {
     if (emblaApi && isOpen) {
-      emblaApi.scrollTo(selectedIndex);
+      emblaApi.scrollTo(selectedIndex, true);
     }
   }, [emblaApi, isOpen, selectedIndex]);
 
@@ -121,7 +121,7 @@ function Gallery({ images }: GalleryProps) {
 
       {isOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-2 md:p-4"
+          className="bg-background/90 fixed inset-0 z-50 flex items-center justify-center p-2 md:p-4"
           onClick={() => setIsOpen(false)}
         >
           <div

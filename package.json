@@ -1,13 +1,16 @@
 {
-  "name": "toyz",
+  "name": "TOYZ Webzine",
+  "version": "1.0.0",
+  "private": false,
+  "homepage": "https://toyzwebzine.com",
+  "description": "A webzine platform about graffiti, street art, underground music, skateboarding, cinema, photography, and art — all rooted in counter-culture.",
+  "license": "MIT",
   "author": {
     "name": "Aycan Öğüt",
     "email": "aycanonfire@gmail.com",
     "url": "https://aycan.dev",
     "github": "https://github.com/aycanogut"
   },
-  "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -31,6 +34,7 @@
     "@payloadcms/plugin-search": "^3.69.0",
     "@payloadcms/richtext-lexical": "^3.69.0",
     "@payloadcms/storage-s3": "^3.69.0",
+    "@payloadcms/ui": "^3.69.0",
     "@radix-ui/react-popover": "^1.1.15",
     "@sentry/nextjs": "^10.31.0",
     "class-variance-authority": "^0.7.1",
