@@ -13,7 +13,7 @@ import useReCaptcha from '../hooks/useReCaptcha';
 
 import { mailAction } from './mailAction';
 
-const ContactSchema = z.object({
+export const ContactSchema = z.object({
   name: z.string().min(2, { message: 'validation-name-error' }),
   email: z.email({ message: 'validation-email-error' }),
   subject: z.string().min(3, { message: 'validation-subject-error' }),

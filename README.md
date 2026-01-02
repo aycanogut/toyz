@@ -81,7 +81,9 @@ Admin panel: [http://localhost:3000/admin](http://localhost:3000/admin)
 - `pnpm build` - Build for production
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
-- `pnpm generateEnvKeyTypes` - Generate TypeScript types for environment variables
+- `check:deps` - Check for outdated dependencies
+- `update:deps` - Update dependencies
+- `generate:env-key-types` - Generate TypeScript types for environment variables
 
 ## Project Structure
 
@@ -92,6 +94,22 @@ app/
 components/             # Shared UI components
 locales/                # Translation files
 ```
+
+## 🧪 Testing
+
+This project uses a multi-layered testing strategy:
+
+### Test Types
+- **Unit Tests (Vitest):** Logic and utility functions (`tests/unit`).
+- **Integration Tests (Vitest):** Server Actions and Data Services (`tests/integration`).
+- **E2E Tests (Playwright):** Full user journeys and UI flows (`tests/e2e`).
+
+### Commands
+- `pnpm test`: Runs all Vitest tests.
+- `pnpm test:watch`: Runs Vitest in watch mode for development.
+- `pnpm test:ui`: Opens Vitest UI for a visual test dashboard.
+- `pnpm test:e2e`: Runs all Playwright tests in headless mode.
+- `pnpm test:e2e:ui`: Opens Playwright UI (Timeline, Screenshots, Debugging).
 
 ## License
 
