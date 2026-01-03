@@ -33,7 +33,7 @@ function Gallery({ images }: GalleryProps) {
 
   useEffect(() => {
     if (emblaApi && isOpen) {
-      emblaApi.scrollTo(selectedIndex, true);
+      emblaApi.scrollTo(selectedIndex, false);
     }
   }, [emblaApi, isOpen, selectedIndex]);
 
