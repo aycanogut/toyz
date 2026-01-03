@@ -4,6 +4,7 @@ import { Media, Category } from '@/payload-types';
 import getCategories from '@/services/categories';
 import { getPayloadClient } from '@/utils/payloadClient';
 
+import Breadcrumbs from '../components/Breadcrumbs';
 import ContentCard from '../components/ContentCard';
 
 import { default as SearchComponent } from './Search';
@@ -43,6 +44,7 @@ async function Search({ searchParams }: SearchProps) {
 
   return (
     <section className="container flex flex-col gap-12 px-4 py-12">
+      <Breadcrumbs />
       <h1 className="sr-only">{t('title')}</h1>
 
       <SearchComponent categories={categories} />

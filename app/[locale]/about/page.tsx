@@ -5,6 +5,8 @@ import { getLocale } from 'next-intl/server';
 import { Media } from '@/payload-types';
 import getAbout from '@/services/about';
 
+import Breadcrumbs from '../components/Breadcrumbs';
+
 async function About() {
   const locale = await getLocale();
 
@@ -17,6 +19,8 @@ async function About() {
   return (
     <section>
       <span className="bg-background block h-20 md:h-24 lg:hidden" />
+
+      <Breadcrumbs />
 
       <div className="relative h-30 lg:h-45.5">
         <Image

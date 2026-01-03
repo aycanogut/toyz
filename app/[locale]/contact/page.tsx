@@ -7,6 +7,7 @@ import { Link } from '@/i18n/routing';
 import { Media } from '@/payload-types';
 import getContact from '@/services/contact';
 
+import Breadcrumbs from '../components/Breadcrumbs';
 import ReCaptchaProvider from '../components/ReCaptchaProvider';
 
 import ContactForm from './ContactForm';
@@ -23,6 +24,8 @@ async function Contact() {
   return (
     <section>
       <span className="bg-background block h-20 md:h-24 lg:hidden" />
+
+      <Breadcrumbs />
 
       <div className="relative h-30 lg:h-45.5">
         <Image
