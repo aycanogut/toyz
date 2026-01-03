@@ -11,6 +11,7 @@ const SCROLL_THRESHOLD = 600;
 
 function ScrollUp() {
   const [isVisible, setIsVisible] = useState(false);
+
   const t = useTranslations('Global');
 
   const handleScroll = useCallback(() => {
@@ -33,7 +34,7 @@ function ScrollUp() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 24, scale: 0.9 }}
           transition={{ duration: 0.25, ease: 'easeOut' }}
-          className="fixed right-4 bottom-4 z-50"
+          className="fixed right-4 bottom-4 z-40"
         >
           <Button
             variant="secondary"
