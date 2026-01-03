@@ -18,7 +18,7 @@ function ContentCard({ title, image, details, slug }: ContentCardProps) {
   const t = useTranslations('Content');
 
   return (
-    <article className="flex h-full flex-col items-center gap-6 md:flex-row md:items-stretch md:gap-10 lg:gap-14">
+    <article className="flex h-full flex-col items-center gap-6 md:gap-10 lg:flex-row lg:gap-14">
       <div className="relative h-52 w-full md:h-80 lg:h-90">
         <Image
           src={image}
@@ -33,7 +33,7 @@ function ContentCard({ title, image, details, slug }: ContentCardProps) {
         </header>
         <ContentLabels
           rootProps={{
-            className: 'border-border-light flex w-full max-w-114.5 flex-wrap gap-x-7 gap-y-2 border px-6 py-2 md:w-fit md:max-w-fit lg:py-6',
+            className: 'flex w-fit gap-x-7 gap-y-2 border border-border-light px-6 py-2 lg:py-6',
           }}
           iconProps={{
             className: 'mt-1 size-5',
