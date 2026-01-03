@@ -46,6 +46,13 @@ function Breadcrumbs({ currentPageTitle }: BreadcrumbsProps) {
         const path = `/${pathSegments.join('/')}`;
 
         if (segment === 'content') {
+          // If this is the last segment and we have a title, add it
+          if (isLast && currentPageTitle) {
+            return {
+              breadcrumbs: [...acc.breadcrumbs, { label: currentPageTitle, href: path }],
+              pathSegments,
+            };
+          }
           return { ...acc, pathSegments };
         }
 
@@ -59,13 +66,19 @@ function Breadcrumbs({ currentPageTitle }: BreadcrumbsProps) {
           return { breadcrumbs: items, pathSegments };
         }
 
-        const label = getRouteLabel(segment);
-        const finalLabel = isLast && currentPageTitle ? currentPageTitle : label;
+        // Only add breadcrumb for known routes or if currentPageTitle is provided
+        if (segment in ROUTE_TRANSLATIONS || (isLast && currentPageTitle)) {
+          const label = getRouteLabel(segment);
+          const finalLabel = isLast && currentPageTitle ? currentPageTitle : label;
 
-        return {
-          breadcrumbs: [...acc.breadcrumbs, { label: finalLabel, href: path }],
-          pathSegments,
-        };
+          return {
+            breadcrumbs: [...acc.breadcrumbs, { label: finalLabel, href: path }],
+            pathSegments,
+          };
+        }
+
+        // Skip unknown segments
+        return { ...acc, pathSegments };
       },
       { breadcrumbs: initialBreadcrumbs, pathSegments: [] as string[] }
     );
