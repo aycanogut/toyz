@@ -33,13 +33,13 @@ function ContentCard({ title, image, details, slug }: ContentCardProps) {
         </header>
         <ContentLabels
           rootProps={{
-            className: 'border-border-light flex w-full max-w-114.5 flex-wrap gap-x-7 gap-y-2 border px-6 py-2 md:w-fit md:max-w-fit lg:py-6',
+            className: 'flex w-fit flex-wrap items-center gap-x-7 gap-y-3 border border-border-light px-6 py-2 lg:py-6',
           }}
           iconProps={{
-            className: 'mt-1 size-5',
+            className: 'mt-1 size-4 md:size-5',
           }}
           labelProps={{
-            className: 'text-lg md:text-xl',
+            className: 'text-base md:text-lg',
           }}
           items={details}
         />

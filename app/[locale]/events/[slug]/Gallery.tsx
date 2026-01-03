@@ -33,7 +33,7 @@ function Gallery({ images }: GalleryProps) {
 
   useEffect(() => {
     if (emblaApi && isOpen) {
-      emblaApi.scrollTo(selectedIndex, true);
+      emblaApi.scrollTo(selectedIndex, false);
     }
   }, [emblaApi, isOpen, selectedIndex]);
 
@@ -123,11 +123,11 @@ function Gallery({ images }: GalleryProps) {
 
       {isOpen && (
         <div
-          className="bg-background/90 fixed inset-0 z-50 flex items-center justify-center p-2 md:p-4"
+          className="bg-background/90 fixed inset-0 z-50 flex h-full min-h-screen w-full touch-none items-center justify-center p-2 md:p-4"
           onClick={() => setIsOpen(false)}
         >
           <div
-            className="size-full max-w-7xl"
+            className="size-full max-w-7xl touch-auto"
             onClick={e => e.stopPropagation()}
           >
             <div
@@ -146,7 +146,7 @@ function Gallery({ images }: GalleryProps) {
                         alt={image.alt ?? `Event photo ${index + 1}`}
                         width={image.width ?? 1920}
                         height={image.height ?? 1080}
-                        className="max-h-[80vh] w-auto object-contain md:max-h-[85vh] lg:max-h-[90vh]"
+                        className="max-h-[80dvh] w-auto object-contain md:max-h-[85dvh] lg:max-h-[90dvh]"
                         priority={index === selectedIndex}
                       />
 
