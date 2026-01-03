@@ -42,7 +42,7 @@ function SocialMediaShare({ title, slug, locale }: SocialMediaShare) {
             name: 'share',
             className: 'size-5',
           }}
-          className="h-fit cursor-pointer p-2 md:p-3"
+          className="h-fit cursor-pointer p-2 text-sm md:p-3 md:text-base"
         >
           {t('share')}
         </Button>
