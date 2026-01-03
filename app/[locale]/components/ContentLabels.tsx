@@ -39,7 +39,7 @@ async function ContentLabels({ rootProps, iconProps, labelProps, items }: Conten
           <Link
             key={item}
             href={`/search?category=${categorySlug}`}
-            className="flex h-full items-center gap-2"
+            className="flex items-center gap-2"
           >
             <Icon
               name={item as IconLabelProps}
@@ -49,7 +49,7 @@ async function ContentLabels({ rootProps, iconProps, labelProps, items }: Conten
           </Link>
         ) : (
           <div
-            className="flex h-full items-center gap-2"
+            className="flex items-center gap-2"
             key={item}
           >
             <Icon
