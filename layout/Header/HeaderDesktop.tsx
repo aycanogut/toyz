@@ -57,7 +57,7 @@ function HeaderDesktop() {
         >
           <Link
             href="/"
-            className="relative flex aspect-video w-40 items-center justify-center"
+            className="relative flex aspect-square w-16 shrink-0 items-center justify-center"
           >
             <Image
               src="/brand-logo.webp"
