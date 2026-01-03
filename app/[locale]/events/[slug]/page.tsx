@@ -7,6 +7,7 @@ import getEvent from '@/services/event';
 import getAllEventSlugs from '@/services/event-slugs';
 
 import BackButton from '../../components/BackButton';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import ContentLabels from '../../components/ContentLabels';
 import SocialMediaShare from '../../components/SocialMediaShare';
 
@@ -52,6 +53,8 @@ async function EventDetails({ params }: EventDetailsProps) {
   return (
     <section className="pb-24 md:pb-28 lg:pb-32">
       <span className="bg-background block h-20 lg:hidden" />
+
+      <Breadcrumbs currentPageTitle={title} />
 
       <article className="flex flex-col gap-8 md:gap-10 lg:gap-12">
         <div className="relative min-w-full">

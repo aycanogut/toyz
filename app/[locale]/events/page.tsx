@@ -7,6 +7,8 @@ import { Media } from '@/payload-types';
 import getEventGlobal from '@/services/event-global';
 import getEvents from '@/services/events';
 
+import Breadcrumbs from '../components/Breadcrumbs';
+
 async function Events() {
   const locale = await getLocale();
 
@@ -20,6 +22,8 @@ async function Events() {
   return (
     <section>
       <span className="bg-background block h-20 md:h-24 lg:hidden" />
+
+      <Breadcrumbs />
 
       <div className="relative h-30 lg:h-45.5">
         <Image

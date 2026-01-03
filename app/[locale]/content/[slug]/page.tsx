@@ -7,6 +7,7 @@ import getArticle from '@/services/article';
 import getAllArticleSlugs from '@/services/slugs';
 
 import BackButton from '../../components/BackButton';
+import Breadcrumbs from '../../components/Breadcrumbs';
 import ContentLabels from '../../components/ContentLabels';
 import SocialMediaShare from '../../components/SocialMediaShare';
 
@@ -55,6 +56,8 @@ async function ContentDetails({ params }: ContentDetailsProps) {
       <ScrollProgressAnimation />
 
       <span className="bg-background block h-20 lg:hidden" />
+
+      <Breadcrumbs currentPageTitle={title} />
 
       <article className="flex flex-col gap-8 md:gap-10 lg:gap-12">
         <div className="relative min-w-full">
