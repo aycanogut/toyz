@@ -38,7 +38,7 @@ async function Contact() {
 
       <div className="container flex flex-col gap-3 p-4 pt-4 pb-14 lg:gap-11 lg:pt-10 lg:pb-28">
         <header>
-          <h1 className="font-grotesque text-title-light text-2xl leading-10 font-medium uppercase lg:text-6xl">{contact.title}</h1>
+          <h1 className="font-grotesque text-title-light text-2xl font-medium uppercase lg:text-6xl">{contact.title}</h1>
         </header>
 
         <div className="flex flex-col gap-4 sm:flex-row">

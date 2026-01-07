@@ -120,7 +120,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
 
         <RichText
           data={content}
-          className="prose text-title-light md:prose-lg lg:prose-xl prose-strong:font-extrabold prose-p:leading-8 mx-auto max-w-3xl px-4 lg:px-0"
+          className="prose text-title-light md:prose-lg lg:prose-xl prose-strong:font-extrabold prose-p:leading-6 md:prose-p:leading-7 lg:prose-p:leading-8 mx-auto max-w-3xl px-4 lg:px-0"
         />
       </article>
     </section>

@@ -36,7 +36,7 @@ async function Events() {
 
       <div className="container flex flex-col gap-2 p-4 pt-4 pb-14 lg:gap-8 lg:pt-10 lg:pb-28">
         <header>
-          <h1 className="font-grotesque text-title-light text-2xl leading-10 font-medium uppercase lg:text-6xl">{event.title}</h1>
+          <h1 className="font-grotesque text-title-light text-2xl font-medium uppercase lg:text-6xl">{event.title}</h1>
         </header>
 
         <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
