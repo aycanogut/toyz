@@ -97,7 +97,7 @@ async function EventDetails({ params }: EventDetailsProps) {
               title={title}
               slug={slug}
               locale={locale}
-              type="events"
+              type="event"
             />
           </div>
         </div>
@@ -110,7 +110,7 @@ async function EventDetails({ params }: EventDetailsProps) {
               title={title}
               slug={slug}
               locale={locale}
-              type="events"
+              type="event"
             />
           </div>
         </div>
