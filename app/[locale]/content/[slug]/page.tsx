@@ -1,14 +1,19 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
+import { getTranslations } from 'next-intl/server';
+
 import { routing } from '@/i18n/routing';
 import { Category, Media } from '@/payload-types';
 import getArticle from '@/services/article';
+import getArticles from '@/services/articles';
 import getAllArticleSlugs from '@/services/slugs';
+import formatDate from '@/utils/formatDate';
 
 import BackButton from '../../components/BackButton';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import ContentLabels from '../../components/ContentLabels';
+import SimiliarContentCard from '../../components/SimiliarContentCard';
 import SocialMediaShare from '../../components/SocialMediaShare';
 
 import RichText from './RichText';
@@ -40,6 +45,8 @@ export const dynamicParams = true;
 async function ContentDetails({ params }: ContentDetailsProps) {
   const { locale, slug } = await params;
 
+  const t = await getTranslations('Content');
+
   const article = await getArticle(slug, locale);
 
   if (!article) {
@@ -50,6 +57,11 @@ async function ContentDetails({ params }: ContentDetailsProps) {
 
   const media = images as Media;
   const category = details.category as Category;
+
+  const articles = await getArticles(locale);
+
+  const otherArticles = articles.docs.filter(item => item.slug !== slug);
+  const randomArticles = otherArticles.sort(() => Math.random() - 0.5).slice(0, 3);
 
   return (
     <section className="pb-24 md:pb-28 lg:pb-32">
@@ -120,9 +132,35 @@ async function ContentDetails({ params }: ContentDetailsProps) {
 
         <RichText
           data={content}
-          className="prose text-title-light md:prose-lg lg:prose-xl prose-strong:font-extrabold prose-p:leading-8 mx-auto max-w-3xl px-4 lg:px-0"
+          className="prose text-title-light md:prose-lg lg:prose-xl prose-strong:font-extrabold prose-p:leading-6 md:prose-p:leading-7 lg:prose-p:leading-8 mx-auto max-w-3xl px-4 lg:px-0"
         />
       </article>
+
+      {randomArticles.length > 0 && (
+        <section className="mx-auto mt-10 flex w-full max-w-7xl flex-col gap-4 px-4 md:mt-16 md:gap-8 lg:mt-20 lg:gap-10 lg:px-6">
+          <header>
+            <h2 className="font-grotesque text-title-light text-2xl font-semibold uppercase md:text-3xl lg:text-4xl">{t('similar-content')}</h2>
+          </header>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {randomArticles.map(item => {
+              const itemMedia = item.images as Media;
+              const itemCategory = item.details.category as Category;
+
+              return (
+                <SimiliarContentCard
+                  key={item.id}
+                  title={item.title}
+                  image={itemMedia.url ?? ''}
+                  categoryName={itemCategory.name}
+                  date={formatDate(item.details.date, locale)}
+                  author={item.details.author}
+                  slug={item.slug ?? ''}
+                />
+              );
+            })}
+          </div>
+        </section>
+      )}
     </section>
   );
 }

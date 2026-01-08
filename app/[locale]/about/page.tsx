@@ -33,10 +33,10 @@ async function About() {
 
       <div className="container flex flex-col gap-2 p-4 pt-4 pb-14 lg:gap-8 lg:pt-10 lg:pb-28">
         <header>
-          <h1 className="font-grotesque text-title-light text-2xl leading-10 font-medium uppercase lg:text-6xl">{about.title}</h1>
+          <h1 className="font-grotesque text-title-light text-2xl font-medium uppercase lg:text-6xl">{about.title}</h1>
         </header>
 
-        <div className="font-grotesque text-title-light space-y-4 text-xl lg:space-y-6 lg:text-3xl lg:leading-10">{about.description}</div>
+        <div className="font-grotesque text-title-light space-y-4 text-xl lg:space-y-6 lg:text-3xl">{about.description}</div>
       </div>
     </section>
   );
