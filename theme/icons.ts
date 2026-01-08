@@ -12,6 +12,14 @@ import {
   RiMenuLine,
   RiCalendarLine,
   RiCloseFill,
+  RiFacebookFill,
+  RiWhatsappFill,
+  RiTelegramFill,
+  RiRedditFill,
+  RiBlueskyFill,
+  RiMastodonFill,
+  RiLinkM,
+  RiCheckLine,
 } from 'react-icons/ri';
 
 const icons = [
@@ -78,6 +86,38 @@ const icons = [
   {
     label: 'location',
     icon: IoLocationSharp,
+  },
+  {
+    label: 'facebook',
+    icon: RiFacebookFill,
+  },
+  {
+    label: 'whatsapp',
+    icon: RiWhatsappFill,
+  },
+  {
+    label: 'telegram',
+    icon: RiTelegramFill,
+  },
+  {
+    label: 'reddit',
+    icon: RiRedditFill,
+  },
+  {
+    label: 'bluesky',
+    icon: RiBlueskyFill,
+  },
+  {
+    label: 'mastodon',
+    icon: RiMastodonFill,
+  },
+  {
+    label: 'link',
+    icon: RiLinkM,
+  },
+  {
+    label: 'check',
+    icon: RiCheckLine,
   },
 ] as const;
 

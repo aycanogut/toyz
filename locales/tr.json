@@ -22,7 +22,14 @@
     "show-more": "içeriğe git",
     "share": "paylaş",
     "back": "geri",
-    "similar-content": "Benzer İçerikler"
+    "similar-content": "Benzer İçerikler",
+    "share-facebook": "Facebook'ta paylaş",
+    "share-whatsapp": "WhatsApp'ta paylaş",
+    "share-telegram": "Telegram'da paylaş",
+    "share-reddit": "Reddit'te paylaş",
+    "share-bluesky": "Bluesky'da paylaş",
+    "share-mastodon": "Mastodon'da paylaş",
+    "copy-link": "Linki kopyala"
   },
   "Contact": {
     "message": "bize ulaşın",

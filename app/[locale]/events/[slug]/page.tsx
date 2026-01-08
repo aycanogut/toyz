@@ -97,12 +97,22 @@ async function EventDetails({ params }: EventDetailsProps) {
               title={title}
               slug={slug}
               locale={locale}
+              type="events"
             />
           </div>
         </div>
 
         <div className="mx-auto flex w-full max-w-7xl justify-between px-4 lg:px-0">
           <BackButton />
+
+          <div className="md:hidden">
+            <SocialMediaShare
+              title={title}
+              slug={slug}
+              locale={locale}
+              type="events"
+            />
+          </div>
         </div>
 
         {galleryItems.length > 0 && (

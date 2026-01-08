@@ -22,7 +22,14 @@
     "show-more": "show more",
     "share": "share",
     "back": "back",
-    "similar-content": "Similar Content"
+    "similar-content": "Similar Content",
+    "share-facebook": "Share on Facebook",
+    "share-whatsapp": "Share on WhatsApp",
+    "share-telegram": "Share on Telegram",
+    "share-reddit": "Share on Reddit",
+    "share-bluesky": "Share on Bluesky",
+    "share-mastodon": "Share on Mastodon",
+    "copy-link": "Copy link"
   },
   "Contact": {
     "message": "send us your message",

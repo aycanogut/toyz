@@ -12,6 +12,12 @@
   --color-button-background: #ededed;
   --color-border-dark: #565656;
   --color-border-light: #e5e7eb;
+  --color-social-facebook: #1877f2;
+  --color-social-whatsapp: #25d366;
+  --color-social-telegram: #0088cc;
+  --color-social-reddit: #ff4500;
+  --color-social-bluesky: #0085ff;
+  --color-social-mastodon: #6364ff;
 }
 
 @theme inline {
