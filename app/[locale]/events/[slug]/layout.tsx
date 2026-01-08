@@ -24,7 +24,16 @@ export async function generateMetadata(props: {
 
   const media = event.poster as Media;
 
+  const ogImage = {
+    url: media.url ?? '',
+    width: media.width ?? 1200,
+    height: media.height ?? 630,
+    alt: event.title,
+    type: media.mimeType ?? 'image/jpeg',
+  };
+
   return {
+    metadataBase: new URL(toyzConfig.baseUrl),
     title: `${event.title} - ${toyzConfig.title}`,
     applicationName: toyzConfig.title,
     keywords: event.keywords?.join(', ') ?? '',
@@ -32,10 +41,15 @@ export async function generateMetadata(props: {
       siteName: toyzConfig.title,
       title: event.title,
       type: 'article',
-      images: [media.url ?? ''],
+      images: [ogImage],
       url: `${toyzConfig.baseUrl}/${locale}/events/${slug}`,
       locale,
       modifiedTime: event.updatedAt,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: event.title,
+      images: [ogImage],
     },
     alternates: {
       canonical: `${toyzConfig.baseUrl}/${locale}/events/${slug}`,
