@@ -24,16 +24,7 @@ export async function generateMetadata(props: {
 
   const media = article.images as Media;
 
-  const ogImage = {
-    url: media.url ?? '',
-    width: media.width ?? 1200,
-    height: media.height ?? 630,
-    alt: article.title,
-    type: media.mimeType ?? 'image/jpeg',
-  };
-
   return {
-    metadataBase: new URL(toyzConfig.baseUrl),
     title: `${article.title} - ${toyzConfig.title}`,
     description: article.description,
     applicationName: toyzConfig.title,
@@ -43,17 +34,11 @@ export async function generateMetadata(props: {
       title: article.title,
       description: article.description,
       type: 'article',
-      images: [ogImage],
+      images: [media.url ?? ''],
       url: `${toyzConfig.baseUrl}/${locale}/content/${slug}`,
       locale,
       modifiedTime: article.updatedAt,
       authors: [article.details.author],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: article.title,
-      description: article.description,
-      images: [ogImage],
     },
     authors: [
       {
