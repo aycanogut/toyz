@@ -16,7 +16,7 @@ interface SocialMediaShareProps {
   title: string;
   slug: string;
   locale: string;
-  type?: 'content' | 'events';
+  type: 'content' | 'event';
   className?: string;
 }
 

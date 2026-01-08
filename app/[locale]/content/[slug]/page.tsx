@@ -127,6 +127,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
               title={title}
               slug={slug}
               locale={locale}
+              type="content"
             />
           </div>
         </div>
