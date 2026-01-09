@@ -14,7 +14,7 @@ function BackButton() {
   return (
     <Button
       onClick={back}
-      className="focus-visible:ring-title-light group inline-flex cursor-pointer items-center gap-2 border-0 bg-transparent p-0 hover:bg-transparent focus-visible:ring-2 focus-visible:outline-hidden"
+      className="focus-visible:ring-title-light group inline-flex items-center gap-2 border-0 bg-transparent p-0 hover:bg-transparent focus-visible:ring-2 focus-visible:outline-hidden"
     >
       <Icon
         name="arrow-left"

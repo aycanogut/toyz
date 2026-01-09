@@ -110,7 +110,7 @@ function ContactForm() {
       <Button
         disabled={isSubmitting}
         loading={isSubmitting}
-        className="h-12 cursor-pointer"
+        className="h-12"
       >
         {t('send')}
       </Button>
