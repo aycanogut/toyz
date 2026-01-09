@@ -40,7 +40,7 @@ export async function generateStaticParams() {
   return results.flat();
 }
 
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 async function ContentDetails({ params }: ContentDetailsProps) {
   const { locale, slug } = await params;
