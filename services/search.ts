@@ -13,7 +13,7 @@ const getSearch = unstable_cache(
     });
   },
   ['search'],
-  { revalidate: 3600 }
+  { revalidate: 86400 }
 );
 
 export default getSearch;

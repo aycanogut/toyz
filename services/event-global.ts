@@ -13,7 +13,7 @@ const getEventGlobal = unstable_cache(
     });
   },
   ['events-global'],
-  { revalidate: 3600 }
+  { revalidate: 86400 }
 );
 
 export default getEventGlobal;

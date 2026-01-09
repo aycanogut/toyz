@@ -24,7 +24,7 @@ const getSitemapEvents = unstable_cache(
     return result.docs;
   },
   ['sitemap-events'],
-  { revalidate: 3600 }
+  { revalidate: 86400 }
 );
 
 export default getSitemapEvents;

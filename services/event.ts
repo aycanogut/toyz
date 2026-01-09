@@ -19,7 +19,7 @@ const getEvent = unstable_cache(
     return result.docs[0] ?? null;
   },
   ['event'],
-  { revalidate: 3600 }
+  { revalidate: 86400 }
 );
 
 export default getEvent;
