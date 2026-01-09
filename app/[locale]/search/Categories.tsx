@@ -47,7 +47,6 @@ function Categories({ categories }: CategoriesProps) {
       }}
       trigger={
         <Button
-          className="cursor-pointer"
           appendIconProps={{
             name: 'arrow-down',
             className: cn('size-5 transition-transform', isOpen && 'rotate-180'),

@@ -44,7 +44,7 @@ function ScrollUp() {
               name: 'arrow-up',
               className: 'size-5',
             }}
-            className="bg-background cursor-pointer shadow-lg shadow-black/30"
+            className="bg-background shadow-lg shadow-black/30"
           />
         </motion.div>
       ) : null}

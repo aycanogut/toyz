@@ -62,7 +62,7 @@ function SocialMediaShare({ title, slug, locale, type, className }: SocialMediaS
         onClick={handleCopyLink}
         className={cn(
           'flex size-8 items-center justify-center bg-white/10 text-white transition-all duration-200 hover:scale-110 active:scale-95 md:size-8 lg:size-10',
-          'hover:bg-title-light hover:text-background cursor-pointer',
+          'hover:bg-title-light hover:text-background',
           copied && 'bg-green-500 hover:bg-green-500'
         )}
         aria-label={t('copy-link')}

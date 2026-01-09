@@ -34,7 +34,7 @@ export async function generateStaticParams() {
   return results.flat();
 }
 
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 async function EventDetails({ params }: EventDetailsProps) {
   const { locale, slug } = await params;

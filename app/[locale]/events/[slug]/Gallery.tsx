@@ -107,7 +107,7 @@ function Gallery({ images }: GalleryProps) {
               setSelectedIndex(index);
               setIsOpen(true);
             }}
-            className="group relative aspect-square w-full cursor-pointer overflow-hidden transition-transform hover:scale-102"
+            className="group relative aspect-square w-full overflow-hidden transition-transform hover:scale-102"
           >
             <Image
               src={image.url ?? ''}
@@ -155,7 +155,7 @@ function Gallery({ images }: GalleryProps) {
                           <Button
                             type="button"
                             onClick={() => setIsOpen(false)}
-                            className="bg-background/70 hover:bg-background-light/70 text-title-light absolute top-1 right-1 z-10 cursor-pointer p-1 transition-colors md:top-4 md:right-4 md:p-2"
+                            className="bg-background/70 hover:bg-background-light/70 text-title-light absolute top-1 right-1 z-10 p-1 transition-colors md:top-4 md:right-4 md:p-2"
                             aria-label={t('close-gallery')}
                           >
                             <Icon
@@ -171,7 +171,7 @@ function Gallery({ images }: GalleryProps) {
                                 e.stopPropagation();
                                 scrollPrev();
                               }}
-                              className="bg-background/70 hover:bg-background-light/70 text-title-light absolute top-1/2 left-1 z-10 -translate-y-1/2 cursor-pointer p-1 transition-colors md:left-4 md:p-2"
+                              className="bg-background/70 hover:bg-background-light/70 text-title-light absolute top-1/2 left-1 z-10 -translate-y-1/2 p-1 transition-colors md:left-4 md:p-2"
                               aria-label={t('previous-image')}
                             >
                               <Icon
@@ -188,7 +188,7 @@ function Gallery({ images }: GalleryProps) {
                                 e.stopPropagation();
                                 scrollNext();
                               }}
-                              className="bg-background/70 hover:bg-background-light/70 text-title-light absolute top-1/2 right-1 z-10 -translate-y-1/2 cursor-pointer p-1 transition-colors md:right-4 md:p-2"
+                              className="bg-background/70 hover:bg-background-light/70 text-title-light absolute top-1/2 right-1 z-10 -translate-y-1/2 p-1 transition-colors md:right-4 md:p-2"
                               aria-label={t('next-image')}
                             >
                               <Icon

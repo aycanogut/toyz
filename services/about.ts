@@ -13,7 +13,7 @@ const getAbout = unstable_cache(
     });
   },
   ['about'],
-  { revalidate: 3600 }
+  { revalidate: 86400 }
 );
 
 export default getAbout;
