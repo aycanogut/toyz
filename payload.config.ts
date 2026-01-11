@@ -96,4 +96,7 @@ export default buildConfig({
     defaultFromName: toyzConfig.title,
     apiKey: toyzConfig.resendApiKey,
   }),
+  routes: {
+    admin: '/toyz-panel',
+  },
 });

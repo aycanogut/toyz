@@ -73,7 +73,7 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the app.  
-Admin panel: [http://localhost:3000/admin](http://localhost:3000/admin)
+Admin panel: [http://localhost:3000/admin](http://localhost:3000/toyz-panel)
 
 ## Available Scripts
 
