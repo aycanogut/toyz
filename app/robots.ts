@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/about', '/contact', '/search', '/content/'],
+      disallow: ['/toyz-panel'],
     },
     sitemap: `${toyzConfig.baseUrl}/sitemap.xml`,
   };
