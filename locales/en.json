@@ -47,6 +47,11 @@
     "validation-subject-error": "Subject must be at least 3 characters long.",
     "validation-message-error": "Message must be at least 10 characters long."
   },
+  "Email": {
+    "subscription-note": "You are receiving this email because you subscribed to the TOYZ Webzine content bulletin.",
+    "unsubscribe": "Unsubscribe",
+    "read-more": "READ MORE"
+  },
   "Error": {
     "404": "Page not found",
     "redirect": "Homepage",

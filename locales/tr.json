@@ -47,6 +47,11 @@
     "validation-subject-error": "Konu en az 3 karakter olmalıdır.",
     "validation-message-error": "Mesaj en az 10 karakter olmalıdır."
   },
+  "Email": {
+    "subscription-note": "TOYZ Webzine içerik bültenine abone olduğunuz için bu e-postayı alıyorsunuz.",
+    "unsubscribe": "Abonelikten çık",
+    "read-more": "DEVAMINI OKU"
+  },
   "Error": {
     "404": "Sayfa bulunamadı",
     "redirect": "Anasayfa",
