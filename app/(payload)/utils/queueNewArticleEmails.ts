@@ -1,7 +1,6 @@
 import type { CollectionAfterChangeHook } from 'payload';
 
 import type { Article } from '@/payload-types';
-import extractLexicalText from '@/utils/extractLexicalText';
 
 /**
  * Queues email notification jobs for all active subscribers when an article is published.
@@ -34,24 +33,7 @@ async function queueNewArticleEmails({
         limit: 0,
       });
 
-      if (subscribers && subscribers.length > 0 && doc.slug) {
-        const articleSlug = doc.slug;
-        const summary = extractLexicalText(doc.content, 2);
-
-        let imageUrl = '';
-
-        if (doc.images) {
-          const mediaId = typeof doc.images === 'object' ? doc.images.id : doc.images;
-          const media = await payload.findByID({
-            collection: 'media',
-            id: mediaId,
-          });
-
-          if (media && media.filename) {
-            imageUrl = `https://cdn.toyzwebzine.com/${media.filename}`;
-          }
-        }
-
+      if (subscribers && subscribers.length > 0) {
         await Promise.all(
           subscribers.map((subscriber) => {
             const locale = subscriber.preferredLocale === 'tr' ? 'tr' : 'en';
@@ -61,10 +43,7 @@ async function queueNewArticleEmails({
               input: {
                 subscriberEmail: subscriber.email,
                 preferredLocale: locale,
-                articleTitle: doc.title,
-                articleSlug,
-                articleSummary: summary,
-                articleImageUrl: imageUrl,
+                articleId: doc.id,
               },
             });
           })
