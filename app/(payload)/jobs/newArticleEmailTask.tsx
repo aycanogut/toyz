@@ -39,8 +39,6 @@ export const newArticleEmailTask = {
       const { subscriberEmail, preferredLocale, articleId } = input;
       const locale = preferredLocale === 'tr' ? 'tr' : 'en';
 
-      req.payload.logger.info(`📧 Processing email job for ${subscriberEmail} (locale: ${locale}, articleId: ${articleId})`);
-
       const article = await req.payload.findByID({
         collection: 'articles',
         id: articleId,
@@ -48,9 +46,7 @@ export const newArticleEmailTask = {
       });
 
       if (!article || !article.slug) {
-        const error = new Error(`Article not found: ${articleId} (locale: ${locale})`);
-        req.payload.logger.error(`❌ ${error.message}`);
-        throw error;
+        throw new Error(`Article not found: ${articleId} (locale: ${locale})`);
       }
 
       const articleTitle = article.title;
@@ -59,25 +55,20 @@ export const newArticleEmailTask = {
       let imageUrl = '';
 
       if (article.images) {
-        try {
-          const mediaId = typeof article.images === 'object' ? article.images.id : article.images;
-          const media = await req.payload.findByID({
-            collection: 'media',
-            id: mediaId,
-          });
+        const mediaId = typeof article.images === 'object' ? article.images.id : article.images;
+        
+        const media = await req.payload.findByID({
+          collection: 'media',
+          id: mediaId,
+        });
 
-          if (media && media.filename) {
-            imageUrl = `https://cdn.toyzwebzine.com/${media.filename}`;
-          }
-        } catch (mediaError) {
-          req.payload.logger.warn(`⚠️ Could not fetch media for article ${articleId}: ${mediaError}`);
+        if (media && media.filename) {
+          imageUrl = `https://cdn.toyzwebzine.com/${media.filename}`;
         }
       }
 
       const articleUrl = `${toyzConfig.baseUrl}/${locale}/content/${article.slug}`;
       const unsubscribeUrl = `${toyzConfig.baseUrl}/api/subscribers/unsubscribe?email=${subscriberEmail}`;
-
-      req.payload.logger.info(`📝 Rendering email template for: ${articleTitle}`);
 
       const emailHtml = await render(
         <NewArticleEmail
@@ -90,15 +81,24 @@ export const newArticleEmailTask = {
         />
       );
 
-      req.payload.logger.info(`✉️ Sending email to: ${subscriberEmail}`);
-
-      await req.payload.sendEmail({
-        to: subscriberEmail,
-        subject: locale === 'tr' ? `Yeni İçerik: ${articleTitle}` : `New Content: ${articleTitle}`,
-        html: emailHtml,
-      });
-
-      req.payload.logger.info(`✅ Email sent successfully to: ${subscriberEmail}`);
+      try {
+        await req.payload.sendEmail({
+          to: subscriberEmail,
+          subject: locale === 'tr' ? `Yeni İçerik: ${articleTitle}` : `New Content: ${articleTitle}`,
+          html: emailHtml,
+        });
+      } catch (emailError) {
+        if (emailError instanceof Error && emailError.message.includes('429')) {
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          await req.payload.sendEmail({
+            to: subscriberEmail,
+            subject: locale === 'tr' ? `Yeni İçerik: ${articleTitle}` : `New Content: ${articleTitle}`,
+            html: emailHtml,
+          });
+        } else {
+          throw emailError;
+        }
+      }
 
       return {
         output: {
@@ -107,15 +107,7 @@ export const newArticleEmailTask = {
       };
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : String(error);
-      const errorStack = error instanceof Error ? error.stack : undefined;
-
-      req.payload.logger.error(`❌ Email job failed for ${input.subscriberEmail}: ${errorMessage}`);
-      
-      if (errorStack) {
-        req.payload.logger.error(`Stack trace: ${errorStack}`);
-      }
-
-      // Re-throw the original error to preserve stack trace and error type
+      req.payload.logger.error(`Email job failed for ${input.subscriberEmail}: ${errorMessage}`);
       throw error;
     }
   },
