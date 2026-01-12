@@ -35,8 +35,10 @@ async function queueNewArticleEmails({
 
       if (subscribers && subscribers.length > 0) {
         await Promise.all(
-          subscribers.map((subscriber) => {
+          subscribers.map((subscriber, index) => {
             const locale = subscriber.preferredLocale === 'tr' ? 'tr' : 'en';
+            const delayMs = index * 500;
+            const waitUntil = new Date(Date.now() + delayMs);
 
             return payload.jobs.queue({
               task: 'newArticleEmail',
@@ -45,11 +47,12 @@ async function queueNewArticleEmails({
                 preferredLocale: locale,
                 articleId: doc.id,
               },
+              waitUntil,
             });
           })
         );
 
-        payload.logger.info(`✅ Queued ${subscribers.length} notification jobs for article: ${doc.title}`);
+        payload.logger.info(`✅ Queued ${subscribers.length} notification jobs for article: ${doc.title} (staggered by 500ms)`);
       }
     } catch (error) {
       payload.logger.error(`❌ Error while queuing notifications: ${error}`);
