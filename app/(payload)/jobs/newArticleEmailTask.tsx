@@ -35,60 +35,88 @@ export const newArticleEmailTask = {
     };
     req: { payload: BasePayload };
   }) => {
-    const { subscriberEmail, preferredLocale, articleId } = input;
-    const locale: Locale = preferredLocale === 'tr' ? 'tr' : 'en';
+    try {
+      const { subscriberEmail, preferredLocale, articleId } = input;
+      const locale = preferredLocale === 'tr' ? 'tr' : 'en';
 
-    const article = await req.payload.findByID({
-      collection: 'articles',
-      id: articleId,
-      locale,
-    });
+      req.payload.logger.info(`📧 Processing email job for ${subscriberEmail} (locale: ${locale}, articleId: ${articleId})`);
 
-    if (!article || !article.slug) {
-      throw new Error(`Article not found: ${articleId}`);
-    }
-
-    const articleTitle = article.title;
-    const articleSummary = extractLexicalText(article.content, 2);
-
-    let imageUrl = '';
-    
-    if (article.images) {
-      const mediaId = typeof article.images === 'object' ? article.images.id : article.images;
-      const media = await req.payload.findByID({
-        collection: 'media',
-        id: mediaId,
+      const article = await req.payload.findByID({
+        collection: 'articles',
+        id: articleId,
+        locale,
       });
 
-      if (media && media.filename) {
-        imageUrl = `https://cdn.toyzwebzine.com/${media.filename}`;
+      if (!article || !article.slug) {
+        const error = new Error(`Article not found: ${articleId} (locale: ${locale})`);
+        req.payload.logger.error(`❌ ${error.message}`);
+        throw error;
       }
+
+      const articleTitle = article.title;
+      const articleSummary = extractLexicalText(article.content, 2);
+
+      let imageUrl = '';
+
+      if (article.images) {
+        try {
+          const mediaId = typeof article.images === 'object' ? article.images.id : article.images;
+          const media = await req.payload.findByID({
+            collection: 'media',
+            id: mediaId,
+          });
+
+          if (media && media.filename) {
+            imageUrl = `https://cdn.toyzwebzine.com/${media.filename}`;
+          }
+        } catch (mediaError) {
+          req.payload.logger.warn(`⚠️ Could not fetch media for article ${articleId}: ${mediaError}`);
+        }
+      }
+
+      const articleUrl = `${toyzConfig.baseUrl}/${locale}/content/${article.slug}`;
+      const unsubscribeUrl = `${toyzConfig.baseUrl}/api/subscribers/unsubscribe?email=${subscriberEmail}`;
+
+      req.payload.logger.info(`📝 Rendering email template for: ${articleTitle}`);
+
+      const emailHtml = await render(
+        <NewArticleEmail
+          title={articleTitle}
+          summary={articleSummary}
+          imageUrl={imageUrl}
+          articleUrl={articleUrl}
+          unsubscribeUrl={unsubscribeUrl}
+          locale={locale}
+        />
+      );
+
+      req.payload.logger.info(`✉️ Sending email to: ${subscriberEmail}`);
+
+      await req.payload.sendEmail({
+        to: subscriberEmail,
+        subject: locale === 'tr' ? `Yeni İçerik: ${articleTitle}` : `New Content: ${articleTitle}`,
+        html: emailHtml,
+      });
+
+      req.payload.logger.info(`✅ Email sent successfully to: ${subscriberEmail}`);
+
+      return {
+        output: {
+          sent: true,
+        },
+      };
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      const errorStack = error instanceof Error ? error.stack : undefined;
+
+      req.payload.logger.error(`❌ Email job failed for ${input.subscriberEmail}: ${errorMessage}`);
+      
+      if (errorStack) {
+        req.payload.logger.error(`Stack trace: ${errorStack}`);
+      }
+
+      // Re-throw the original error to preserve stack trace and error type
+      throw error;
     }
-
-    const articleUrl = `${toyzConfig.baseUrl}/${locale}/content/${article.slug}`;
-    const unsubscribeUrl = `${toyzConfig.baseUrl}/api/subscribers/unsubscribe?email=${subscriberEmail}`;
-
-    const emailHtml = await render(
-      <NewArticleEmail
-        title={articleTitle}
-        summary={articleSummary}
-        imageUrl={imageUrl}
-        articleUrl={articleUrl}
-        unsubscribeUrl={unsubscribeUrl}
-        locale={locale}
-      />
-    );
-
-    await req.payload.sendEmail({
-      to: subscriberEmail,
-      subject: locale === 'tr' ? `Yeni İçerik: ${articleTitle}` : `New Content: ${articleTitle}`,
-      html: emailHtml,
-    });
-
-    return {
-      output: {
-        sent: true,
-      },
-    };
   },
 };
