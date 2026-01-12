@@ -22,7 +22,15 @@ if (!cached) {
   };
 }
 
-export const getPayloadClient = async (): Promise<Payload> => {
+/**
+ * Returns a cached Payload CMS client instance or initializes a new one.
+ * Implements the singleton pattern to ensure only one connection is active,
+ * which is critical for preventing connection leaks in serverless environments.
+ *
+ * @returns {Promise<Payload>} A promise that resolves to the Payload CMS client.
+ * @throws {Error} If the database connection fails during initialization.
+ */
+export async function getPayloadClient(): Promise<Payload> {
   if (cached.client) {
     return cached.client;
   }
@@ -37,9 +45,9 @@ export const getPayloadClient = async (): Promise<Payload> => {
     cached.client = await cached.promise;
   } catch (error) {
     cached.promise = null;
-    console.error('🔴 DB Bağlantı Hatası (Cold Start):', error);
+    console.error('🔴 Database connection error (Cold Start):', error);
     throw error;
   }
 
   return cached.client;
-};
+}

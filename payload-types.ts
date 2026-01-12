@@ -72,6 +72,7 @@ export interface Config {
     categories: Category;
     events: Event;
     'event-media': EventMedia;
+    subscribers: Subscriber;
     search: Search;
     'payload-kv': PayloadKv;
     users: User;
@@ -91,6 +92,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     'event-media': EventMediaSelect<false> | EventMediaSelect<true>;
+    subscribers: SubscribersSelect<false> | SubscribersSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -125,6 +127,7 @@ export interface Config {
   };
   jobs: {
     tasks: {
+      newArticleEmail: TaskNewArticleEmail;
       schedulePublish: TaskSchedulePublish;
       inline: {
         input: unknown;
@@ -225,7 +228,7 @@ export interface Category {
 export interface Event {
   id: string;
   title: string;
-  poster: string | Media;
+  poster: string | EventMedia;
   details: {
     date: string;
     location: string;
@@ -261,6 +264,18 @@ export interface EventMedia {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscribers".
+ */
+export interface Subscriber {
+  id: string;
+  email: string;
+  preferredLocale: 'en' | 'tr';
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This is a collection of automatically created search results. These results are used by the global site search and will be updated automatically as documents in the CMS are created or updated.
@@ -372,7 +387,7 @@ export interface PayloadJob {
     | {
         executedAt: string;
         completedAt: string;
-        taskSlug: 'inline' | 'schedulePublish';
+        taskSlug: 'inline' | 'newArticleEmail' | 'schedulePublish';
         taskID: string;
         input?:
           | {
@@ -405,7 +420,7 @@ export interface PayloadJob {
         id?: string | null;
       }[]
     | null;
-  taskSlug?: ('inline' | 'schedulePublish') | null;
+  taskSlug?: ('inline' | 'newArticleEmail' | 'schedulePublish') | null;
   queue?: string | null;
   waitUntil?: string | null;
   processing?: boolean | null;
@@ -438,6 +453,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'event-media';
         value: string | EventMedia;
+      } | null)
+    | ({
+        relationTo: 'subscribers';
+        value: string | Subscriber;
       } | null)
     | ({
         relationTo: 'search';
@@ -579,6 +598,17 @@ export interface EventMediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscribers_select".
+ */
+export interface SubscribersSelect<T extends boolean = true> {
+  email?: T;
+  preferredLocale?: T;
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -869,6 +899,23 @@ export interface EventsGlobalSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskNewArticleEmail".
+ */
+export interface TaskNewArticleEmail {
+  input: {
+    subscriberEmail: string;
+    preferredLocale: string;
+    articleTitle: string;
+    articleSlug: string;
+    articleSummary: string;
+    articleImageUrl?: string | null;
+  };
+  output: {
+    sent: boolean;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
