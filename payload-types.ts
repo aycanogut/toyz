@@ -908,10 +908,7 @@ export interface TaskNewArticleEmail {
   input: {
     subscriberEmail: string;
     preferredLocale: string;
-    articleTitle: string;
-    articleSlug: string;
-    articleSummary: string;
-    articleImageUrl?: string | null;
+    articleId: string;
   };
   output: {
     sent: boolean;

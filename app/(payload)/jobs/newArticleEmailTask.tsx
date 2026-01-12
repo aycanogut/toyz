@@ -3,14 +3,12 @@ import type { BasePayload, EmailField, TextField, CheckboxField } from 'payload'
 
 import NewArticleEmail from '@/emails/NewArticleEmail';
 import toyzConfig from '@/toyzConfig';
+import extractLexicalText from '@/utils/extractLexicalText';
 
 const inputSchema: (EmailField | TextField)[] = [
   { name: 'subscriberEmail', type: 'email', required: true },
   { name: 'preferredLocale', type: 'text', required: true },
-  { name: 'articleTitle', type: 'text', required: true },
-  { name: 'articleSlug', type: 'text', required: true },
-  { name: 'articleSummary', type: 'text', required: true },
-  { name: 'articleImageUrl', type: 'text', required: false },
+  { name: 'articleId', type: 'text', required: true },
 ];
 
 const outputSchema: CheckboxField[] = [{ name: 'sent', type: 'checkbox', required: true }];
@@ -19,6 +17,7 @@ const outputSchema: CheckboxField[] = [{ name: 'sent', type: 'checkbox', require
  * Task configuration for sending article notification emails.
  * This task is queued when a new article is published and processes
  * email sending in the background to avoid blocking the main thread.
+ * The article is fetched with the subscriber's preferred locale for proper localization.
  */
 export const newArticleEmailTask = {
   slug: 'newArticleEmail',
@@ -32,24 +31,48 @@ export const newArticleEmailTask = {
     input: {
       subscriberEmail: string;
       preferredLocale: string;
-      articleTitle: string;
-      articleSlug: string;
-      articleSummary: string;
-      articleImageUrl: string;
+      articleId: string;
     };
     req: { payload: BasePayload };
   }) => {
-    const { subscriberEmail, preferredLocale, articleTitle, articleSlug, articleSummary, articleImageUrl } = input;
-
+    const { subscriberEmail, preferredLocale, articleId } = input;
     const locale: Locale = preferredLocale === 'tr' ? 'tr' : 'en';
-    const articleUrl = `${toyzConfig.baseUrl}/${locale}/content/${articleSlug}`;
+
+    const article = await req.payload.findByID({
+      collection: 'articles',
+      id: articleId,
+      locale,
+    });
+
+    if (!article || !article.slug) {
+      throw new Error(`Article not found: ${articleId}`);
+    }
+
+    const articleTitle = article.title;
+    const articleSummary = extractLexicalText(article.content, 2);
+
+    let imageUrl = '';
+    
+    if (article.images) {
+      const mediaId = typeof article.images === 'object' ? article.images.id : article.images;
+      const media = await req.payload.findByID({
+        collection: 'media',
+        id: mediaId,
+      });
+
+      if (media && media.filename) {
+        imageUrl = `https://cdn.toyzwebzine.com/${media.filename}`;
+      }
+    }
+
+    const articleUrl = `${toyzConfig.baseUrl}/${locale}/content/${article.slug}`;
     const unsubscribeUrl = `${toyzConfig.baseUrl}/api/subscribers/unsubscribe?email=${subscriberEmail}`;
 
     const emailHtml = await render(
       <NewArticleEmail
         title={articleTitle}
         summary={articleSummary}
-        imageUrl={articleImageUrl}
+        imageUrl={imageUrl}
         articleUrl={articleUrl}
         unsubscribeUrl={unsubscribeUrl}
         locale={locale}
