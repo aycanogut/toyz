@@ -106,6 +106,13 @@ export default buildConfig({
         limit: 50,
       },
     ],
+    jobsCollectionOverrides: ({ defaultJobsCollection }) => ({
+      ...defaultJobsCollection,
+      admin: {
+        ...defaultJobsCollection.admin,
+        hidden: false,
+      },
+    }),
   },
   routes: {
     admin: '/toyz-panel',
