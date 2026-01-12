@@ -1,8 +1,13 @@
 import type { CollectionConfig } from 'payload';
+
 import slugField from '../fields/slug';
+import queueNewArticleEmails from '../utils/queueNewArticleEmails';
 
 export const Articles: CollectionConfig = {
   slug: 'articles',
+  hooks: {
+    afterChange: [queueNewArticleEmails],
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'createdAt', 'updatedAt'],
