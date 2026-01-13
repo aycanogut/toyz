@@ -1,10 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import Error from 'next/error';
-
-import * as Sentry from '@sentry/nextjs';
 
 import Button from '@/components/Button';
 
@@ -17,9 +13,6 @@ interface GlobalErrorProps {
 }
 
 function GlobalError({ error, reset }: GlobalErrorProps) {
-  useEffect(() => {
-    Sentry.captureException(error);
-  }, [error]);
 
   return (
     <html>
