@@ -111,7 +111,7 @@ export default buildConfig({
       admin: {
         ...defaultJobsCollection.admin,
         hidden: false,
-        defaultColumns: ['taskSlug', 'completedAt', 'hasError', 'processing', 'totalTried'],
+        defaultColumns: ['taskSlug', 'subscriberEmail', 'completedAt', 'hasError', 'processing', 'totalTried'],
       },
     }),
   },

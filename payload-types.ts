@@ -185,6 +185,7 @@ export interface Article {
     author: string;
   };
   keywords?: string[] | null;
+  isEmailSent?: boolean | null;
   slug?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -525,6 +526,7 @@ export interface ArticlesSelect<T extends boolean = true> {
         author?: T;
       };
   keywords?: T;
+  isEmailSent?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;

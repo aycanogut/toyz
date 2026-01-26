@@ -1,65 +1,67 @@
-import type { CollectionAfterChangeHook } from 'payload';
-
+import type { CollectionAfterChangeHook, CollectionBeforeChangeHook } from 'payload';
 import type { Article } from '@/payload-types';
 
-/**
- * Queues email notification jobs for all active subscribers when an article is published.
- * This hook is triggered after an article is created or updated.
- * Instead of sending emails directly, it queues background jobs for better performance.
- *
- * @param {Object} params - The hook parameters provided by Payload CMS.
- * @param {Article} params.doc - The current document state after the change.
- * @param {Article} params.previousDoc - The previous document state before the change.
- * @param {Object} params.req - The request object containing the Payload instance.
- * @returns {Promise<Article>} The document, unchanged.
- */
-async function queueNewArticleEmails({
-  doc,
-  previousDoc,
-  req: { payload },
-}: Parameters<CollectionAfterChangeHook<Article>>[0]): Promise<Article> {
-  const isPublished = doc._status === 'published';
-  const isRecentlyPublished = isPublished && (!previousDoc || previousDoc._status !== 'published');
+export const setArticleEmailFlag: CollectionBeforeChangeHook<Article> = async ({ data, originalDoc, operation, req }) => {
+  if (operation !== 'update' && operation !== 'create') return data;
 
-  if (isRecentlyPublished) {
-    try {
-      const { docs: subscribers } = await payload.find({
-        collection: 'subscribers',
-        where: {
-          isActive: {
-            equals: true,
-          },
-        },
-        limit: 0,
-      });
+  const isNowPublished = data._status === 'published';
+  const wasAlreadyPublished = originalDoc?._status === 'published';
+  const hasAlreadySentMail = originalDoc?.isEmailSent === true;
 
-      if (subscribers && subscribers.length > 0) {
-        await Promise.all(
-          subscribers.map((subscriber, index) => {
-            const locale = subscriber.preferredLocale === 'tr' ? 'tr' : 'en';
-            const delayMs = index * 500;
-            const waitUntil = new Date(Date.now() + delayMs);
+  req.payload.logger.info(
+    `🔍 Hook Check [${data.title}]: NowPublished: ${isNowPublished}, PreviouslyPublished: ${wasAlreadyPublished}, AlreadySent: ${hasAlreadySentMail}`
+  );
 
-            return payload.jobs.queue({
-              task: 'newArticleEmail',
-              input: {
-                subscriberEmail: subscriber.email,
-                preferredLocale: locale,
-                articleId: doc.id,
-              },
-              waitUntil,
-            });
-          })
-        );
+  if (isNowPublished && !wasAlreadyPublished && !hasAlreadySentMail) {
+    req.payload.logger.info(`🎯 Targeting for Email Queue: ${data.title}`);
 
-        payload.logger.info(`✅ Queued ${subscribers.length} notification jobs for article: ${doc.title} (staggered by 500ms)`);
-      }
-    } catch (error) {
-      payload.logger.error(`❌ Error while queuing notifications: ${error}`);
+    data.isEmailSent = true;
+
+    req.context.shouldQueueEmails = true;
+  } else {
+    if (hasAlreadySentMail) {
+      data.isEmailSent = true;
     }
+    req.payload.logger.info(`🚫 Skipping Email Queue: Article already published or mail already sent.`);
   }
 
-  return doc;
-}
+  return data;
+};
 
-export default queueNewArticleEmails;
+export const queueNewArticleEmails: CollectionAfterChangeHook<Article> = async ({ doc, req: { payload, context } }) => {
+  if (!context.shouldQueueEmails) {
+    return doc;
+  }
+
+  try {
+    const { docs: subscribers } = await payload.find({
+      collection: 'subscribers',
+      where: { isActive: { equals: true } },
+      limit: 0,
+    });
+
+    if (!subscribers?.length) return doc;
+
+    await Promise.all(
+      subscribers.map((subscriber, index) =>
+        payload.jobs.queue({
+          task: 'newArticleEmail',
+          input: {
+            subscriberEmail: subscriber.email,
+            preferredLocale: subscriber.preferredLocale === 'tr' ? 'tr' : 'en',
+            articleId: doc.id,
+          },
+          waitUntil: new Date(Date.now() + index * 600),
+        })
+      )
+    );
+
+    payload.logger.info(`✅ Successfully queued ${subscribers.length} jobs for: ${doc.title}`);
+  } catch (error) {
+    payload.logger.error(`❌ Error in queueing: ${error}`);
+  }
+
+  delete context.shouldQueueEmails;
+
+  return doc;
+};
