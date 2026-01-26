@@ -56,7 +56,7 @@ export const newArticleEmailTask = {
 
       if (article.images) {
         const mediaId = typeof article.images === 'object' ? article.images.id : article.images;
-        
+
         const media = await req.payload.findByID({
           collection: 'media',
           id: mediaId,
@@ -89,7 +89,7 @@ export const newArticleEmailTask = {
         });
       } catch (emailError) {
         if (emailError instanceof Error && emailError.message.includes('429')) {
-          await new Promise((resolve) => setTimeout(resolve, 1000));
+          await new Promise(resolve => setTimeout(resolve, 1000));
           await req.payload.sendEmail({
             to: subscriberEmail,
             subject: locale === 'tr' ? `Yeni İçerik: ${articleTitle}` : `New Content: ${articleTitle}`,
