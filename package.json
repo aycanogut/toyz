@@ -44,7 +44,7 @@
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "motion": "^12.26.1",
-    "next": "15.4.10",
+    "next": "15.5.10",
     "next-intl": "^4.7.0",
     "nextjs-google-analytics": "^2.3.7",
     "payload": "^3.70.0",
