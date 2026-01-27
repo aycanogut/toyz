@@ -13,7 +13,6 @@ interface GlobalErrorProps {
 }
 
 function GlobalError({ error, reset }: GlobalErrorProps) {
-
   return (
     <html>
       <body>
