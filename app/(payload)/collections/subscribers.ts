@@ -10,8 +10,8 @@ export const Subscribers: CollectionConfig = {
   access: {
     read: ({ req: { user } }) => Boolean(user),
     create: () => true,
-    update: () => false,
-    delete: () => false,
+    update: ({ req: { user } }) => Boolean(user),
+    delete: ({ req: { user } }) => Boolean(user),
   },
   fields: [
     {

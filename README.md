@@ -12,7 +12,6 @@ A webzine platform about graffiti, street art, underground music, skateboarding,
 - **next-intl** - Internationalization (en, tr)
 - **Cloudflare R2 Blob Storage** - Media storage
 - **Resend** - Email service
-- **Sentry** - Error tracking
 
 ## Getting Started
 
@@ -56,8 +55,6 @@ R2_BUCKET_NAME=your-r2-bucket-name
 R2_ACCESS_KEY_ID=your-acces-key-id
 R2_SECRET_ACCESS_KEY=your-secret-access-okey
 R2_ENDPOINT=your-endpoint
-SENTRY_AUTH_TOKEN=your-sentry-auth-token
-NEXT_PUBLIC_SENTRY_DSN=your-sentry-dsn
 ```
 
 4. Generate environment variable types:
