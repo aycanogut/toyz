@@ -1,6 +1,7 @@
 namespace NodeJS {
   interface ProcessEnv {
     NEXT_PUBLIC_TITLE: string;
+    NEXT_PUBLIC_INSTAGRAM_URL: string;
     NEXT_PUBLIC_BASE_URL: string;
     DATABASE_URI: string;
     PAYLOAD_SECRET: string;
