@@ -139,7 +139,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
       </article>
 
       {randomArticles.length > 0 && (
-        <section className="mx-auto mt-10 flex w-full max-w-7xl flex-col gap-4 px-4 md:mt-16 md:gap-8 sm:px-6 lg:mt-20 lg:gap-10 lg:px-8">
+        <section className="mx-auto mt-10 flex w-full max-w-7xl flex-col gap-4 px-4 sm:px-6 md:mt-16 md:gap-8 lg:mt-20 lg:gap-10 lg:px-8">
           <header>
             <h2 className="font-grotesque text-title-light text-2xl font-semibold uppercase md:text-3xl lg:text-4xl">{t('similar-content')}</h2>
           </header>
