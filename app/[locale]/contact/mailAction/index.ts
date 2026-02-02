@@ -5,8 +5,7 @@ import { z } from 'zod';
 
 import toyzConfig from '@/toyzConfig';
 import { getPayloadClient } from '@/utils/payloadClient';
-
-import verifyReCaptcha from './verifyReCaptcha';
+import verifyReCaptcha from '@/utils/verifyReCaptcha';
 
 const escapeHtml = (str: string): string =>
   str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');

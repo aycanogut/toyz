@@ -10,7 +10,7 @@ vi.mock('next-intl/server', () => ({
   getTranslations: () => mockGetTranslations,
 }));
 
-vi.mock('@/app/[locale]/contact/mailAction/verifyReCaptcha', () => ({
+vi.mock('@/utils/verifyReCaptcha', () => ({
   default: mockVerifyReCaptcha,
 }));
 

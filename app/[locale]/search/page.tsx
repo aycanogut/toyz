@@ -43,7 +43,7 @@ async function Search({ searchParams }: SearchProps) {
   });
 
   return (
-    <section className="container flex flex-col gap-12 px-4 py-12">
+    <section className="mx-auto flex w-full max-w-7xl flex-col gap-12 px-4 py-12 sm:px-6 lg:px-8">
       <Breadcrumbs />
       <h1 className="sr-only">{t('title')}</h1>
 

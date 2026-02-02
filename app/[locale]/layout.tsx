@@ -17,6 +17,7 @@ import toyzConfig from '@/toyzConfig';
 import cn from '@/utils/cn';
 
 import GoogleAnalytics from './components/GoogleAnalytics';
+import ReCaptchaProvider from './components/ReCaptchaProvider';
 import ScrollUp from './components/ScrollUp';
 
 export async function generateMetadata(props: {
@@ -98,10 +99,12 @@ async function RootLayout(props: { children: ReactNode; params: Promise<{ locale
     >
       <body className="bg-background">
         <NextIntlClientProvider>
-          <Layout>{children}</Layout>
-          <Toaster theme="dark" />
-          <GoogleAnalytics />
-          <ScrollUp />
+          <ReCaptchaProvider>
+            <Layout>{children}</Layout>
+            <Toaster theme="dark" />
+            <GoogleAnalytics />
+            <ScrollUp />
+          </ReCaptchaProvider>
         </NextIntlClientProvider>
       </body>
     </html>

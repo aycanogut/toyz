@@ -99,7 +99,7 @@ function Breadcrumbs({ currentPageTitle }: BreadcrumbsProps) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="container mx-auto p-4"
+      className="mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 lg:px-8"
     >
       <ol className="flex flex-wrap items-center gap-2">
         {breadcrumbs.map((crumb, index) => {

@@ -1,4 +1,8 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
+
+function getContactFormLocator(page: Page) {
+  return page.locator('form').filter({ has: page.locator('input[name="name"]') });
+}
 
 test.describe('Contact Form', () => {
   test.beforeEach(async ({ page }) => {
@@ -6,14 +10,15 @@ test.describe('Contact Form', () => {
   });
 
   test('should show validation errors for empty fields', async ({ page }) => {
-    const submitButton = page.getByRole('button', { name: /send|gönder/i });
+    const contactForm = getContactFormLocator(page);
+    const submitButton = contactForm.getByRole('button', { name: /send|gönder/i });
     await submitButton.click();
 
-    await expect(page.locator('form')).toContainText(/at least|invalid/i);
+    await expect(contactForm).toContainText(/at least|invalid|en az|geçersiz/i);
   });
 
   test('should fill the form and attempt submission', async ({ page }) => {
-    const contactForm = page.locator('form');
+    const contactForm = getContactFormLocator(page);
     await contactForm.locator('input[name="name"]').fill('Test Kullanıcısı');
     await contactForm.locator('input[name="email"]').fill('test@example.com');
     await contactForm.locator('input[name="subject"]').fill('E2E Test Konusu');

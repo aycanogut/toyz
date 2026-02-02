@@ -1,5 +1,6 @@
 interface ToyzConfigProps {
   title: string;
+  instagramUrl: string;
   baseUrl: string;
   resendApiKey: string;
   contactEmail: string;
@@ -16,6 +17,7 @@ interface ToyzConfigProps {
 
 const toyzConfig: ToyzConfigProps = {
   title: process.env.NEXT_PUBLIC_TITLE,
+  instagramUrl: process.env.NEXT_PUBLIC_INSTAGRAM_URL,
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   resendApiKey: process.env.RESEND_API_KEY,
   contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL,

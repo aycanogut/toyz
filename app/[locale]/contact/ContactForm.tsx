@@ -26,6 +26,7 @@ function ContactForm() {
   const { getRecapthcaToken } = useReCaptcha();
 
   const t = useTranslations('Contact');
+  const tFooter = useTranslations('Footer');
 
   const {
     register,
@@ -114,6 +115,11 @@ function ContactForm() {
       >
         {t('send')}
       </Button>
+
+      <div className="flex flex-col gap-2">
+        <p className="text-title-dark font-grotesque mt-3 text-sm leading-relaxed opacity-60">{t('privacy-notice')}</p>
+        <p className="text-title-dark font-grotesque text-sm leading-relaxed opacity-60">{tFooter('recaptcha-notice')}</p>
+      </div>
     </form>
   );
 }
