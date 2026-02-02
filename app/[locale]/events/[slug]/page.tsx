@@ -102,7 +102,7 @@ async function EventDetails({ params }: EventDetailsProps) {
           </div>
         </div>
 
-        <div className="mx-auto flex w-full max-w-7xl justify-between px-4 lg:px-0">
+        <div className="mx-auto flex w-full max-w-7xl justify-between px-4 sm:px-6 lg:px-8">
           <BackButton />
 
           <div className="md:hidden">
@@ -116,7 +116,7 @@ async function EventDetails({ params }: EventDetailsProps) {
         </div>
 
         {galleryItems.length > 0 && (
-          <div className="mx-auto w-full max-w-7xl px-4 lg:px-0">
+          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
             <Gallery images={galleryItems} />
           </div>
         )}

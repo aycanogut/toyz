@@ -8,8 +8,8 @@ interface ContentViewProps {
 
 function ContentView({ articles }: ContentViewProps) {
   return (
-    <section className="bg-background relative z-20 px-4 py-12 md:py-16 lg:py-20 xl:py-24">
-      <div className="container flex flex-col gap-14">
+    <section className="bg-background relative z-20 py-12 md:py-16 lg:py-20 xl:py-24">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-14 px-4 sm:px-6 lg:px-8">
         {articles.length > 0 &&
           articles.map(item => {
             const media = item.images as Media;

@@ -4,7 +4,7 @@ test.describe('Search', () => {
   test('should filter articles by category', async ({ page }) => {
     await page.goto('/search');
 
-    const categoryButton = page.locator('section.container button[aria-haspopup="dialog"]');
+    const categoryButton = page.locator('section button[aria-haspopup="dialog"]');
 
     await expect(categoryButton).toBeVisible();
     await categoryButton.click();

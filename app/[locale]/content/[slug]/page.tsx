@@ -119,7 +119,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
           </div>
         </div>
 
-        <div className="mx-auto flex w-full max-w-3xl justify-between px-4 lg:px-0">
+        <div className="mx-auto flex w-full max-w-3xl justify-between px-4 sm:px-6 lg:px-8">
           <BackButton />
 
           <div className="md:hidden">
@@ -134,12 +134,12 @@ async function ContentDetails({ params }: ContentDetailsProps) {
 
         <RichText
           data={content}
-          className="prose text-title-light md:prose-lg lg:prose-xl prose-strong:font-extrabold prose-p:leading-6 md:prose-p:leading-7 lg:prose-p:leading-8 mx-auto max-w-3xl px-4 lg:px-0"
+          className="prose text-title-light md:prose-lg lg:prose-xl prose-strong:font-extrabold prose-p:leading-6 md:prose-p:leading-7 lg:prose-p:leading-8 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8"
         />
       </article>
 
       {randomArticles.length > 0 && (
-        <section className="mx-auto mt-10 flex w-full max-w-7xl flex-col gap-4 px-4 md:mt-16 md:gap-8 lg:mt-20 lg:gap-10 lg:px-6">
+        <section className="mx-auto mt-10 flex w-full max-w-7xl flex-col gap-4 px-4 md:mt-16 md:gap-8 sm:px-6 lg:mt-20 lg:gap-10 lg:px-8">
           <header>
             <h2 className="font-grotesque text-title-light text-2xl font-semibold uppercase md:text-3xl lg:text-4xl">{t('similar-content')}</h2>
           </header>

@@ -71,7 +71,7 @@ function Footer() {
 
   return (
     <footer className="bg-background border-background-light relative min-h-100 border-t py-12 md:min-h-140 md:py-16 lg:min-h-110 lg:py-20">
-      <div className="container">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <div className="relative h-full max-h-120 w-full max-w-100 opacity-15 md:max-h-140 md:max-w-140 lg:max-h-100 lg:max-w-100">
             <Image
@@ -83,7 +83,7 @@ function Footer() {
           </div>
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 md:px-0">
+        <div className="relative z-10">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
             <div>
               <h3 className="text-title-light font-grotesque mb-4 text-xl font-bold tracking-wider uppercase">{t('about')}</h3>
