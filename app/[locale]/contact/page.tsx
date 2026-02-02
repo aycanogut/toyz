@@ -6,9 +6,9 @@ import Icon from '@/components/Icon';
 import { Link } from '@/i18n/routing';
 import { Media } from '@/payload-types';
 import getContact from '@/services/contact';
+import toyzConfig from '@/toyzConfig';
 
 import Breadcrumbs from '../components/Breadcrumbs';
-import ReCaptchaProvider from '../components/ReCaptchaProvider';
 
 import ContactForm from './ContactForm';
 
@@ -43,7 +43,7 @@ async function Contact() {
 
         <div className="flex flex-col gap-4 sm:flex-row">
           <Link
-            href="https://www.instagram.com/toyzwebzine"
+            href={toyzConfig.instagramUrl}
             target="_blank"
             className="bg-background-light flex gap-2 rounded-s rounded-e p-2.5 md:inline-flex"
           >
@@ -69,9 +69,7 @@ async function Contact() {
           </Link>
         </div>
 
-        <ReCaptchaProvider>
-          <ContactForm />
-        </ReCaptchaProvider>
+        <ContactForm />
       </div>
     </section>
   );

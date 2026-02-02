@@ -10,7 +10,9 @@
     "events": "events",
     "about": "about",
     "contact": "contact",
-    "search": "search"
+    "search": "search",
+    "navigation": "Navigation",
+    "pages": "Pages"
   },
   "Search": {
     "title": "Search Results",
@@ -45,7 +47,8 @@
     "validation-name-error": "Name must be at least 2 characters long.",
     "validation-email-error": "Invalid email address.",
     "validation-subject-error": "Subject must be at least 3 characters long.",
-    "validation-message-error": "Message must be at least 10 characters long."
+    "validation-message-error": "Message must be at least 10 characters long.",
+    "privacy-notice": "By submitting this form, you agree that your personal data (name, email, subject, message) will be used solely for responding to your inquiry. Your data will not be shared with third parties and will be stored securely. You can request deletion of your data at any time."
   },
   "Email": {
     "subscription-note": "You are receiving this email because you subscribed to the TOYZ Webzine content bulletin.",
@@ -57,5 +60,17 @@
     "redirect": "Homepage",
     "500": "Something went wrong!",
     "try-again": "Try Again"
+  },
+  "Footer": {
+    "description": "TOYZ is a webzine focused on skateboarding culture, graffiti, independent music, film, photography, and underground art. Featuring artist interviews, scene stories, and insights into alternative culture, we document underground movements across global DIY community.",
+    "newsletter": "Newsletter",
+    "newsletter-description": "Stay connected by subscribing to our newsletter.",
+    "newsletter-placeholder": "Enter your e-mail",
+    "newsletter-subscribe": "Subscribe",
+    "subscribed": "Successfully subscribed to newsletter!",
+    "already-subscribed": "This email is already subscribed.",
+    "invalid-email": "Please enter a valid email address.",
+    "error": "Something went wrong. Please try again.",
+    "recaptcha-notice": "This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply."
   }
 }

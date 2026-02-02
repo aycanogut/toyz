@@ -10,7 +10,9 @@
     "events": "etkinlikler",
     "about": "hakkımızda",
     "contact": "iletişim",
-    "search": "ara"
+    "search": "ara",
+    "navigation": "Navigasyon",
+    "pages": "Sayfalar"
   },
   "Search": {
     "title": "Arama Sonuçları",
@@ -45,7 +47,8 @@
     "validation-name-error": "İsim en az 2 karakter olmalıdır.",
     "validation-email-error": "Geçersiz e-posta adresi.",
     "validation-subject-error": "Konu en az 3 karakter olmalıdır.",
-    "validation-message-error": "Mesaj en az 10 karakter olmalıdır."
+    "validation-message-error": "Mesaj en az 10 karakter olmalıdır.",
+    "privacy-notice": "Bu formu göndererek, kişisel verilerinizin (isim, e-posta, konu, mesaj) yalnızca talebinize yanıt vermek amacıyla kullanılacağını kabul edersiniz. Verileriniz üçüncü taraflarla paylaşılmayacak ve güvenli bir şekilde saklanacaktır. Verilerinizin silinmesini istediğinizde bize ulaşabilirsiniz."
   },
   "Email": {
     "subscription-note": "TOYZ Webzine içerik bültenine abone olduğunuz için bu e-postayı alıyorsunuz.",
@@ -57,5 +60,17 @@
     "redirect": "Anasayfa",
     "500": "Bir şeyler ters gitti!",
     "try-again": "Tekrar Dene"
+  },
+  "Footer": {
+    "description": "TOYZ, kaykay kültürü, graffiti, bağımsız müzik, sinema, fotoğraf ve yeraltı sanatına odaklanan bir webzine. Sanatçılarla yapılan röportajlar, sahne hikâyeleri ve alternatif kültürü belgeleyen içeriklerle küresel yeraltı hareketlerini ele alıyoruz.",
+    "newsletter": "Bülten",
+    "newsletter-description": "Yeni içeriklerden haberdar olmak için bültenimize kayıt olun.",
+    "newsletter-placeholder": "E-posta adresiniz",
+    "newsletter-subscribe": "Abone Ol",
+    "subscribed": "Bültene başarıyla abone oldunuz!",
+    "already-subscribed": "Bu e-posta adresi zaten abone.",
+    "invalid-email": "Lütfen geçerli bir e-posta adresi girin.",
+    "error": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+    "recaptcha-notice": "Bu site reCAPTCHA tarafından korunmaktadır ve Google Gizlilik Politikası ile Hizmet Şartları geçerlidir."
   }
 }
