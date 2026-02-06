@@ -27,14 +27,15 @@
     "generate:env-key-types": "npx ts-node ./generatorScripts/envFileTypeBuilder.ts && npx prettier --w types/EnvFileTypes.d.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.984.0",
     "@hookform/resolvers": "^5.2.2",
-    "@payloadcms/db-mongodb": "^3.70.0",
-    "@payloadcms/email-resend": "^3.70.0",
-    "@payloadcms/next": "^3.70.0",
-    "@payloadcms/plugin-search": "^3.70.0",
-    "@payloadcms/richtext-lexical": "^3.70.0",
-    "@payloadcms/storage-s3": "^3.70.0",
-    "@payloadcms/ui": "^3.70.0",
+    "@payloadcms/db-mongodb": "^3.75.0",
+    "@payloadcms/email-resend": "^3.75.0",
+    "@payloadcms/next": "^3.75.0",
+    "@payloadcms/plugin-search": "^3.75.0",
+    "@payloadcms/richtext-lexical": "^3.75.0",
+    "@payloadcms/storage-s3": "^3.75.0",
+    "@payloadcms/ui": "^3.75.0",
     "@radix-ui/react-popover": "^1.1.15",
     "@react-email/components": "^1.0.4",
     "@react-email/render": "^2.0.2",
@@ -47,7 +48,7 @@
     "next": "15.4.10",
     "next-intl": "^4.7.0",
     "nextjs-google-analytics": "^2.3.7",
-    "payload": "^3.74.0",
+    "payload": "^3.75.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-google-recaptcha-v3": "^1.11.0",
@@ -95,6 +96,13 @@
     "overrides": {
       "@types/react": "19.1.12",
       "@types/react-dom": "19.1.9"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@swc/core",
+      "esbuild",
+      "sharp",
+      "unrs-resolver"
+    ]
   }
 }
