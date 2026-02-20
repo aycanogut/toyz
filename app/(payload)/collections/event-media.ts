@@ -7,10 +7,6 @@ export const EventMedia: CollectionConfig = {
     mimeTypes: ['image/*'],
     disableLocalStorage: true,
   },
-  admin: {
-    defaultColumns: ['filename', 'thumbnail', 'event', 'updatedAt'],
-    useAsTitle: 'filename',
-  },
   fields: [
     {
       name: 'event',
