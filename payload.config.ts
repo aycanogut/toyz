@@ -33,6 +33,7 @@ export default buildConfig({
     try {
       const { docs: staleJobs } = await payload.find({
         collection: 'payload-jobs',
+        overrideAccess: true,
         where: {
           and: [
             { processing: { equals: true } },
@@ -42,11 +43,14 @@ export default buildConfig({
         limit: 100,
       });
 
+      payload.logger.info(`onInit: found ${staleJobs.length} stuck jobs`);
+
       if (staleJobs.length > 0) {
         await Promise.all(
           staleJobs.map((job) =>
             payload.update({
               collection: 'payload-jobs',
+              overrideAccess: true,
               id: job.id,
               data: { processing: false },
             })
