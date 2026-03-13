@@ -38,6 +38,7 @@ export async function getPayloadClient(): Promise<Payload> {
   if (!cached.promise) {
     cached.promise = getPayload({
       config: configPromise,
+      cron: true,
     });
   }
 
