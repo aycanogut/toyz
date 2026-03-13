@@ -29,6 +29,35 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
+  onInit: async (payload) => {
+    try {
+      const { docs: staleJobs } = await payload.find({
+        collection: 'payload-jobs',
+        where: {
+          and: [
+            { processing: { equals: true } },
+            { completedAt: { exists: false } },
+          ],
+        },
+        limit: 100,
+      });
+
+      if (staleJobs.length > 0) {
+        await Promise.all(
+          staleJobs.map((job) =>
+            payload.update({
+              collection: 'payload-jobs',
+              id: job.id,
+              data: { processing: false },
+            })
+          )
+        );
+        payload.logger.info(`Recovered ${staleJobs.length} stuck jobs on startup`);
+      }
+    } catch (error) {
+      payload.logger.error(`Failed to reset stale jobs: ${error}`);
+    }
+  },
   collections: [Articles, Media, Categories, Events, EventMedia, Subscribers],
   globals: [Home, Slider, About, Contact, SearchPage, EventsGlobal],
   secret: toyzConfig.payloadSecret || '',
@@ -99,10 +128,11 @@ export default buildConfig({
     apiKey: toyzConfig.resendApiKey,
   }),
   jobs: {
+    deleteJobOnComplete: true,
     tasks: [newArticleEmailTask],
     autoRun: [
       {
-        cron: '*/5 * * * *',
+        cron: '*/1 * * * *',
         limit: 50,
       },
     ],
