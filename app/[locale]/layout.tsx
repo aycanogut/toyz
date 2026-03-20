@@ -22,7 +22,7 @@ import ScrollUp from './components/ScrollUp';
 
 export async function generateMetadata(props: {
   params: Promise<{
-    locale: Locale;
+    locale: string;
   }>;
 }): Promise<Metadata> {
   const { locale } = await props.params;
@@ -81,7 +81,7 @@ export function generateStaticParams() {
   return routing.locales.map(locale => ({ locale }));
 }
 
-async function RootLayout(props: { children: ReactNode; params: Promise<{ locale: Locale }> }) {
+async function RootLayout(props: { children: ReactNode; params: Promise<{ locale: string }> }) {
   const params = await props.params;
 
   const { locale } = params;
