@@ -4,12 +4,12 @@ test.describe('Search', () => {
   test('should filter articles by category', async ({ page }) => {
     await page.goto('/search');
 
-    const categoryButton = page.locator('section button[aria-haspopup="dialog"]');
+    const categoryButton = page.getByTestId('category-filter-trigger');
 
     await expect(categoryButton).toBeVisible();
     await categoryButton.click();
 
-    const categoryOption = page.getByRole('button', { name: 'SKATE', exact: false });
+    const categoryOption = page.getByTestId('category-filter-option-skate');
     await expect(categoryOption).toBeVisible();
     await categoryOption.click();
 
@@ -21,7 +21,7 @@ test.describe('Search', () => {
 
     await categoryButton.click();
 
-    const allOption = page.locator('div[role="dialog"] button').filter({ hasText: /all|kategori/i });
+    const allOption = page.getByTestId('category-filter-option-all');
     await allOption.click();
 
     await expect(page).not.toHaveURL(/category=/);

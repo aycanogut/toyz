@@ -47,6 +47,7 @@ function Categories({ categories }: CategoriesProps) {
       }}
       trigger={
         <Button
+          data-testid="category-filter-trigger"
           appendIconProps={{
             name: 'arrow-down',
             className: cn('size-5 transition-transform', isOpen && 'rotate-180'),
@@ -66,6 +67,7 @@ function Categories({ categories }: CategoriesProps) {
         {allCategories.map(category => (
           <Button
             key={category.value || 'all'}
+            data-testid={`category-filter-option-${category.value || 'all'}`}
             variant="secondary"
             className="font-grotesque border-none text-lg font-semibold text-white uppercase"
             onClick={() => {
