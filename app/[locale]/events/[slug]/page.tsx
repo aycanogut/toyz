@@ -103,7 +103,7 @@ async function EventDetails({ params }: EventDetailsProps) {
         </div>
 
         <div className="mx-auto flex w-full max-w-7xl justify-between px-4 sm:px-6 lg:px-8">
-          <BackButton />
+          <BackButton href="/events" />
 
           <div className="md:hidden">
             <SocialMediaShare
