@@ -120,7 +120,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
         </div>
 
         <div className="mx-auto flex w-full max-w-3xl justify-between px-4 sm:px-6 lg:px-8">
-          <BackButton />
+          <BackButton href="/" />
 
           <div className="md:hidden">
             <SocialMediaShare
