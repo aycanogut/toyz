@@ -1,6 +1,8 @@
 import type { CollectionAfterChangeHook, CollectionBeforeChangeHook } from 'payload';
 import type { Article } from '@/payload-types';
 
+const emailQueueLock = new Set<number | string>();
+
 export const setArticleEmailFlag: CollectionBeforeChangeHook<Article> = async ({ data, originalDoc, operation, req }) => {
   if (operation !== 'update' && operation !== 'create') return data;
 
@@ -33,6 +35,13 @@ export const queueNewArticleEmails: CollectionAfterChangeHook<Article> = async (
     return doc;
   }
 
+  if (emailQueueLock.has(doc.id)) {
+    payload.logger.info(`⏭️ Email queue already in progress for: ${doc.title}, skipping duplicate`);
+    return doc;
+  }
+
+  emailQueueLock.add(doc.id);
+
   try {
     const { docs: subscribers } = await payload.find({
       collection: 'subscribers',
@@ -59,6 +68,8 @@ export const queueNewArticleEmails: CollectionAfterChangeHook<Article> = async (
     payload.logger.info(`✅ Successfully queued ${subscribers.length} jobs for: ${doc.title}`);
   } catch (error) {
     payload.logger.error(`❌ Error in queueing: ${error}`);
+  } finally {
+    setTimeout(() => emailQueueLock.delete(doc.id), 10000);
   }
 
   delete context.shouldQueueEmails;
