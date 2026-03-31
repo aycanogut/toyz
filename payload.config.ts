@@ -121,7 +121,7 @@ export default buildConfig({
   },
   admin: {
     livePreview: {
-      url: 'http://localhost:3000',
+      url: toyzConfig.baseUrl || 'http://localhost:3000',
       collections: ['articles'],
       globals: ['slider', 'about', 'contact'],
     },
