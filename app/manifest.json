@@ -1,5 +1,5 @@
 {
-  "name": "TOYZ",
+  "name": "TOYZ Webzine",
   "short_name": "TOYZ",
   "icons": [
     {
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#707070",
+  "background_color": "#2f2f2f",
   "display": "standalone"
 }
