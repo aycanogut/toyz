@@ -107,7 +107,7 @@
       "minimatch": ">=10.2.3",
       "rollup": ">=4.59.0",
       "diff": ">=4.0.4",
-      "file-type": ">=21.3.1",
+      "file-type": ">=22.0.0",
       "ajv": ">=8.18.0",
       "socket.io-parser": ">=4.2.6",
       "immutable": ">=4.3.8",
