@@ -47,7 +47,7 @@ export const NewArticleEmail = ({ title, summary, imageUrl, articleUrl, unsubscr
           <Container className="border-border-dark mx-auto my-10 max-w-3xl rounded-lg border border-solid p-5">
             <Section className="mt-8">
               <Img
-                src="https://toyzwebzine.com/brand-logo.webp"
+                src="https://toyzwebzine.com/brand-logo.png"
                 width="120"
                 height="auto"
                 alt="Toyz Webzine"

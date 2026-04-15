@@ -6,6 +6,18 @@ export const Media: CollectionConfig = {
     adminThumbnail: 'thumbnail',
     mimeTypes: ['image/*'],
     disableLocalStorage: true,
+    imageSizes: [
+      {
+        name: 'email',
+        width: 600,
+        formatOptions: {
+          format: 'jpeg',
+          options: {
+            quality: 100,
+          },
+        },
+      },
+    ],
   },
   access: {
     read: () => true,

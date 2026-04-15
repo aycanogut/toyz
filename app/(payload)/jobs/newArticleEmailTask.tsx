@@ -62,8 +62,14 @@ export const newArticleEmailTask = {
           id: mediaId,
         });
 
-        if (media && media.filename) {
-          imageUrl = `https://cdn.toyzwebzine.com/${media.filename}`;
+        if (media) {
+          const emailSize = media.sizes?.email;
+          
+          if (emailSize?.filename) {
+            imageUrl = `https://cdn.toyzwebzine.com/${emailSize.filename}`;
+          } else if (media.filename) {
+            imageUrl = `https://cdn.toyzwebzine.com/${media.filename}`;
+          }
         }
       }
 
