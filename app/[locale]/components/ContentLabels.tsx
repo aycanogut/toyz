@@ -3,7 +3,6 @@ import { HTMLAttributes } from 'react';
 import { getLocale } from 'next-intl/server';
 
 import Icon from '@/components/Icon';
-import { Link } from '@/i18n/routing';
 import cn from '@/utils/cn';
 import formatDate from '@/utils/formatDate';
 
@@ -36,9 +35,8 @@ async function ContentLabels({ rootProps, iconProps, labelProps, items }: Conten
     <div className={rootProps?.className}>
       {Object.entries(displayItems).map(([item, value]) => {
         return item === 'category' ? (
-          <Link
+          <div
             key={item}
-            href={`/search?category=${categorySlug}`}
             className="flex items-center gap-2"
           >
             <Icon
@@ -46,7 +44,7 @@ async function ContentLabels({ rootProps, iconProps, labelProps, items }: Conten
               className={cn(`text-title-light`, iconProps?.className)}
             />
             <span className={cn('font-grotesque text-title-light font-medium whitespace-nowrap', labelProps?.className)}>{value}</span>
-          </Link>
+          </div>
         ) : (
           <div
             className="flex items-center gap-2"
