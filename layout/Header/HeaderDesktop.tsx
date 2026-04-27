@@ -15,7 +15,11 @@ import LanguageSwitcher from './LanguageSwitcher';
 import navigationItems from './navigationItems';
 import variants from './variants';
 
-function HeaderDesktop() {
+interface HeaderDesktopProps {
+  onSearchOpen: () => void;
+}
+
+function HeaderDesktop({ onSearchOpen }: HeaderDesktopProps) {
   const [isScrolling, setIsScrolling] = useState(false);
 
   const pathname = usePathname();
@@ -51,33 +55,41 @@ function HeaderDesktop() {
           exit="exit"
           variants={isHomepage ? variants : {}}
           className={cn(
-            'bg-background flex w-full px-20 py-4 lg:h-24',
-            isHomepage && 'border-background-light fixed top-0 right-0 left-0 z-50 border-b drop-shadow-lg'
+            'bg-background border-title-light flex w-full items-center gap-6 border-b-2 px-8 py-5',
+            isHomepage && 'fixed top-0 right-0 left-0 z-50 drop-shadow-lg'
           )}
         >
           <Link
             href="/"
-            className="relative flex aspect-square w-16 shrink-0 items-center justify-center"
+            className="flex shrink-0 items-center gap-3"
           >
             <Image
-              src="/brand-logo.webp"
-              alt="TOYZ Logo"
-              fill
-              className="absolute top-0 left-0 object-contain"
+              src="/brand-logo.png"
+              alt="TOYZ"
+              width={52}
+              height={52}
+              className="size-13 object-contain"
             />
+            <span
+              className="font-heading text-title-light text-4xl leading-none font-black tracking-tight italic"
+              style={{ transform: 'skewX(-8deg)', textShadow: '4px 4px 0 var(--color-acid)' }}
+            >
+              TOYZ*
+            </span>
           </Link>
-          <nav className="w-full">
-            <ul className="flex h-full items-center justify-end gap-8">
+
+          <nav className="ml-auto">
+            <ul className="flex items-center gap-6">
               {navigationItems.map(item => (
                 <li key={item.id}>
                   <Link
                     href={item.path}
-                    className="focus-visible:ring-title-light flex items-center gap-2 p-2 focus-visible:ring-2 focus-visible:outline-hidden"
+                    className="focus-visible:ring-title-light flex items-center p-1 focus-visible:ring-2 focus-visible:outline-hidden"
                   >
                     <span
                       className={cn(
-                        'font-grotesque text-title-dark hover:text-title-light text-2xl font-bold uppercase transition',
-                        pathname === item.path && 'text-title-light'
+                        'font-heading text-title-light hover:text-acid text-base font-bold tracking-eyebrow uppercase transition-colors',
+                        pathname === item.path && 'text-acid'
                       )}
                     >
                       {t(item.name)}
@@ -88,18 +100,26 @@ function HeaderDesktop() {
             </ul>
           </nav>
 
-          <Link
-            href="/search"
-            className={cn('text-title-dark hover:text-title-light mx-4 mt-1 flex items-center transition', pathname === '/search' && 'text-title-light')}
+          <button
+            onClick={onSearchOpen}
+            className="border-title-light text-title-light hover:bg-title-light hover:text-background flex size-10 items-center justify-center border-2 transition-colors"
             aria-label={t('search')}
           >
             <Icon
               name="search"
-              className="size-7"
+              className="size-4"
+              aria-hidden="true"
             />
-          </Link>
+          </button>
 
           <LanguageSwitcher locale={locale as Locale} />
+
+          <a
+            href="#newsletter"
+            className="bg-acid text-background hover:bg-title-light font-heading border-title-light border-2 px-4 py-2.5 text-sm font-black tracking-eyebrow uppercase transition-colors"
+          >
+            {t('subscribe')}
+          </a>
         </motion.header>
       </AnimatePresence>
     </div>

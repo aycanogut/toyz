@@ -2,21 +2,28 @@
 
 import { useEffect, useState } from 'react';
 
+import Image from 'next/image';
+
 import { useLocale, useTranslations } from 'next-intl';
 
 import Button from '@/components/Button';
 import Icon from '@/components/Icon';
-import { Link } from '@/i18n/routing';
+import { Link, usePathname } from '@/i18n/routing';
 import cn from '@/utils/cn';
 
 import LanguageSwitcher from './LanguageSwitcher';
 import navigationItems from './navigationItems';
 
-function HeaderMobile() {
+interface HeaderMobileProps {
+  onSearchOpen: () => void;
+}
+
+function HeaderMobile({ onSearchOpen }: HeaderMobileProps) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const t = useTranslations('Navigation');
   const locale = useLocale();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -32,65 +39,100 @@ function HeaderMobile() {
 
   return (
     <header className={cn('absolute w-full overflow-hidden lg:hidden', isMenuOpen ? 'z-50 h-screen' : 'h-20')}>
-      <div className="absolute top-4 right-4 left-0 z-50 flex w-full items-center gap-1 px-4">
+      <div className="bg-background border-title-light absolute top-0 right-0 left-0 z-50 flex h-20 items-center gap-2 border-b-2 px-4">
         <Button
           onClick={handleMenuToggle}
-          className={cn('text-button-background bg-transparent p-0 lg:hidden', isMenuOpen && 'hidden')}
+          className={cn('text-title-light bg-transparent p-0', isMenuOpen && 'invisible')}
           appendIconProps={{
             name: 'hamburger',
-            className: 'size-12',
+            className: 'size-10',
           }}
           aria-label="Menu"
         />
 
         <Link
-          href="/search"
-          className="text-button-background mr-2 ml-auto lg:hidden"
+          href="/"
+          className="ml-2 flex shrink-0 items-center gap-2"
+        >
+          <Image
+            src="/brand-logo.png"
+            alt="TOYZ"
+            width={36}
+            height={36}
+            className="size-9 object-contain"
+          />
+          <span
+            className="font-heading text-title-light text-xl leading-none font-black tracking-tight italic"
+            style={{ transform: 'skewX(-8deg)', textShadow: '2px 2px 0 var(--color-acid)' }}
+          >
+            TOYZ*
+          </span>
+        </Link>
+
+        <button
+          onClick={onSearchOpen}
+          className="border-title-light text-title-light ml-auto flex size-8 items-center justify-center border-2"
           aria-label={t('search')}
         >
           <Icon
             name="search"
-            className="size-8"
+            className="size-4"
+            aria-hidden="true"
           />
-        </Link>
+        </button>
 
         <LanguageSwitcher locale={locale as Locale} />
       </div>
 
-      <div className={cn('bg-background -ml-[-100%] h-screen w-screen p-4 transition-[margin]', isMenuOpen && 'ml-0')}>
-        <Button
-          className={cn('text-button-background invisible relative z-50 bg-transparent p-0 lg:hidden', isMenuOpen && 'visible')}
-          appendIconProps={{
-            name: 'close',
-            className: 'size-12',
-          }}
-          onClick={handleMenuToggle}
-        />
+      <div className={cn('bg-background -ml-[-100%] h-screen w-screen px-6 pt-6 transition-[margin]', isMenuOpen && 'ml-0')}>
+        <div className="flex items-center justify-between">
+          <Button
+            className={cn('text-title-light invisible relative z-50 bg-transparent p-0', isMenuOpen && 'visible')}
+            appendIconProps={{
+              name: 'close',
+              className: 'size-10',
+            }}
+            onClick={handleMenuToggle}
+          />
+        </div>
 
-        <nav className="mt-6">
-          <ul className="flex flex-col gap-8 pl-2 md:pl-4">
+        <nav className="mt-10">
+          <ul className="flex flex-col gap-6">
             {navigationItems.map(item => (
-              <li key={item.id}>
-                <Button
+              <li
+                key={item.id}
+                className="border-paper-faint border-b pb-4"
+              >
+                <Link
+                  href={item.path}
                   onClick={handleMenuToggle}
-                  tabIndex={0}
-                  className="text-button-background justify-start bg-transparent p-0"
-                  appendIconProps={{
-                    name: 'arrow-right',
-                    className: 'size-6',
-                  }}
+                  className="flex items-center justify-between"
                 >
-                  <Link
-                    href={item.path}
-                    className="flex items-center gap-2"
+                  <span
+                    className={cn(
+                      'font-heading text-title-light text-3xl font-black tracking-tight uppercase',
+                      pathname === item.path && 'text-acid'
+                    )}
                   >
-                    <span className="font-grotesque text-title-light text-2xl font-medium uppercase">{t(item.name)}</span>
-                  </Link>
-                </Button>
+                    {t(item.name)}
+                  </span>
+                  <Icon
+                    name="arrow-right"
+                    className="text-title-light size-7"
+                  />
+                </Link>
               </li>
             ))}
           </ul>
         </nav>
+
+        <a
+          href="#newsletter"
+          onClick={handleMenuToggle}
+          className="bg-acid text-background border-title-light font-heading mt-10 inline-block border-2 px-5 py-3 text-sm font-black tracking-eyebrow uppercase"
+        >
+          {t('subscribe')}
+        </a>
       </div>
     </header>
   );
