@@ -21,7 +21,7 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
       trigger={
         <Button
           variant="secondary"
-          className="hover:bg-title-light hover:text-title-darker my-auto border-none"
+          className="hover:bg-title-light hover:text-background font-heading border-paper-faint my-auto border-2 px-3 py-1.5 text-xs tracking-eyebrow"
         >
           {locale}
         </Button>
@@ -32,7 +32,7 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
           <Button
             key={locale}
             variant="secondary"
-            className="font-grotesque bg-background border-none p-2 text-lg font-semibold text-white uppercase"
+            className="font-heading bg-background border-paper-faint border-2 p-2 text-xs font-bold tracking-eyebrow text-white uppercase"
             onClick={() => handleLocale(locale)}
           >
             {localeNames[locale]}
