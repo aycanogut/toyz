@@ -1,29 +1,35 @@
 import { expect, test } from '@playwright/test';
 
-test.describe('Search', () => {
-  test('should filter articles by category', async ({ page }) => {
-    await page.goto('/search');
+test.describe('Search overlay', () => {
+  test('should open and close search overlay', async ({ page }) => {
+    await page.goto('/');
 
-    const categoryButton = page.getByTestId('category-filter-trigger');
+    const searchButton = page.locator('button[aria-label="search"]').first();
+    await expect(searchButton).toBeVisible();
+    await searchButton.click();
 
-    await expect(categoryButton).toBeVisible();
-    await categoryButton.click();
+    const overlay = page.locator('input[type="text"]').first();
+    await expect(overlay).toBeVisible();
 
-    const categoryOption = page.getByTestId('category-filter-option-skate');
-    await expect(categoryOption).toBeVisible();
-    await categoryOption.click();
+    await page.keyboard.press('Escape');
+    await expect(overlay).not.toBeVisible();
+  });
 
-    await expect(page).toHaveURL(/category=skate/);
+  test('should show results when typing', async ({ page }) => {
+    await page.goto('/');
 
-    const firstArticle = page.locator('article').first();
-    await expect(firstArticle).toBeVisible({ timeout: 10000 });
-    await expect(firstArticle).toContainText(/skate/i);
+    const searchButton = page.locator('button[aria-label="search"]').first();
+    await searchButton.click();
 
-    await categoryButton.click();
+    const input = page.locator('input[type="text"]').first();
+    await input.fill('punk');
 
-    const allOption = page.getByTestId('category-filter-option-all');
-    await allOption.click();
+    await page.waitForTimeout(500);
 
-    await expect(page).not.toHaveURL(/category=/);
+    const closeButton = page.locator('button[aria-label="Close search"]');
+    await expect(closeButton).toBeVisible();
+    await closeButton.click();
+
+    await expect(input).not.toBeVisible();
   });
 });
