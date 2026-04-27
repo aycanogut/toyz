@@ -11,13 +11,15 @@
     "about": "hakkımızda",
     "contact": "iletişim",
     "search": "ara",
+    "subscribe": "abone ol",
     "navigation": "Navigasyon",
     "pages": "Sayfalar"
   },
   "Search": {
-    "title": "Arama Sonuçları",
+    "title": "Arama",
     "placeholder": "Bir içerik arayın",
-    "result": "Bir sonuç bulunamadı",
+    "popular-topics": "Popüler Konular",
+    "result": "Sonuç bulunamadı",
     "category": "hepsi"
   },
   "Content": {
@@ -63,6 +65,8 @@
   },
   "Footer": {
     "description": "TOYZ, kaykay kültürü, graffiti, bağımsız müzik, sinema, fotoğraf ve yeraltı sanatına odaklanan bir webzine. Sanatçılarla yapılan röportajlar, sahne hikâyeleri ve alternatif kültürü belgeleyen içeriklerle küresel yeraltı hareketlerini ele alıyoruz.",
+    "about": "Hakkımızda",
+    "contact": "İletişim",
     "newsletter": "Bülten",
     "newsletter-description": "Yeni içeriklerden haberdar olmak için bültenimize kayıt olun.",
     "newsletter-placeholder": "E-posta adresiniz",
@@ -71,6 +75,18 @@
     "already-subscribed": "Bu e-posta adresi zaten abone.",
     "invalid-email": "Lütfen geçerli bir e-posta adresi girin.",
     "error": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
-    "recaptcha-notice": "Bu site reCAPTCHA tarafından korunmaktadır ve Google Gizlilik Politikası ile Hizmet Şartları geçerlidir."
+    "recaptcha-notice": "Bu site reCAPTCHA tarafından korunmaktadır ve Google Gizlilik Politikası ile Hizmet Şartları geçerlidir.",
+    "back-to-top": "Yukarı çık"
+  },
+  "Loader": {},
+  "Home": {
+    "latest-drops": "Yeni Çıkanlar",
+    "filter-prefix": "// Filtrele",
+    "filter-all": "Tümü",
+    "article-count": "{count} / {total} içerik",
+    "no-articles": "Bu kategoride içerik yok"
+  },
+  "Meta": {
+    "read-time": "{count} dk"
   }
 }
