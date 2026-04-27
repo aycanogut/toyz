@@ -91,7 +91,7 @@
     "typescript": "^5",
     "vitest": "^4.1.0"
   },
-  "packageManager": "pnpm@10.32.1",
+  "packageManager": "pnpm@10.33.2",
   "pnpm": {
     "onlyBuiltDependencies": [
       "@parcel/watcher",
