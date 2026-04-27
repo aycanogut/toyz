@@ -1,16 +1,30 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function Loading() {
   return (
-    <div className="bg-background fixed inset-0 z-50 flex items-center justify-center">
-      <Image
-        src="/toyz-big-logo.webp"
-        alt="Toyz"
-        width={200}
-        height={200}
-        className="animate-logo-scale size-32 sm:size-40 md:size-48 object-contain"
-        priority
-      />
+    <div className="bg-background text-title-light fixed inset-0 z-9999 flex flex-col items-center justify-center overflow-hidden">
+      <div className="loader-overlay pointer-events-none absolute inset-0" />
+
+      <div className="relative flex flex-col items-center gap-5">
+        <Image
+          src="/brand-logo.png"
+          alt="TOYZ"
+          width={112}
+          height={112}
+          priority
+          className="h-auto w-28 animate-toyz-bob object-contain motion-reduce:animate-none"
+        />
+        <div
+          className="font-heading text-title-light text-5xl font-black tracking-tight italic"
+          style={{ transform: 'skewX(-8deg)', textShadow: '4px 4px 0 var(--color-acid)' }}
+        >
+          TOYZ*
+        </div>
+      </div>
+
+      <div className="absolute bottom-15 left-1/2 h-0.5 w-70 -translate-x-1/2 overflow-hidden bg-zinc-800">
+        <div className="bg-acid h-full animate-toyz-bar motion-reduce:animate-none" />
+      </div>
     </div>
   );
 }
