@@ -1,5 +1,43 @@
 @theme {
   --animate-logo-scale: logo-scale 1.25s ease-in-out infinite;
+  --animate-toyz-bob: toyz-bob 900ms ease-in-out infinite alternate;
+  --animate-toyz-pulse: toyz-pulse 900ms ease-in-out infinite;
+  --animate-toyz-bar: toyz-bar 1.4s ease-in-out infinite;
+
+  @keyframes toyz-bob {
+    0% {
+      transform: translateY(0) rotate(-3deg);
+    }
+    100% {
+      transform: translateY(-12px) rotate(3deg);
+    }
+  }
+
+  @keyframes toyz-pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(0.7);
+    }
+  }
+
+  @keyframes toyz-bar {
+    0% {
+      transform: translateX(-100%);
+      width: 40%;
+    }
+    50% {
+      width: 70%;
+    }
+    100% {
+      transform: translateX(280px);
+      width: 40%;
+    }
+  }
 
   @keyframes logo-scale {
     0%,
