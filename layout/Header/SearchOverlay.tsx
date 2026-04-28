@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useFormatter, useTranslations } from 'next-intl';
 
 import { searchArticles, SearchResult } from '@/app/actions/searchArticles';
+import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import { Link } from '@/i18n/routing';
 import { Category } from '@/payload-types';
@@ -106,22 +107,25 @@ function SearchOverlay({ isOpen, onClose, categories }: SearchOverlayProps) {
           <div className="border-title-light flex items-center justify-between border-b-2 px-4 py-4 lg:px-8 lg:py-5">
             <span className="font-heading text-title-dark tracking-eyebrow text-xs uppercase lg:text-sm">TOYZ* / {t('title').toUpperCase()}</span>
             <div className="flex items-center gap-3">
-              <button
+              <Button
                 onClick={handleClose}
-                className="font-heading text-title-dark hover:text-title-light tracking-eyebrow hidden text-xs uppercase transition-colors lg:block"
+                variant="ghost"
+                className="font-heading text-title-dark hover:text-title-light tracking-eyebrow hidden p-0 text-xs lg:block"
               >
                 ESC
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={handleClose}
-                className="border-title-light text-title-light hover:bg-title-light hover:text-background flex size-9 items-center justify-center border-2 transition-colors lg:size-10"
+                variant="outline"
+                size="iconSm"
+                className="lg:size-10"
                 aria-label="Close search"
               >
                 <Icon
                   name="close"
                   className="size-4"
                 />
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -142,16 +146,18 @@ function SearchOverlay({ isOpen, onClose, categories }: SearchOverlayProps) {
                 className="font-heading text-title-light placeholder:text-title-dark w-full border-b-2 border-b-transparent bg-transparent pb-4 pl-11 text-3xl font-black uppercase focus:border-b-current focus:outline-none lg:pl-14 lg:text-5xl xl:text-6xl"
               />
               {query && (
-                <button
+                <Button
                   onClick={() => setQuery('')}
-                  className="text-title-dark hover:text-title-light absolute right-0 transition-colors"
+                  variant="ghost"
+                  size="iconSm"
+                  className="text-title-dark hover:text-title-light absolute right-0"
                   aria-label="Clear search"
                 >
                   <Icon
                     name="close"
                     className="size-5"
                   />
-                </button>
+                </Button>
               )}
             </div>
           </div>
@@ -160,26 +166,25 @@ function SearchOverlay({ isOpen, onClose, categories }: SearchOverlayProps) {
           <div className="px-4 py-6 lg:px-8 lg:py-8">
             <p className="text-paper-muted font-heading tracking-eyebrow mb-5 text-[10px] uppercase lg:text-xs">{t('popular-topics')}</p>
             <div className="flex flex-wrap gap-x-5 gap-y-2 lg:gap-x-8 lg:gap-y-3">
-              <button
+              <Button
                 onClick={() => setSelectedCategory('')}
-                className={cn(
-                  'font-heading text-xl font-black tracking-tight uppercase transition-colors lg:text-3xl',
-                  selectedCategory === '' ? 'text-acid' : 'text-title-light hover:text-acid'
-                )}
+                variant="ghost"
+                className={cn('font-heading p-0 text-xl font-black tracking-tight lg:text-3xl', selectedCategory === '' ? 'text-acid hover:text-acid' : '')}
               >
                 {t('category')}
-              </button>
+              </Button>
               {categories.map(cat => (
-                <button
+                <Button
                   key={cat.id}
                   onClick={() => handleCategoryToggle(cat.slug ?? '')}
+                  variant="ghost"
                   className={cn(
-                    'font-heading text-xl font-black tracking-tight uppercase transition-colors lg:text-3xl',
-                    selectedCategory === cat.slug ? 'text-acid' : 'text-title-light hover:text-acid'
+                    'font-heading p-0 text-xl font-black tracking-tight lg:text-3xl',
+                    selectedCategory === cat.slug ? 'text-acid hover:text-acid' : ''
                   )}
                 >
                   {cat.name}
-                </button>
+                </Button>
               ))}
             </div>
           </div>
@@ -201,7 +206,7 @@ function SearchOverlay({ isOpen, onClose, categories }: SearchOverlayProps) {
                       className="group flex items-start gap-4 py-5 transition-opacity hover:opacity-75"
                     >
                       {item.category && (
-                        <span className="bg-acid text-background font-heading mt-1 shrink-0 px-2 py-0.5 text-[10px] font-black tracking-[0.16em] uppercase">
+                        <span className="bg-acid text-background font-heading tracking-meta mt-1 shrink-0 px-2 py-0.5 text-[10px] font-black uppercase">
                           {item.category}
                         </span>
                       )}
@@ -209,7 +214,7 @@ function SearchOverlay({ isOpen, onClose, categories }: SearchOverlayProps) {
                         <h3 className="font-heading text-title-light group-hover:text-acid text-lg leading-tight font-black uppercase transition-colors lg:text-2xl">
                           {item.title}
                         </h3>
-                        <div className="text-paper-muted font-heading mt-1 flex items-center gap-2 text-[10px] tracking-[0.16em] uppercase">
+                        <div className="text-paper-muted font-heading tracking-meta mt-1 flex items-center gap-2 text-[10px] uppercase">
                           <span>{item.author}</span>
                           <span aria-hidden="true">·</span>
                           <span>{formatDate(item.date)}</span>

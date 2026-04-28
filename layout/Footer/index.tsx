@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 
 import { subscribeAction } from '@/app/[locale]/footer/subscribeAction';
 import useReCaptcha from '@/app/[locale]/hooks/useReCaptcha';
+import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import Input from '@/components/Input';
 import { Link, usePathname } from '@/i18n/routing';
@@ -156,27 +157,34 @@ function Footer() {
               onChange={e => setEmail(e.target.value)}
               required
             />
-            <button
+            <Button
               type="submit"
+              variant="acid"
+              size="fullWidth"
               disabled={isSubmitting}
-              className="bg-acid text-background hover:bg-title-light font-heading border-title-light tracking-eyebrow w-full border-2 px-4 py-2.5 text-xs font-black uppercase transition-colors disabled:opacity-60"
+              className="py-2.5 text-xs font-black disabled:opacity-60"
             >
               {tFooter('newsletter-subscribe')}
-            </button>
+            </Button>
           </form>
           <p className="font-grotesque text-paper-muted mt-3 text-xs leading-relaxed opacity-70">{tFooter('recaptcha-notice')}</p>
         </div>
       </div>
 
-      <div className="border-rule-faint mt-10 flex flex-col items-start justify-between gap-3 border-t pt-4 sm:flex-row sm:items-center">
+      <div className="border-rule-faint mt-10 flex items-start justify-between gap-3 border-t pt-4">
         <span className="font-heading text-paper-muted tracking-meta text-xs uppercase">© {new Date().getFullYear()} TOYZ Webzine</span>
-        <button
+        <Button
           type="button"
+          variant="ghost"
           onClick={scrollToTop}
-          className="font-heading text-paper-muted hover:text-acid tracking-meta text-xs uppercase transition-colors"
+          appendIconProps={{
+            name: 'arrow-up',
+            className: 'size-4',
+          }}
+          className="font-heading text-paper-muted hover:text-acid tracking-meta gap-1 p-0 text-xs"
         >
-          ↑ {tFooter('back-to-top')}
-        </button>
+          {tFooter('back-to-top')}
+        </Button>
       </div>
     </footer>
   );

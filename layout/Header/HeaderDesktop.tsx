@@ -7,6 +7,8 @@ import Image from 'next/image';
 import { AnimatePresence, motion } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
 
+import Button from '@/components/Button';
+import buttonVariants from '@/components/Button/buttonVariants';
 import Icon from '@/components/Icon';
 import { Link, usePathname } from '@/i18n/routing';
 import cn from '@/utils/cn';
@@ -100,9 +102,10 @@ function HeaderDesktop({ onSearchOpen }: HeaderDesktopProps) {
             </ul>
           </nav>
 
-          <button
+          <Button
             onClick={onSearchOpen}
-            className="border-title-light text-title-light hover:bg-title-light hover:text-background flex size-10 items-center justify-center border-2 transition-colors"
+            variant="outline"
+            size="iconMd"
             aria-label={t('search')}
           >
             <Icon
@@ -110,16 +113,16 @@ function HeaderDesktop({ onSearchOpen }: HeaderDesktopProps) {
               className="size-4"
               aria-hidden="true"
             />
-          </button>
+          </Button>
 
           <LanguageSwitcher locale={locale as Locale} />
 
-          <a
+          <Link
             href="#newsletter"
-            className="bg-acid text-background hover:bg-title-light font-heading border-title-light tracking-eyebrow border-2 px-4 py-2.5 text-sm font-black uppercase transition-colors"
+            className={cn(buttonVariants({ variant: 'acid' }), 'px-4 py-2.5 text-sm font-black')}
           >
             {t('subscribe')}
-          </a>
+          </Link>
         </motion.header>
       </AnimatePresence>
     </div>

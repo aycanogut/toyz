@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 
 import Button from '@/components/Button';
+import buttonVariants from '@/components/Button/buttonVariants';
 import Icon from '@/components/Icon';
 import { Link, usePathname } from '@/i18n/routing';
 import cn from '@/utils/cn';
@@ -69,9 +70,11 @@ function HeaderMobile({ onSearchOpen }: HeaderMobileProps) {
           </span>
         </Link>
 
-        <button
+        <Button
           onClick={onSearchOpen}
-          className="border-title-light text-title-light ml-auto flex size-8 items-center justify-center border-2"
+          variant="outline"
+          size="iconSm"
+          className="ml-auto"
           aria-label={t('search')}
         >
           <Icon
@@ -79,12 +82,12 @@ function HeaderMobile({ onSearchOpen }: HeaderMobileProps) {
             className="size-4"
             aria-hidden="true"
           />
-        </button>
+        </Button>
 
         <LanguageSwitcher locale={locale as Locale} />
       </div>
 
-      <div className={cn('bg-background -ml-[-100%] h-screen w-screen px-6 pt-6 transition-[margin]', isMenuOpen && 'ml-0')}>
+      <div className={cn('bg-background ml-[100%] h-screen w-screen px-6 pt-6 transition-[margin]', isMenuOpen && 'ml-0')}>
         <div className="flex items-center justify-between">
           <Button
             className={cn('text-title-light invisible relative z-50 bg-transparent p-0', isMenuOpen && 'visible')}
@@ -121,13 +124,13 @@ function HeaderMobile({ onSearchOpen }: HeaderMobileProps) {
           </ul>
         </nav>
 
-        <a
+        <Link
           href="#newsletter"
           onClick={handleMenuToggle}
-          className="bg-acid text-background border-title-light font-heading tracking-eyebrow mt-10 inline-block border-2 px-5 py-3 text-sm font-black uppercase"
+          className={cn(buttonVariants({ variant: 'acid' }), 'mt-10 px-5 py-3 text-sm font-black')}
         >
           {t('subscribe')}
-        </a>
+        </Link>
       </div>
     </header>
   );
