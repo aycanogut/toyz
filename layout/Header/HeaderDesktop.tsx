@@ -64,7 +64,7 @@ function HeaderDesktop({ onSearchOpen }: HeaderDesktopProps) {
             className="flex shrink-0 items-center gap-3"
           >
             <Image
-              src="/brand-logo.png"
+              src="/brand-logo.web"
               alt="TOYZ"
               width={52}
               height={52}

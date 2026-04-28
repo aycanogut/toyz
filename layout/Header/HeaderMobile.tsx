@@ -55,7 +55,7 @@ function HeaderMobile({ onSearchOpen }: HeaderMobileProps) {
           className="ml-2 flex shrink-0 items-center gap-2"
         >
           <Image
-            src="/brand-logo.png"
+            src="/brand-logo.webp"
             alt="TOYZ"
             width={36}
             height={36}

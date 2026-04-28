@@ -7,7 +7,7 @@ export default function Loading() {
 
       <div className="relative flex flex-col items-center gap-5">
         <Image
-          src="/brand-logo.png"
+          src="/brand-logo.webp"
           alt="TOYZ"
           width={112}
           height={112}
