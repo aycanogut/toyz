@@ -77,7 +77,7 @@ function ContentCard({ title, description, image, imageAlt, date, author, catego
           href={`/content/${slug}`}
           className="block"
         >
-          <h2 className="font-heading text-title-light hover:text-acid mb-3 text-4xl font-black uppercase transition-colors md:text-5xl lg:text-5xl">
+          <h2 className="font-heading text-title-light hover:text-acid mb-3 text-3xl font-black uppercase transition-colors md:text-4xl lg:text-5xl">
             {title}
           </h2>
         </Link>

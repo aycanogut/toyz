@@ -38,7 +38,7 @@ function HeaderMobile({ onSearchOpen }: HeaderMobileProps) {
   };
 
   return (
-    <header className={cn('absolute w-full overflow-hidden lg:hidden', isMenuOpen ? 'z-50 h-screen' : 'h-20')}>
+    <header className={cn('sticky top-0 z-50 w-full overflow-hidden lg:absolute lg:hidden', isMenuOpen ? 'h-screen' : 'h-20')}>
       <div className="bg-background border-title-light absolute top-0 right-0 left-0 z-50 flex h-20 items-center gap-2 border-b-2 px-4">
         <Button
           onClick={handleMenuToggle}

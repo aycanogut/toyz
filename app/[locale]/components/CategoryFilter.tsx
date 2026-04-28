@@ -30,7 +30,7 @@ function CategoryFilter({ categories, counts, totalCount }: CategoryFilterProps)
   };
 
   return (
-    <div className="bg-background border-title-light sticky top-23.5 z-40 flex flex-wrap items-center gap-2 border-b-2 px-6 py-4 md:px-8">
+    <div className="bg-background border-title-light top-23.5 z-40 flex flex-wrap items-center gap-2 border-b-2 px-6 py-4 md:px-8 lg:sticky">
       <span className="font-heading text-paper-muted tracking-eyebrow mr-2 text-xs font-black uppercase">{t('filter-prefix')}</span>
 
       <FilterPill
