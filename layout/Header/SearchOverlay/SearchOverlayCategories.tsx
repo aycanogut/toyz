@@ -16,7 +16,7 @@ function SearchOverlayCategories({ categories, selectedCategory, onToggle, onRes
 
   return (
     <div className="px-4 py-6 lg:px-8 lg:py-8">
-      <p className="text-paper-muted font-heading tracking-eyebrow mb-5 text-[10px] uppercase lg:text-xs">{t('popular-topics')}</p>
+      <p className="text-paper-muted font-heading tracking-eyebrow mb-5 uppercase">{t('popular-topics')}</p>
       <div className="flex flex-wrap gap-x-5 gap-y-2 lg:gap-x-8 lg:gap-y-3">
         <Button
           onClick={onReset}

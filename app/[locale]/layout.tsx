@@ -96,7 +96,7 @@ async function RootLayout(props: { children: ReactNode; params: Promise<{ locale
       lang={locale}
       className={cn(grotesque.variable, display.variable)}
     >
-      <body className="bg-background text-title-light font-grotesque antialiased">
+      <body className="bg-background text-title-light font-fira antialiased">
         <NextIntlClientProvider>
           <ReCaptchaProvider>
             <Layout>{children}</Layout>

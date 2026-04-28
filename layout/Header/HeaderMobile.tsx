@@ -127,7 +127,7 @@ function HeaderMobile({ onSearchOpen }: HeaderMobileProps) {
         <Link
           href="#newsletter"
           onClick={handleMenuToggle}
-          className={cn(buttonVariants({ variant: 'acid' }), 'mt-10 px-5 py-3 text-sm font-black')}
+          className={cn(buttonVariants({ variant: 'acid' }), 'mt-10 px-5 py-3 font-black')}
         >
           {t('subscribe')}
         </Link>

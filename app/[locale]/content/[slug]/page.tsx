@@ -83,7 +83,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
 
             <header className="absolute inset-0 mx-auto flex size-full max-w-96 flex-col items-center justify-between p-4 md:mx-0 md:max-w-lg md:items-start md:p-5 lg:max-w-4xl lg:p-6">
               <div className="bg-background/80 size-auto p-2 md:p-3 lg:p-4">
-                <h1 className="font-grotesque text-title-light max-w-3xl text-center text-2xl font-medium uppercase text-shadow-md md:text-start md:text-4xl lg:text-6xl lg:font-semibold">
+                <h1 className="font-fira text-title-light max-w-3xl text-center text-2xl font-medium uppercase text-shadow-md md:text-start md:text-4xl lg:text-6xl lg:font-semibold">
                   {title}
                 </h1>
               </div>
@@ -97,7 +97,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
                     className: 'size-4 md:size-5 lg:size-6 mt-1.5',
                   }}
                   labelProps={{
-                    className: 'text-base md:text-lg lg:text-2xl text-shadow-md',
+                    className: 'md:text-lg lg:text-2xl text-shadow-md',
                   }}
                   items={{
                     ...details,
@@ -141,7 +141,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
       {randomArticles.length > 0 && (
         <section className="mx-auto mt-10 flex w-full max-w-7xl flex-col gap-4 px-4 sm:px-6 md:mt-16 md:gap-8 lg:mt-20 lg:gap-10 lg:px-8">
           <header>
-            <h2 className="font-grotesque text-title-light text-2xl font-semibold uppercase md:text-3xl lg:text-4xl">{t('similar-content')}</h2>
+            <h2 className="font-fira text-title-light text-2xl font-semibold uppercase md:text-3xl lg:text-4xl">{t('similar-content')}</h2>
           </header>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {randomArticles.map(item => {

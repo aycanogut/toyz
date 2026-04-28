@@ -24,7 +24,7 @@ function BackButton({ href }: BackButtonProps) {
         name="arrow-left"
         className="text-title-light group-hover:text-title-dark size-6 transition-colors"
       />
-      <span className="font-grotesque text-title-light group-hover:text-title-dark mb-1 bg-transparent text-xl font-bold capitalize transition-colors lg:text-2xl">
+      <span className="font-fira text-title-light group-hover:text-title-dark mb-1 bg-transparent text-xl font-bold capitalize transition-colors lg:text-2xl">
         {t('back')}
       </span>
     </Button>

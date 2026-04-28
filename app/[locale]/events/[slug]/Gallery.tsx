@@ -199,7 +199,7 @@ function Gallery({ images }: GalleryProps) {
                           )}
 
                           {images.length > 1 && (
-                            <span className="bg-background/70 text-title-light font-grotesque absolute bottom-1 left-1/2 z-10 -translate-x-1/2 p-1 text-xs md:bottom-4 md:p-2 md:text-base">
+                            <span className="bg-background/70 text-title-light font-fira absolute bottom-1 left-1/2 z-10 -translate-x-1/2 p-1 md:bottom-4 md:p-2 md:text-lg">
                               {currentIndex + 1} / {images.length}
                             </span>
                           )}
@@ -210,7 +210,7 @@ function Gallery({ images }: GalleryProps) {
                                 name="camera"
                                 className="text-title-light mt-1 size-3 md:mt-0.5 md:size-5"
                               />
-                              <span className="font-grotesque text-title-light text-xs font-medium md:text-base">{image.credits}</span>
+                              <span className="font-fira text-title-light font-medium md:text-lg">{image.credits}</span>
                             </div>
                           )}
                         </>

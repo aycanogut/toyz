@@ -42,7 +42,7 @@
 }
 
 @theme inline {
-  --font-grotesque: var(--font-grotesque);
+  --font-fira: var(--font-fira);
   --font-heading: var(--font-heading);
 }
 

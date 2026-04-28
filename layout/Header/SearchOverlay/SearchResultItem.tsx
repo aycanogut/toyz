@@ -25,13 +25,13 @@ function SearchResultItem({ item, onClose }: SearchResultItemProps) {
       className="group flex items-start gap-4 py-5 transition-opacity hover:opacity-75"
     >
       {item.category && (
-        <span className="bg-acid text-background font-heading tracking-meta mt-1 shrink-0 px-2 py-0.5 text-[10px] font-black uppercase">{item.category}</span>
+        <span className="bg-acid text-background font-heading tracking-meta mt-1 shrink-0 px-2 py-0.5 font-black uppercase">{item.category}</span>
       )}
       <div className="min-w-0 flex-1">
         <h5 className="font-heading text-title-light group-hover:text-acid text-lg leading-tight font-black uppercase transition-colors lg:text-2xl">
           {item.title}
         </h5>
-        <div className="text-paper-muted font-heading tracking-meta mt-1 flex items-center gap-2 text-[10px] uppercase">
+        <div className="text-paper-muted font-heading tracking-meta mt-1 flex items-center gap-2 uppercase">
           <span>{item.author}</span>
           <span aria-hidden="true">·</span>
           <span>{formatDate(item.date)}</span>

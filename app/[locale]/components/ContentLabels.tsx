@@ -42,7 +42,7 @@ async function ContentLabels({ rootProps, iconProps, labelProps, items }: Conten
             name={item as IconLabelProps}
             className={cn('text-title-light', iconProps?.className)}
           />
-          <span className={cn('font-grotesque text-title-light font-medium whitespace-nowrap', labelProps?.className)}>{value}</span>
+          <span className={cn('font-fira text-title-light font-medium whitespace-nowrap', labelProps?.className)}>{value}</span>
         </div>
       ))}
     </div>

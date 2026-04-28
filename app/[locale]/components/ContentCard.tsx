@@ -75,7 +75,7 @@ function ContentCard({ title, description, image, imageAlt, date, author, catego
           <Link
             href={categorySlug ? `?category=${categorySlug}` : '#'}
             scroll={false}
-            className={cn('font-heading text-background tracking-meta mb-3 inline-block px-2.5 py-1 text-xs font-black uppercase', accent)}
+            className={cn('font-heading text-background tracking-meta mb-3 inline-block px-2.5 py-1 font-black uppercase', accent)}
           >
             {category}
           </Link>
@@ -88,8 +88,8 @@ function ContentCard({ title, description, image, imageAlt, date, author, catego
             {title}
           </h2>
         </Link>
-        {description && <p className="font-grotesque text-title-dark mb-4 text-sm leading-relaxed md:text-base">{description}</p>}
-        <div className="font-heading text-paper-muted tracking-label flex flex-wrap items-center gap-3 text-xs uppercase md:text-sm">
+        {description && <p className="font-fira text-title-dark mb-4 leading-relaxed md:text-lg">{description}</p>}
+        <div className="font-heading text-paper-muted tracking-label flex flex-wrap items-center gap-3 text-sm uppercase">
           <span className="text-title-light font-bold">{author}</span>
           <span aria-hidden="true">·</span>
           <span>{formattedDate}</span>

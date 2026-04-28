@@ -22,7 +22,7 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
               videoId={videoId}
               title={title}
             />
-            <figcaption className="font-grotesque text-title-light mt-2 max-w-3xl text-center text-base leading-5 lg:text-lg">{title}</figcaption>
+            <figcaption className="font-fira text-title-light mt-2 max-w-3xl text-center leading-5 lg:text-lg">{title}</figcaption>
           </figure>
         );
       }
@@ -50,7 +50,7 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
             src={url}
             alt={alt ?? ''}
           />
-          <figcaption className="font-grotesque text-title-light mt-2 max-w-3xl text-center text-base leading-5 lg:text-lg">{credits}</figcaption>
+          <figcaption className="font-fira text-title-light mt-2 max-w-3xl text-center leading-5 lg:text-lg">{credits}</figcaption>
         </figure>
       );
     }

@@ -121,7 +121,7 @@ function Breadcrumbs({ currentPageTitle }: BreadcrumbsProps) {
 
               {isLast ? (
                 <span
-                  className="font-grotesque text-title-light text-sm font-medium uppercase lg:text-lg"
+                  className="font-fira text-title-light font-medium uppercase lg:text-lg"
                   aria-current="page"
                 >
                   {crumb.label}
@@ -129,7 +129,7 @@ function Breadcrumbs({ currentPageTitle }: BreadcrumbsProps) {
               ) : (
                 <Link
                   href={crumb.href}
-                  className="font-grotesque text-title-dark hover:text-title-light text-sm font-medium uppercase transition-colors lg:text-lg"
+                  className="font-fira text-title-dark hover:text-title-light font-medium uppercase transition-colors lg:text-lg"
                 >
                   {crumb.label}
                 </Link>

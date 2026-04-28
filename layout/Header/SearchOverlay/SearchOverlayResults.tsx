@@ -14,7 +14,7 @@ function SearchOverlayResults({ results, isPending, onClose }: SearchOverlayResu
   const t = useTranslations('Search');
 
   if (isPending) {
-    return <div className="text-paper-muted font-heading tracking-eyebrow py-8 text-xs uppercase">...</div>;
+    return <div className="text-paper-muted font-heading tracking-eyebrow py-8 uppercase">...</div>;
   }
 
   if (results !== null && results.length === 0) {

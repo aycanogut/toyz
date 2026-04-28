@@ -34,7 +34,7 @@ function SimiliarContentCard({ title, image, categoryName, date, author, slug }:
           />
 
           <header className="bg-background/60 absolute inset-x-0 top-0 p-3">
-            <h2 className="font-grotesque text-title-light line-clamp-2 text-lg leading-tight font-semibold uppercase lg:text-xl">{title}</h2>
+            <h2 className="font-fira text-title-light line-clamp-2 text-lg leading-tight font-semibold uppercase lg:text-xl">{title}</h2>
           </header>
 
           <footer className="text-title-light bg-background/60 absolute inset-x-0 bottom-0 flex flex-wrap items-center justify-center gap-4 p-3">
@@ -47,7 +47,7 @@ function SimiliarContentCard({ title, image, categoryName, date, author, slug }:
                   name={item.icon}
                   className="mt-1 size-3.5 md:size-4"
                 />
-                <span className="font-grotesque font-medium md:text-lg">{item.value}</span>
+                <span className="font-fira font-medium md:text-lg">{item.value}</span>
               </span>
             ))}
           </footer>

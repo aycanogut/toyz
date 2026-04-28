@@ -70,7 +70,7 @@ function ContactForm() {
       onSubmit={handleSubmit(onSubmit)}
       className="flex max-w-160 flex-col gap-6"
     >
-      <h2 className="font-grotesque text-title-light text-2xl font-medium first-letter:capitalize lg:text-6xl">{t('message')}</h2>
+      <h2 className="font-fira text-title-light text-2xl font-medium first-letter:capitalize lg:text-6xl">{t('message')}</h2>
 
       <Input
         aria-label={t('name')}
@@ -93,7 +93,7 @@ function ContactForm() {
       <div className="flex flex-col gap-4">
         <label
           htmlFor="message"
-          className="font-grotesque text-title-light text-xl font-medium capitalize lg:text-3xl"
+          className="font-fira text-title-light text-xl font-medium capitalize lg:text-3xl"
         >
           {t('message-label')}
         </label>
@@ -102,7 +102,7 @@ function ContactForm() {
             id="message"
             {...register('message')}
             rows={10}
-            className="focus-visible:ring-primary-blue-100 bg-background-light text-title-light focus-visible:ring-title-light w-full border p-4 text-sm placeholder:text-sm placeholder:font-normal focus-visible:ring-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-40"
+            className="focus-visible:ring-primary-blue-100 bg-background-light text-title-light focus-visible:ring-title-light w-full border p-4 placeholder:font-normal focus-visible:ring-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-40"
           />
           {errors.message?.message && <span className="font-inter text-md text-red-500">{t(errors.message.message)}</span>}
         </div>
@@ -117,8 +117,8 @@ function ContactForm() {
       </Button>
 
       <div className="flex flex-col gap-2">
-        <p className="text-title-dark font-grotesque mt-3 text-sm leading-relaxed opacity-60">{t('privacy-notice')}</p>
-        <p className="text-title-dark font-grotesque text-sm leading-relaxed opacity-60">{tFooter('recaptcha-notice')}</p>
+        <p className="text-title-dark font-fira mt-3 leading-relaxed opacity-60">{t('privacy-notice')}</p>
+        <p className="text-title-dark font-fira leading-relaxed opacity-60">{tFooter('recaptcha-notice')}</p>
       </div>
     </form>
   );

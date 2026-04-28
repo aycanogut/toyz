@@ -38,7 +38,7 @@ async function Contact() {
 
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 pt-4 pb-14 sm:px-6 lg:gap-11 lg:px-8 lg:pt-10 lg:pb-28">
         <header>
-          <h1 className="font-grotesque text-title-light text-2xl font-medium uppercase lg:text-6xl">{contact.title}</h1>
+          <h1 className="font-fira text-title-light text-2xl font-medium uppercase lg:text-6xl">{contact.title}</h1>
         </header>
 
         <div className="flex flex-col gap-4 sm:flex-row">
@@ -52,7 +52,7 @@ async function Contact() {
               className="size-6 text-white lg:size-9"
             />
 
-            <span className="font-grotesque text-base font-medium text-white lg:text-2xl">toyzwebzine</span>
+            <span className="font-fira font-medium text-white lg:text-2xl">toyzwebzine</span>
           </Link>
 
           <Link
@@ -65,7 +65,7 @@ async function Contact() {
               className="size-6 text-white lg:size-9"
             />
 
-            <span className="font-grotesque text-base font-medium text-white lg:text-2xl">info@toyzwebzine.com</span>
+            <span className="font-fira font-medium text-white lg:text-2xl">info@toyzwebzine.com</span>
           </Link>
         </div>
 

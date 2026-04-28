@@ -90,7 +90,7 @@ function HeaderDesktop({ onSearchOpen }: HeaderDesktopProps) {
                   >
                     <span
                       className={cn(
-                        'font-heading text-title-light hover:text-acid tracking-eyebrow text-base font-bold uppercase transition-colors',
+                        'font-heading text-title-light hover:text-acid tracking-eyebrow font-bold uppercase transition-colors',
                         pathname === item.path && 'text-acid'
                       )}
                     >
@@ -119,7 +119,7 @@ function HeaderDesktop({ onSearchOpen }: HeaderDesktopProps) {
 
           <Link
             href="#newsletter"
-            className={cn(buttonVariants({ variant: 'acid' }), 'px-4 py-2.5 text-sm font-black')}
+            className={cn(buttonVariants({ variant: 'acid' }), 'px-4 py-2.5 font-black')}
           >
             {t('subscribe')}
           </Link>

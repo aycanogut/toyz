@@ -12,8 +12,20 @@
   - Accents: `acid` (#c8ff00), `blood` (#ff3d2e), `amber` (#f4d35e)
   - Social: `social-facebook`, `social-whatsapp`, `social-telegram`, `social-reddit`, `social-bluesky`, `social-mastodon`
 - **Fonts** (configured in `theme/fonts.ts`):
-  - `font-grotesque` — DM Sans (body)
-  - `font-heading` — Roboto Condensed (display/headings)
+  - `font-heading` — DM Sans (display/headings, eyebrow labels, meta text, navigation, buttons, badges)
+  - `font-fira` — Fira Code (body copy, descriptions, paragraphs — anything that reads as long-form prose)
+- **Typography rules**:
+  - **Minimum font-size is `text-base` (16px / 1rem).** Never use `text-xs` (12px) or `text-sm` (14px) anywhere in the UI. Replace any legacy occurrences with `text-base` (or larger). Arbitrary sub-16px values (e.g. `text-[13px]`, `text-[10px]`) are likewise forbidden.
+  - **Use Tailwind's default type scale** — `text-base`, `text-lg`, `text-xl`, `text-2xl`, `text-3xl`, `text-4xl`, `text-5xl`, `text-6xl`. Do not use arbitrary pixel values for font sizes (no `text-[15px]`, `text-[42px]`, etc.).
+  - **Apply responsive hierarchy** with breakpoint prefixes — small viewports get the smaller step, larger viewports the larger one. Examples:
+    - h1 / hero: `text-4xl md:text-5xl lg:text-6xl`
+    - h2 / card title: `text-3xl md:text-4xl lg:text-5xl`
+    - h3 / section heading: `text-2xl md:text-3xl`
+    - h4: `text-xl md:text-2xl`
+    - h5 / card heading: `text-lg md:text-xl`
+    - body / description: `text-base md:text-lg`
+    - meta / eyebrow / labels: `text-base` (uppercase + tracking handles the visual weight, not size)
+  - **Eyebrow / meta / label text** uses `font-heading` + `uppercase` + a `tracking-eyebrow|meta|label` token. The minimum size is still `text-base`; rely on tracking, weight, and color for the small-caps look — never on a sub-16px font size.
 - **Use `cn()` from `@/utils/cn`** for conditional or merged className — never use template literals or string concatenation for className composition.
 - **Never add `className` manually to a component's interface.** Instead, extend the appropriate `HTMLAttributes<HTMLElement>` (e.g. `HTMLAttributes<HTMLDivElement>`, `ButtonHTMLAttributes<HTMLButtonElement>`) to inherit it.
 - **Never use arbitrary values when a standard Tailwind class exists.** Typography, spacing, sizing and all other utilities that have predefined Tailwind classes must use the standard class. For example use `text-xl` instead of `text-[1.25rem]`, `w-36` instead of `w-[9rem]`, `p-4` instead of `p-[1rem]`. Arbitrary values (`[…]`) are only acceptable when there is genuinely no matching Tailwind utility — the project's `theme/globals.css` already adds custom tokens like `border-width-6`, `rotate-4`, `rotate-md`, `rotate-sm`, and `tracking-eyebrow|meta|label` for values that fall outside the default scale.

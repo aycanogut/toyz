@@ -79,19 +79,19 @@ function Footer() {
     <footer className="bg-background text-title-light border-title-light relative overflow-hidden border-t-2 px-6 pt-10 pb-6 md:px-8">
       <div className="lg:grid-cols-footer grid grid-cols-1 gap-10 md:grid-cols-2 lg:items-start lg:gap-8">
         <div className="lg:order-1">
-          <h3 className="font-heading text-acid tracking-eyebrow mb-3 text-xs font-black uppercase">{tFooter('about')}</h3>
-          <p className="font-grotesque text-title-dark max-w-xs text-sm leading-relaxed">{tFooter('description')}</p>
+          <h3 className="font-heading text-acid tracking-eyebrow mb-3 font-black uppercase">{tFooter('about')}</h3>
+          <p className="font-fira text-title-dark max-w-xs leading-relaxed">{tFooter('description')}</p>
         </div>
 
         <nav className="lg:order-2">
-          <h3 className="font-heading text-acid tracking-eyebrow mb-3 text-xs font-black uppercase">{tNav('pages')}</h3>
+          <h3 className="font-heading text-acid tracking-eyebrow mb-3 font-black uppercase">{tNav('pages')}</h3>
           <ul className="flex flex-col gap-2">
             {navigationItems.map(item => (
               <li key={item.id}>
                 <Link
                   href={item.path}
                   className={cn(
-                    'font-heading text-title-light hover:text-acid tracking-label text-sm font-bold uppercase transition-colors',
+                    'font-heading text-title-light hover:text-acid tracking-label font-bold uppercase transition-colors',
                     pathname === item.path && 'text-acid'
                   )}
                 >
@@ -108,32 +108,32 @@ function Footer() {
             alt="TOYZ"
             width={280}
             height={280}
-            className="size-48 object-contain md:size-64"
+            className="size-48 object-contain md:size-64 lg:size-80"
           />
         </div>
 
         <div className="lg:order-4">
-          <h3 className="font-heading text-acid tracking-eyebrow mb-3 text-xs font-black uppercase">{tFooter('contact')}</h3>
+          <h3 className="font-heading text-acid tracking-eyebrow mb-3 font-black uppercase">{tFooter('contact')}</h3>
           <div className="flex flex-col gap-3">
             <a
               href={toyzConfig.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-grotesque text-title-dark hover:text-acid flex items-center gap-2 text-sm transition-colors"
+              className="font-fira text-title-dark hover:text-acid flex items-center gap-2 transition-colors"
             >
               <Icon
                 name="instagram"
-                className="text-acid text-base"
+                className="text-acid"
               />
               Instagram
             </a>
             <a
               href={`mailto:${toyzConfig.contactEmail}`}
-              className="font-grotesque text-title-dark hover:text-acid flex items-center gap-2 text-sm transition-colors"
+              className="font-fira text-title-dark hover:text-acid flex items-center gap-2 transition-colors"
             >
               <Icon
                 name="envelope"
-                className="text-acid text-base"
+                className="text-acid"
               />
               {toyzConfig.contactEmail}
             </a>
@@ -144,8 +144,8 @@ function Footer() {
           id="newsletter"
           className="scroll-mt-28 lg:order-5"
         >
-          <h3 className="font-heading text-acid tracking-eyebrow mb-3 text-xs font-black uppercase">{tFooter('newsletter')}</h3>
-          <p className="font-grotesque text-title-dark mb-3 text-sm leading-relaxed">{tFooter('newsletter-description')}</p>
+          <h3 className="font-heading text-acid tracking-eyebrow mb-3 font-black uppercase">{tFooter('newsletter')}</h3>
+          <p className="font-fira text-title-dark mb-3 leading-relaxed">{tFooter('newsletter-description')}</p>
           <form
             onSubmit={handleNewsletterSubmit}
             className="flex flex-col gap-2"
@@ -162,17 +162,17 @@ function Footer() {
               variant="acid"
               size="fullWidth"
               disabled={isSubmitting}
-              className="py-2.5 text-xs font-black disabled:opacity-60"
+              className="py-2.5 font-black disabled:opacity-60"
             >
               {tFooter('newsletter-subscribe')}
             </Button>
           </form>
-          <p className="font-grotesque text-paper-muted mt-3 text-xs leading-relaxed opacity-70">{tFooter('recaptcha-notice')}</p>
+          <p className="font-fira text-paper-muted mt-3 leading-relaxed opacity-70">{tFooter('recaptcha-notice')}</p>
         </div>
       </div>
 
       <div className="border-rule-faint mt-10 flex items-start justify-between gap-3 border-t pt-4">
-        <span className="font-heading text-paper-muted tracking-meta text-xs uppercase">© {new Date().getFullYear()} TOYZ Webzine</span>
+        <span className="font-heading text-paper-muted tracking-meta text-sm uppercase">© {new Date().getFullYear()} TOYZ Webzine</span>
         <Button
           type="button"
           variant="ghost"
