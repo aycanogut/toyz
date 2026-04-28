@@ -30,7 +30,7 @@ function ContentCard({ title, description, image, imageAlt, date, author, catego
   const flipped = index % 2 === 1;
 
   const accent = ACCENT_CLASSES[index % ACCENT_CLASSES.length];
-  
+
   const tilt = TILT_CLASSES[index % TILT_CLASSES.length];
 
   const formattedDate = (() => {
@@ -71,9 +71,7 @@ function ContentCard({ title, description, image, imageAlt, date, author, catego
 
       <div className={cn(flipped ? 'lg:order-1 lg:pr-2' : 'lg:order-2 lg:pl-2')}>
         {category && (
-          <div className={cn('font-heading text-background mb-3 inline-block px-2.5 py-1 text-xs font-black tracking-meta uppercase', accent)}>
-            {category}
-          </div>
+          <div className={cn('font-heading text-background tracking-meta mb-3 inline-block px-2.5 py-1 text-xs font-black uppercase', accent)}>{category}</div>
         )}
         <Link
           href={`/content/${slug}`}
@@ -83,10 +81,8 @@ function ContentCard({ title, description, image, imageAlt, date, author, catego
             {title}
           </h2>
         </Link>
-        {description && (
-          <p className="font-grotesque text-title-dark mb-4 text-sm leading-relaxed md:text-base">{description}</p>
-        )}
-        <div className="font-heading text-paper-muted flex flex-wrap items-center gap-3 text-xs tracking-label uppercase md:text-sm">
+        {description && <p className="font-grotesque text-title-dark mb-4 text-sm leading-relaxed md:text-base">{description}</p>}
+        <div className="font-heading text-paper-muted tracking-label flex flex-wrap items-center gap-3 text-xs uppercase md:text-sm">
           <span className="text-title-light font-bold">{author}</span>
           <span aria-hidden="true">·</span>
           <span>{formattedDate}</span>

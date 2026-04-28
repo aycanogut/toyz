@@ -12,7 +12,7 @@ export default function Loading() {
           width={112}
           height={112}
           priority
-          className="h-auto w-28 animate-toyz-bob object-contain motion-reduce:animate-none"
+          className="animate-toyz-bob h-auto w-28 object-contain motion-reduce:animate-none"
         />
         <div
           className="font-heading text-title-light text-5xl font-black tracking-tight italic"
@@ -23,7 +23,7 @@ export default function Loading() {
       </div>
 
       <div className="absolute bottom-15 left-1/2 h-0.5 w-70 -translate-x-1/2 overflow-hidden bg-zinc-800">
-        <div className="bg-acid h-full animate-toyz-bar motion-reduce:animate-none" />
+        <div className="bg-acid animate-toyz-bar h-full motion-reduce:animate-none" />
       </div>
     </div>
   );

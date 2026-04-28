@@ -31,7 +31,7 @@ function CategoryFilter({ categories, counts, totalCount }: CategoryFilterProps)
 
   return (
     <div className="bg-background border-title-light sticky top-23.5 z-40 flex flex-wrap items-center gap-2 border-b-2 px-6 py-4 md:px-8">
-      <span className="font-heading text-paper-muted mr-2 text-xs font-black tracking-eyebrow uppercase">{t('filter-prefix')}</span>
+      <span className="font-heading text-paper-muted tracking-eyebrow mr-2 text-xs font-black uppercase">{t('filter-prefix')}</span>
 
       <FilterPill
         href={buildHref()}

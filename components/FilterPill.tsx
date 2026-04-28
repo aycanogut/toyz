@@ -17,17 +17,13 @@ function FilterPill({ active = false, count, label, className, href, scroll = fa
       scroll={scroll}
       {...props}
       className={cn(
-        'font-heading border-2 px-3.5 py-1.5 text-xs tracking-meta uppercase transition-colors',
+        'font-heading tracking-meta border-2 px-3.5 py-1.5 text-xs uppercase transition-colors',
         active ? 'bg-acid text-background border-acid font-black' : 'border-paper-faint text-title-light hover:border-title-light font-bold',
         className
       )}
     >
       {label}
-      {count != null && (
-        <span className={cn('ml-1.5 text-xs opacity-60', active && 'opacity-80')}>
-          ({count})
-        </span>
-      )}
+      {count != null && <span className={cn('ml-1.5 text-xs opacity-60', active && 'opacity-80')}>({count})</span>}
     </Link>
   );
 }

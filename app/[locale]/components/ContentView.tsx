@@ -47,7 +47,7 @@ async function ContentView({ articles, allArticles, categories }: ContentViewPro
               const media = item.images as Media;
               const category = item.details.category as Category;
               const minutes = readTime(item.content as Parameters<typeof readTime>[0]);
-              
+
               return (
                 <ContentCard
                   key={item.id}
@@ -66,9 +66,7 @@ async function ContentView({ articles, allArticles, categories }: ContentViewPro
             })}
           </div>
         ) : (
-          <div className="font-heading text-paper-muted px-6 py-20 text-center text-sm tracking-meta uppercase md:px-8 md:py-24">
-            {t('no-articles')}
-          </div>
+          <div className="font-heading text-paper-muted tracking-meta px-6 py-20 text-center text-sm uppercase md:px-8 md:py-24">{t('no-articles')}</div>
         )}
       </div>
     </section>

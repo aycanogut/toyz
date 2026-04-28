@@ -146,7 +146,7 @@ function Gallery({ images }: GalleryProps) {
                         alt={image.alt ?? `Event photo ${index + 1}`}
                         width={image.width ?? 1920}
                         height={image.height ?? 1080}
-                        className="max-h-gallery-sm w-auto object-contain md:max-h-gallery-md lg:max-h-gallery-lg"
+                        className="max-h-gallery-sm md:max-h-gallery-md lg:max-h-gallery-lg w-auto object-contain"
                         priority={index === selectedIndex}
                       />
 
