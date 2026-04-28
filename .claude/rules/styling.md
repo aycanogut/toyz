@@ -1,0 +1,21 @@
+# Styling Rules
+
+- **Tailwind v4** (PostCSS plugin) with `@tailwindcss/typography`. Theme tokens are declared in `theme/globals.css` under `@theme`.
+- **Use `rem` in arbitrary values**, not `px`.
+- **Use theme tokens for colors**, not CSS variables directly (e.g. `bg-background-light` not `bg-(--color-background-light)`).
+- **Never use inline `style` prop** — all styles must be Tailwind classes. Exception: dynamic/runtime values that Tailwind JIT cannot generate.
+- Component variants use **CVA** (`class-variance-authority`). Place variant definitions in a sibling `*Variants.ts` file (see `components/Button/buttonVariants.ts`, `components/Badge/badgeVariants.ts`).
+- **Brand color tokens** (defined in `theme/globals.css`):
+  - Surfaces: `background`, `background-light`, `button-background`
+  - Type: `title-light`, `title-dark`, `title-darker`, `paper-muted`, `paper-faint`
+  - Borders/rules: `border-light`, `border-dark`, `rule-faint`
+  - Accents: `acid` (#c8ff00), `blood` (#ff3d2e), `amber` (#f4d35e)
+  - Social: `social-facebook`, `social-whatsapp`, `social-telegram`, `social-reddit`, `social-bluesky`, `social-mastodon`
+- **Fonts** (configured in `theme/fonts.ts`):
+  - `font-grotesque` — DM Sans (body)
+  - `font-heading` — Roboto Condensed (display/headings)
+- **Use `cn()` from `@/utils/cn`** for conditional or merged className — never use template literals or string concatenation for className composition.
+- **Never add `className` manually to a component's interface.** Instead, extend the appropriate `HTMLAttributes<HTMLElement>` (e.g. `HTMLAttributes<HTMLDivElement>`, `ButtonHTMLAttributes<HTMLButtonElement>`) to inherit it.
+- **Never use arbitrary values when a standard Tailwind class exists.** Typography, spacing, sizing and all other utilities that have predefined Tailwind classes must use the standard class. For example use `text-xl` instead of `text-[1.25rem]`, `w-36` instead of `w-[9rem]`, `p-4` instead of `p-[1rem]`. Arbitrary values (`[…]`) are only acceptable when there is genuinely no matching Tailwind utility — the project's `theme/globals.css` already adds custom tokens like `border-width-6`, `rotate-4`, `rotate-md`, `rotate-sm`, and `tracking-eyebrow|meta|label` for values that fall outside the default scale.
+- **Always prefer Tailwind's default spacing/sizing scale.** Before reaching for an arbitrary value, check whether the value maps to an existing Tailwind class (e.g. `w-36` = `9rem`, `gap-6` = `1.5rem`). If it does, use the standard class.
+- **Always use shorthand utilities when available.** Use `size-*` instead of `h-* w-*` for equal width and height (e.g. `size-20` not `h-20 w-20`). Apply the same principle to other shorthand utilities (e.g. `inset-*` instead of `top-* right-* bottom-* left-*`, `overflow-*` for both axes when equal).
