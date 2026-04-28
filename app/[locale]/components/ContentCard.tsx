@@ -13,6 +13,7 @@ interface ContentCardProps {
   date: string;
   author: string;
   category?: string;
+  categorySlug?: string;
   readTimeMinutes?: number;
   slug: string;
   index: number;
@@ -22,7 +23,7 @@ const ACCENT_CLASSES = ['bg-acid', 'bg-blood text-title-light', 'bg-acid', 'bg-a
 
 const TILT_CLASSES = ['lg:-rotate-1', 'lg:rotate-md', 'lg:-rotate-sm'] as const;
 
-function ContentCard({ title, description, image, imageAlt, date, author, category, readTimeMinutes, slug, index }: ContentCardProps) {
+function ContentCard({ title, description, image, imageAlt, date, author, category, categorySlug, readTimeMinutes, slug, index }: ContentCardProps) {
   const t = useTranslations('Meta');
 
   const format = useFormatter();
@@ -71,7 +72,13 @@ function ContentCard({ title, description, image, imageAlt, date, author, catego
 
       <div className={cn(flipped ? 'lg:order-1 lg:pr-2' : 'lg:order-2 lg:pl-2')}>
         {category && (
-          <div className={cn('font-heading text-background tracking-meta mb-3 inline-block px-2.5 py-1 text-xs font-black uppercase', accent)}>{category}</div>
+          <Link
+            href={categorySlug ? `?category=${categorySlug}` : '#'}
+            scroll={false}
+            className={cn('font-heading text-background tracking-meta mb-3 inline-block px-2.5 py-1 text-xs font-black uppercase', accent)}
+          >
+            {category}
+          </Link>
         )}
         <Link
           href={`/content/${slug}`}

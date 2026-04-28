@@ -59,6 +59,7 @@ async function ContentView({ articles, allArticles, categories }: ContentViewPro
                   date={item.details.date}
                   author={item.details.author}
                   category={category?.name}
+                  categorySlug={category?.slug}
                   readTimeMinutes={minutes}
                   slug={item.slug ?? ''}
                 />
