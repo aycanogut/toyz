@@ -64,7 +64,7 @@ function HeaderDesktop({ onSearchOpen }: HeaderDesktopProps) {
             className="flex shrink-0 items-center gap-3"
           >
             <Image
-              src="/brand-logo.web"
+              src="/brand-logo.webp"
               alt="TOYZ"
               width={52}
               height={52}
@@ -88,7 +88,7 @@ function HeaderDesktop({ onSearchOpen }: HeaderDesktopProps) {
                   >
                     <span
                       className={cn(
-                        'font-heading text-title-light hover:text-acid text-base font-bold tracking-eyebrow uppercase transition-colors',
+                        'font-heading text-title-light hover:text-acid tracking-eyebrow text-base font-bold uppercase transition-colors',
                         pathname === item.path && 'text-acid'
                       )}
                     >
@@ -116,7 +116,7 @@ function HeaderDesktop({ onSearchOpen }: HeaderDesktopProps) {
 
           <a
             href="#newsletter"
-            className="bg-acid text-background hover:bg-title-light font-heading border-title-light border-2 px-4 py-2.5 text-sm font-black tracking-eyebrow uppercase transition-colors"
+            className="bg-acid text-background hover:bg-title-light font-heading border-title-light tracking-eyebrow border-2 px-4 py-2.5 text-sm font-black uppercase transition-colors"
           >
             {t('subscribe')}
           </a>

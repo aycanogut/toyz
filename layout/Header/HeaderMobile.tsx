@@ -108,12 +108,7 @@ function HeaderMobile({ onSearchOpen }: HeaderMobileProps) {
                   onClick={handleMenuToggle}
                   className="flex items-center justify-between"
                 >
-                  <span
-                    className={cn(
-                      'font-heading text-title-light text-3xl font-black tracking-tight uppercase',
-                      pathname === item.path && 'text-acid'
-                    )}
-                  >
+                  <span className={cn('font-heading text-title-light text-3xl font-black tracking-tight uppercase', pathname === item.path && 'text-acid')}>
                     {t(item.name)}
                   </span>
                   <Icon
@@ -129,7 +124,7 @@ function HeaderMobile({ onSearchOpen }: HeaderMobileProps) {
         <a
           href="#newsletter"
           onClick={handleMenuToggle}
-          className="bg-acid text-background border-title-light font-heading mt-10 inline-block border-2 px-5 py-3 text-sm font-black tracking-eyebrow uppercase"
+          className="bg-acid text-background border-title-light font-heading tracking-eyebrow mt-10 inline-block border-2 px-5 py-3 text-sm font-black uppercase"
         >
           {t('subscribe')}
         </a>

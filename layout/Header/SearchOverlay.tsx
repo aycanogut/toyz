@@ -100,17 +100,15 @@ function SearchOverlay({ isOpen, onClose, categories }: SearchOverlayProps) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.18, ease: 'easeOut' }}
-          className="fixed inset-0 z-200 overflow-y-auto bg-background/90 backdrop-blur-sm"
+          className="bg-background/90 fixed inset-0 z-200 overflow-y-auto backdrop-blur-sm"
         >
           {/* Top bar */}
           <div className="border-title-light flex items-center justify-between border-b-2 px-4 py-4 lg:px-8 lg:py-5">
-            <span className="font-heading text-title-dark text-xs tracking-eyebrow uppercase lg:text-sm">
-              TOYZ* / {t('title').toUpperCase()}
-            </span>
+            <span className="font-heading text-title-dark tracking-eyebrow text-xs uppercase lg:text-sm">TOYZ* / {t('title').toUpperCase()}</span>
             <div className="flex items-center gap-3">
               <button
                 onClick={handleClose}
-                className="font-heading text-title-dark hover:text-title-light hidden text-xs tracking-eyebrow uppercase transition-colors lg:block"
+                className="font-heading text-title-dark hover:text-title-light tracking-eyebrow hidden text-xs uppercase transition-colors lg:block"
               >
                 ESC
               </button>
@@ -160,14 +158,12 @@ function SearchOverlay({ isOpen, onClose, categories }: SearchOverlayProps) {
 
           {/* Popular topics — always visible so users can change category while viewing results */}
           <div className="px-4 py-6 lg:px-8 lg:py-8">
-            <p className="text-paper-muted font-heading mb-5 text-[10px] tracking-eyebrow uppercase lg:text-xs">
-              {t('popular-topics')}
-            </p>
+            <p className="text-paper-muted font-heading tracking-eyebrow mb-5 text-[10px] uppercase lg:text-xs">{t('popular-topics')}</p>
             <div className="flex flex-wrap gap-x-5 gap-y-2 lg:gap-x-8 lg:gap-y-3">
               <button
                 onClick={() => setSelectedCategory('')}
                 className={cn(
-                  'font-heading text-xl font-black uppercase tracking-tight transition-colors lg:text-3xl',
+                  'font-heading text-xl font-black tracking-tight uppercase transition-colors lg:text-3xl',
                   selectedCategory === '' ? 'text-acid' : 'text-title-light hover:text-acid'
                 )}
               >
@@ -178,7 +174,7 @@ function SearchOverlay({ isOpen, onClose, categories }: SearchOverlayProps) {
                   key={cat.id}
                   onClick={() => handleCategoryToggle(cat.slug ?? '')}
                   className={cn(
-                    'font-heading text-xl font-black uppercase tracking-tight transition-colors lg:text-3xl',
+                    'font-heading text-xl font-black tracking-tight uppercase transition-colors lg:text-3xl',
                     selectedCategory === cat.slug ? 'text-acid' : 'text-title-light hover:text-acid'
                   )}
                 >
@@ -192,7 +188,7 @@ function SearchOverlay({ isOpen, onClose, categories }: SearchOverlayProps) {
           {showResults && (
             <div className="px-4 pb-16 lg:px-8">
               {isPending ? (
-                <div className="text-paper-muted font-heading py-8 text-xs tracking-eyebrow uppercase">...</div>
+                <div className="text-paper-muted font-heading tracking-eyebrow py-8 text-xs uppercase">...</div>
               ) : hasSearched && results.length === 0 ? (
                 <p className="font-heading text-title-dark py-8 text-xl font-bold uppercase">{t('result')}</p>
               ) : (
@@ -210,7 +206,7 @@ function SearchOverlay({ isOpen, onClose, categories }: SearchOverlayProps) {
                         </span>
                       )}
                       <div className="min-w-0 flex-1">
-                        <h3 className="font-heading text-title-light group-hover:text-acid text-lg font-black uppercase leading-tight transition-colors lg:text-2xl">
+                        <h3 className="font-heading text-title-light group-hover:text-acid text-lg leading-tight font-black uppercase transition-colors lg:text-2xl">
                           {item.title}
                         </h3>
                         <div className="text-paper-muted font-heading mt-1 flex items-center gap-2 text-[10px] tracking-[0.16em] uppercase">

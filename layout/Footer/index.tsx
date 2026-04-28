@@ -76,21 +76,21 @@ function Footer() {
 
   return (
     <footer className="bg-background text-title-light border-title-light relative overflow-hidden border-t-2 px-6 pt-10 pb-6 md:px-8">
-      <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-footer lg:items-start lg:gap-8">
+      <div className="lg:grid-cols-footer grid grid-cols-1 gap-10 md:grid-cols-2 lg:items-start lg:gap-8">
         <div className="lg:order-1">
-          <h3 className="font-heading text-acid mb-3 text-xs font-black tracking-eyebrow uppercase">{tFooter('about')}</h3>
+          <h3 className="font-heading text-acid tracking-eyebrow mb-3 text-xs font-black uppercase">{tFooter('about')}</h3>
           <p className="font-grotesque text-title-dark max-w-xs text-sm leading-relaxed">{tFooter('description')}</p>
         </div>
 
         <nav className="lg:order-2">
-          <h3 className="font-heading text-acid mb-3 text-xs font-black tracking-eyebrow uppercase">{tNav('pages')}</h3>
+          <h3 className="font-heading text-acid tracking-eyebrow mb-3 text-xs font-black uppercase">{tNav('pages')}</h3>
           <ul className="flex flex-col gap-2">
             {navigationItems.map(item => (
               <li key={item.id}>
                 <Link
                   href={item.path}
                   className={cn(
-                    'font-heading text-title-light hover:text-acid text-sm font-bold tracking-label uppercase transition-colors',
+                    'font-heading text-title-light hover:text-acid tracking-label text-sm font-bold uppercase transition-colors',
                     pathname === item.path && 'text-acid'
                   )}
                 >
@@ -101,7 +101,7 @@ function Footer() {
           </ul>
         </nav>
 
-        <div className="row-start-1 flex justify-center self-center md:col-span-2 lg:col-span-1 lg:order-3 lg:row-start-auto lg:self-center">
+        <div className="row-start-1 flex justify-center self-center md:col-span-2 lg:order-3 lg:col-span-1 lg:row-start-auto lg:self-center">
           <Image
             src="/toyz-big-logo.webp"
             alt="TOYZ"
@@ -112,7 +112,7 @@ function Footer() {
         </div>
 
         <div className="lg:order-4">
-          <h3 className="font-heading text-acid mb-3 text-xs font-black tracking-eyebrow uppercase">{tFooter('contact')}</h3>
+          <h3 className="font-heading text-acid tracking-eyebrow mb-3 text-xs font-black uppercase">{tFooter('contact')}</h3>
           <div className="flex flex-col gap-3">
             <a
               href={toyzConfig.instagramUrl}
@@ -143,7 +143,7 @@ function Footer() {
           id="newsletter"
           className="scroll-mt-28 lg:order-5"
         >
-          <h3 className="font-heading text-acid mb-3 text-xs font-black tracking-eyebrow uppercase">{tFooter('newsletter')}</h3>
+          <h3 className="font-heading text-acid tracking-eyebrow mb-3 text-xs font-black uppercase">{tFooter('newsletter')}</h3>
           <p className="font-grotesque text-title-dark mb-3 text-sm leading-relaxed">{tFooter('newsletter-description')}</p>
           <form
             onSubmit={handleNewsletterSubmit}
@@ -159,7 +159,7 @@ function Footer() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="bg-acid text-background hover:bg-title-light font-heading border-title-light w-full border-2 px-4 py-2.5 text-xs font-black tracking-eyebrow uppercase transition-colors disabled:opacity-60"
+              className="bg-acid text-background hover:bg-title-light font-heading border-title-light tracking-eyebrow w-full border-2 px-4 py-2.5 text-xs font-black uppercase transition-colors disabled:opacity-60"
             >
               {tFooter('newsletter-subscribe')}
             </button>
@@ -169,13 +169,11 @@ function Footer() {
       </div>
 
       <div className="border-rule-faint mt-10 flex flex-col items-start justify-between gap-3 border-t pt-4 sm:flex-row sm:items-center">
-        <span className="font-heading text-paper-muted text-xs tracking-meta uppercase">
-          © {new Date().getFullYear()} TOYZ Webzine
-        </span>
+        <span className="font-heading text-paper-muted tracking-meta text-xs uppercase">© {new Date().getFullYear()} TOYZ Webzine</span>
         <button
           type="button"
           onClick={scrollToTop}
-          className="font-heading text-paper-muted hover:text-acid text-xs tracking-meta uppercase transition-colors"
+          className="font-heading text-paper-muted hover:text-acid tracking-meta text-xs uppercase transition-colors"
         >
           ↑ {tFooter('back-to-top')}
         </button>
