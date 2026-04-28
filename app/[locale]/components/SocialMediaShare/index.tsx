@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 
 import Icon from '@/components/Icon';
 import cn from '@/utils/cn';
-import toyzConfig from 'toyzConfig';
+import toyzConfig from '@/toyzConfig';
 
 import socialLinks from './socialLinks';
 
