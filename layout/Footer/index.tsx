@@ -119,21 +119,21 @@ function Footer() {
               href={toyzConfig.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-fira text-title-dark hover:text-acid flex items-center gap-2 transition-colors"
+              className="font-fira text-title-dark hover:text-acid flex items-center gap-2 text-sm transition-colors"
             >
               <Icon
                 name="instagram"
-                className="text-acid"
+                className="text-acid size-5"
               />
               Instagram
             </a>
             <a
               href={`mailto:${toyzConfig.contactEmail}`}
-              className="font-fira text-title-dark hover:text-acid flex items-center gap-2 transition-colors"
+              className="font-fira text-title-dark hover:text-acid flex items-center gap-2 text-sm transition-colors"
             >
               <Icon
                 name="envelope"
-                className="text-acid"
+                className="text-acid size-5"
               />
               {toyzConfig.contactEmail}
             </a>
@@ -145,7 +145,7 @@ function Footer() {
           className="scroll-mt-28 lg:order-5"
         >
           <h3 className="font-heading text-acid tracking-eyebrow mb-3 font-black uppercase">{tFooter('newsletter')}</h3>
-          <p className="font-fira text-title-dark mb-3 leading-relaxed">{tFooter('newsletter-description')}</p>
+          <p className="font-fira text-title-dark mb-3 text-sm leading-relaxed">{tFooter('newsletter-description')}</p>
           <form
             onSubmit={handleNewsletterSubmit}
             className="flex flex-col gap-2"
@@ -167,7 +167,7 @@ function Footer() {
               {tFooter('newsletter-subscribe')}
             </Button>
           </form>
-          <p className="font-fira text-paper-muted mt-3 leading-relaxed opacity-70">{tFooter('recaptcha-notice')}</p>
+          <p className="font-fira text-paper-muted mt-3 text-xs leading-relaxed opacity-70">{tFooter('recaptcha-notice')}</p>
         </div>
       </div>
 

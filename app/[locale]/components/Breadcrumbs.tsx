@@ -99,9 +99,9 @@ function Breadcrumbs({ currentPageTitle }: BreadcrumbsProps) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 lg:px-8"
+      className="border-border-dark mx-auto w-full max-w-7xl border-b p-4 md:px-8 lg:px-10 xl:px-0"
     >
-      <ol className="flex flex-wrap items-center gap-2">
+      <ol className="flex min-w-0 items-center gap-2">
         {breadcrumbs.map((crumb, index) => {
           const isLast = index === breadcrumbs.length - 1;
           const showSeparator = index > 0;
@@ -109,19 +109,23 @@ function Breadcrumbs({ currentPageTitle }: BreadcrumbsProps) {
           return (
             <li
               key={`${crumb.href}-${index}`}
-              className="flex items-center gap-2"
+              className={isLast ? 'flex min-w-0 shrink items-center gap-2' : 'flex shrink-0 items-center gap-2'}
             >
               {showSeparator && (
-                <Icon
-                  name="arrow-right"
-                  className="text-title-dark size-5 lg:mt-1"
+                <span
+                  className="text-title-light"
                   aria-hidden="true"
-                />
+                >
+                  <Icon
+                    name="arrow-right"
+                    className="size-4"
+                  />
+                </span>
               )}
 
               {isLast ? (
                 <span
-                  className="font-fira text-title-light font-medium uppercase lg:text-lg"
+                  className="font-heading text-title-light truncate text-base font-bold uppercase"
                   aria-current="page"
                 >
                   {crumb.label}
@@ -129,7 +133,7 @@ function Breadcrumbs({ currentPageTitle }: BreadcrumbsProps) {
               ) : (
                 <Link
                   href={crumb.href}
-                  className="font-fira text-title-dark hover:text-title-light font-medium uppercase transition-colors lg:text-lg"
+                  className="font-heading tracking-eyebrow text-acid hover:text-title-light text-base font-bold uppercase transition-colors"
                 >
                   {crumb.label}
                 </Link>
