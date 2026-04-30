@@ -202,8 +202,9 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
-button {
-  @apply cursor-pointer;
+button,
+a {
+  cursor: pointer;
 }
 
 .grecaptcha-badge {
