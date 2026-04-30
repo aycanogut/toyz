@@ -14,7 +14,7 @@ function ScrollProgressAnimation() {
   return (
     <motion.span
       style={{ scaleX }}
-      className="bg-title-light fixed inset-0 h-1 origin-left"
+      className="bg-acid fixed inset-0 h-1 origin-left"
     />
   );
 }

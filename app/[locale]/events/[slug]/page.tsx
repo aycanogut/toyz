@@ -51,7 +51,7 @@ async function EventDetails({ params }: EventDetailsProps) {
   const galleryItems = (gallery?.docs ?? []) as EventMedia[];
 
   return (
-    <section className="pb-24 md:pb-28 lg:pb-32">
+    <section className="py-12">
       <span className="bg-background block h-20 lg:hidden" />
 
       <Breadcrumbs currentPageTitle={title} />
