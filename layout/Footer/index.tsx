@@ -108,7 +108,7 @@ function Footer() {
             alt="TOYZ"
             width={280}
             height={280}
-            className="size-48 object-contain md:size-64 lg:size-80"
+            className="size-48 object-contain md:size-72 lg:size-80"
           />
         </div>
 
