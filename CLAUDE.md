@@ -38,11 +38,14 @@ This is a **Next.js 15 (App Router) + Payload CMS 3** monorepo-style app where P
 
 Payload's queue runs **in-process** via `autoRun` cron `*/1 * * * *` (every minute, limit 50). The only registered task is `newArticleEmailTask` (notifies subscribers via Resend, template in `emails/NewArticleEmail.tsx`). On boot, `onInit` in `payload.config.ts` recovers stuck jobs (`processing: true` with no `completedAt`) — keep this behavior in mind when debugging job state.
 
+An article `afterChange` hook queues the email task using an in-memory `emailQueueLock` Set to prevent duplicate queues within the same process. Emails are sent per subscriber with locale preference respected. Jobs complete and are deleted from the queue on success; failures retry up to 3 times.
+
 ### Data access pattern
 
 UI components do **not** call Payload directly. Instead:
 
 - `services/*.ts` — server-side data fetchers (one file per resource: `articles`, `article`, `home`, `events`, `search`, `sitemap`, etc.). They use the Payload Local API via `utils/payloadClient.ts`.
+- All service functions are wrapped with `unstable_cache` (24 h / 86 400 s revalidation) and tagged with semantic cache keys (e.g. `['article']`, `['home']`). Invalidate these tags when content changes are required immediately.
 - `app/[locale]/**/page.tsx` calls these services and passes data to client components.
 - Server actions (e.g. contact form, subscribe) live alongside their feature and call Payload + Resend directly; reCAPTCHA is verified server-side via `utils/verifyReCaptcha.ts`.
 
@@ -60,8 +63,20 @@ All env access is centralized in `toyzConfig.ts` — import from there rather th
 - Vitest: `tests/unit/`, `tests/integration/`, `tests/components/` — env `happy-dom`, setup in `tests/setup.ts`, only files matching `tests/**/*.test.{ts,tsx}`.
 - Playwright: `tests/e2e/`, Chromium only, `webServer` boots `pnpm dev` automatically.
 
+### i18n messages
+
+Translation strings live in `locales/en.json` and `locales/tr.json`, loaded dynamically in `i18n/request.ts`. The middleware matcher regex `/((?!toyz-panel|api|monitoring|_next|_vercel|.*\\..*).+)` excludes CMS routes, API endpoints, and static assets from locale routing.
+
+### Payload field conventions
+
+A `slugField` factory in `app/(payload)/fields/slug.ts` generates slug fields with a `formatSlug` hook. Use it when adding new slugged collections rather than defining slug logic inline.
+
+Articles have role-based read access (authenticated users see all statuses; public sees only published), draft autosave, scheduled publishing, and version history (max 10). This is enforced at the Payload config level, not in services.
+
 ### Misc
 
 - Tailwind v4 (PostCSS plugin) with `@tailwindcss/typography`.
 - Shared UI primitives: `components/` (Badge, Button, Icon, Input, Popover). Layout chrome: `layout/Header`, `layout/Footer`. Page-level components: `app/[locale]/components/`.
+- `app/[locale]/` has root-level `error.tsx`, `loading.tsx`, and `not-found.tsx` — all use `next-intl` translations.
+- `next.config.ts` sets strict security headers including a CSP that whitelists `https://cdn.toyzwebzine.com` (R2), Google Analytics/reCAPTCHA, and YouTube iframes. Update the CSP there when integrating new third-party scripts.
 - Admin URL is `/toyz-panel` (not `/admin`). README mentions `/admin` but the actual mount is `/toyz-panel`.
