@@ -91,5 +91,15 @@
   },
   "Meta": {
     "read-time": "{count} min"
+  },
+  "Events": {
+    "photo-archive": "TOYZ // PHOTO ARCHIVE",
+    "photo-credit": "PHOTO",
+    "keyboard-hint": "← → ESC",
+    "gallery": "GALLERY",
+    "photos": "{count} PHOTOS",
+    "close-modal": "Close photo viewer",
+    "previous-photo": "Previous photo",
+    "next-photo": "Next photo"
   }
 }

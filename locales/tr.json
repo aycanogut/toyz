@@ -91,5 +91,15 @@
   },
   "Meta": {
     "read-time": "{count} dk"
+  },
+  "Events": {
+    "photo-archive": "TOYZ // FOTOĞRAF ARŞİVİ",
+    "photo-credit": "FOTOĞRAF",
+    "keyboard-hint": "← → ESC",
+    "gallery": "GALERİ",
+    "photos": "{count} FOTOĞRAF",
+    "close-modal": "Fotoğraf görüntüleyiciyi kapat",
+    "previous-photo": "Önceki fotoğraf",
+    "next-photo": "Sonraki fotoğraf"
   }
 }
