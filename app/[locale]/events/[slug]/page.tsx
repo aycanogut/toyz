@@ -1,14 +1,16 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
+import { getTranslations } from 'next-intl/server';
+
+import Icon from '@/components/Icon';
 import { routing } from '@/i18n/routing';
 import { EventMedia, Media } from '@/payload-types';
 import getEvent from '@/services/event';
 import getAllEventSlugs from '@/services/event-slugs';
+import formatDate from '@/utils/formatDate';
 
-import BackButton from '../../components/BackButton';
 import Breadcrumbs from '../../components/Breadcrumbs';
-import ContentLabels from '../../components/ContentLabels';
 import SocialMediaShare from '../../components/SocialMediaShare';
 
 import Gallery from './Gallery';
@@ -39,6 +41,8 @@ export const dynamicParams = false;
 async function EventDetails({ params }: EventDetailsProps) {
   const { locale, slug } = await params;
 
+  const t = await getTranslations('Events');
+
   const event = await getEvent(slug, locale);
 
   if (!event) {
@@ -49,75 +53,83 @@ async function EventDetails({ params }: EventDetailsProps) {
 
   const posterMedia = poster as Media;
   const galleryItems = (gallery?.docs ?? []) as EventMedia[];
+  const formattedDate = formatDate(details.date, locale);
 
   return (
-    <section className="py-12">
+    <section className="pb-24 md:pb-28 lg:pb-32">
       <span className="bg-background block h-20 lg:hidden" />
 
       <Breadcrumbs currentPageTitle={title} />
 
-      <article className="flex flex-col gap-8 md:gap-10 lg:gap-12">
-        <div className="relative min-w-full">
-          <div className="h-80 md:h-100 lg:h-160">
-            <Image
-              src={posterMedia.url ?? ''}
-              alt={title}
-              fill
-              className="object-cover"
-            />
+      <article>
+        {/* Hero */}
+        <div className="relative h-80 w-full overflow-hidden md:h-100 lg:h-120">
+          <Image
+            src={posterMedia.url ?? ''}
+            alt={title}
+            fill
+            priority
+            className="xerox-img object-cover"
+          />
+          <div className="xerox-halftone opacity-30" />
 
-            <header className="absolute inset-0 mx-auto flex size-full max-w-96 flex-col items-center justify-between p-4 md:mx-0 md:max-w-lg md:items-start md:p-5 lg:max-w-4xl lg:p-6">
-              <div className="bg-background/80 size-auto p-2 md:p-3 lg:p-4">
-                <h1 className="font-fira text-title-light max-w-3xl text-center text-2xl font-medium uppercase text-shadow-md md:text-start md:text-4xl lg:text-6xl lg:font-semibold">
-                  {title}
-                </h1>
-              </div>
+          {/* Gradient overlay — title in lower portion, meta strip at very bottom */}
+          <div className="from-background via-background/50 absolute inset-0 flex flex-col justify-end bg-linear-to-t to-transparent">
+            {/* Title */}
+            <div className="mx-auto w-full max-w-7xl px-4 xl:px-0">
+              <h1 className="event-title-shadow font-heading text-blood py-3 text-4xl leading-[0.9] font-black tracking-tight uppercase md:py-8 md:text-6xl lg:text-8xl">
+                {title}
+              </h1>
+            </div>
 
-              <div className="bg-background/80 size-auto p-2 md:p-3 lg:p-4">
-                <ContentLabels
-                  rootProps={{
-                    className: 'flex gap-8',
-                  }}
-                  iconProps={{
-                    className: 'size-4 md:size-5 lg:size-6 mt-1.5',
-                  }}
-                  labelProps={{
-                    className: 'md:text-lg lg:text-2xl text-shadow-md',
-                  }}
-                  items={{
-                    ...details,
-                  }}
+            {/* Meta strip — date / location / social */}
+            <div className="border-title-light/20 mx-auto w-full max-w-7xl border-t">
+              <div className="flex items-center justify-between px-4 py-3 md:py-8 xl:px-0">
+                <div className="flex items-center gap-5">
+                  <div className="flex items-center gap-2">
+                    <Icon
+                      name="date"
+                      className="text-paper-muted size-4 shrink-0"
+                    />
+                    <span className="font-heading tracking-label text-acid text-base font-bold uppercase">{formattedDate}</span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <Icon
+                      name="location"
+                      className="text-paper-muted size-4 shrink-0"
+                    />
+                    <span className="font-heading tracking-label text-title-light text-base uppercase">{details.location}</span>
+                  </div>
+                </div>
+
+                <SocialMediaShare
+                  title={title}
+                  slug={slug}
+                  locale={locale}
+                  type="event"
+                  className="bg-transparent! p-0!"
                 />
               </div>
-            </header>
-          </div>
-
-          <div className="absolute right-0 bottom-0 hidden md:block md:p-5 lg:p-6">
-            <SocialMediaShare
-              title={title}
-              slug={slug}
-              locale={locale}
-              type="event"
-            />
+            </div>
           </div>
         </div>
 
-        <div className="mx-auto flex w-full max-w-7xl justify-between px-4 sm:px-6 lg:px-8">
-          <BackButton href="/events" />
-
-          <div className="md:hidden">
-            <SocialMediaShare
-              title={title}
-              slug={slug}
-              locale={locale}
-              type="event"
-            />
-          </div>
-        </div>
-
+        {/* Gallery */}
         {galleryItems.length > 0 && (
-          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-            <Gallery images={galleryItems} />
+          <div className="mx-auto mt-8 w-full max-w-7xl px-4 xl:px-0">
+            <div className="border-title-light mb-6 flex items-center gap-4 border-b-2 pb-4">
+              <span className="font-heading text-title-light tracking-meta font-black uppercase md:text-lg"> {t('gallery')}</span>
+              <span className="bg-title-light h-px flex-1" />
+              <span className="font-heading tracking-label text-paper-muted text-base uppercase">{t('photos', { count: galleryItems.length })}</span>
+            </div>
+
+            <Gallery
+              images={galleryItems}
+              eventTitle={title}
+              eventDate={formattedDate}
+              eventLocation={details.location}
+            />
           </div>
         )}
       </article>

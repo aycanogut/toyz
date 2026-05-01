@@ -111,6 +111,12 @@
     0.5rem 0.5rem 0 0.0625rem var(--color-title-light);
 }
 
+@utility event-title-shadow {
+  text-shadow:
+    3px 3px 0 #000,
+    5px 5px 0 rgba(0, 0, 0, 0.4);
+}
+
 @utility loader-overlay {
   position: absolute;
   inset: 0;
