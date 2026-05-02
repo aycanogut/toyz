@@ -199,7 +199,6 @@ function Gallery({ images, eventTitle, eventDate, eventLocation }: GalleryProps)
                 </div>
               ))}
             </div>
-
           </div>
 
           {/* Bottom bar */}
