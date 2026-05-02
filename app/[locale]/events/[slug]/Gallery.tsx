@@ -45,7 +45,7 @@ function Gallery({ images, eventTitle, eventDate, eventLocation }: GalleryProps)
 
   useEffect(() => {
     if (emblaApi && isOpen) {
-      emblaApi.scrollTo(selectedIndex, false);
+      emblaApi.scrollTo(selectedIndex, true);
     }
   }, [emblaApi, isOpen, selectedIndex]);
 
