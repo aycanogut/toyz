@@ -160,16 +160,17 @@
 }
 
 /* Dynamic viewport heights for gallery lightbox */
+/* top bar (3rem) + bottom bar (3.5rem) + slide py-6 (3rem) + layered border overflow buffer = ~11rem */
 @utility max-h-gallery-sm {
-  max-height: 80dvh;
+  max-height: calc(100dvh - 11rem);
 }
 
 @utility max-h-gallery-md {
-  max-height: 85dvh;
+  max-height: calc(100dvh - 11rem);
 }
 
 @utility max-h-gallery-lg {
-  max-height: 90dvh;
+  max-height: calc(100dvh - 11rem);
 }
 
 html {

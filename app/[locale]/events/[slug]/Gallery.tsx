@@ -173,7 +173,7 @@ function Gallery({ images, eventTitle, eventDate, eventLocation }: GalleryProps)
               {sortedImages.map((image, index) => (
                 <div
                   key={image.id}
-                  className="relative flex h-full w-full min-w-0 shrink-0 grow-0 items-center justify-center px-20 py-6 md:px-28"
+                  className="relative flex h-full w-full min-w-0 shrink-0 grow-0 items-center justify-center px-6 py-6"
                 >
                   {/* Layered border: acid furthest (most offset), blood middle, white image frame on top */}
                   <div className="relative">
@@ -200,52 +200,6 @@ function Gallery({ images, eventTitle, eventDate, eventLocation }: GalleryProps)
               ))}
             </div>
 
-            {/* Navigation arrows — white + acid layered border */}
-            {sortedImages.length > 1 && (
-              <>
-                <div className="absolute top-1/2 left-4 -translate-y-1/2 md:left-6">
-                  <div
-                    aria-hidden="true"
-                    className="border-acid absolute inset-0 translate-x-1 translate-y-1 border-4"
-                  />
-                  <button
-                    type="button"
-                    onClick={e => {
-                      e.stopPropagation();
-                      emblaApi?.scrollPrev();
-                    }}
-                    className="border-title-light text-title-light hover:border-acid hover:text-acid bg-background relative cursor-pointer border-4 p-3 transition-colors md:p-4"
-                    aria-label={t('previous-photo')}
-                  >
-                    <Icon
-                      name="arrow-left"
-                      className="size-5 md:size-6"
-                    />
-                  </button>
-                </div>
-
-                <div className="absolute top-1/2 right-4 -translate-y-1/2 md:right-6">
-                  <div
-                    aria-hidden="true"
-                    className="border-acid absolute inset-0 translate-x-1 translate-y-1 border-4"
-                  />
-                  <button
-                    type="button"
-                    onClick={e => {
-                      e.stopPropagation();
-                      emblaApi?.scrollNext();
-                    }}
-                    className="border-title-light text-title-light hover:border-acid hover:text-acid bg-background relative cursor-pointer border-4 p-3 transition-colors md:p-4"
-                    aria-label={t('next-photo')}
-                  >
-                    <Icon
-                      name="arrow-right"
-                      className="size-5 md:size-6"
-                    />
-                  </button>
-                </div>
-              </>
-            )}
           </div>
 
           {/* Bottom bar */}
@@ -253,6 +207,27 @@ function Gallery({ images, eventTitle, eventDate, eventLocation }: GalleryProps)
             className="border-title-light/20 flex h-14 shrink-0 items-stretch border-t"
             onClick={e => e.stopPropagation()}
           >
+            {/* Prev button */}
+            {sortedImages.length > 1 && (
+              <div className="border-rule-faint relative flex shrink-0 items-stretch border-r">
+                <div
+                  aria-hidden="true"
+                  className="border-acid pointer-events-none absolute inset-0 translate-x-1 translate-y-1 border-4"
+                />
+                <button
+                  type="button"
+                  onClick={() => emblaApi?.scrollPrev()}
+                  className="border-title-light text-title-light hover:border-acid hover:text-acid bg-background relative cursor-pointer border-r-0 px-4 transition-colors"
+                  aria-label={t('previous-photo')}
+                >
+                  <Icon
+                    name="arrow-left"
+                    className="size-5"
+                  />
+                </button>
+              </div>
+            )}
+
             {/* Credits — LEFT, flex-1 pushes right group to edge */}
             <div className="flex min-w-0 flex-1 items-center gap-2 px-4 md:px-5">
               <Icon
@@ -294,6 +269,27 @@ function Gallery({ images, eventTitle, eventDate, eventLocation }: GalleryProps)
                 <span className="font-heading tracking-label text-acid text-base uppercase">{t('keyboard-hint')}</span>
               </div>
             </div>
+
+            {/* Next button */}
+            {sortedImages.length > 1 && (
+              <div className="border-rule-faint relative flex shrink-0 items-stretch border-l">
+                <div
+                  aria-hidden="true"
+                  className="border-acid pointer-events-none absolute inset-0 translate-x-1 translate-y-1 border-4"
+                />
+                <button
+                  type="button"
+                  onClick={() => emblaApi?.scrollNext()}
+                  className="border-title-light text-title-light hover:border-acid hover:text-acid bg-background relative cursor-pointer px-4 transition-colors"
+                  aria-label={t('next-photo')}
+                >
+                  <Icon
+                    name="arrow-right"
+                    className="size-5"
+                  />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
