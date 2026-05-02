@@ -73,7 +73,7 @@ function HeaderMobile({ onSearchOpen }: HeaderMobileProps) {
         <Button
           onClick={onSearchOpen}
           variant="outline"
-          size="iconSm"
+          size="iconMd"
           className="ml-auto"
           aria-label={t('search')}
         >

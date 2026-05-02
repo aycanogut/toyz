@@ -17,11 +17,14 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
       hasCloseIcon={false}
       contentProps={{
         className: 'z-50 bg-background w-[var(--radix-popover-trigger-width)]',
+        align: 'end',
+        collisionPadding: 0,
       }}
       trigger={
         <Button
           variant="secondary"
-          className="hover:bg-title-light hover:text-background font-heading border-paper-faint tracking-eyebrow my-auto border-2 px-3 py-1.5"
+          size="iconMd"
+          className="hover:bg-title-light hover:text-background font-heading border-paper-faint tracking-eyebrow my-auto border-2 p-5"
         >
           {locale}
         </Button>
@@ -32,7 +35,8 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
           <Button
             key={locale}
             variant="secondary"
-            className="font-heading bg-background border-paper-faint tracking-eyebrow border-2 p-2 font-bold text-white uppercase"
+            size="iconMd"
+            className="font-heading bg-background border-paper-faint tracking-eyebrow w-full border-2 font-bold uppercase"
             onClick={() => handleLocale(locale)}
           >
             {localeNames[locale]}
