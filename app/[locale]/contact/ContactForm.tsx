@@ -66,7 +66,7 @@ function ContactForm() {
 
   return (
     <div className="border-title-light bg-background-light relative border-2 p-4 md:p-8">
-      <span className="bg-acid text-background font-heading tracking-eyebrow absolute -top-4 right-2 rotate-3 px-3 py-1.5 text-base font-black uppercase">
+      <span className="bg-acid text-background font-heading tracking-eyebrow absolute -top-6 -right-2 rotate-3 px-3 py-1.5 text-sm font-black uppercase sm:-top-4 sm:right-2 sm:text-base">
         {t('message')}
       </span>
 
