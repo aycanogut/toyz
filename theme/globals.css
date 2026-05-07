@@ -129,6 +129,12 @@
 
 /* Drop cap for first paragraph of article body */
 @utility article-drop-cap {
+  & blockquote a {
+    color: var(--color-background);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
   & > p:first-of-type::first-letter {
     float: left;
     font-family: var(--font-heading);
