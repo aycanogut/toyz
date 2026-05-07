@@ -26,7 +26,7 @@ function CategoryFilter({ categories, counts, totalCount }: CategoryFilterProps)
       params.delete('category');
     }
     const queryString = params.toString();
-    return queryString ? `?${queryString}` : '?';
+    return queryString ? `?${queryString}` : '';
   };
 
   return (
