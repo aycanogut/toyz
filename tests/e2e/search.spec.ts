@@ -1,11 +1,17 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('Search overlay', () => {
-  test('should open and close search overlay', async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
     await page.goto('/');
+    await page.setViewportSize({ width: 1440, height: 900 });
+    // Desktop header on homepage starts hidden (y: -100%) and animates in after 250px scroll
+    await page.evaluate(() => window.scrollTo(0, 300));
+    await page.waitForTimeout(400);
+  });
 
-    const searchButton = page.locator('button[aria-label="search"]').first();
-    await expect(searchButton).toBeVisible();
+  test('should open and close search overlay', async ({ page }) => {
+    const searchButton = page.getByRole('button', { name: 'search' });
+    await expect(searchButton).toBeVisible({ timeout: 5000 });
     await searchButton.click();
 
     const overlay = page.locator('input[type="text"]').first();
@@ -16,9 +22,8 @@ test.describe('Search overlay', () => {
   });
 
   test('should show results when typing', async ({ page }) => {
-    await page.goto('/');
-
-    const searchButton = page.locator('button[aria-label="search"]').first();
+    const searchButton = page.getByRole('button', { name: 'search' });
+    await expect(searchButton).toBeVisible({ timeout: 5000 });
     await searchButton.click();
 
     const input = page.locator('input[type="text"]').first();
