@@ -2,34 +2,43 @@ import Image from 'next/image';
 
 import { Link } from '@/i18n/routing';
 
+import CategoryBadge from './CategoryBadge';
+
 interface SimiliarContentCardProps {
   title: string;
   image: string;
   categoryName: string;
+  categoryId: string | number;
   date: string;
   author: string;
   slug: string;
 }
 
-function SimiliarContentCard({ title, image, categoryName, date, author, slug }: SimiliarContentCardProps) {
+function SimiliarContentCard({ title, image, categoryName, categoryId, date, author, slug }: SimiliarContentCardProps) {
   return (
     <article>
       <Link
         href={`/content/${slug}`}
         className="focus-visible:ring-title-light group block focus-visible:ring-2 focus-visible:outline-hidden"
       >
-        <div className="border-title-light relative mb-3 aspect-5/3 w-full overflow-hidden border-4">
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+        <div className="relative mb-3 aspect-5/3 w-full">
+          <div className="border-title-light absolute inset-0 overflow-hidden border-4">
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          </div>
 
           <div className="xerox-halftone" />
 
-          <div className="absolute top-2 left-2">
-            <span className="bg-acid text-background font-heading tracking-meta px-2 py-0.5 text-base font-black uppercase">{categoryName}</span>
+          <div className="absolute top-2 left-2 z-10">
+            <CategoryBadge
+              name={categoryName}
+              categoryId={categoryId}
+              className="px-2 py-0.5"
+            />
           </div>
         </div>
 

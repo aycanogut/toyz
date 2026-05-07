@@ -54,8 +54,8 @@ async function Events() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="xerox-halftone" />
                 </div>
+                <div className="xerox-halftone" />
 
                 <div className="mt-3 space-y-1.5">
                   <h5 className="font-heading text-title-light group-hover:text-acid text-lg leading-tight font-black uppercase transition-colors md:text-xl">
