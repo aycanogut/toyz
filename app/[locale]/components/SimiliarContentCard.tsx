@@ -42,7 +42,7 @@ function SimiliarContentCard({ title, image, categoryName, categoryId, date, aut
           </div>
         </div>
 
-        <h5 className="font-heading text-title-light group-hover:text-acid mb-2 text-lg leading-tight font-black uppercase transition-colors md:text-xl">
+        <h5 className="font-heading text-title-light group-hover:text-acid after:bg-acid relative mb-2 text-lg leading-tight font-black uppercase transition-colors after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:transition-[width] after:duration-300 group-hover:after:w-full md:text-xl">
           {title}
         </h5>
 

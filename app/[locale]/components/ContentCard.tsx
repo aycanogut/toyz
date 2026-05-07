@@ -43,14 +43,14 @@ function ContentCard({ title, description, image, imageAlt, date, author, catego
   return (
     <article
       className={cn(
-        'border-paper-muted grid items-center gap-8 border-b border-dashed py-8',
+        'border-paper-muted group grid items-center gap-8 border-b border-dashed py-8',
         'lg:gap-10 lg:py-10',
         flipped ? 'lg:grid-cols-card-flip' : 'lg:grid-cols-card'
       )}
     >
       <Link
         href={`/content/${slug}`}
-        className={cn('group relative block aspect-16/10 w-full lg:aspect-auto lg:h-72', flipped && 'lg:order-2', tilt)}
+        className={cn('relative block aspect-16/10 w-full lg:aspect-auto lg:h-72', flipped && 'lg:order-2', tilt)}
       >
         <div className="border-title-light xerox-shadow-hard relative h-full w-full overflow-hidden border-4 lg:border-6">
           <Image
@@ -85,7 +85,7 @@ function ContentCard({ title, description, image, imageAlt, date, author, catego
           href={`/content/${slug}`}
           className="block"
         >
-          <h2 className="font-heading text-title-light hover:text-acid mb-3 text-3xl font-black uppercase transition-colors md:text-4xl lg:text-5xl">
+          <h2 className="font-heading text-title-light group-hover:text-acid after:bg-acid relative mb-3 text-3xl font-black uppercase transition-colors after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:transition-[width] after:duration-300 group-hover:after:w-full md:text-4xl lg:text-5xl">
             {title}
           </h2>
         </Link>

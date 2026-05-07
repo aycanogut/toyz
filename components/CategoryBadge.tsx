@@ -26,7 +26,11 @@ function getAccent(id: string | number): string {
 function CategoryBadge({ name, categoryId, className, ...props }: CategoryBadgeProps) {
   return (
     <span
-      className={cn('font-heading tracking-meta w-fit px-2.5 py-1 text-base font-black uppercase', getAccent(categoryId), className)}
+      className={cn(
+        'font-heading tracking-meta inline-block w-fit px-2.5 py-1 text-base font-black uppercase transition-transform duration-150 hover:scale-105 active:scale-95',
+        getAccent(categoryId),
+        className
+      )}
       {...props}
     >
       {name}
