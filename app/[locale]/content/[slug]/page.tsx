@@ -13,6 +13,7 @@ import formatDate from '@/utils/formatDate';
 import readTime from '@/utils/readTime';
 
 import Breadcrumbs from '../../components/Breadcrumbs';
+import CategoryBadge from '../../components/CategoryBadge';
 import SimiliarContentCard from '../../components/SimiliarContentCard';
 import SocialMediaShare from '../../components/SocialMediaShare';
 
@@ -78,7 +79,11 @@ async function ContentDetails({ params }: ContentDetailsProps) {
           <header className="border-title-light border-b-2 px-4 md:px-8 lg:px-10">
             <div className="mx-auto max-w-335">
               <div className="flex flex-col gap-4 py-6">
-                <span className="bg-acid text-background font-heading tracking-eyebrow w-fit px-3 py-1.5 text-base font-black uppercase">{category.name}</span>
+                <CategoryBadge
+                  name={category.name}
+                  categoryId={category.id}
+                  className="tracking-eyebrow px-3 py-1.5"
+                />
 
                 <h1 className="font-heading text-title-light text-4xl leading-[0.88] font-black tracking-tight text-balance uppercase md:text-6xl lg:text-8xl">
                   {title}
@@ -160,6 +165,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
                     title={item.title}
                     image={itemMedia.url ?? ''}
                     categoryName={itemCategory.name}
+                    categoryId={itemCategory.id}
                     date={formatDate(item.details.date, locale)}
                     author={item.details.author}
                     slug={item.slug ?? ''}

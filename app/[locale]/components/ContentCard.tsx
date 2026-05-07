@@ -5,6 +5,8 @@ import { useFormatter, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import cn from '@/utils/cn';
 
+import CategoryBadge from './CategoryBadge';
+
 interface ContentCardProps {
   title: string;
   description?: string;
@@ -19,8 +21,6 @@ interface ContentCardProps {
   index: number;
 }
 
-const ACCENT_CLASSES = ['bg-acid', 'bg-blood text-title-light', 'bg-acid', 'bg-amber', 'bg-acid', 'bg-blood text-title-light'] as const;
-
 const TILT_CLASSES = ['lg:-rotate-1', 'lg:rotate-md', 'lg:-rotate-sm'] as const;
 
 function ContentCard({ title, description, image, imageAlt, date, author, category, categorySlug, readTimeMinutes, slug, index }: ContentCardProps) {
@@ -29,8 +29,6 @@ function ContentCard({ title, description, image, imageAlt, date, author, catego
   const format = useFormatter();
 
   const flipped = index % 2 === 1;
-
-  const accent = ACCENT_CLASSES[index % ACCENT_CLASSES.length];
 
   const tilt = TILT_CLASSES[index % TILT_CLASSES.length];
 
@@ -62,11 +60,11 @@ function ContentCard({ title, description, image, imageAlt, date, author, catego
             sizes="(min-width: 1024px) 460px, 100vw"
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          <div className="xerox-halftone" />
         </div>
+        <div className="xerox-halftone" />
         <div
           aria-hidden="true"
-          className="absolute -top-2.5 left-2/5 h-6 w-16 -rotate-4 bg-white/55 shadow-md"
+          className="absolute -top-2.5 left-2/5 z-10 h-6 w-16 -rotate-4 bg-white/55 shadow-md"
         />
       </Link>
 
@@ -75,9 +73,12 @@ function ContentCard({ title, description, image, imageAlt, date, author, catego
           <Link
             href={categorySlug ? `?category=${categorySlug}` : '#'}
             scroll={false}
-            className={cn('font-heading text-background tracking-meta mb-3 inline-block px-2.5 py-1 font-black uppercase', accent)}
+            className="mb-3 inline-block"
           >
-            {category}
+            <CategoryBadge
+              name={category}
+              categoryId={categorySlug ?? category}
+            />
           </Link>
         )}
         <Link
