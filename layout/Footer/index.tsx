@@ -102,7 +102,7 @@ function Footer() {
           </ul>
         </nav>
 
-        <div className="row-start-1 flex justify-center self-center md:col-span-2 lg:order-3 lg:col-span-1 lg:row-start-auto lg:self-center">
+        <div className="row-start-1 flex w-full justify-center self-center md:col-span-2 lg:order-3 lg:col-span-1 lg:row-start-auto lg:self-center">
           <Image
             src="/toyz-big-logo.webp"
             alt="TOYZ"
