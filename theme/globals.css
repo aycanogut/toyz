@@ -221,5 +221,5 @@ a {
 }
 
 .grecaptcha-badge {
-  @apply invisible! absolute left-[-9999px] opacity-0!;
+  @apply invisible! absolute -left-2499.75 opacity-0!;
 }
