@@ -5,7 +5,7 @@ import { useFormatter, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import cn from '@/utils/cn';
 
-import CategoryBadge from './CategoryBadge';
+import CategoryBadge from '../../../components/CategoryBadge';
 
 interface ContentCardProps {
   title: string;

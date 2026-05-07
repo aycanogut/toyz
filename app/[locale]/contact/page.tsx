@@ -1,11 +1,10 @@
 import { getLocale } from 'next-intl/server';
 
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Icon from '@/components/Icon';
 import { Link } from '@/i18n/routing';
 import getContact from '@/services/contact';
 import toyzConfig from '@/toyzConfig';
-
-import Breadcrumbs from '../components/Breadcrumbs';
 
 import ContactForm from './ContactForm';
 

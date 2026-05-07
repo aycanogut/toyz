@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 
 import { getTranslations } from 'next-intl/server';
 
+import Breadcrumbs from '@/components/Breadcrumbs';
+import CategoryBadge from '@/components/CategoryBadge';
 import { routing } from '@/i18n/routing';
 import { Category, Media } from '@/payload-types';
 import getArticle from '@/services/article';
@@ -12,8 +14,6 @@ import extractHeadings from '@/utils/extractHeadings';
 import formatDate from '@/utils/formatDate';
 import readTime from '@/utils/readTime';
 
-import Breadcrumbs from '../../components/Breadcrumbs';
-import CategoryBadge from '../../components/CategoryBadge';
 import SimiliarContentCard from '../../components/SimiliarContentCard';
 import SocialMediaShare from '../../components/SocialMediaShare';
 

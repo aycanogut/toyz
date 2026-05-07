@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import { getLocale } from 'next-intl/server';
 
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Icon from '@/components/Icon';
 import { Link } from '@/i18n/routing';
 import { Media } from '@/payload-types';
@@ -9,8 +10,6 @@ import getEventGlobal from '@/services/event-global';
 import getEvents from '@/services/events';
 import cn from '@/utils/cn';
 import formatDate from '@/utils/formatDate';
-
-import Breadcrumbs from '../components/Breadcrumbs';
 
 const TILT_CLASSES = ['lg:-rotate-1', 'lg:rotate-md'] as const;
 

@@ -1,8 +1,7 @@
 import { getLocale } from 'next-intl/server';
 
+import Breadcrumbs from '@/components/Breadcrumbs';
 import getAbout from '@/services/about';
-
-import Breadcrumbs from '../components/Breadcrumbs';
 
 async function About() {
   const locale = await getLocale();

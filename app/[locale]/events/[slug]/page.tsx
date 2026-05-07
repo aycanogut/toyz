@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import { getTranslations } from 'next-intl/server';
 
+import Breadcrumbs from '@/components/Breadcrumbs';
 import Icon from '@/components/Icon';
 import { routing } from '@/i18n/routing';
 import { EventMedia, Media } from '@/payload-types';
@@ -10,7 +11,6 @@ import getEvent from '@/services/event';
 import getAllEventSlugs from '@/services/event-slugs';
 import formatDate from '@/utils/formatDate';
 
-import Breadcrumbs from '../../components/Breadcrumbs';
 import SocialMediaShare from '../../components/SocialMediaShare';
 
 import Gallery from './Gallery';
