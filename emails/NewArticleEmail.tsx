@@ -67,14 +67,14 @@ export const NewArticleEmail = ({ title, summary, imageUrl, articleUrl, unsubscr
               {summary.split('\n\n').map((paragraph, index) => (
                 <Text
                   key={index}
-                  className="text-title-dark mb-4 text-left text-base leading-relaxed"
+                  className="text-title-dark mb-4 text-left leading-relaxed"
                 >
                   {paragraph}
                 </Text>
               ))}
               <Section className="my-8 text-center">
                 <Button
-                  className="bg-button-background text-background rounded px-6 py-3 text-center text-xs font-bold tracking-widest uppercase no-underline"
+                  className="bg-button-background text-background rounded px-6 py-3 text-center font-bold tracking-widest uppercase no-underline"
                   href={articleUrl}
                 >
                   {t['read-more']}
@@ -84,7 +84,7 @@ export const NewArticleEmail = ({ title, summary, imageUrl, articleUrl, unsubscr
 
             <Hr className="border-border-dark mx-0 my-6 w-full border border-solid" />
 
-            <Section className="text-title-dark text-center text-xs">
+            <Section className="text-title-dark text-center">
               <Text>{t['subscription-note']}</Text>
               <Link
                 href={unsubscribeUrl}

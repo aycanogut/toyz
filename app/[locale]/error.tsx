@@ -26,7 +26,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
           500
         </text>
       </svg>
-      <h1 className="font-grotesque text-title-light text-4xl md:text-6xl lg:text-7xl">{error?.message ?? t('500')}</h1>
+      <h1 className="font-fira text-title-light text-4xl md:text-6xl lg:text-7xl">{error?.message ?? t('500')}</h1>
       <Button onClick={reset}>{t('try-again')}</Button>
     </div>
   );

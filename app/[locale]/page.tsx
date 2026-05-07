@@ -1,23 +1,39 @@
 import { getLocale } from 'next-intl/server';
 
 import getArticles from '@/services/articles';
+import getCategories from '@/services/categories';
 import getSlider from '@/services/slider';
 import toyzConfig from '@/toyzConfig';
 
 import ContentView from './components/ContentView';
 import Slider from './components/Slider';
 
-async function Home() {
-  const locale = await getLocale();
+interface HomeProps {
+  searchParams: Promise<{ category?: string }>;
+}
 
-  const slider = await getSlider();
-  const articles = await getArticles(locale);
+async function Home({ searchParams }: HomeProps) {
+  const locale = await getLocale();
+  const { category } = await searchParams;
+
+  const [slider, articlesAll, articlesFiltered, categories] = await Promise.all([
+    getSlider(),
+    getArticles(locale),
+    category ? getArticles(locale, category) : null,
+    getCategories(locale),
+  ]);
+
+  const filtered = articlesFiltered?.docs ?? articlesAll.docs;
 
   return (
     <>
       <h1 className="sr-only">{toyzConfig.title}</h1>
       <Slider slider={slider} />
-      <ContentView articles={articles.docs} />
+      <ContentView
+        articles={filtered}
+        allArticles={articlesAll.docs}
+        categories={categories}
+      />
     </>
   );
 }

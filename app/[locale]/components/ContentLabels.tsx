@@ -3,7 +3,6 @@ import { HTMLAttributes } from 'react';
 import { getLocale } from 'next-intl/server';
 
 import Icon from '@/components/Icon';
-import { Link } from '@/i18n/routing';
 import cn from '@/utils/cn';
 import formatDate from '@/utils/formatDate';
 
@@ -26,40 +25,26 @@ async function ContentLabels({ rootProps, iconProps, labelProps, items }: Conten
   const locale = await getLocale();
 
   const computedItems = {
-    ...items,
     date: items.date ? formatDate(items.date, locale as Locale) : undefined,
+    ...(items.category && { category: items.category }),
+    ...(items.author && { author: items.author }),
+    ...(items.location && { location: items.location }),
   };
-
-  const { categorySlug, ...displayItems } = computedItems;
 
   return (
     <div className={rootProps?.className}>
-      {Object.entries(displayItems).map(([item, value]) => {
-        return item === 'category' ? (
-          <Link
-            key={item}
-            href={`/search?category=${categorySlug}`}
-            className="flex items-center gap-2"
-          >
-            <Icon
-              name={item as IconLabelProps}
-              className={cn(`text-title-light`, iconProps?.className)}
-            />
-            <span className={cn('font-grotesque text-title-light font-medium whitespace-nowrap', labelProps?.className)}>{value}</span>
-          </Link>
-        ) : (
-          <div
-            className="flex items-center gap-2"
-            key={item}
-          >
-            <Icon
-              name={item as IconLabelProps}
-              className={cn(`text-title-light`, iconProps?.className)}
-            />
-            <span className={cn('font-grotesque text-title-light font-medium whitespace-nowrap', labelProps?.className)}>{value}</span>
-          </div>
-        );
-      })}
+      {Object.entries(computedItems).map(([item, value]) => (
+        <div
+          key={item}
+          className="flex items-center gap-2"
+        >
+          <Icon
+            name={item as IconLabelProps}
+            className={cn('text-title-light', iconProps?.className)}
+          />
+          <span className={cn('font-fira text-title-light font-medium whitespace-nowrap', labelProps?.className)}>{value}</span>
+        </div>
+      ))}
     </div>
   );
 }

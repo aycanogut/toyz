@@ -13,12 +13,13 @@ test.describe('Home page', () => {
     await expect(contentSection).toBeVisible();
 
     const articles = page.locator('article');
+    await articles.first().scrollIntoViewIfNeeded();
     await expect(articles.first()).toBeVisible({ timeout: 10000 });
 
-    const firstArticleTitle = articles.first().locator('h2');
+    const firstArticleTitle = articles.first().locator('h2, h5').first();
     await expect(firstArticleTitle).toBeVisible();
 
-    const firstArticleLink = articles.first().locator('a[href*="/content/"]');
+    const firstArticleLink = articles.first().locator('a[href*="/content/"]').first();
     await expect(firstArticleLink).toBeVisible();
   });
 });

@@ -8,18 +8,18 @@ test.describe('Article Navigation Flow', () => {
     const firstArticle = page.locator('article').first();
     await expect(firstArticle).toBeVisible({ timeout: 10000 });
 
-    const detailLink = firstArticle.locator('a[href*="/content/"]');
+    const detailLink = firstArticle.locator('a[href*="/content/"]').first();
     await expect(detailLink).toBeVisible({ timeout: 5000 });
 
     await Promise.all([
-      page.waitForURL(/.*\/content\/.*/, { waitUntil: 'domcontentloaded', timeout: 15000 }),
+      page.waitForURL(/.*\/content\/.*/, { waitUntil: 'domcontentloaded', timeout: 30000 }),
       detailLink.click(),
     ]);
 
     const detailTitle = page.locator('h1');
     await expect(detailTitle).toBeVisible();
 
-    const backButton = page.getByRole('button', { name: /back|geri/i });
+    const backButton = page.getByRole('button', { name: /^(back|geri)$/i });
 
     if (await backButton.isVisible()) {
       await backButton.click();

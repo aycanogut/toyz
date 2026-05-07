@@ -17,4 +17,5 @@ function useReCaptcha() {
     getRecapthcaToken,
   };
 }
+
 export default useReCaptcha;

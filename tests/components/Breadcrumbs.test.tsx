@@ -3,7 +3,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import Breadcrumbs from '@/app/[locale]/components/Breadcrumbs';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 vi.mock('next-intl', () => ({
   useTranslations: () => (key: string) => {

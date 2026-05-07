@@ -1,0 +1,32 @@
+# Styling Rules
+
+- **Tailwind v4** (PostCSS plugin) with `@tailwindcss/typography`. Theme tokens are declared in `theme/globals.css` under `@theme`.
+- **Use `rem` in arbitrary values**, not `px`.
+- **Use theme tokens for colors**, not CSS variables directly (e.g. `bg-background-light` not `bg-(--color-background-light)`).
+- **Never use inline `style` prop** — all styles must be Tailwind classes. Exception: dynamic/runtime values that Tailwind JIT cannot generate.
+- Component variants use **CVA** (`class-variance-authority`). Place variant definitions in a sibling `*Variants.ts` file (see `components/Button/buttonVariants.ts`, `components/Badge/badgeVariants.ts`).
+- **Brand color tokens** (defined in `theme/globals.css`):
+  - Surfaces: `background`, `background-light`, `button-background`
+  - Type: `title-light`, `title-dark`, `title-darker`, `paper-muted`, `paper-faint`
+  - Borders/rules: `border-light`, `border-dark`, `rule-faint`
+  - Accents: `acid` (#c8ff00), `blood` (#ff3d2e), `amber` (#f4d35e)
+  - Social: `social-facebook`, `social-whatsapp`, `social-telegram`, `social-reddit`, `social-bluesky`, `social-mastodon`
+- **Fonts** (configured in `theme/fonts.ts`):
+  - `font-heading` — DM Sans (display/headings, eyebrow labels, meta text, navigation, buttons, badges)
+  - `font-fira` — Fira Code (body copy, descriptions, paragraphs — anything that reads as long-form prose)
+- **Typography rules**:
+  - **Minimum font-size is `text-base` (16px / 1rem).** Never use `text-xs` (12px) or `text-sm` (14px) anywhere in the UI. Replace any legacy occurrences with `text-base` (or larger). Arbitrary sub-16px values (e.g. `text-[13px]`, `text-[10px]`) are likewise forbidden.
+  - **Use Tailwind's default type scale** — `text-base`, `text-lg`, `text-xl`, `text-2xl`, `text-3xl`, `text-4xl`, `text-5xl`, `text-6xl`. Do not use arbitrary pixel values for font sizes (no `text-[15px]`, `text-[42px]`, etc.).
+  - **Apply responsive hierarchy** with breakpoint prefixes — small viewports get the smaller step, larger viewports the larger one. Examples:
+    - h1 / hero: `text-4xl md:text-5xl lg:text-6xl`
+    - h2 / card title: `text-3xl md:text-4xl lg:text-5xl`
+    - h3 / section heading: `text-2xl md:text-3xl`
+    - h4: `text-xl md:text-2xl`
+    - h5 / card heading: `text-lg md:text-xl`
+    - body / description: `text-base md:text-lg`
+    - meta / eyebrow / labels: `text-base` (uppercase + tracking handles the visual weight, not size)
+  - **Eyebrow / meta / label text** uses `font-heading` + `uppercase` + a `tracking-eyebrow|meta|label` token. The minimum size is still `text-base`; rely on tracking, weight, and color for the small-caps look — never on a sub-16px font size.
+- **Use `cn()` from `@/utils/cn`** for conditional or merged className — never use template literals or string concatenation for className composition.
+- **Never add `className` manually to a component's interface.** Instead, extend the appropriate `HTMLAttributes<HTMLElement>` (e.g. `HTMLAttributes<HTMLDivElement>`, `ButtonHTMLAttributes<HTMLButtonElement>`) to inherit it.
+- **Never use arbitrary values when a standard Tailwind class exists.** Use `text-xl` not `text-[1.25rem]`, `w-36` not `w-[9rem]`, `p-4` not `p-[1rem]`, `gap-6` not `gap-[1.5rem]`. Arbitrary values (`[…]`) are only acceptable when there is genuinely no matching Tailwind utility — `theme/globals.css` adds custom tokens like `border-width-6`, `rotate-4`, `rotate-md`, `rotate-sm`, and `tracking-eyebrow|meta|label` for values outside the default scale.
+- **Always use shorthand utilities when available.** Use `size-*` instead of `h-* w-*` for equal width and height (e.g. `size-20` not `h-20 w-20`). Apply the same principle to other shorthand utilities (e.g. `inset-*` instead of `top-* right-* bottom-* left-*`, `overflow-*` for both axes when equal).

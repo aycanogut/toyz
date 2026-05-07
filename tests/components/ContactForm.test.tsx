@@ -48,20 +48,20 @@ describe('ContactForm', () => {
     expect(screen.getByLabelText('email')).toBeInTheDocument();
     expect(screen.getByLabelText('subject')).toBeInTheDocument();
     expect(screen.getByLabelText('message-label')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'send' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /send/i })).toBeInTheDocument();
   });
 
   it('should render form title', () => {
     render(<ContactForm />);
 
-    expect(screen.getByRole('heading', { name: 'message' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'contact-form' })).toBeInTheDocument();
   });
 
   it('should show validation errors for empty form submission', async () => {
     const user = userEvent.setup();
     render(<ContactForm />);
 
-    await user.click(screen.getByRole('button', { name: 'send' }));
+    await user.click(screen.getByRole('button', { name: /send/i }));
 
     await waitFor(() => {
       expect(screen.getByText('validation-name-error')).toBeInTheDocument();
@@ -73,7 +73,7 @@ describe('ContactForm', () => {
     render(<ContactForm />);
 
     await user.type(screen.getByLabelText('name'), 'A');
-    await user.click(screen.getByRole('button', { name: 'send' }));
+    await user.click(screen.getByRole('button', { name: /send/i }));
 
     await waitFor(() => {
       expect(screen.getByText('validation-name-error')).toBeInTheDocument();

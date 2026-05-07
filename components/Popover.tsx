@@ -37,7 +37,7 @@ function Popover({ trigger, children, rootProps, triggerProps, portalProps, cont
           sideOffset={8}
           collisionPadding={24}
           className={cn(
-            'bg-background-light data-[state=open]:data-[side=bottom]:animate-slide-up-and-fade data-[state=open]:data-[side=left]:animate-slide-right-and-fade data-[state=open]:data-[side=right]:animate-slide-left-and-fade data-[state=open]:data-[side=top]:animate-slide-down-and-fade -ml-2 p-0 xl:-ml-0',
+            'bg-background-light data-[state=open]:data-[side=bottom]:animate-slide-up-and-fade data-[state=open]:data-[side=left]:animate-slide-right-and-fade data-[state=open]:data-[side=right]:animate-slide-left-and-fade data-[state=open]:data-[side=top]:animate-slide-down-and-fade p-0',
             contentClassName
           )}
           {...restContentProps}
