@@ -58,9 +58,13 @@ describe('getArticles', () => {
       collection: 'articles',
       locale: 'en',
       where: {
-        _status: {
-          equals: 'published',
-        },
+        and: [
+          {
+            _status: {
+              equals: 'published',
+            },
+          },
+        ],
       },
     });
   });
@@ -71,9 +75,13 @@ describe('getArticles', () => {
     expect(mockPayloadFind).toHaveBeenCalledWith(
       expect.objectContaining({
         where: {
-          _status: {
-            equals: 'published',
-          },
+          and: [
+            {
+              _status: {
+                equals: 'published',
+              },
+            },
+          ],
         },
       })
     );
