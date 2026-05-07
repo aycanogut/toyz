@@ -11,7 +11,6 @@
 - **No JSX in variables** — never assign JSX to a variable (`const foo = <div>...</div>`) and then reference it later. JSX must be written inline so the render tree reads top-to-bottom without indirection.
 - **Use `article` for card components** and **`h5` for card headings**.
 - **Routing helpers** — import `Link`, `redirect`, `usePathname`, `useRouter` from `@/i18n/routing`, **never** from `next/navigation`.
-- **Data access** — UI components must not call Payload directly. Read data through `services/*.ts` (server-side) and pass it down as props.
 
 ## Project layout
 
