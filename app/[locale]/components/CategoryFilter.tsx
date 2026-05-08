@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import FilterPill from '@/components/FilterPill';
+import { useRouter } from '@/i18n/routing';
 import { Category } from '@/payload-types';
 
 interface CategoryFilterProps {
@@ -16,6 +17,7 @@ interface CategoryFilterProps {
 function CategoryFilter({ categories, counts, totalCount }: CategoryFilterProps) {
   const t = useTranslations('Home');
   const searchParams = useSearchParams();
+  const router = useRouter();
   const active = searchParams.get('category') ?? undefined;
 
   const buildHref = (slug?: string): string => {
@@ -29,6 +31,12 @@ function CategoryFilter({ categories, counts, totalCount }: CategoryFilterProps)
     return queryString ? `?${queryString}` : '';
   };
 
+  const handleFilter = (slug?: string) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    const href = buildHref(slug);
+    router.push(href ? href : { pathname: '/' }, { scroll: false });
+  };
+
   return (
     <div className="bg-background border-title-light top-23.5 z-40 flex flex-wrap items-center gap-2 border-b-2 px-6 py-4 md:px-8 lg:sticky">
       <span className="font-heading text-paper-muted tracking-eyebrow mr-2 font-black uppercase">{t('filter-prefix')}</span>
@@ -38,6 +46,7 @@ function CategoryFilter({ categories, counts, totalCount }: CategoryFilterProps)
         label={t('filter-all')}
         active={!active}
         count={totalCount}
+        onClick={handleFilter()}
       />
 
       {categories.map(cat => (
@@ -47,6 +56,7 @@ function CategoryFilter({ categories, counts, totalCount }: CategoryFilterProps)
           label={cat.name}
           active={active === cat.slug}
           count={counts[cat.slug] ?? 0}
+          onClick={handleFilter(cat.slug)}
         />
       ))}
     </div>
