@@ -8,30 +8,17 @@ import toyzConfig from '@/toyzConfig';
 import ContentView from './components/ContentView';
 import Slider from './components/Slider';
 
-interface HomeProps {
-  searchParams: Promise<{ category?: string }>;
-}
-
-async function Home({ searchParams }: HomeProps) {
+async function Home() {
   const locale = await getLocale();
-  const { category } = await searchParams;
 
-  const [slider, articlesAll, articlesFiltered, categories] = await Promise.all([
-    getSlider(),
-    getArticles(locale),
-    category ? getArticles(locale, category) : null,
-    getCategories(locale),
-  ]);
-
-  const filtered = articlesFiltered?.docs ?? articlesAll.docs;
+  const [slider, articles, categories] = await Promise.all([getSlider(), getArticles(locale), getCategories(locale)]);
 
   return (
     <>
       <h1 className="sr-only">{toyzConfig.title}</h1>
       <Slider slider={slider} />
       <ContentView
-        articles={filtered}
-        allArticles={articlesAll.docs}
+        articles={articles.docs}
         categories={categories}
       />
     </>

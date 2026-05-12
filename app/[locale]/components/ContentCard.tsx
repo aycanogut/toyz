@@ -70,16 +70,18 @@ function ContentCard({ title, description, image, imageAlt, date, author, catego
 
       <div className={cn(flipped ? 'lg:order-1 lg:pr-2' : 'lg:order-2 lg:pl-2')}>
         {category && (
-          <Link
-            href={categorySlug ? `?category=${categorySlug}` : '#'}
-            scroll={false}
-            className="mb-3 inline-block"
+          <button
+            type="button"
+            onClick={() => {
+              if (categorySlug) window.history.pushState(null, '', `${window.location.pathname}?category=${categorySlug}`);
+            }}
+            className="mb-3 inline-block cursor-pointer"
           >
             <CategoryBadge
               name={category}
               categoryId={categorySlug ?? category}
             />
-          </Link>
+          </button>
         )}
         <Link
           href={`/content/${slug}`}

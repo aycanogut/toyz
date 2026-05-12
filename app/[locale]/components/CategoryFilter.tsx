@@ -5,7 +5,6 @@ import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import FilterPill from '@/components/FilterPill';
-import { useRouter } from '@/i18n/routing';
 import { Category } from '@/payload-types';
 
 interface CategoryFilterProps {
@@ -17,10 +16,9 @@ interface CategoryFilterProps {
 function CategoryFilter({ categories, counts, totalCount }: CategoryFilterProps) {
   const t = useTranslations('Home');
   const searchParams = useSearchParams();
-  const router = useRouter();
   const active = searchParams.get('category') ?? undefined;
 
-  const buildHref = (slug?: string): string => {
+  const handleFilter = (slug?: string) => () => {
     const params = new URLSearchParams(searchParams.toString());
     if (slug) {
       params.set('category', slug);
@@ -28,13 +26,8 @@ function CategoryFilter({ categories, counts, totalCount }: CategoryFilterProps)
       params.delete('category');
     }
     const queryString = params.toString();
-    return queryString ? `?${queryString}` : '';
-  };
-
-  const handleFilter = (slug?: string) => (e: React.MouseEvent) => {
-    e.preventDefault();
-    const href = buildHref(slug);
-    router.push(href ? href : { pathname: '/' }, { scroll: false });
+    const basePath = window.location.pathname;
+    window.history.pushState(null, '', queryString ? `${basePath}?${queryString}` : basePath);
   };
 
   return (
@@ -42,7 +35,6 @@ function CategoryFilter({ categories, counts, totalCount }: CategoryFilterProps)
       <span className="font-heading text-paper-muted tracking-eyebrow mr-2 font-black uppercase">{t('filter-prefix')}</span>
 
       <FilterPill
-        href={buildHref()}
         label={t('filter-all')}
         active={!active}
         count={totalCount}
@@ -52,7 +44,6 @@ function CategoryFilter({ categories, counts, totalCount }: CategoryFilterProps)
       {categories.map(cat => (
         <FilterPill
           key={cat.id}
-          href={buildHref(cat.slug)}
           label={cat.name}
           active={active === cat.slug}
           count={counts[cat.slug] ?? 0}
