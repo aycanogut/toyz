@@ -27,13 +27,13 @@ function Input({
 }: InputProps) {
   return (
     <div className="flex w-full flex-col gap-1">
-      {ariaLabel && <label className="font-grotesque text-title-light mb-3 text-xl font-medium first-letter:capitalize lg:text-3xl">{ariaLabel}</label>}
+      {ariaLabel && <label className="font-fira text-title-light mb-3 text-xl font-medium first-letter:capitalize lg:text-3xl">{ariaLabel}</label>}
       <div className="relative">
         {prependIconProps && <Icon {...prependIconProps} />}
 
         <input
           className={cn(
-            'focus-visible:ring-primary-blue-100 bg-background-light text-title-light focus-visible:ring-title-light w-full border p-4 text-sm placeholder:text-sm placeholder:font-normal focus-visible:ring-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-40',
+            'focus-visible:ring-primary-blue-100 bg-background-light text-title-light focus-visible:ring-title-light w-full border p-4 placeholder:font-normal focus-visible:ring-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-40',
             prependIconProps && 'pl-11',
             className
           )}

@@ -1,13 +1,14 @@
-import HeaderDesktop from './HeaderDesktop';
-import HeaderMobile from './HeaderMobile';
+import { getLocale } from 'next-intl/server';
 
-function Header() {
-  return (
-    <>
-      <HeaderMobile />
-      <HeaderDesktop />
-    </>
-  );
+import getCategories from '@/services/categories';
+
+import HeaderClient from './HeaderClient';
+
+async function Header() {
+  const locale = await getLocale();
+  const categories = await getCategories(locale);
+
+  return <HeaderClient categories={categories} />;
 }
 
 export default Header;

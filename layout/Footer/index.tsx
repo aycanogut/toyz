@@ -28,7 +28,7 @@ function Footer() {
 
   const { getRecapthcaToken } = useReCaptcha();
 
-  const t = useTranslations('Navigation');
+  const tNav = useTranslations('Navigation');
   const tFooter = useTranslations('Footer');
 
   const handleNewsletterSubmit = async (event: FormEvent) => {
@@ -69,101 +69,122 @@ function Footer() {
     }
   };
 
+  const scrollToTop = () => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <footer className="bg-background border-background-light relative min-h-100 border-t py-12 md:min-h-140 md:py-16 lg:min-h-110 lg:py-20">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div className="relative h-full max-h-120 w-full max-w-100 opacity-15 md:max-h-140 md:max-w-140 lg:max-h-100 lg:max-w-100">
-            <Image
-              src="/toyz-big-logo.webp"
-              alt=""
-              fill
-              className="object-contain"
+    <footer className="bg-background text-title-light border-title-light relative overflow-hidden border-t-2 px-6 pt-10 pb-6 md:px-8">
+      <div className="lg:grid-cols-footer grid grid-cols-1 gap-10 md:grid-cols-2 lg:items-start lg:gap-8">
+        <div className="lg:order-1">
+          <h3 className="font-heading text-acid tracking-eyebrow mb-3 font-black uppercase">{tFooter('about')}</h3>
+          <p className="font-fira text-title-dark max-w-xs leading-relaxed">{tFooter('description')}</p>
+        </div>
+
+        <nav className="lg:order-2">
+          <h3 className="font-heading text-acid tracking-eyebrow mb-3 font-black uppercase">{tNav('pages')}</h3>
+          <ul className="flex flex-col gap-2">
+            {navigationItems.map(item => (
+              <li key={item.id}>
+                <Link
+                  href={item.path}
+                  className={cn(
+                    'font-heading text-title-light hover:text-acid tracking-label font-bold uppercase transition-colors',
+                    pathname === item.path && 'text-acid'
+                  )}
+                >
+                  {tNav(item.name)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="row-start-1 flex w-full justify-center self-center md:col-span-2 lg:order-3 lg:col-span-1 lg:row-start-auto lg:self-center">
+          <Image
+            src="/toyz-big-logo.webp"
+            alt="TOYZ"
+            width={280}
+            height={280}
+            className="size-48 object-contain md:size-72 lg:size-80"
+          />
+        </div>
+
+        <div className="lg:order-4">
+          <h3 className="font-heading text-acid tracking-eyebrow mb-3 font-black uppercase">{tFooter('contact')}</h3>
+          <div className="flex flex-col gap-3">
+            <a
+              href={toyzConfig.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-fira text-title-dark hover:text-acid flex items-center gap-2 text-sm transition-colors"
+            >
+              <Icon
+                name="instagram"
+                className="text-acid size-5"
+              />
+              Instagram
+            </a>
+            <a
+              href={`mailto:${toyzConfig.contactEmail}`}
+              className="font-fira text-title-dark hover:text-acid flex items-center gap-2 text-sm transition-colors"
+            >
+              <Icon
+                name="envelope"
+                className="text-acid size-5"
+              />
+              {toyzConfig.contactEmail}
+            </a>
+          </div>
+        </div>
+
+        <div
+          id="newsletter"
+          className="scroll-mt-28 lg:order-5"
+        >
+          <h3 className="font-heading text-acid tracking-eyebrow mb-3 font-black uppercase">{tFooter('newsletter')}</h3>
+          <p className="font-fira text-title-dark mb-3 text-sm leading-relaxed">{tFooter('newsletter-description')}</p>
+          <form
+            onSubmit={handleNewsletterSubmit}
+            className="flex flex-col gap-2"
+          >
+            <Input
+              type="email"
+              placeholder={tFooter('newsletter-placeholder')}
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
             />
-          </div>
+            <Button
+              type="submit"
+              variant="acid"
+              size="fullWidth"
+              disabled={isSubmitting}
+              className="py-2.5 font-black disabled:opacity-60"
+            >
+              {tFooter('newsletter-subscribe')}
+            </Button>
+          </form>
+          <p className="font-fira text-paper-muted mt-3 text-xs leading-relaxed opacity-70">{tFooter('recaptcha-notice')}</p>
         </div>
+      </div>
 
-        <div className="relative z-10">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-            <div>
-              <h3 className="text-title-light font-grotesque mb-4 text-xl font-bold tracking-wider uppercase">{t('about')}</h3>
-              <p className="text-title-dark font-grotesque text-lg leading-relaxed">{tFooter('description')}</p>
-            </div>
-
-            <nav>
-              <h3 className="text-title-light font-grotesque mb-4 text-xl font-bold tracking-wider uppercase">{t('pages')}</h3>
-              <ul className="flex flex-col gap-3">
-                {navigationItems.map(item => (
-                  <li key={item.id}>
-                    <Link
-                      href={item.path}
-                      className={cn(
-                        'text-title-dark hover:text-title-light font-grotesque text-lg font-medium uppercase transition',
-                        pathname === item.path && 'text-title-light'
-                      )}
-                    >
-                      {t(item.name)}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            <div>
-              <h3 className="text-title-light font-grotesque mb-4 text-xl font-bold tracking-wider uppercase">{t('contact')}</h3>
-              <div className="flex flex-col gap-4">
-                <a
-                  href={toyzConfig.instagramUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-title-dark hover:text-title-light flex items-center gap-3 transition"
-                >
-                  <Icon
-                    name="instagram"
-                    className="mt-1 size-5"
-                  />
-                  <span className="font-grotesque text-lg">Instagram</span>
-                </a>
-                <a
-                  href={`mailto:${toyzConfig.contactEmail}`}
-                  className="text-title-dark hover:text-title-light flex items-center gap-3 transition"
-                >
-                  <Icon
-                    name="envelope"
-                    className="mt-1 size-5"
-                  />
-                  <span className="font-grotesque text-lg">{toyzConfig.contactEmail}</span>
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-title-light font-grotesque mb-4 text-xl font-bold tracking-wider uppercase">{tFooter('newsletter')}</h3>
-              <p className="text-title-dark font-grotesque mb-4 text-lg leading-relaxed">{tFooter('newsletter-description')}</p>
-              <form
-                onSubmit={handleNewsletterSubmit}
-                className="flex flex-col gap-3"
-              >
-                <Input
-                  type="email"
-                  placeholder={tFooter('newsletter-placeholder')}
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  required
-                />
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  loading={isSubmitting}
-                  className="w-full cursor-pointer"
-                >
-                  {tFooter('newsletter-subscribe')}
-                </Button>
-              </form>
-              <p className="text-title-dark font-grotesque mt-3 text-sm leading-relaxed opacity-60">{tFooter('recaptcha-notice')}</p>
-            </div>
-          </div>
-        </div>
+      <div className="border-rule-faint mt-10 flex items-start justify-between gap-3 border-t pt-4">
+        <span className="font-heading text-paper-muted tracking-meta text-sm uppercase">© {new Date().getFullYear()} TOYZ Webzine</span>
+        <Button
+          type="button"
+          variant="ghost"
+          onClick={scrollToTop}
+          appendIconProps={{
+            name: 'arrow-up',
+            className: 'size-4',
+          }}
+          className="font-heading text-paper-muted hover:text-acid tracking-meta gap-1 p-0 text-xs"
+        >
+          {tFooter('back-to-top')}
+        </Button>
       </div>
     </footer>
   );

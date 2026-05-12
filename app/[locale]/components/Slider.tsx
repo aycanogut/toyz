@@ -88,7 +88,7 @@ function Slider({ slider }: SliderProps) {
                       name="camera"
                       className="text-title-light size-5"
                     />
-                    <span className="font-grotesque text-title-light font-medium">{credits}</span>
+                    <span className="font-fira text-title-light font-medium">{credits}</span>
                   </div>
                 )}
               </div>

@@ -7,7 +7,6 @@ import { toast } from 'sonner';
 import z from 'zod';
 
 import Button from '@/components/Button';
-import Input from '@/components/Input';
 
 import useReCaptcha from '../hooks/useReCaptcha';
 
@@ -66,61 +65,99 @@ function ContactForm() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex max-w-160 flex-col gap-6"
-    >
-      <h2 className="font-grotesque text-title-light text-2xl font-medium first-letter:capitalize lg:text-6xl">{t('message')}</h2>
+    <div className="border-title-light bg-background-light relative border-2 p-4 md:p-8">
+      <span className="bg-acid text-background font-heading tracking-eyebrow absolute -top-6 -right-2 rotate-3 px-3 py-1.5 text-sm font-black uppercase sm:-top-4 sm:right-2 sm:text-base">
+        {t('message')}
+      </span>
 
-      <Input
-        aria-label={t('name')}
-        {...register('name')}
-        error={errors.name?.message && t(errors.name.message)}
-      />
-      <Input
-        aria-label={t('email')}
-        type="email"
-        {...register('email')}
-        error={errors.email?.message && t(errors.email.message)}
-      />
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col gap-5"
+      >
+        <h2 className="font-heading text-title-light mb-1 text-3xl leading-none font-black uppercase">{t('contact-form')}</h2>
 
-      <Input
-        aria-label={t('subject')}
-        {...register('subject')}
-        error={errors.subject?.message && t(errors.subject.message)}
-      />
+        <div className="flex flex-col gap-1.5">
+          <label
+            htmlFor="name"
+            className="font-heading text-acid tracking-eyebrow mb-1.5 block text-base font-bold uppercase"
+          >
+            {t('name')}
+          </label>
+          <input
+            id="name"
+            {...register('name')}
+            disabled={isSubmitting}
+            className="bg-background border-border-dark text-title-light font-fira focus-visible:border-acid w-full border-2 p-3 text-base focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-40"
+          />
+          {errors.name?.message && <span className="font-fira text-blood text-base">{t(errors.name.message)}</span>}
+        </div>
 
-      <div className="flex flex-col gap-4">
-        <label
-          htmlFor="message"
-          className="font-grotesque text-title-light text-xl font-medium capitalize lg:text-3xl"
-        >
-          {t('message-label')}
-        </label>
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1.5">
+          <label
+            htmlFor="email"
+            className="font-heading text-acid tracking-eyebrow mb-1.5 block text-base font-bold uppercase"
+          >
+            {t('email')}
+          </label>
+          <input
+            id="email"
+            type="email"
+            {...register('email')}
+            disabled={isSubmitting}
+            className="bg-background border-border-dark text-title-light font-fira focus-visible:border-acid w-full border-2 p-3 text-base focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-40"
+          />
+          {errors.email?.message && <span className="font-fira text-blood text-base">{t(errors.email.message)}</span>}
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label
+            htmlFor="subject"
+            className="font-heading text-acid tracking-eyebrow mb-1.5 block text-base font-bold uppercase"
+          >
+            {t('subject')}
+          </label>
+          <input
+            id="subject"
+            {...register('subject')}
+            disabled={isSubmitting}
+            className="bg-background border-border-dark text-title-light font-fira focus-visible:border-acid w-full border-2 p-3 text-base focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-40"
+          />
+          {errors.subject?.message && <span className="font-fira text-blood text-base">{t(errors.subject.message)}</span>}
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label
+            htmlFor="message"
+            className="font-heading text-acid tracking-eyebrow mb-1.5 block text-base font-bold uppercase"
+          >
+            {t('message-label')}
+          </label>
           <textarea
             id="message"
             {...register('message')}
-            rows={10}
-            className="focus-visible:ring-primary-blue-100 bg-background-light text-title-light focus-visible:ring-title-light w-full border p-4 text-sm placeholder:text-sm placeholder:font-normal focus-visible:ring-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-40"
+            rows={6}
+            disabled={isSubmitting}
+            className="bg-background border-border-dark text-title-light resize-vertical font-fira focus-visible:border-acid w-full border-2 p-3 text-base focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-40"
           />
-          {errors.message?.message && <span className="font-inter text-md text-red-500">{t(errors.message.message)}</span>}
+          {errors.message?.message && <span className="font-fira text-blood text-base">{t(errors.message.message)}</span>}
         </div>
-      </div>
 
-      <Button
-        disabled={isSubmitting}
-        loading={isSubmitting}
-        className="h-12"
-      >
-        {t('send')}
-      </Button>
+        <Button
+          variant="acid"
+          size="fullWidth"
+          disabled={isSubmitting}
+          loading={isSubmitting}
+          className="shadow-[4px_4px_0_#f0eee6]"
+        >
+          {t('send')} →
+        </Button>
 
-      <div className="flex flex-col gap-2">
-        <p className="text-title-dark font-grotesque mt-3 text-sm leading-relaxed opacity-60">{t('privacy-notice')}</p>
-        <p className="text-title-dark font-grotesque text-sm leading-relaxed opacity-60">{tFooter('recaptcha-notice')}</p>
-      </div>
-    </form>
+        <div className="flex flex-col gap-2 pt-1">
+          <p className="font-fira text-paper-muted text-xs leading-relaxed">{t('privacy-notice')}</p>
+          <p className="font-fira text-paper-muted text-xs leading-relaxed">{tFooter('recaptcha-notice')}</p>
+        </div>
+      </form>
+    </div>
   );
 }
 

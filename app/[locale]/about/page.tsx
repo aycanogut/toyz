@@ -1,43 +1,24 @@
-import Image from 'next/image';
-
 import { getLocale } from 'next-intl/server';
 
-import { Media } from '@/payload-types';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import getAbout from '@/services/about';
-
-import Breadcrumbs from '../components/Breadcrumbs';
 
 async function About() {
   const locale = await getLocale();
 
   const about = await getAbout(locale);
 
-  const media = about.image as Media;
-
-  if (!media) return null;
-
   return (
     <section>
-      <span className="bg-background block h-20 md:h-24 lg:hidden" />
-
       <Breadcrumbs />
 
-      <div className="relative h-30 lg:h-45.5">
-        <Image
-          src={media.url ?? ''}
-          alt={media.alt ?? ''}
-          fill
-          className="object-cover"
-        />
-      </div>
-
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-2 px-4 pt-4 pb-14 sm:px-6 lg:gap-8 lg:px-8 lg:pt-10 lg:pb-28">
+      <article className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-12 px-4 pt-10 pb-16 sm:px-6 lg:grid-cols-[auto_1fr] lg:pt-14 lg:pb-76 xl:px-0">
         <header>
-          <h1 className="font-grotesque text-title-light text-2xl font-medium uppercase lg:text-6xl">{about.title}</h1>
+          <h1 className="font-heading text-title-light text-6xl leading-none font-black tracking-tight uppercase md:text-6xl lg:text-8xl">{about.title}</h1>
         </header>
 
-        <div className="font-grotesque text-title-light space-y-4 text-xl lg:space-y-6 lg:text-3xl">{about.description}</div>
-      </div>
+        <p className="border-acid font-fira text-title-light border-l-4 pl-5 text-lg leading-normal font-medium lg:text-2xl">{about.description}</p>
+      </article>
     </section>
   );
 }

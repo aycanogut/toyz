@@ -1,29 +1,40 @@
 import { expect, test } from '@playwright/test';
 
-test.describe('Search', () => {
-  test('should filter articles by category', async ({ page }) => {
-    await page.goto('/search');
+test.describe('Search overlay', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+    await page.setViewportSize({ width: 1440, height: 900 });
+    // Desktop header on homepage starts hidden (y: -100%) and animates in after 250px scroll
+    await page.evaluate(() => window.scrollTo(0, 300));
+    await page.waitForTimeout(400);
+  });
 
-    const categoryButton = page.getByTestId('category-filter-trigger');
+  test('should open and close search overlay', async ({ page }) => {
+    const searchButton = page.getByRole('button', { name: 'search' });
+    await expect(searchButton).toBeVisible({ timeout: 5000 });
+    await searchButton.click();
 
-    await expect(categoryButton).toBeVisible();
-    await categoryButton.click();
+    const overlay = page.locator('input[type="text"]').first();
+    await expect(overlay).toBeVisible();
 
-    const categoryOption = page.getByTestId('category-filter-option-skate');
-    await expect(categoryOption).toBeVisible();
-    await categoryOption.click();
+    await page.keyboard.press('Escape');
+    await expect(overlay).not.toBeVisible();
+  });
 
-    await expect(page).toHaveURL(/category=skate/);
+  test('should show results when typing', async ({ page }) => {
+    const searchButton = page.getByRole('button', { name: 'search' });
+    await expect(searchButton).toBeVisible({ timeout: 5000 });
+    await searchButton.click();
 
-    const firstArticle = page.locator('article').first();
-    await expect(firstArticle).toBeVisible({ timeout: 10000 });
-    await expect(firstArticle).toContainText(/skate/i);
+    const input = page.locator('input[type="text"]').first();
+    await input.fill('punk');
 
-    await categoryButton.click();
+    await page.waitForTimeout(500);
 
-    const allOption = page.getByTestId('category-filter-option-all');
-    await allOption.click();
+    const closeButton = page.locator('button[aria-label="Close search"]');
+    await expect(closeButton).toBeVisible();
+    await closeButton.click();
 
-    await expect(page).not.toHaveURL(/category=/);
+    await expect(input).not.toBeVisible();
   });
 });

@@ -8,41 +8,51 @@ import { EmblaOptionsType } from 'embla-carousel';
 import useEmblaCarousel from 'embla-carousel-react';
 import { useTranslations } from 'next-intl';
 
-import Button from '@/components/Button';
 import Icon from '@/components/Icon';
 import { EventMedia } from '@/payload-types';
+import cn from '@/utils/cn';
 
 interface GalleryProps {
   images: EventMedia[];
+  eventTitle: string;
+  eventDate: string;
+  eventLocation: string;
 }
 
-const OPTIONS: EmblaOptionsType = {
+const CAROUSEL_OPTIONS: EmblaOptionsType = {
   containScroll: 'keepSnaps',
   dragFree: false,
   loop: true,
-  align: 'start',
+  align: 'center',
 };
 
-function Gallery({ images }: GalleryProps) {
+function Gallery({ images, eventTitle, eventDate, eventLocation }: GalleryProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS);
+  const [emblaRef, emblaApi] = useEmblaCarousel(CAROUSEL_OPTIONS);
 
-  const t = useTranslations('Global');
+  const t = useTranslations('Events');
+
+  const sortedImages = [...images].sort((a, b) => (a.filename ?? '').localeCompare(b.filename ?? '', undefined, { numeric: true }));
+
+  const openModal = (index: number) => {
+    setSelectedIndex(index);
+    setIsOpen(true);
+  };
+
+  const closeModal = () => setIsOpen(false);
 
   useEffect(() => {
     if (emblaApi && isOpen) {
-      emblaApi.scrollTo(selectedIndex, false);
+      emblaApi.scrollTo(selectedIndex, true);
     }
   }, [emblaApi, isOpen, selectedIndex]);
 
   useEffect(() => {
     if (!emblaApi) return;
 
-    const onSelect = () => {
-      setCurrentIndex(emblaApi.selectedScrollSnap());
-    };
+    const onSelect = () => setCurrentIndex(emblaApi.selectedScrollSnap());
 
     emblaApi.on('select', onSelect);
     onSelect();
@@ -53,177 +63,236 @@ function Gallery({ images }: GalleryProps) {
   }, [emblaApi]);
 
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
 
-      if (event.key === 'Escape') {
-        setIsOpen(false);
-      } else if (event.key === 'ArrowLeft' && emblaApi) {
-        emblaApi.scrollPrev();
-      } else if (event.key === 'ArrowRight' && emblaApi) {
-        emblaApi.scrollNext();
-      }
+      if (e.key === 'Escape') closeModal();
+      else if (e.key === 'ArrowLeft') emblaApi?.scrollPrev();
+      else if (e.key === 'ArrowRight') emblaApi?.scrollNext();
     };
 
     document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, emblaApi]);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-
+    document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     };
   }, [isOpen]);
 
-  const scrollPrev = () => {
-    if (emblaApi) emblaApi.scrollPrev();
-  };
+  if (sortedImages.length === 0) return null;
 
-  const scrollNext = () => {
-    if (emblaApi) emblaApi.scrollNext();
-  };
-
-  if (images.length === 0) return null;
-
-  const sortedImages = [...images].sort((a, b) => (a.filename ?? '').localeCompare(b.filename ?? '', undefined, { numeric: true }));
+  const currentImage = sortedImages[currentIndex];
 
   return (
-    <section>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <>
+      {/* Gallery grid */}
+      <div className="grid grid-cols-1 gap-4 pb-8 sm:grid-cols-2 lg:grid-cols-3">
         {sortedImages.map((image, index) => (
-          <Button
+          <button
             key={image.id}
             type="button"
-            onClick={() => {
-              setSelectedIndex(index);
-              setIsOpen(true);
-            }}
-            className="group relative aspect-square w-full overflow-hidden transition-transform hover:scale-102"
+            onClick={() => openModal(index)}
+            className="group border-title-light relative aspect-3/2 w-full cursor-pointer overflow-hidden border-4 p-0 transition-transform hover:scale-102"
           >
             <Image
               src={image.url ?? ''}
-              alt={image.alt ?? `Event photo ${index + 1}`}
+              alt={image.alt ?? `Photo ${index + 1}`}
               fill
-              className="object-cover"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
+            <div className="xerox-halftone" />
             <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
-          </Button>
+          </button>
         ))}
       </div>
 
+      {/* Modal */}
       {isOpen && (
         <div
-          className="bg-background/90 fixed inset-0 z-50 flex h-full min-h-screen w-full touch-none items-center justify-center p-2 md:p-4"
-          onClick={() => setIsOpen(false)}
+          className="bg-background/95 fixed inset-0 z-50 flex flex-col"
+          onClick={closeModal}
         >
+          {/* Top bar */}
           <div
-            className="size-full max-w-7xl touch-auto"
+            className="border-rule-faint flex h-12 shrink-0 items-stretch border-b"
             onClick={e => e.stopPropagation()}
           >
-            <div
-              className="relative size-full overflow-hidden"
-              ref={emblaRef}
-            >
-              <div className="flex h-full items-center">
-                {sortedImages.map((image, index) => (
-                  <div
-                    key={image.id}
-                    className="relative flex h-full w-full min-w-0 shrink-0 grow-0 items-center justify-center"
-                  >
-                    <div className="relative inline-block max-h-full max-w-full">
+            {/* Label */}
+            <div className="border-rule-faint hidden items-center border-r px-5 md:flex">
+              <span className="font-heading tracking-meta text-acid text-base font-black whitespace-nowrap uppercase">{t('photo-archive')}</span>
+            </div>
+
+            {/* Event info */}
+            <div className="flex min-w-0 flex-1 items-center px-4">
+              <span className="font-heading tracking-label text-title-dark truncate text-base uppercase">
+                {eventTitle}
+                <span className="text-paper-muted mx-2">·</span>
+                {eventDate}
+                <span className="text-paper-muted mx-2">·</span>
+                {eventLocation}
+              </span>
+            </div>
+
+            {/* Counter + close */}
+            <div className="border-rule-faint flex shrink-0 items-stretch border-l">
+              {sortedImages.length > 1 && (
+                <div className="border-rule-faint flex items-center border-r px-4">
+                  <span className="font-heading text-base font-bold tabular-nums">
+                    <span className="text-acid">{String(currentIndex + 1).padStart(2, '0')}</span>
+                    <span className="text-paper-muted mx-1">/</span>
+                    <span className="text-title-light">{String(sortedImages.length).padStart(2, '0')}</span>
+                  </span>
+                </div>
+              )}
+
+              <button
+                type="button"
+                onClick={closeModal}
+                className="bg-acid hover:bg-title-light text-background flex cursor-pointer items-center justify-center px-4 transition-colors"
+                aria-label={t('close-modal')}
+              >
+                <Icon
+                  name="close"
+                  className="size-5"
+                />
+              </button>
+            </div>
+          </div>
+
+          {/* Photo area */}
+          <div
+            className="relative min-h-0 flex-1 overflow-hidden"
+            ref={emblaRef}
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex h-full items-center">
+              {sortedImages.map((image, index) => (
+                <div
+                  key={image.id}
+                  className="relative flex h-full w-full min-w-0 shrink-0 grow-0 items-center justify-center px-6 py-6"
+                >
+                  {/* Layered border: acid furthest (most offset), blood middle, white image frame on top */}
+                  <div className="relative">
+                    <div
+                      aria-hidden="true"
+                      className="border-acid absolute inset-0 translate-x-3 translate-y-3 border-8"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="border-blood absolute inset-0 translate-x-1.5 translate-y-1.5 border-8"
+                    />
+                    <div className="border-title-light relative border-8">
                       <Image
                         src={image.url ?? ''}
-                        alt={image.alt ?? `Event photo ${index + 1}`}
+                        alt={image.alt ?? `Photo ${index + 1}`}
                         width={image.width ?? 1920}
                         height={image.height ?? 1080}
-                        className="max-h-[80dvh] w-auto object-contain md:max-h-[85dvh] lg:max-h-[90dvh]"
+                        className="max-h-gallery-sm md:max-h-gallery-md lg:max-h-gallery-lg block w-auto object-contain"
                         priority={index === selectedIndex}
                       />
-
-                      {index === currentIndex && (
-                        <>
-                          <Button
-                            type="button"
-                            onClick={() => setIsOpen(false)}
-                            className="bg-background/70 hover:bg-background-light/70 text-title-light absolute top-1 right-1 z-10 p-1 transition-colors md:top-4 md:right-4 md:p-2"
-                            aria-label={t('close-gallery')}
-                          >
-                            <Icon
-                              name="close"
-                              className="size-4 md:size-6"
-                            />
-                          </Button>
-
-                          {images.length > 1 && (
-                            <Button
-                              type="button"
-                              onClick={e => {
-                                e.stopPropagation();
-                                scrollPrev();
-                              }}
-                              className="bg-background/70 hover:bg-background-light/70 text-title-light absolute top-1/2 left-1 z-10 -translate-y-1/2 p-1 transition-colors md:left-4 md:p-2"
-                              aria-label={t('previous-image')}
-                            >
-                              <Icon
-                                name="arrow-left"
-                                className="size-4 md:size-6"
-                              />
-                            </Button>
-                          )}
-
-                          {images.length > 1 && (
-                            <Button
-                              type="button"
-                              onClick={e => {
-                                e.stopPropagation();
-                                scrollNext();
-                              }}
-                              className="bg-background/70 hover:bg-background-light/70 text-title-light absolute top-1/2 right-1 z-10 -translate-y-1/2 p-1 transition-colors md:right-4 md:p-2"
-                              aria-label={t('next-image')}
-                            >
-                              <Icon
-                                name="arrow-right"
-                                className="size-4 md:size-6"
-                              />
-                            </Button>
-                          )}
-
-                          {images.length > 1 && (
-                            <span className="bg-background/70 text-title-light font-grotesque absolute bottom-1 left-1/2 z-10 -translate-x-1/2 p-1 text-xs md:bottom-4 md:p-2 md:text-base">
-                              {currentIndex + 1} / {images.length}
-                            </span>
-                          )}
-
-                          {image.credits && (
-                            <div className="bg-background/70 absolute right-2 bottom-2 z-10 flex items-center justify-center gap-1 p-1 md:right-4 md:bottom-4 md:gap-2 md:p-2">
-                              <Icon
-                                name="camera"
-                                className="text-title-light mt-1 size-3 md:mt-0.5 md:size-5"
-                              />
-                              <span className="font-grotesque text-title-light text-xs font-medium md:text-base">{image.credits}</span>
-                            </div>
-                          )}
-                        </>
-                      )}
                     </div>
                   </div>
-                ))}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom bar */}
+          <div
+            className="border-title-light/20 flex h-14 shrink-0 items-stretch border-t"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Prev button */}
+            {sortedImages.length > 1 && (
+              <div className="border-rule-faint relative flex shrink-0 items-stretch border-r">
+                <div
+                  aria-hidden="true"
+                  className="border-acid pointer-events-none absolute inset-0 translate-x-1 translate-y-1 border-4"
+                />
+                <button
+                  type="button"
+                  onClick={() => emblaApi?.scrollPrev()}
+                  className="border-title-light text-title-light hover:border-acid hover:text-acid bg-background relative cursor-pointer border-r-0 px-4 transition-colors"
+                  aria-label={t('previous-photo')}
+                >
+                  <Icon
+                    name="arrow-left"
+                    className="size-5"
+                  />
+                </button>
+              </div>
+            )}
+
+            {/* Credits — LEFT, flex-1 pushes right group to edge */}
+            <div className="flex min-w-0 flex-1 items-center gap-2 px-4 md:px-5">
+              <Icon
+                name="camera"
+                className="text-paper-muted size-4 shrink-0"
+              />
+              <span className="font-heading tracking-label text-paper-muted text-base whitespace-nowrap uppercase">{t('photo-credit')}</span>
+              {currentImage?.credits && <span className="font-heading text-title-light truncate text-base font-bold uppercase">· {currentImage.credits}</span>}
+            </div>
+
+            {/* Thumbnails + keyboard hint — RIGHT */}
+            <div className="border-title-light/20 hidden shrink-0 items-stretch border-l sm:flex">
+              {sortedImages.length > 1 && (
+                <div className="flex items-center gap-1.5 overflow-x-auto px-4">
+                  {sortedImages.map((image, index) => (
+                    <button
+                      key={image.id}
+                      type="button"
+                      onClick={() => emblaApi?.scrollTo(index)}
+                      className={cn(
+                        'relative size-10 shrink-0 cursor-pointer overflow-hidden border-2 transition-colors',
+                        index === currentIndex ? 'border-acid border-4' : 'border-rule-faint hover:border-title-dark border-2'
+                      )}
+                      aria-label={`Photo ${index + 1}`}
+                    >
+                      <Image
+                        src={image.url ?? ''}
+                        alt={image.alt ?? `Photo ${index + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="40px"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              <div className="border-title-light/20 hidden items-center border-l px-4 md:flex md:px-5">
+                <span className="font-heading tracking-label text-acid text-base uppercase">{t('keyboard-hint')}</span>
               </div>
             </div>
+
+            {/* Next button */}
+            {sortedImages.length > 1 && (
+              <div className="border-rule-faint relative flex shrink-0 items-stretch border-l">
+                <div
+                  aria-hidden="true"
+                  className="border-acid pointer-events-none absolute inset-0 translate-x-1 translate-y-1 border-4"
+                />
+                <button
+                  type="button"
+                  onClick={() => emblaApi?.scrollNext()}
+                  className="border-title-light text-title-light hover:border-acid hover:text-acid bg-background relative cursor-pointer px-4 transition-colors"
+                  aria-label={t('next-photo')}
+                >
+                  <Icon
+                    name="arrow-right"
+                    className="size-5"
+                  />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
-    </section>
+    </>
   );
 }
 

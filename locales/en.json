@@ -11,12 +11,14 @@
     "about": "about",
     "contact": "contact",
     "search": "search",
+    "subscribe": "subscribe",
     "navigation": "Navigation",
     "pages": "Pages"
   },
   "Search": {
-    "title": "Search Results",
+    "title": "Search",
     "placeholder": "Search for a content",
+    "popular-topics": "Popular Topics",
     "result": "No results found",
     "category": "all"
   },
@@ -24,7 +26,11 @@
     "show-more": "show more",
     "share": "share",
     "back": "back",
-    "similar-content": "Similar Content",
+    "similar-content": "Continue Reading",
+    "in-this-article": "In this article",
+    "label-author": "Author",
+    "label-date": "Date",
+    "label-read-time": "Read",
     "share-facebook": "Share on Facebook",
     "share-whatsapp": "Share on WhatsApp",
     "share-telegram": "Share on Telegram",
@@ -63,6 +69,8 @@
   },
   "Footer": {
     "description": "TOYZ is a webzine focused on skateboarding culture, graffiti, independent music, film, photography, and underground art. Featuring artist interviews, scene stories, and insights into alternative culture, we document underground movements across global DIY community.",
+    "about": "About",
+    "contact": "Contact",
     "newsletter": "Newsletter",
     "newsletter-description": "Stay connected by subscribing to our newsletter.",
     "newsletter-placeholder": "Enter your e-mail",
@@ -71,6 +79,27 @@
     "already-subscribed": "This email is already subscribed.",
     "invalid-email": "Please enter a valid email address.",
     "error": "Something went wrong. Please try again.",
-    "recaptcha-notice": "This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply."
+    "recaptcha-notice": "This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.",
+    "back-to-top": "Back to top"
+  },
+  "Home": {
+    "latest-drops": "Latest Drops",
+    "filter-prefix": "// Filter",
+    "filter-all": "All",
+    "article-count": "{count} / {total} articles",
+    "no-articles": "No articles in this category"
+  },
+  "Meta": {
+    "read-time": "{count} min"
+  },
+  "Events": {
+    "photo-archive": "TOYZ // PHOTO ARCHIVE",
+    "photo-credit": "PHOTO",
+    "keyboard-hint": "← → ESC",
+    "gallery": "GALLERY",
+    "photos": "{count} PHOTOS",
+    "close-modal": "Close photo viewer",
+    "previous-photo": "Previous photo",
+    "next-photo": "Next photo"
   }
 }

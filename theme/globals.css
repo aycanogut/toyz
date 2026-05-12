@@ -4,25 +4,46 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-  --color-background: #161617;
-  --color-background-light: #373737;
-  --color-title-light: #e1e1e1;
-  --color-title-dark: #858585;
+  --color-background: #0c0c0c;
+  --color-background-light: #1a1a1a;
+  --color-title-light: #f0eee6;
+  --color-title-dark: #bdbab0;
   --color-title-darker: #252525;
-  --color-button-background: #ededed;
-  --color-border-dark: #565656;
-  --color-border-light: #e5e7eb;
+  --color-button-background: #f0eee6;
+  --color-border-dark: #555555;
+  --color-border-light: #f0eee6;
+
+  --color-acid: #c8ff00;
+  --color-blood: #ff3d2e;
+  --color-amber: #f4d35e;
+  --color-paper-muted: #888888;
+  --color-paper-faint: #444444;
+  --color-rule-faint: #333333;
+
   --color-social-facebook: #1877f2;
   --color-social-whatsapp: #25d366;
   --color-social-telegram: #0088cc;
   --color-social-reddit: #ff4500;
   --color-social-bluesky: #0085ff;
   --color-social-mastodon: #6364ff;
+
+  /* No Tailwind equivalent — kept as named tokens */
+  --tracking-eyebrow: 0.2em;
+  --tracking-meta: 0.16em;
+  --tracking-label: 0.12em;
+
+  /* Border width — fills gap between border-4 (4px) and border-8 (8px) */
+  --border-width-6: 0.375rem;
+
+  /* Card tilt rotations — no Tailwind default for these values */
+  --rotate-4: 4deg;
+  --rotate-md: 0.8deg;
+  --rotate-sm: 0.4deg;
 }
 
 @theme inline {
-  --font-grotesque: var(--font-grotesque);
-  --font-nabla: var(--font-nabla);
+  --font-fira: var(--font-fira);
+  --font-heading: var(--font-heading);
 }
 
 @utility container {
@@ -48,14 +69,125 @@
   --tw-prose-td-borders: var(--color-border-dark);
 }
 
+@utility xerox-img {
+  filter: grayscale(1) contrast(1.4);
+}
+
+@utility xerox-halftone {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.25;
+  background-image: radial-gradient(circle at 0.0625rem 0.0625rem, #000 0.0625rem, transparent 0.0875rem);
+  background-size: 0.25rem 0.25rem;
+  mix-blend-mode: multiply;
+}
+
+@utility xerox-scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 5rem,
+    rgba(200, 255, 0, 0.08) 5rem,
+    rgba(200, 255, 0, 0.08) 5.125rem
+  );
+}
+
+@utility xerox-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyNDAnIGhlaWdodD0nMjQwJz48ZmlsdGVyIGlkPSduJz48ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMS42JyBudW1PY3RhdmVzPScyJyBzdGl0Y2hUaWxlcz0nc3RpdGNoJy8+PGZlQ29sb3JNYXRyaXggdmFsdWVzPScwIDAgMCAwIDAgIDAgMCAwIDAgMCAgMCAwIDAgMCAwICAwIDAgMCAwLjg1IDAnLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0nMTAwJScgaGVpZ2h0PScxMDAlJyBmaWx0ZXI9J3VybCglMjNuKScvPjwvc3ZnPg==");
+}
+
+@utility xerox-shadow-hard {
+  box-shadow:
+    0.5rem 0.5rem 0 #000,
+    0.5rem 0.5rem 0 0.0625rem var(--color-title-light);
+}
+
+@utility event-title-shadow {
+  text-shadow:
+    3px 3px 0 #000,
+    5px 5px 0 rgba(0, 0, 0, 0.4);
+}
+
+@utility loader-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 0.0625rem 0.0625rem, #fff 0.0625rem, transparent 0.0875rem);
+  background-size: 0.3125rem 0.3125rem;
+  opacity: 0.25;
+  mix-blend-mode: overlay;
+}
+
+/* Drop cap for first paragraph of article body */
+@utility article-drop-cap {
+  & blockquote a {
+    color: var(--color-background);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  & > p:first-of-type::first-letter {
+    float: left;
+    font-family: var(--font-heading);
+    font-weight: 900;
+    color: var(--color-acid);
+    font-size: 4rem;
+    line-height: 0.85;
+    padding: 0.25rem 0.5rem 0 0;
+  }
+
+  @media (min-width: 768px) {
+    & > p:first-of-type::first-letter {
+      font-size: 5rem;
+    }
+  }
+}
+
+/* Complex grid layouts — no Tailwind utility equivalent */
+@utility grid-cols-footer {
+  grid-template-columns: 1.5fr 1fr 2fr 1fr 1.5fr;
+}
+
+@utility grid-cols-card {
+  grid-template-columns: 28.75rem 1fr;
+}
+
+@utility grid-cols-card-flip {
+  grid-template-columns: 1fr 28.75rem;
+}
+
+/* Dynamic viewport heights for gallery lightbox */
+/* top bar (3rem) + bottom bar (3.5rem) + slide py-6 (3rem) + layered border overflow buffer = ~11rem */
+@utility max-h-gallery-sm {
+  max-height: calc(100dvh - 11rem);
+}
+
+@utility max-h-gallery-md {
+  max-height: calc(100dvh - 11rem);
+}
+
+@utility max-h-gallery-lg {
+  max-height: calc(100dvh - 11rem);
+}
+
 html {
   scrollbar-gutter: stable;
+  scroll-behavior: smooth;
 }
 
 body {
-  --sb-track-color: var(--color-text-darker);
+  --sb-track-color: var(--color-background);
   --sb-thumb-color: var(--color-border-dark);
-  --sb-size: 12px;
+  --sb-size: 0.75rem;
 }
 
 body::-webkit-scrollbar {
@@ -64,17 +196,17 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-track {
   background: var(--sb-track-color);
-  border-radius: 2px;
+  border-radius: 0.125rem;
 }
 
 body::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
-  border-radius: 2px;
+  border-radius: 0.125rem;
 }
 
 ::selection {
-  background: var(--color-title-light);
-  color: var(--color-title-darker);
+  background: var(--color-acid);
+  color: var(--color-background);
 }
 
 @supports not selector(::-webkit-scrollbar) {
@@ -83,11 +215,11 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
-button {
-  @apply cursor-pointer;
+button,
+a {
+  cursor: pointer;
 }
 
-/* Hide reCAPTCHA badge - we inform users in the footer instead */
 .grecaptcha-badge {
-  @apply invisible! absolute left-[-9999px] opacity-0!;
+  @apply invisible! absolute -left-2499.75 opacity-0!;
 }

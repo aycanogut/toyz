@@ -11,14 +11,13 @@ import { routing } from '@/i18n/routing';
 import Layout from '@/layout';
 import { Media } from '@/payload-types';
 import getHome from '@/services/home';
-import { grotesque, nabla } from '@/theme/fonts';
-import '@/theme/globals.css';
+import { grotesque, display } from '@/theme/fonts';
 import toyzConfig from '@/toyzConfig';
 import cn from '@/utils/cn';
+import '@/theme/globals.css';
 
 import GoogleAnalytics from './components/GoogleAnalytics';
 import ReCaptchaProvider from './components/ReCaptchaProvider';
-import ScrollUp from './components/ScrollUp';
 
 export async function generateMetadata(props: {
   params: Promise<{
@@ -95,15 +94,14 @@ async function RootLayout(props: { children: ReactNode; params: Promise<{ locale
   return (
     <html
       lang={locale}
-      className={cn(grotesque.variable, nabla.variable)}
+      className={cn(grotesque.variable, display.variable)}
     >
-      <body className="bg-background">
+      <body className="bg-background text-title-light font-fira antialiased">
         <NextIntlClientProvider>
           <ReCaptchaProvider>
             <Layout>{children}</Layout>
             <Toaster theme="dark" />
             <GoogleAnalytics />
-            <ScrollUp />
           </ReCaptchaProvider>
         </NextIntlClientProvider>
       </body>

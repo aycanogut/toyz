@@ -4,9 +4,10 @@ import { useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
+import Button from '@/components/Button';
 import Icon from '@/components/Icon';
+import toyzConfig from '@/toyzConfig';
 import cn from '@/utils/cn';
-import toyzConfig from 'toyzConfig';
 
 import socialLinks from './socialLinks';
 
@@ -58,11 +59,12 @@ function SocialMediaShare({ title, slug, locale, type, className }: SocialMediaS
         </a>
       ))}
 
-      <button
+      <Button
         onClick={handleCopyLink}
+        variant="ghost"
+        size="iconSm"
         className={cn(
-          'flex size-8 items-center justify-center bg-white/10 text-white transition-all duration-200 hover:scale-110 active:scale-95 md:size-8 lg:size-10',
-          'hover:bg-title-light hover:text-background',
+          'hover:bg-title-light hover:text-background bg-white/10 text-white hover:scale-110 active:scale-95 lg:size-10',
           copied && 'bg-green-500 hover:bg-green-500'
         )}
         aria-label={t('copy-link')}
@@ -71,7 +73,7 @@ function SocialMediaShare({ title, slug, locale, type, className }: SocialMediaS
           name={copied ? 'check' : 'link'}
           className="size-4 md:size-6"
         />
-      </button>
+      </Button>
     </div>
   );
 }
