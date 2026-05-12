@@ -48,7 +48,7 @@ export async function mailAction({ name, email, subject, message, token }: MailA
 
   try {
     const mail = await payload.sendEmail({
-      from: `${subject} - ${name} <${email}>`,
+      from: `TOYZ ${t('contact-form')} <${toyzConfig.contactEmail}>`,
       to: toyzConfig.contactEmail,
       subject,
       replyTo: email,
