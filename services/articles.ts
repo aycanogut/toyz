@@ -25,6 +25,7 @@ const getArticles = unstable_cache(
       collection: 'articles',
       locale: locale as Locale,
       where: { and: conditions },
+      pagination: false,
     });
   },
   ['articles'],
