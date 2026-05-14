@@ -57,6 +57,11 @@ export async function generateMetadata(props: {
         tr: `${toyzConfig.baseUrl}/tr`,
         'x-default': `${toyzConfig.baseUrl}/en`,
       },
+      types: {
+        'application/rss+xml': `${toyzConfig.baseUrl}/${locale}/feed.xml`,
+        'application/atom+xml': `${toyzConfig.baseUrl}/${locale}/feed.atom`,
+        'application/json': `${toyzConfig.baseUrl}/${locale}/feed.json`,
+      },
     },
     robots: {
       index: true,
