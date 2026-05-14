@@ -16,12 +16,6 @@ export const SearchPage: GlobalConfig = {
       localized: true,
     },
     {
-      name: 'keywords',
-      type: 'text',
-      hasMany: true,
-      localized: true,
-    },
-    {
       name: 'openGraph',
       type: 'group',
       fields: [

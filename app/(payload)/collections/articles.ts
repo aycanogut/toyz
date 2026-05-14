@@ -85,12 +85,6 @@ export const Articles: CollectionConfig = {
       ],
     },
     {
-      name: 'keywords',
-      type: 'text',
-      hasMany: true,
-      localized: true,
-    },
-    {
       name: 'isEmailSent',
       type: 'checkbox',
       defaultValue: false,
