@@ -16,12 +16,6 @@ export const Contact: GlobalConfig = {
       localized: true,
     },
     {
-      name: 'image',
-      type: 'upload',
-      relationTo: 'media',
-      required: true,
-    },
-    {
       name: 'openGraph',
       type: 'group',
       fields: [
