@@ -1,67 +1,58 @@
-import type { CollectionAfterChangeHook, CollectionBeforeChangeHook } from 'payload';
+import type { CollectionAfterChangeHook } from 'payload';
+import type { Model } from 'mongoose';
 import type { Article } from '@/payload-types';
-
-const emailQueueLock = new Set<number | string>();
 
 const isProduction = () => process.env.NODE_ENV === 'production';
 
-export const setArticleEmailFlag: CollectionBeforeChangeHook<Article> = async ({ data, originalDoc, operation, req }) => {
-  if (operation !== 'update' && operation !== 'create') return data;
-
-  if (originalDoc?.isEmailSent === true) {
-    data.isEmailSent = true;
-  }
-
+export const queueNewArticleEmails: CollectionAfterChangeHook<Article> = async ({
+  doc,
+  previousDoc,
+  operation,
+  req: { payload },
+}) => {
   if (!isProduction()) {
-    req.payload.logger.info(`🚫 Skipping Email Queue: Not in production environment (NODE_ENV=${process.env.NODE_ENV})`);
-    return data;
+    payload.logger.info(
+      `🚫 Skipping Email Queue: Not in production environment (NODE_ENV=${process.env.NODE_ENV})`
+    );
+    return doc;
   }
 
-  const isNowPublished = data._status === 'published';
-  const wasAlreadyPublished = originalDoc?._status === 'published';
+  if (operation !== 'create' && operation !== 'update') return doc;
 
-  let hasEverBeenPublished = false;
-  
-  if (operation === 'update' && originalDoc?.id) {
-    const { docs: versions } = await req.payload.findVersions({
-      collection: 'articles',
-      where: {
-        parent: { equals: originalDoc.id },
-        'version._status': { equals: 'published' },
-      },
-      limit: 1,
-    });
-    hasEverBeenPublished = versions.length > 0;
+  const isNowPublished = doc._status === 'published';
+  const wasPreviouslyPublished = previousDoc?._status === 'published';
+
+  if (!isNowPublished || wasPreviouslyPublished) return doc;
+
+  const mongooseDb = payload.db as unknown as {
+    collections: Record<string, Model<{ isEmailSent?: boolean }>>;
+  };
+  const ArticlesModel = mongooseDb.collections?.articles;
+
+  if (!ArticlesModel || typeof ArticlesModel.findOneAndUpdate !== 'function') {
+    payload.logger.error(
+      `❌ Could not access Articles mongoose model — aborting email queue for: ${doc.title}`
+    );
+    return doc;
   }
 
-  const hasAlreadySentMail = data.isEmailSent === true;
-
-  req.payload.logger.info(
-    `🔍 Hook Check [${data.title}]: NowPublished: ${isNowPublished}, PreviouslyPublished: ${wasAlreadyPublished}, AlreadySent: ${hasAlreadySentMail}, HasEverBeenPublished: ${hasEverBeenPublished}`
+  // Atomic claim across all instances. MongoDB guarantees this single-document
+  // update is serialized: only one concurrent caller will match the predicate
+  // and update the flag; all others see `null` and bail.
+  const claimed = await ArticlesModel.findOneAndUpdate(
+    { _id: doc.id, isEmailSent: { $ne: true } },
+    { $set: { isEmailSent: true } },
+    { new: false }
   );
 
-  if (isNowPublished && !wasAlreadyPublished && !hasAlreadySentMail && !hasEverBeenPublished) {
-    req.payload.logger.info(`🎯 Targeting for Email Queue: ${data.title}`);
-    data.isEmailSent = true;
-    req.context.shouldQueueEmails = true;
-  } else {
-    req.payload.logger.info(`🚫 Skipping Email Queue: Article already published or mail already sent.`);
-  }
-
-  return data;
-};
-
-export const queueNewArticleEmails: CollectionAfterChangeHook<Article> = async ({ doc, req: { payload, context } }) => {
-  if (!context.shouldQueueEmails) {
+  if (!claimed) {
+    payload.logger.info(
+      `⏭️ Email already claimed for: ${doc.title} (lost race or previously sent)`
+    );
     return doc;
   }
 
-  if (emailQueueLock.has(doc.id)) {
-    payload.logger.info(`⏭️ Email queue already in progress for: ${doc.title}, skipping duplicate`);
-    return doc;
-  }
-
-  emailQueueLock.add(doc.id);
+  payload.logger.info(`🎯 Claimed email send for: ${doc.title}`);
 
   try {
     const { docs: subscribers } = await payload.find({
@@ -70,7 +61,10 @@ export const queueNewArticleEmails: CollectionAfterChangeHook<Article> = async (
       limit: 0,
     });
 
-    if (!subscribers?.length) return doc;
+    if (!subscribers?.length) {
+      payload.logger.info(`ℹ️ No active subscribers, nothing to queue for: ${doc.title}`);
+      return doc;
+    }
 
     await Promise.all(
       subscribers.map((subscriber, index) =>
@@ -89,11 +83,7 @@ export const queueNewArticleEmails: CollectionAfterChangeHook<Article> = async (
     payload.logger.info(`✅ Successfully queued ${subscribers.length} jobs for: ${doc.title}`);
   } catch (error) {
     payload.logger.error(`❌ Error in queueing: ${error}`);
-  } finally {
-    setTimeout(() => emailQueueLock.delete(doc.id), 10000);
   }
-
-  delete context.shouldQueueEmails;
 
   return doc;
 };

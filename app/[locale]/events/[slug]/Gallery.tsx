@@ -238,7 +238,7 @@ function Gallery({ images, eventTitle, eventDate, eventLocation }: GalleryProps)
             </div>
 
             {/* Thumbnails + keyboard hint — RIGHT */}
-            <div className="border-title-light/20 hidden shrink-0 items-stretch border-l sm:flex">
+            <div className="border-title-light/20 hidden shrink-0 items-stretch border-l xl:flex">
               {sortedImages.length > 1 && (
                 <div className="flex items-center gap-1.5 overflow-x-auto px-4">
                   {sortedImages.map((image, index) => (

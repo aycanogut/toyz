@@ -28,7 +28,6 @@ export async function generateMetadata(props: {
     title: `${article.title} - ${toyzConfig.title}`,
     description: article.description,
     applicationName: toyzConfig.title,
-    keywords: article.keywords?.join(', ') ?? '',
     openGraph: {
       siteName: toyzConfig.title,
       title: article.title,

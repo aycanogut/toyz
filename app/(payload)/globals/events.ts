@@ -17,12 +17,6 @@ export const EventsGlobal: GlobalConfig = {
       required: true,
     },
     {
-      name: 'keywords',
-      type: 'text',
-      hasMany: true,
-      localized: true,
-    },
-    {
       name: 'openGraph',
       type: 'group',
       fields: [

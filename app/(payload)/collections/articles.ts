@@ -1,12 +1,11 @@
 import type { CollectionConfig } from 'payload';
 
 import slugField from '../fields/slug';
-import { setArticleEmailFlag, queueNewArticleEmails } from '../utils/queueNewArticleEmails';
+import { queueNewArticleEmails } from '../utils/queueNewArticleEmails';
 
 export const Articles: CollectionConfig = {
   slug: 'articles',
   hooks: {
-    beforeChange: [setArticleEmailFlag],
     afterChange: [queueNewArticleEmails],
   },
   admin: {
@@ -83,12 +82,6 @@ export const Articles: CollectionConfig = {
           required: true,
         },
       ],
-    },
-    {
-      name: 'keywords',
-      type: 'text',
-      hasMany: true,
-      localized: true,
     },
     {
       name: 'isEmailSent',
