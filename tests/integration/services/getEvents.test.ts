@@ -57,6 +57,7 @@ describe('getEvents', () => {
     expect(mockPayloadFind).toHaveBeenCalledWith({
       collection: 'events',
       locale: 'en',
+      pagination: false,
       where: {
         _status: {
           equals: 'published',

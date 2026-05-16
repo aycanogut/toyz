@@ -1,12 +1,17 @@
 import type { CollectionConfig } from 'payload';
 
+import {
+  revalidateArticleCacheOnChange,
+  revalidateArticleCacheOnDelete,
+} from '../hooks/revalidateArticleCache';
 import slugField from '../fields/slug';
 import { queueNewArticleEmails } from '../utils/queueNewArticleEmails';
 
 export const Articles: CollectionConfig = {
   slug: 'articles',
   hooks: {
-    afterChange: [queueNewArticleEmails],
+    afterChange: [queueNewArticleEmails, revalidateArticleCacheOnChange],
+    afterDelete: [revalidateArticleCacheOnDelete],
   },
   admin: {
     useAsTitle: 'title',

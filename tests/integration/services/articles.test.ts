@@ -57,6 +57,7 @@ describe('getArticles', () => {
     expect(mockPayloadFind).toHaveBeenCalledWith({
       collection: 'articles',
       locale: 'en',
+      pagination: false,
       where: {
         and: [
           {
