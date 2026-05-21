@@ -73,6 +73,7 @@ export interface Config {
     events: Event;
     'event-media': EventMedia;
     subscribers: Subscriber;
+    'newsletter-dispatches': NewsletterDispatch;
     search: Search;
     'payload-kv': PayloadKv;
     users: User;
@@ -93,6 +94,7 @@ export interface Config {
     events: EventsSelect<false> | EventsSelect<true>;
     'event-media': EventMediaSelect<false> | EventMediaSelect<true>;
     subscribers: SubscribersSelect<false> | SubscribersSelect<true>;
+    'newsletter-dispatches': NewsletterDispatchesSelect<false> | NewsletterDispatchesSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -110,7 +112,6 @@ export interface Config {
     slider: Slider;
     about: About;
     contact: Contact;
-    searchPage: SearchPage;
     'events-global': EventsGlobal;
   };
   globalsSelect: {
@@ -118,16 +119,16 @@ export interface Config {
     slider: SliderSelect<false> | SliderSelect<true>;
     about: AboutSelect<false> | AboutSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
-    searchPage: SearchPageSelect<false> | SearchPageSelect<true>;
     'events-global': EventsGlobalSelect<false> | EventsGlobalSelect<true>;
   };
   locale: 'en' | 'tr';
-  user: User & {
-    collection: 'users';
+  widgets: {
+    collections: CollectionsWidget;
   };
+  user: User;
   jobs: {
     tasks: {
-      newArticleEmail: TaskNewArticleEmail;
+      dispatchNewsletter: TaskDispatchNewsletter;
       schedulePublish: TaskSchedulePublish;
       inline: {
         input: unknown;
@@ -184,8 +185,10 @@ export interface Article {
     category: string | Category;
     author: string;
   };
-  keywords?: string[] | null;
-  isEmailSent?: boolean | null;
+  /**
+   * When this article is first published with this checked, all active subscribers will receive an email after ~30 minutes. The field becomes read-only once the newsletter has been sent.
+   */
+  sendNewsletter?: boolean | null;
   slug?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -199,16 +202,6 @@ export interface Media {
   id: string;
   alt?: string | null;
   credits?: string | null;
-  sizes?: {
-    email?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  } | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -220,6 +213,16 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    email?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -249,7 +252,6 @@ export interface Event {
     hasNextPage?: boolean;
     totalDocs?: number;
   };
-  keywords?: string[] | null;
   slug?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -285,6 +287,28 @@ export interface Subscriber {
   email: string;
   preferredLocale: 'en' | 'tr';
   isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-dispatches".
+ */
+export interface NewsletterDispatch {
+  id: string;
+  article: string | Article;
+  status: 'queued' | 'sending' | 'sent' | 'disabled' | 'failed';
+  scheduledFor: string;
+  triggeredAt?: string | null;
+  completedAt?: string | null;
+  recipientCount?: number | null;
+  successCount?: number | null;
+  failureCount?: number | null;
+  /**
+   * Subscribers who have already received this newsletter. Used for resume on retry.
+   */
+  sentSubscribers?: (string | Subscriber)[] | null;
+  lastError?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -345,6 +369,7 @@ export interface User {
       }[]
     | null;
   password?: string | null;
+  collection: 'users';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -398,7 +423,7 @@ export interface PayloadJob {
     | {
         executedAt: string;
         completedAt: string;
-        taskSlug: 'inline' | 'newArticleEmail' | 'schedulePublish';
+        taskSlug: 'inline' | 'dispatchNewsletter' | 'schedulePublish';
         taskID: string;
         input?:
           | {
@@ -431,7 +456,7 @@ export interface PayloadJob {
         id?: string | null;
       }[]
     | null;
-  taskSlug?: ('inline' | 'newArticleEmail' | 'schedulePublish') | null;
+  taskSlug?: ('inline' | 'dispatchNewsletter' | 'schedulePublish') | null;
   queue?: string | null;
   waitUntil?: string | null;
   processing?: boolean | null;
@@ -468,6 +493,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'subscribers';
         value: string | Subscriber;
+      } | null)
+    | ({
+        relationTo: 'newsletter-dispatches';
+        value: string | NewsletterDispatch;
       } | null)
     | ({
         relationTo: 'search';
@@ -535,8 +564,7 @@ export interface ArticlesSelect<T extends boolean = true> {
         category?: T;
         author?: T;
       };
-  keywords?: T;
-  isEmailSent?: T;
+  sendNewsletter?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -560,6 +588,20 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        email?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -585,7 +627,6 @@ export interface EventsSelect<T extends boolean = true> {
         location?: T;
       };
   gallery?: T;
-  keywords?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -619,6 +660,24 @@ export interface SubscribersSelect<T extends boolean = true> {
   email?: T;
   preferredLocale?: T;
   isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-dispatches_select".
+ */
+export interface NewsletterDispatchesSelect<T extends boolean = true> {
+  article?: T;
+  status?: T;
+  scheduledFor?: T;
+  triggeredAt?: T;
+  completedAt?: T;
+  recipientCount?: T;
+  successCount?: T;
+  failureCount?: T;
+  sentSubscribers?: T;
+  lastError?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -734,7 +793,6 @@ export interface Home {
   id: string;
   title: string;
   description: string;
-  keywords?: string[] | null;
   openGraph?: {
     images?: (string | null) | Media;
   };
@@ -760,8 +818,6 @@ export interface About {
   id: string;
   title: string;
   description: string;
-  image: string | Media;
-  keywords?: string[] | null;
   openGraph?: {
     images?: (string | null) | Media;
   };
@@ -776,23 +832,6 @@ export interface Contact {
   id: string;
   title: string;
   description: string;
-  image: string | Media;
-  keywords?: string[] | null;
-  openGraph?: {
-    images?: (string | null) | Media;
-  };
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "searchPage".
- */
-export interface SearchPage {
-  id: string;
-  title: string;
-  description: string;
-  keywords?: string[] | null;
   openGraph?: {
     images?: (string | null) | Media;
   };
@@ -806,8 +845,6 @@ export interface SearchPage {
 export interface EventsGlobal {
   id: string;
   title: string;
-  image: string | Media;
-  keywords?: string[] | null;
   openGraph?: {
     images?: (string | null) | Media;
   };
@@ -821,7 +858,6 @@ export interface EventsGlobal {
 export interface HomeSelect<T extends boolean = true> {
   title?: T;
   description?: T;
-  keywords?: T;
   openGraph?:
     | T
     | {
@@ -849,8 +885,6 @@ export interface SliderSelect<T extends boolean = true> {
 export interface AboutSelect<T extends boolean = true> {
   title?: T;
   description?: T;
-  image?: T;
-  keywords?: T;
   openGraph?:
     | T
     | {
@@ -867,25 +901,6 @@ export interface AboutSelect<T extends boolean = true> {
 export interface ContactSelect<T extends boolean = true> {
   title?: T;
   description?: T;
-  image?: T;
-  keywords?: T;
-  openGraph?:
-    | T
-    | {
-        images?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "searchPage_select".
- */
-export interface SearchPageSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  keywords?: T;
   openGraph?:
     | T
     | {
@@ -901,8 +916,6 @@ export interface SearchPageSelect<T extends boolean = true> {
  */
 export interface EventsGlobalSelect<T extends boolean = true> {
   title?: T;
-  image?: T;
-  keywords?: T;
   openGraph?:
     | T
     | {
@@ -914,17 +927,23 @@ export interface EventsGlobalSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TaskNewArticleEmail".
+ * via the `definition` "collections_widget".
  */
-export interface TaskNewArticleEmail {
+export interface CollectionsWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'full';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TaskDispatchNewsletter".
+ */
+export interface TaskDispatchNewsletter {
   input: {
-    subscriberEmail: string;
-    preferredLocale: string;
-    articleId: string;
+    dispatchId: string;
   };
-  output: {
-    sent: boolean;
-  };
+  output?: unknown;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
