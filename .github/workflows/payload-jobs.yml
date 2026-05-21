@@ -4,7 +4,7 @@ name: Trigger Payload Jobs
 # /api/payload-jobs/run endpoint externally from GitHub Actions.
 #
 # Required repository secrets:
-#   - PAYLOAD_JOBS_URL    e.g. https://toyzwebzine.com/api/payload-jobs/run
+#   - PAYLOAD_JOBS_URL    e.g. https://www.toyzwebzine.com/api/payload-jobs/run
 #   - CRON_SECRET         must match process.env.CRON_SECRET on Vercel
 #
 # Schedule is hourly — the 30-minute delay
@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Hit Payload jobs run endpoint
         run: |
-          curl --fail --silent --show-error \
+          curl --fail --silent --show-error --location \
             --max-time 60 \
             -H "Authorization: Bearer ${CRON_SECRET}" \
             "${PAYLOAD_JOBS_URL}"
