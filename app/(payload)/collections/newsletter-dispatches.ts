@@ -1,7 +1,41 @@
-import type { CollectionConfig } from 'payload';
+import type { CollectionAfterChangeHook, CollectionConfig } from 'payload';
+
+// When a dispatch reaches a terminal state, flip the article's sendNewsletter
+// checkbox off so the admin UI reflects that the job is done (or cancelled).
+const syncArticleSendNewsletter: CollectionAfterChangeHook = async ({ doc, req: { payload } }) => {
+  const isTerminal = doc.status === 'sent' || doc.status === 'disabled';
+
+  if (!isTerminal) {
+    return doc;
+  }
+
+  const articleId = typeof doc.article === 'object' ? doc.article.id : doc.article;
+
+  if (!articleId) {
+    return doc;
+  }
+
+  try {
+    await payload.update({
+      collection: 'articles',
+      id: articleId,
+      data: { sendNewsletter: false },
+      overrideAccess: true,
+    });
+  } catch (error) {
+    payload.logger.error(
+      `Failed to reset sendNewsletter for article ${articleId}: ${error instanceof Error ? error.message : String(error)}`
+    );
+  }
+
+  return doc;
+};
 
 export const NewsletterDispatches: CollectionConfig = {
   slug: 'newsletter-dispatches',
+  hooks: {
+    afterChange: [syncArticleSendNewsletter],
+  },
   admin: {
     useAsTitle: 'id',
     defaultColumns: ['article', 'status', 'scheduledFor', 'successCount', 'failureCount'],
