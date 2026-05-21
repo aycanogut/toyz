@@ -15,13 +15,14 @@ import { Categories } from './app/(payload)/collections/categories';
 import { EventMedia } from './app/(payload)/collections/event-media';
 import { Events } from './app/(payload)/collections/events';
 import { Media } from './app/(payload)/collections/media';
+import { NewsletterDispatches } from './app/(payload)/collections/newsletter-dispatches';
 import { Subscribers } from './app/(payload)/collections/subscribers';
 import { About } from './app/(payload)/globals/about';
 import { Contact } from './app/(payload)/globals/contact';
 import { EventsGlobal } from './app/(payload)/globals/events';
 import { Home } from './app/(payload)/globals/home';
 import { Slider } from './app/(payload)/globals/slider';
-import { newArticleEmailTask } from './app/(payload)/jobs/newArticleEmailTask';
+import { dispatchNewsletterTask } from './app/(payload)/jobs/dispatchNewsletterTask';
 import toyzConfig from './toyzConfig';
 
 const filename = fileURLToPath(import.meta.url);
@@ -61,7 +62,7 @@ export default buildConfig({
       payload.logger.error(`Failed to reset stale jobs: ${error}`);
     }
   },
-  collections: [Articles, Media, Categories, Events, EventMedia, Subscribers],
+  collections: [Articles, Media, Categories, Events, EventMedia, Subscribers, NewsletterDispatches],
   globals: [Home, Slider, About, Contact, EventsGlobal],
   secret: toyzConfig.payloadSecret || '',
   db: mongooseAdapter({
@@ -132,7 +133,7 @@ export default buildConfig({
   }),
   jobs: {
     deleteJobOnComplete: true,
-    tasks: [newArticleEmailTask],
+    tasks: [dispatchNewsletterTask],
     autoRun: [
       {
         cron: '*/1 * * * *',
@@ -144,7 +145,7 @@ export default buildConfig({
       admin: {
         ...defaultJobsCollection.admin,
         hidden: false,
-        defaultColumns: ['taskSlug', 'subscriberEmail', 'completedAt', 'hasError', 'processing', 'totalTried'],
+        defaultColumns: ['taskSlug', 'completedAt', 'hasError', 'processing', 'totalTried'],
       },
     }),
   },
