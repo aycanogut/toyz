@@ -134,12 +134,23 @@ export default buildConfig({
   jobs: {
     deleteJobOnComplete: true,
     tasks: [dispatchNewsletterTask],
-    autoRun: [
-      {
-        cron: '*/1 * * * *',
-        limit: 50,
+    access: {
+      run: ({ req }) => {
+        if (req.user) {
+          return true;
+        }
+
+        const secret = process.env.CRON_SECRET;
+
+        if (!secret) {
+          return false;
+        }
+
+        const authHeader = req.headers.get('authorization');
+
+        return authHeader === `Bearer ${secret}`;
       },
-    ],
+    },
     jobsCollectionOverrides: ({ defaultJobsCollection }) => ({
       ...defaultJobsCollection,
       admin: {

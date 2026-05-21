@@ -1,0 +1,31 @@
+name: Trigger Payload Jobs
+
+# Runs Payload's job queue on a schedule.
+# /api/payload-jobs/run endpoint externally from GitHub Actions.
+#
+# Required repository secrets:
+#   - PAYLOAD_JOBS_URL    e.g. https://toyzwebzine.com/api/payload-jobs/run
+#   - CRON_SECRET         must match process.env.CRON_SECRET on Vercel
+#
+# Schedule is hourly — the 30-minute delay
+# window can tolerate up to ~1 hour of additional drift.
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Hit Payload jobs run endpoint
+        run: |
+          curl --fail --silent --show-error \
+            --max-time 60 \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            "${PAYLOAD_JOBS_URL}"
+        env:
+          PAYLOAD_JOBS_URL: ${{ secrets.PAYLOAD_JOBS_URL }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
