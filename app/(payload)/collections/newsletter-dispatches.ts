@@ -3,9 +3,9 @@ import type { CollectionAfterChangeHook, CollectionConfig } from 'payload';
 // When a dispatch reaches a terminal state, flip the article's sendNewsletter
 // checkbox off so the admin UI reflects that the job is done (or cancelled).
 const syncArticleSendNewsletter: CollectionAfterChangeHook = async ({ doc, req: { payload } }) => {
-  const isTerminal = doc.status === 'sent' || doc.status === 'disabled';
+  const isFinished = doc.status === 'sent' || doc.status === 'disabled';
 
-  if (!isTerminal) {
+  if (!isFinished) {
     return doc;
   }
 
