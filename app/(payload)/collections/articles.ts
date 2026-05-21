@@ -5,12 +5,12 @@ import {
   revalidateArticleCacheOnDelete,
 } from '../hooks/revalidateArticleCache';
 import slugField from '../fields/slug';
-import { queueNewArticleEmails } from '../utils/queueNewArticleEmails';
+import { scheduleNewsletterDispatch } from '../utils/scheduleNewsletterDispatch';
 
 export const Articles: CollectionConfig = {
   slug: 'articles',
   hooks: {
-    afterChange: [queueNewArticleEmails, revalidateArticleCacheOnChange],
+    afterChange: [scheduleNewsletterDispatch, revalidateArticleCacheOnChange],
     afterDelete: [revalidateArticleCacheOnDelete],
   },
   admin: {
@@ -89,11 +89,34 @@ export const Articles: CollectionConfig = {
       ],
     },
     {
-      name: 'isEmailSent',
+      name: 'sendNewsletter',
       type: 'checkbox',
       defaultValue: false,
+      localized: false,
       admin: {
-        hidden: true,
+        position: 'sidebar',
+        description:
+          'When this article is first published with this checked, all active subscribers will receive an email after ~30 minutes. The field becomes read-only once the newsletter has been sent.',
+      },
+      access: {
+        update: async ({ req, id }) => {
+          if (!id) return true;
+          try {
+            const { docs } = await req.payload.find({
+              collection: 'newsletter-dispatches',
+              where: {
+                and: [
+                  { article: { equals: id } },
+                  { status: { equals: 'sent' } },
+                ],
+              },
+              limit: 1,
+            });
+            return docs.length === 0;
+          } catch {
+            return true;
+          }
+        },
       },
     },
     slugField('title'),
