@@ -22,7 +22,7 @@ export const ContactSchema = z.object({
 export type ContactFormSchema = z.infer<typeof ContactSchema>;
 
 function ContactForm() {
-  const { getRecapthcaToken } = useReCaptcha();
+  const { getReCaptchaToken } = useReCaptcha();
 
   const t = useTranslations('Contact');
   const tFooter = useTranslations('Footer');
@@ -39,7 +39,7 @@ function ContactForm() {
   });
 
   const onSubmit: SubmitHandler<ContactFormSchema> = async inputValues => {
-    const token = await getRecapthcaToken();
+    const token = await getReCaptchaToken();
 
     if (!token) {
       toast.error(t('error'));

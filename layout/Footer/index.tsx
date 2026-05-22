@@ -26,7 +26,7 @@ function Footer() {
 
   const locale = useLocale() as Locale;
 
-  const { getRecapthcaToken } = useReCaptcha();
+  const { getReCaptchaToken } = useReCaptcha();
 
   const tNav = useTranslations('Navigation');
   const tFooter = useTranslations('Footer');
@@ -41,7 +41,7 @@ function Footer() {
     setIsSubmitting(true);
 
     try {
-      const token = await getRecapthcaToken();
+      const token = await getReCaptchaToken();
 
       if (!token) {
         toast.error(tFooter('error'));
