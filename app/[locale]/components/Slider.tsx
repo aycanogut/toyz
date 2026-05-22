@@ -78,7 +78,7 @@ function Slider({ slider }: SliderProps) {
                   src={media.url ?? ''}
                   alt={media.alt ?? ''}
                   fill
-                  className="absolute top-0 left-0 block h-full w-full object-cover"
+                  className="absolute top-0 left-0 block size-full object-cover"
                   fetchPriority="high"
                 />
 
