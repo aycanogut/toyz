@@ -16,7 +16,7 @@ const getCategories = unstable_cache(
     return result.docs;
   },
   ['categories'],
-  { revalidate: 86400 }
+  { revalidate: 3600 }
 );
 
 export default getCategories;

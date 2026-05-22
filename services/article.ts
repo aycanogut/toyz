@@ -20,7 +20,7 @@ const getArticle = unstable_cache(
     return result.docs[0] ?? null;
   },
   ['article'],
-  { revalidate: 86400 }
+  { revalidate: 3600 }
 );
 
 export default getArticle;
