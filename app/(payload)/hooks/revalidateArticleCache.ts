@@ -5,16 +5,16 @@ import type { Article } from '@/payload-types';
 
 export const revalidateArticleCacheOnChange: CollectionAfterChangeHook<Article> = ({ doc }) => {
   if (doc._status === 'published') {
-    revalidateTag('article');
-    revalidateTag('articles');
-    revalidateTag('sitemap');
+    revalidateTag('article', 'max');
+    revalidateTag('articles', 'max');
+    revalidateTag('sitemap', 'max');
   }
 
   return doc;
 };
 
 export const revalidateArticleCacheOnDelete: CollectionAfterDeleteHook = () => {
-  revalidateTag('article');
-  revalidateTag('articles');
-  revalidateTag('sitemap');
+  revalidateTag('article', 'max');
+  revalidateTag('articles', 'max');
+  revalidateTag('sitemap', 'max');
 };
