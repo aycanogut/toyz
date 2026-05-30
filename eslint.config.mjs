@@ -1,29 +1,16 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-import { FlatCompat } from '@eslint/eslintrc';
-import js from '@eslint/js';
-import typescriptEslintEslintPlugin from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTs from 'eslint-config-next/typescript';
+import prettierConfig from 'eslint-config-prettier';
 import prettier from 'eslint-plugin-prettier';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-});
-
-export default [
-  ...compat.extends('next', 'next/core-web-vitals', 'prettier', 'plugin:@typescript-eslint/recommended', 'prettier'),
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+  prettierConfig,
   {
     plugins: {
       prettier,
-      '@typescript-eslint': typescriptEslintEslintPlugin,
-    },
-    languageOptions: {
-      parser: tsParser,
     },
     rules: {
       camelcase: 'off',
@@ -101,6 +88,8 @@ export default [
         },
       },
     },
-    ignores: ['app/(payload)/**/*'],
   },
-];
+  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'app/(payload)/**/*']),
+]);
+
+export default eslintConfig;

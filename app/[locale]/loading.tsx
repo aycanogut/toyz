@@ -14,12 +14,7 @@ export default function Loading() {
           priority
           className="animate-toyz-bob h-auto w-28 object-contain motion-reduce:animate-none"
         />
-        <div
-          className="font-heading text-title-light text-5xl font-black tracking-tight italic"
-          style={{ transform: 'skewX(-8deg)', textShadow: '4px 4px 0 var(--color-acid)' }}
-        >
-          TOYZ*
-        </div>
+        <div className="font-heading text-title-light loader-wordmark text-5xl font-black tracking-tight italic">TOYZ*</div>
       </div>
 
       <div className="absolute bottom-15 left-1/2 h-0.5 w-70 -translate-x-1/2 overflow-hidden bg-zinc-800">

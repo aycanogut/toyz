@@ -3,7 +3,7 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 function useReCaptcha() {
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const getRecapthcaToken = async () => {
+  const getReCaptchaToken = async () => {
     if (!executeRecaptcha) {
       console.log('Execute recaptcha not yet available');
       return;
@@ -14,7 +14,7 @@ function useReCaptcha() {
 
   return {
     executeRecaptcha,
-    getRecapthcaToken,
+    getReCaptchaToken,
   };
 }
 

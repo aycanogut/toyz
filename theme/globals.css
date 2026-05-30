@@ -127,6 +127,11 @@
   mix-blend-mode: overlay;
 }
 
+@utility loader-wordmark {
+  transform: skewX(-8deg);
+  text-shadow: 0.25rem 0.25rem 0 var(--color-acid);
+}
+
 /* Drop cap for first paragraph of article body */
 @utility article-drop-cap {
   & blockquote a {

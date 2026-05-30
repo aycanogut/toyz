@@ -16,7 +16,7 @@ vi.mock('next-intl', () => ({
 
 vi.mock('@/app/[locale]/hooks/useReCaptcha', () => ({
   default: () => ({
-    getRecapthcaToken: mockGetRecaptchaToken,
+    getReCaptchaToken: mockGetRecaptchaToken,
   }),
 }));
 

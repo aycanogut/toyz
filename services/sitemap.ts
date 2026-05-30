@@ -19,7 +19,7 @@ const getSitemap = unstable_cache(
     return result.docs;
   },
   ['sitemap'],
-  { revalidate: 86400 }
+  { revalidate: 3600 }
 );
 
 export default getSitemap;

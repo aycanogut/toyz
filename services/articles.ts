@@ -29,7 +29,7 @@ const getArticles = unstable_cache(
     });
   },
   ['articles'],
-  { revalidate: 86400 }
+  { revalidate: 3600 }
 );
 
 export default getArticles;

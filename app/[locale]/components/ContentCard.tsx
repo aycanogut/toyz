@@ -52,7 +52,7 @@ function ContentCard({ title, description, image, imageAlt, date, author, catego
         href={`/content/${slug}`}
         className={cn('relative block aspect-16/10 w-full lg:aspect-auto lg:h-72', flipped && 'lg:order-2', tilt)}
       >
-        <div className="border-title-light xerox-shadow-hard relative h-full w-full overflow-hidden border-4 lg:border-6">
+        <div className="border-title-light xerox-shadow-hard relative size-full overflow-hidden border-4 lg:border-6">
           <Image
             src={image}
             alt={imageAlt ?? title}

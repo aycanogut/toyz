@@ -173,7 +173,7 @@ function Gallery({ images, eventTitle, eventDate, eventLocation }: GalleryProps)
               {sortedImages.map((image, index) => (
                 <div
                   key={image.id}
-                  className="relative flex h-full w-full min-w-0 shrink-0 grow-0 items-center justify-center px-6 py-6"
+                  className="relative flex size-full min-w-0 shrink-0 grow-0 items-center justify-center px-6 py-6"
                 >
                   {/* Layered border: acid furthest (most offset), blood middle, white image frame on top */}
                   <div className="relative">
