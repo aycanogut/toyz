@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Hit Payload jobs run endpoint
         run: |
-          curl --fail --silent --show-error --location \
+          curl --fail --verbose \
             --max-time 60 \
             -H "Authorization: Bearer ${CRON_SECRET}" \
             "${PAYLOAD_JOBS_URL}"
