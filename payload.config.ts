@@ -29,16 +29,13 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
-  onInit: async (payload) => {
+  onInit: async payload => {
     try {
       const { docs: staleJobs } = await payload.find({
         collection: 'payload-jobs',
         overrideAccess: true,
         where: {
-          and: [
-            { processing: { equals: true } },
-            { completedAt: { exists: false } },
-          ],
+          and: [{ processing: { equals: true } }, { completedAt: { exists: false } }],
         },
         limit: 100,
       });
@@ -47,7 +44,7 @@ export default buildConfig({
 
       if (staleJobs.length > 0) {
         await Promise.all(
-          staleJobs.map((job) =>
+          staleJobs.map(job =>
             payload.update({
               collection: 'payload-jobs',
               overrideAccess: true,
