@@ -3,9 +3,15 @@ name: Trigger Payload Jobs
 # Runs Payload's job queue on a schedule.
 # /api/payload-jobs/run endpoint externally from GitHub Actions.
 #
+# Hits the Vercel deployment directly (the *.vercel.app URL) to bypass the
+# Cloudflare proxy in front of the custom domain — Cloudflare's Bot Fight Mode
+# was challenging the GitHub-hosted runner and returning 403.
+#
 # Required repository secrets:
-#   - PAYLOAD_JOBS_URL    e.g. https://www.toyzwebzine.com/api/payload-jobs/run
-#   - CRON_SECRET         must match process.env.CRON_SECRET on Vercel
+#   - PAYLOAD_JOBS_URL                 e.g. https://<project>.vercel.app/api/payload-jobs/run
+#   - CRON_SECRET                      must match process.env.CRON_SECRET on Vercel
+#   - VERCEL_AUTOMATION_BYPASS_SECRET  Vercel "Protection Bypass for Automation" token
+#                                      (keeps Deployment Protection on for everyone else)
 #
 # Schedule is hourly — the 30-minute delay
 # window can tolerate up to ~1 hour of additional drift.
@@ -25,7 +31,9 @@ jobs:
           curl --fail --verbose \
             --max-time 60 \
             -H "Authorization: Bearer ${CRON_SECRET}" \
+            -H "x-vercel-protection-bypass: ${VERCEL_AUTOMATION_BYPASS_SECRET}" \
             "${PAYLOAD_JOBS_URL}"
         env:
           PAYLOAD_JOBS_URL: ${{ secrets.PAYLOAD_JOBS_URL }}
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
