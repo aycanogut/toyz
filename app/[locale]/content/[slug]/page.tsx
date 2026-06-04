@@ -8,7 +8,7 @@ import CategoryBadge from '@/components/CategoryBadge';
 import { routing } from '@/i18n/routing';
 import { Category, Media } from '@/payload-types';
 import getArticle from '@/services/article';
-import getArticles from '@/services/articles';
+import getRandomArticles from '@/services/randomArticles';
 import getAllArticleSlugs from '@/services/slugs';
 import extractHeadings from '@/utils/extractHeadings';
 import formatDate from '@/utils/formatDate';
@@ -61,9 +61,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
   const media = images as Media;
   const category = details.category as Category;
 
-  const articles = await getArticles(locale);
-  const otherArticles = articles.docs.filter(item => item.slug !== slug);
-  const randomArticles = otherArticles.sort(() => Math.random() - 0.5).slice(0, 3);
+  const randomArticles = await getRandomArticles(locale, slug);
 
   const headings = extractHeadings(content as Parameters<typeof extractHeadings>[0]);
   const minutes = readTime(content as Parameters<typeof readTime>[0]);
