@@ -8,13 +8,13 @@ interface SimiliarContentCardProps {
   title: string;
   image: string;
   categoryName: string;
-  categoryId: string | number;
+  colorIndex: number;
   date: string;
   author: string;
   slug: string;
 }
 
-function SimiliarContentCard({ title, image, categoryName, categoryId, date, author, slug }: SimiliarContentCardProps) {
+function SimiliarContentCard({ title, image, categoryName, colorIndex, date, author, slug }: SimiliarContentCardProps) {
   return (
     <article>
       <Link
@@ -36,7 +36,7 @@ function SimiliarContentCard({ title, image, categoryName, categoryId, date, aut
           <div className="absolute top-2 left-2 z-10">
             <CategoryBadge
               name={categoryName}
-              categoryId={categoryId}
+              colorIndex={colorIndex}
               className="px-2 py-0.5"
             />
           </div>

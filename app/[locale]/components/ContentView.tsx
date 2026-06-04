@@ -23,6 +23,7 @@ async function ContentView({ articles, categories }: ContentViewProps) {
     const media = item.images as Media;
     const category = item.details.category as Category;
     const minutes = readTime(item.content as Parameters<typeof readTime>[0]);
+    const colorIndex = categories.findIndex(color => color.id === category?.id);
 
     return {
       id: item.id,
@@ -34,6 +35,7 @@ async function ContentView({ articles, categories }: ContentViewProps) {
       author: item.details.author,
       category: category?.name,
       categorySlug: category?.slug,
+      colorIndex,
       readTimeMinutes: minutes,
       slug: item.slug ?? '',
     };

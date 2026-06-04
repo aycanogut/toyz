@@ -9,7 +9,7 @@ export interface SimilarArticleData {
   title: string;
   image: string;
   categoryName: string;
-  categoryId: string | number;
+  colorIndex: number;
   date: string;
   author: string;
   slug: string;
@@ -38,7 +38,7 @@ function AnimatedSimilarGrid({ articles }: AnimatedSimilarGridProps) {
             title={article.title}
             image={article.image}
             categoryName={article.categoryName}
-            categoryId={article.categoryId}
+            colorIndex={article.colorIndex}
             date={article.date}
             author={article.author}
             slug={article.slug}

@@ -14,6 +14,7 @@ export interface ArticleCardData {
   author: string;
   category?: string;
   categorySlug?: string;
+  colorIndex: number;
   readTimeMinutes?: number;
   slug: string;
 }
@@ -45,6 +46,7 @@ function AnimatedArticleList({ articles }: AnimatedArticleListProps) {
               author={article.author}
               category={article.category}
               categorySlug={article.categorySlug}
+              colorIndex={article.colorIndex}
               readTimeMinutes={article.readTimeMinutes}
               slug={article.slug}
             />
