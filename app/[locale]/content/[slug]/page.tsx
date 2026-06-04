@@ -8,6 +8,7 @@ import CategoryBadge from '@/components/CategoryBadge';
 import { routing } from '@/i18n/routing';
 import { Category, Media } from '@/payload-types';
 import getArticle from '@/services/article';
+import getCategories from '@/services/categories';
 import getRandomArticles from '@/services/randomArticles';
 import getAllArticleSlugs from '@/services/slugs';
 import extractHeadings from '@/utils/extractHeadings';
@@ -50,7 +51,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
   const t = await getTranslations('Content');
   const tMeta = await getTranslations('Meta');
 
-  const article = await getArticle(slug, locale);
+  const [article, categories, randomArticles] = await Promise.all([getArticle(slug, locale), getCategories(locale), getRandomArticles(locale, slug)]);
 
   if (!article) {
     return notFound();
@@ -60,8 +61,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
 
   const media = images as Media;
   const category = details.category as Category;
-
-  const randomArticles = await getRandomArticles(locale, slug);
+  const categoryColorIndex = categories.findIndex(color => color.id === category.id);
 
   const headings = extractHeadings(content as Parameters<typeof extractHeadings>[0]);
   const minutes = readTime(content as Parameters<typeof readTime>[0]);
@@ -79,7 +79,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
               <div className="flex flex-col gap-4 py-6">
                 <CategoryBadge
                   name={category.name}
-                  categoryId={category.id}
+                  colorIndex={categoryColorIndex}
                   className="tracking-eyebrow px-3 py-1.5"
                 />
 
@@ -162,7 +162,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
                   title: item.title,
                   image: itemMedia.url ?? '',
                   categoryName: itemCategory.name,
-                  categoryId: itemCategory.id,
+                  colorIndex: categories.findIndex(color => color.id === itemCategory.id),
                   date: formatDate(item.details.date, locale),
                   author: item.details.author,
                   slug: item.slug ?? '',

@@ -16,6 +16,7 @@ interface ContentCardProps {
   author: string;
   category?: string;
   categorySlug?: string;
+  colorIndex: number;
   readTimeMinutes?: number;
   slug: string;
   index: number;
@@ -23,7 +24,20 @@ interface ContentCardProps {
 
 const TILT_CLASSES = ['lg:-rotate-1', 'lg:rotate-md', 'lg:-rotate-sm'] as const;
 
-function ContentCard({ title, description, image, imageAlt, date, author, category, categorySlug, readTimeMinutes, slug, index }: ContentCardProps) {
+function ContentCard({
+  title,
+  description,
+  image,
+  imageAlt,
+  date,
+  author,
+  category,
+  categorySlug,
+  colorIndex,
+  readTimeMinutes,
+  slug,
+  index,
+}: ContentCardProps) {
   const t = useTranslations('Meta');
 
   const format = useFormatter();
@@ -79,7 +93,7 @@ function ContentCard({ title, description, image, imageAlt, date, author, catego
           >
             <CategoryBadge
               name={category}
-              categoryId={categorySlug ?? category}
+              colorIndex={colorIndex}
             />
           </button>
         )}
