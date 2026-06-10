@@ -227,20 +227,20 @@ function Gallery({ images, eventTitle, eventDate, eventLocation }: GalleryProps)
               </div>
             )}
 
-            {/* Credits — LEFT, flex-1 pushes right group to edge */}
-            <div className="flex min-w-0 flex-1 items-center gap-2 px-4 md:px-5">
+            {/* Credits — fills space below xl; content-sized at xl so it never collapses under the thumbnail strip */}
+            <div className="flex min-w-0 flex-1 items-center gap-2 px-4 md:px-5 xl:max-w-md xl:flex-none">
               <Icon
                 name="camera"
                 className="text-paper-muted size-4 shrink-0"
               />
               <span className="font-heading tracking-label text-paper-muted text-base whitespace-nowrap uppercase">{t('photo-credit')}</span>
-              {currentImage?.credits && <span className="font-heading text-title-light truncate text-base font-bold uppercase">· {currentImage.credits}</span>}
+              {currentImage?.credits && <span className="font-heading text-title-light min-w-0 truncate text-base font-bold uppercase">· {currentImage.credits}</span>}
             </div>
 
             {/* Thumbnails + keyboard hint — RIGHT */}
-            <div className="border-title-light/20 hidden shrink-0 items-stretch border-l xl:flex">
+            <div className="border-title-light/20 hidden min-w-0 flex-1 items-stretch border-l xl:flex">
               {sortedImages.length > 1 && (
-                <div className="flex items-center gap-1.5 overflow-x-auto px-4">
+                <div className="flex min-w-0 flex-1 items-center gap-1.5 overflow-x-auto px-4">
                   {sortedImages.map((image, index) => (
                     <button
                       key={image.id}
@@ -264,7 +264,7 @@ function Gallery({ images, eventTitle, eventDate, eventLocation }: GalleryProps)
                 </div>
               )}
 
-              <div className="border-title-light/20 hidden items-center border-l px-4 md:flex md:px-5">
+              <div className="border-title-light/20 hidden shrink-0 items-center border-l px-4 md:flex md:px-5">
                 <span className="font-heading tracking-label text-acid text-base uppercase">{t('keyboard-hint')}</span>
               </div>
             </div>
