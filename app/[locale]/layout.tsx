@@ -94,6 +94,7 @@ async function RootLayout(props: { children: ReactNode; params: Promise<{ locale
     <html
       lang={locale}
       className={cn(grotesque.variable, display.variable)}
+      data-scroll-behavior="smooth"
     >
       <body className="bg-background text-title-light font-fira antialiased">
         <NextIntlClientProvider>
