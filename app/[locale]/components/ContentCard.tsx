@@ -72,6 +72,7 @@ function ContentCard({
             alt={imageAlt ?? title}
             fill
             sizes="(min-width: 1024px) 460px, 100vw"
+            priority={index === 0}
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
