@@ -60,7 +60,6 @@ function HeaderMobile({ onSearchOpen }: HeaderMobileProps) {
             alt="TOYZ"
             width={36}
             height={36}
-            priority
             className="size-9 object-contain"
           />
           <span
