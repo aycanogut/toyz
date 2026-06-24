@@ -70,6 +70,7 @@ function HeaderDesktop({ onSearchOpen }: HeaderDesktopProps) {
               alt="TOYZ"
               width={52}
               height={52}
+              priority
               className="size-13 object-contain"
             />
             <span

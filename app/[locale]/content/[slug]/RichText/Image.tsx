@@ -12,7 +12,8 @@ function Image({ src, alt }: ImageProps) {
       alt={alt ?? ''}
       width={800}
       height={600}
-      className="mx-auto"
+      sizes="(min-width: 768px) 800px, 100vw"
+      className="mx-auto h-auto w-full max-w-200"
     />
   );
 }

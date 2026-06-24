@@ -78,8 +78,10 @@ function Slider({ slider }: SliderProps) {
                   src={media.url ?? ''}
                   alt={media.alt ?? ''}
                   fill
-                  className="absolute top-0 left-0 block size-full object-cover"
+                  sizes="100vw"
+                  priority={index === 0}
                   fetchPriority="high"
+                  className="absolute top-0 left-0 block size-full object-cover"
                 />
 
                 {isMouseDown && credits && (
@@ -103,8 +105,9 @@ function Slider({ slider }: SliderProps) {
           alt=""
           width={200}
           height={200}
+          priority
+          unoptimized
           className="pointer-events-none absolute inset-0 m-auto size-240 object-contain drop-shadow-lg"
-          fetchPriority="high"
         />
       </div>
     </section>
