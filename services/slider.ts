@@ -11,7 +11,7 @@ const getArticles = unstable_cache(
     });
   },
   ['slider'],
-  { revalidate: 86400 }
+  { revalidate: 86400, tags: ['slider'] }
 );
 
 export default getArticles;

@@ -18,7 +18,7 @@ const getEvents = unstable_cache(
     });
   },
   ['events'],
-  { revalidate: 3600 }
+  { revalidate: 3600, tags: ['events'] }
 );
 
 export default getEvents;
