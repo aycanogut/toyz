@@ -1,10 +1,15 @@
 import { GlobalConfig } from 'payload';
 
+import { revalidateSliderCache } from '../hooks/revalidateSliderCache';
+
 export const Slider: GlobalConfig = {
   slug: 'slider',
   // versions: {
   //   drafts: true,
   // },
+  hooks: {
+    afterChange: [revalidateSliderCache],
+  },
   fields: [
     {
       name: 'images',
