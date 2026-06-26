@@ -1,11 +1,19 @@
 import type { CollectionConfig } from 'payload';
 import slugField from '../fields/slug';
+import {
+  revalidateEventsCacheOnChange,
+  revalidateEventsCacheOnDelete,
+} from '../hooks/revalidateEventsCache';
 
 export const Events: CollectionConfig = {
   slug: 'events',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'createdAt'],
+  },
+  hooks: {
+    afterChange: [revalidateEventsCacheOnChange],
+    afterDelete: [revalidateEventsCacheOnDelete],
   },
   access: {
     read: ({ req }) => {
