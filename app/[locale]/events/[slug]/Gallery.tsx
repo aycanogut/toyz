@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
@@ -173,10 +173,14 @@ function Gallery({ images, eventTitle, eventDate, eventLocation }: GalleryProps)
               {sortedImages.map((image, index) => (
                 <div
                   key={image.id}
-                  className="relative flex size-full min-w-0 shrink-0 grow-0 items-center justify-center px-6 py-6"
+                  className="relative flex size-full min-w-0 shrink-0 grow-0 items-center justify-center px-4 py-2"
                 >
-                  {/* Layered border: acid furthest (most offset), blood middle, white image frame on top */}
-                  <div className="relative">
+                  {/* Layered border (acid, blood, white frame) hugging the photo. --gallery-ar passes
+                      the photo's aspect ratio to the `gallery-photo` utility, which handles sizing. */}
+                  <div
+                    className="relative"
+                    style={{ '--gallery-ar': (image.width ?? 3) / (image.height ?? 2) } as CSSProperties}
+                  >
                     <div
                       aria-hidden="true"
                       className="border-acid absolute inset-0 translate-x-3 translate-y-3 border-8"
@@ -191,7 +195,7 @@ function Gallery({ images, eventTitle, eventDate, eventLocation }: GalleryProps)
                         alt={image.alt ?? `Photo ${index + 1}`}
                         width={image.width ?? 1920}
                         height={image.height ?? 1080}
-                        className="max-h-gallery-sm md:max-h-gallery-md lg:max-h-gallery-lg block w-auto object-contain"
+                        className="gallery-photo block"
                         priority={index === selectedIndex}
                       />
                     </div>
@@ -234,7 +238,9 @@ function Gallery({ images, eventTitle, eventDate, eventLocation }: GalleryProps)
                 className="text-paper-muted size-4 shrink-0"
               />
               <span className="font-heading tracking-label text-paper-muted text-base whitespace-nowrap uppercase">{t('photo-credit')}</span>
-              {currentImage?.credits && <span className="font-heading text-title-light min-w-0 truncate text-base font-bold uppercase">· {currentImage.credits}</span>}
+              {currentImage?.credits && (
+                <span className="font-heading text-title-light min-w-0 truncate text-base font-bold uppercase">· {currentImage.credits}</span>
+              )}
             </div>
 
             {/* Thumbnails + keyboard hint — RIGHT */}

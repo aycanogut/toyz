@@ -170,18 +170,13 @@
   grid-template-columns: 1fr 28.75rem;
 }
 
-/* Dynamic viewport heights for gallery lightbox */
-/* top bar (3rem) + bottom bar (3.5rem) + slide py-6 (3rem) + layered border overflow buffer = ~11rem */
-@utility max-h-gallery-sm {
-  max-height: calc(100dvh - 11rem);
-}
-
-@utility max-h-gallery-md {
-  max-height: calc(100dvh - 11rem);
-}
-
-@utility max-h-gallery-lg {
-  max-height: calc(100dvh - 11rem);
+/* Gallery lightbox photo. --gallery-ar is the photo's aspect ratio (passed from the component).
+   A definite width scales small photos up; aspect-ratio derives the height so it can't distort.
+   Viewport-relative caps scale with the screen; 100dvh - 9.5rem guards short screens. */
+@utility gallery-photo {
+  aspect-ratio: var(--gallery-ar);
+  width: min(88vw, calc(min(72dvh, 100dvh - 9.5rem) * var(--gallery-ar)));
+  height: auto;
 }
 
 html {
