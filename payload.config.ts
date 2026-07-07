@@ -67,7 +67,9 @@ export default buildConfig({
     connectOptions: {
       serverSelectionTimeoutMS: 10000,
       socketTimeoutMS: 45000,
-      maxPoolSize: 10,
+      maxPoolSize: 3,
+      minPoolSize: 0,
+      maxIdleTimeMS: 10000,
     },
   }),
   plugins: [
