@@ -184,6 +184,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Lock page scroll (desktop + mobile) while a full-screen loader is mounted */
+html:has([data-scroll-lock]),
+html:has([data-scroll-lock]) body {
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
 body {
   --sb-track-color: var(--color-background);
   --sb-thumb-color: var(--color-border-dark);

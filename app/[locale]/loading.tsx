@@ -2,7 +2,10 @@ import Image from 'next/image';
 
 export default function Loading() {
   return (
-    <div className="bg-background text-title-light fixed inset-0 z-9999 flex flex-col items-center justify-center overflow-hidden">
+    <div
+      data-scroll-lock
+      className="bg-background text-title-light fixed inset-0 z-9999 flex touch-none flex-col items-center justify-center overflow-hidden overscroll-none"
+    >
       <div className="loader-overlay pointer-events-none absolute inset-0" />
 
       <div className="relative flex flex-col items-center gap-5">
