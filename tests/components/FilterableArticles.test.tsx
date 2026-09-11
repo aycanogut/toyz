@@ -55,6 +55,7 @@ function makeArticle(overrides: Partial<ArticleCardData>): ArticleCardData {
     date: '2026-01-01',
     author: 'Author',
     slug: overrides.slug ?? 'untitled',
+    colorIndex: overrides.colorIndex ?? 0,
     ...overrides,
   };
 }
