@@ -17,10 +17,10 @@
 - `app/[locale]/` — Public site (App Router + `next-intl`). Locales: `en`, `tr`.
 - `app/[locale]/components/` — Page-level components consumed by `page.tsx` files.
 - `app/(payload)/` — Payload CMS code (collections, globals, blocks, fields, jobs). Admin UI mounted at `/toyz-panel`.
-- `app/actions/` — Server actions (contact form, subscribe, etc.).
+- Server actions live next to their feature (`app/[locale]/contact/mailAction`, `app/[locale]/footer/subscribeAction`); `app/actions/` only holds `searchArticles.ts`.
 - `layout/Header/`, `layout/Footer/` — Site chrome (desktop + mobile variants live inside).
-- `components/` — Reusable UI primitives (`Badge`, `Button`, `FilterPill`, `Icon`, `Input`, `Popover`).
+- `components/` — Reusable UI primitives (`Badge`, `Breadcrumbs`, `Button`, `CategoryBadge`, `FilterPill`, `Icon`, `Input`, `Popover`).
 - `services/` — Server-side data fetchers backed by the Payload Local API (`utils/payloadClient.ts`).
-- `utils/` — Shared utilities (`cn`, `formatDate`, `readTime`, `extractLexicalText`, `verifyReCaptcha`, `payloadClient`).
+- `utils/` — Shared utilities (`cn`, `categoryColor`, `extractHeadings`, `extractLexicalText`, `formatDate`, `payloadClient`, `readTime`, `verifyReCaptcha`).
 - `theme/` — Design tokens (`globals.css`, `animations.css`, `fonts.ts`, `icons.ts`).
 - `toyzConfig.ts` — Centralized env access. Import from here instead of reading `process.env` directly.

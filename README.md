@@ -4,7 +4,7 @@ A webzine platform about graffiti, street art, underground music, skateboarding,
 
 ## Tech Stack
 
-- **Next.js 15** - React framework
+- **Next.js 16** - React framework
 - **Payload CMS** - Headless CMS
 - **MongoDB** - Database
 - **TypeScript** - Type safety
@@ -18,7 +18,7 @@ A webzine platform about graffiti, street art, underground music, skateboarding,
 ### Prerequisites
 
 - Node.js 18.x or higher
-- pnpm 10.21.0 or higher
+- pnpm 12.3.4 or higher
 - MongoDB database
 - Cloudflare R2 Bucket account
 - Resend API key
@@ -55,12 +55,14 @@ R2_BUCKET_NAME=your-r2-bucket-name
 R2_ACCESS_KEY_ID=your-acces-key-id
 R2_SECRET_ACCESS_KEY=your-secret-access-okey
 R2_ENDPOINT=your-endpoint
+NEXT_PUBLIC_INSTAGRAM_URL=https://instagram.com/your-account
+CRON_SECRET=your-cron-secret
 ```
 
 4. Generate environment variable types:
 
 ```bash
-pnpm run generateEnvKeyTypes
+pnpm generate:env-key-types
 ```
 
 5. Run the development server:
@@ -70,7 +72,7 @@ pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the app.  
-Admin panel: [http://localhost:3000/admin](http://localhost:3000/toyz-panel)
+Admin panel: [http://localhost:3000/toyz-panel](http://localhost:3000/toyz-panel)
 
 ## Available Scripts
 
@@ -78,19 +80,30 @@ Admin panel: [http://localhost:3000/admin](http://localhost:3000/toyz-panel)
 - `pnpm build` - Build for production
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
-- `check:deps` - Check for outdated dependencies
-- `update:deps` - Update dependencies
-- `generate:env-key-types` - Generate TypeScript types for environment variables
+- `pnpm deps:check` - Check for outdated dependencies
+- `pnpm deps:update` - Update dependencies
+- `pnpm generate:env-key-types` - Generate TypeScript types for environment variables
 
 ## Project Structure
 
 ```
 app/
-├── [locale]/     # Localized app routes
-└── (payload)/          # Payload CMS routes
-components/             # Shared UI components
-locales/                # Translation files
+├── [locale]/           # Localized public site routes
+├── (payload)/          # Payload CMS: collections, globals, jobs, admin (/toyz-panel)
+└── actions/            # Shared server actions (search)
+components/             # Shared UI primitives
+layout/                 # Header & Footer
+services/               # Server-side data fetchers (Payload Local API + cache)
+emails/                 # React Email templates (newsletter)
+utils/                  # Shared helpers
+theme/                  # Design tokens, fonts, icons
+locales/                # Translation files (en, tr)
+tests/                  # Vitest (unit, integration, components) & Playwright (e2e)
 ```
+
+## Newsletter
+
+When an article is published with **Send newsletter** checked, an email to all active subscribers is scheduled for ~30 minutes later (unchecking it before then cancels the send). Background jobs are run by an external cron that calls Payload's jobs endpoint with `Authorization: Bearer $CRON_SECRET`. Emails are only sent in production.
 
 ## 🧪 Testing
 
