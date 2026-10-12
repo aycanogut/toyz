@@ -1,7 +1,9 @@
+import { Messages } from 'next-intl';
+
 interface SocialLinkProps {
   name: IconLabelProps;
   hoverColor: string;
-  translationKey: string;
+  translationKey: keyof Messages['Content'];
   getUrl: (url: string, title: string) => string;
 }
 

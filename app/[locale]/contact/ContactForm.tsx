@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
+import { Messages, useTranslations } from 'next-intl';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import z from 'zod';
@@ -20,6 +20,8 @@ export const ContactSchema = z.object({
 });
 
 export type ContactFormSchema = z.infer<typeof ContactSchema>;
+
+type ContactMessageKey = keyof Messages['Contact'];
 
 function ContactForm() {
   const { getReCaptchaToken } = useReCaptcha();
@@ -89,7 +91,7 @@ function ContactForm() {
             disabled={isSubmitting}
             className="bg-background border-border-dark text-title-light font-fira focus-visible:border-acid w-full border-2 p-3 text-base focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-40"
           />
-          {errors.name?.message && <span className="font-fira text-blood text-base">{t(errors.name.message)}</span>}
+          {errors.name?.message && <span className="font-fira text-blood text-base">{t(errors.name.message as ContactMessageKey)}</span>}
         </div>
 
         <div className="flex flex-col gap-1.5">
@@ -106,7 +108,7 @@ function ContactForm() {
             disabled={isSubmitting}
             className="bg-background border-border-dark text-title-light font-fira focus-visible:border-acid w-full border-2 p-3 text-base focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-40"
           />
-          {errors.email?.message && <span className="font-fira text-blood text-base">{t(errors.email.message)}</span>}
+          {errors.email?.message && <span className="font-fira text-blood text-base">{t(errors.email.message as ContactMessageKey)}</span>}
         </div>
 
         <div className="flex flex-col gap-1.5">
@@ -122,7 +124,7 @@ function ContactForm() {
             disabled={isSubmitting}
             className="bg-background border-border-dark text-title-light font-fira focus-visible:border-acid w-full border-2 p-3 text-base focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-40"
           />
-          {errors.subject?.message && <span className="font-fira text-blood text-base">{t(errors.subject.message)}</span>}
+          {errors.subject?.message && <span className="font-fira text-blood text-base">{t(errors.subject.message as ContactMessageKey)}</span>}
         </div>
 
         <div className="flex flex-col gap-1.5">
@@ -139,7 +141,7 @@ function ContactForm() {
             disabled={isSubmitting}
             className="bg-background border-border-dark text-title-light resize-vertical font-fira focus-visible:border-acid w-full border-2 p-3 text-base focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-40"
           />
-          {errors.message?.message && <span className="font-fira text-blood text-base">{t(errors.message.message)}</span>}
+          {errors.message?.message && <span className="font-fira text-blood text-base">{t(errors.message.message as ContactMessageKey)}</span>}
         </div>
 
         <Button
