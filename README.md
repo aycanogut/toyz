@@ -111,11 +111,13 @@ When an article is published with **Send newsletter** checked, an email to all a
 This project uses a multi-layered testing strategy:
 
 ### Test Types
+
 - **Unit Tests (Vitest):** Logic and utility functions (`tests/unit`).
 - **Integration Tests (Vitest):** Server Actions and Data Services (`tests/integration`).
 - **E2E Tests (Playwright):** Full user journeys and UI flows (`tests/e2e`).
 
 ### Commands
+
 - `pnpm test`: Runs all Vitest tests.
 - `pnpm test:watch`: Runs Vitest in watch mode for development.
 - `pnpm test:ui`: Opens Vitest UI for a visual test dashboard.

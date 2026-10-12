@@ -1,9 +1,6 @@
 import type { CollectionConfig } from 'payload';
 
-import {
-  revalidateArticleCacheOnChange,
-  revalidateArticleCacheOnDelete,
-} from '../hooks/revalidateArticleCache';
+import { revalidateArticleCacheOnChange, revalidateArticleCacheOnDelete } from '../hooks/revalidateArticleCache';
 import slugField from '../fields/slug';
 import { scheduleNewsletterDispatch } from '../utils/scheduleNewsletterDispatch';
 
@@ -105,10 +102,7 @@ export const Articles: CollectionConfig = {
             const { docs } = await req.payload.find({
               collection: 'newsletter-dispatches',
               where: {
-                and: [
-                  { article: { equals: id } },
-                  { status: { equals: 'sent' } },
-                ],
+                and: [{ article: { equals: id } }, { status: { equals: 'sent' } }],
               },
               limit: 1,
             });

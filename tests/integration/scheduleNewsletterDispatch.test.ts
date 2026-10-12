@@ -114,9 +114,7 @@ describe('scheduleNewsletterDispatch', () => {
     });
     payload.create.mockRejectedValue(dupErr);
 
-    await expect(
-      callHook({ doc: buildDoc(), operation: 'update', payload })
-    ).resolves.toBeDefined();
+    await expect(callHook({ doc: buildDoc(), operation: 'update', payload })).resolves.toBeDefined();
 
     expect(payload.logger.warn).toHaveBeenCalled();
     expect(payload.logger.error).not.toHaveBeenCalled();
@@ -127,9 +125,7 @@ describe('scheduleNewsletterDispatch', () => {
     const payload = buildPayload();
     payload.create.mockRejectedValue(new Error('boom'));
 
-    await expect(
-      callHook({ doc: buildDoc(), operation: 'update', payload })
-    ).resolves.toBeDefined();
+    await expect(callHook({ doc: buildDoc(), operation: 'update', payload })).resolves.toBeDefined();
 
     expect(payload.logger.error).toHaveBeenCalled();
     expect(payload.jobs.queue).not.toHaveBeenCalled();

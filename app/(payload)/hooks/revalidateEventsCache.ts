@@ -1,9 +1,5 @@
 import { revalidateTag } from 'next/cache';
-import type {
-  CollectionAfterChangeHook,
-  CollectionAfterDeleteHook,
-  GlobalAfterChangeHook,
-} from 'payload';
+import type { CollectionAfterChangeHook, CollectionAfterDeleteHook, GlobalAfterChangeHook } from 'payload';
 
 import type { Event } from '@/payload-types';
 

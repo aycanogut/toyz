@@ -32,11 +32,7 @@ const isDuplicateKeyError = (error: unknown): boolean => {
   return message.includes('E11000') || message.includes('duplicate key');
 };
 
-export const scheduleNewsletterDispatch: CollectionAfterChangeHook<Article> = async ({
-  doc,
-  operation,
-  req: { payload },
-}) => {
+export const scheduleNewsletterDispatch: CollectionAfterChangeHook<Article> = async ({ doc, operation, req: { payload } }) => {
   try {
     // Newsletter sending is gated behind production to keep dev/staging from
     // emailing real subscribers.
@@ -75,18 +71,12 @@ export const scheduleNewsletterDispatch: CollectionAfterChangeHook<Article> = as
           waitUntil: scheduledFor,
         });
 
-        payload.logger.info(
-          `📬 Newsletter dispatch queued for article "${doc.title}" (dispatch ${dispatch.id}, scheduledFor ${scheduledFor.toISOString()})`
-        );
+        payload.logger.info(`📬 Newsletter dispatch queued for article "${doc.title}" (dispatch ${dispatch.id}, scheduledFor ${scheduledFor.toISOString()})`);
       } catch (error) {
         if (isDuplicateKeyError(error)) {
-          payload.logger.warn(
-            `⏭️ Newsletter dispatch already exists for article ${doc.id} — skipping (this is expected on re-edits).`
-          );
+          payload.logger.warn(`⏭️ Newsletter dispatch already exists for article ${doc.id} — skipping (this is expected on re-edits).`);
         } else {
-          payload.logger.error(
-            `❌ Failed to create newsletter dispatch for article ${doc.id}: ${error instanceof Error ? error.message : String(error)}`
-          );
+          payload.logger.error(`❌ Failed to create newsletter dispatch for article ${doc.id}: ${error instanceof Error ? error.message : String(error)}`);
         }
       }
 
@@ -98,10 +88,7 @@ export const scheduleNewsletterDispatch: CollectionAfterChangeHook<Article> = as
         const { docs } = await payload.find({
           collection: 'newsletter-dispatches',
           where: {
-            and: [
-              { article: { equals: doc.id } },
-              { status: { equals: 'queued' } },
-            ],
+            and: [{ article: { equals: doc.id } }, { status: { equals: 'queued' } }],
           },
           limit: 1,
         });
@@ -112,20 +99,14 @@ export const scheduleNewsletterDispatch: CollectionAfterChangeHook<Article> = as
             id: docs[0].id,
             data: { status: 'disabled' },
           });
-          payload.logger.info(
-            `🛑 Newsletter dispatch disabled for article ${doc.id} (user toggled off sendNewsletter).`
-          );
+          payload.logger.info(`🛑 Newsletter dispatch disabled for article ${doc.id} (user toggled off sendNewsletter).`);
         }
       } catch (error) {
-        payload.logger.error(
-          `❌ Failed to disable newsletter dispatch for article ${doc.id}: ${error instanceof Error ? error.message : String(error)}`
-        );
+        payload.logger.error(`❌ Failed to disable newsletter dispatch for article ${doc.id}: ${error instanceof Error ? error.message : String(error)}`);
       }
     }
   } catch (error) {
-    payload.logger.error(
-      `❌ Unexpected error in scheduleNewsletterDispatch (article ${doc.id}): ${error instanceof Error ? error.message : String(error)}`
-    );
+    payload.logger.error(`❌ Unexpected error in scheduleNewsletterDispatch (article ${doc.id}): ${error instanceof Error ? error.message : String(error)}`);
   }
 
   return doc;

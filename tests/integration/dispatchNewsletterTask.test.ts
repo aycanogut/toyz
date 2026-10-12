@@ -172,9 +172,7 @@ describe('dispatchNewsletterTask', () => {
         { id: 'sub-2', email: 'b@test', preferredLocale: 'en' },
       ],
     });
-    payload.sendEmail
-      .mockResolvedValueOnce({} as never)
-      .mockRejectedValueOnce(new Error('SMTP down'));
+    payload.sendEmail.mockResolvedValueOnce({} as never).mockRejectedValueOnce(new Error('SMTP down'));
 
     const dispatch = {
       id: 'd-1',

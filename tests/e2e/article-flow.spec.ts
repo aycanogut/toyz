@@ -11,10 +11,7 @@ test.describe('Article Navigation Flow', () => {
     const detailLink = firstArticle.locator('a[href*="/content/"]').first();
     await expect(detailLink).toBeVisible({ timeout: 5000 });
 
-    await Promise.all([
-      page.waitForURL(/.*\/content\/.*/, { waitUntil: 'domcontentloaded', timeout: 30000 }),
-      detailLink.click(),
-    ]);
+    await Promise.all([page.waitForURL(/.*\/content\/.*/, { waitUntil: 'domcontentloaded', timeout: 30000 }), detailLink.click()]);
 
     const detailTitle = page.locator('h1');
     await expect(detailTitle).toBeVisible();

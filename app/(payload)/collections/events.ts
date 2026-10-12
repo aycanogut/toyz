@@ -1,9 +1,6 @@
 import type { CollectionConfig } from 'payload';
 import slugField from '../fields/slug';
-import {
-  revalidateEventsCacheOnChange,
-  revalidateEventsCacheOnDelete,
-} from '../hooks/revalidateEventsCache';
+import { revalidateEventsCacheOnChange, revalidateEventsCacheOnDelete } from '../hooks/revalidateEventsCache';
 
 export const Events: CollectionConfig = {
   slug: 'events',
@@ -64,7 +61,7 @@ export const Events: CollectionConfig = {
       type: 'join',
       collection: 'event-media',
       on: 'event',
-      defaultLimit: 50
+      defaultLimit: 50,
     },
     slugField('title'),
   ],
