@@ -1,6 +1,6 @@
 import { GlobalConfig } from 'payload';
 
-import { revalidateSliderCache } from '../hooks/revalidateSliderCache';
+import { revalidateGlobalCache } from '../hooks/revalidateGlobalCache';
 
 export const Slider: GlobalConfig = {
   slug: 'slider',
@@ -8,7 +8,7 @@ export const Slider: GlobalConfig = {
   //   drafts: true,
   // },
   hooks: {
-    afterChange: [revalidateSliderCache],
+    afterChange: [revalidateGlobalCache('slider')],
   },
   fields: [
     {

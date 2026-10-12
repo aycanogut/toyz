@@ -1,7 +1,12 @@
 import { GlobalConfig } from 'payload';
 
+import { revalidateGlobalCache } from '../hooks/revalidateGlobalCache';
+
 export const Home: GlobalConfig = {
   slug: 'home',
+  hooks: {
+    afterChange: [revalidateGlobalCache('home')],
+  },
   fields: [
     {
       name: 'title',

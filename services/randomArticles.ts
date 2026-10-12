@@ -24,7 +24,7 @@ const getRandomArticles = unstable_cache(
       .map(({ article }) => article);
   },
   ['random-articles'],
-  { revalidate: 3600 }
+  { revalidate: 3600, tags: ['articles'] }
 );
 
 export default getRandomArticles;

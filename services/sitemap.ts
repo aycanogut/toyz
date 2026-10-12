@@ -8,6 +8,11 @@ const getSitemap = unstable_cache(
 
     const result = await payload.find({
       collection: 'articles',
+      where: {
+        _status: {
+          equals: 'published',
+        },
+      },
       pagination: false,
       limit: 10000,
       select: {

@@ -38,11 +38,16 @@ describe('getSitemap', () => {
     expect(result[0].slug).toBe('article-1');
   });
 
-  it('should use correct query parameters', async () => {
+  it('should query only published articles', async () => {
     await getSitemap();
 
     expect(mockPayloadFind).toHaveBeenCalledWith({
       collection: 'articles',
+      where: {
+        _status: {
+          equals: 'published',
+        },
+      },
       pagination: false,
       limit: 10000,
       select: {
