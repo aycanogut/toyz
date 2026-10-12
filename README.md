@@ -18,7 +18,7 @@ A webzine platform about graffiti, street art, underground music, skateboarding,
 ### Prerequisites
 
 - Node.js 18.x or higher
-- pnpm 12.3.4 or higher
+- pnpm 11.19.0 or higher
 - MongoDB database
 - Cloudflare R2 Bucket account
 - Resend API key

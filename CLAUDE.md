@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-Package manager is **pnpm** (12.3.4). Use `pnpm` for all installs/scripts.
+Package manager is **pnpm** (11.19.0). Use `pnpm` for all installs/scripts.
 
 - `pnpm dev` — Next.js dev server with Turbopack
 - `pnpm build` / `pnpm start` — production build / serve
