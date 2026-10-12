@@ -2,19 +2,14 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import prettierConfig from 'eslint-config-prettier';
-import prettier from 'eslint-plugin-prettier';
 
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   prettierConfig,
   {
-    plugins: {
-      prettier,
-    },
     rules: {
       camelcase: 'off',
-      'prettier/prettier': 'error',
       'import/prefer-default-export': 'off',
       'react/jsx-filename-extension': 'off',
       'react/jsx-props-no-spreading': 'off',
@@ -89,7 +84,7 @@ const eslintConfig = defineConfig([
       },
     },
   },
-  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'app/(payload)/**/*']),
+  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts', 'app/(payload)/**/*', 'playwright-report/**', 'test-results/**', 'backups/**']),
 ]);
 
 export default eslintConfig;

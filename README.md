@@ -80,6 +80,7 @@ Admin panel: [http://localhost:3000/toyz-panel](http://localhost:3000/toyz-panel
 - `pnpm build` - Build for production
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
+- `pnpm format` / `pnpm format:check` - Format with Prettier / check formatting
 - `pnpm deps:check` - Check for outdated dependencies
 - `pnpm deps:update` - Update dependencies
 - `pnpm generate:env-key-types` - Generate TypeScript types for environment variables
