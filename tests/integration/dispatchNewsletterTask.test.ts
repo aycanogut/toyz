@@ -1,3 +1,4 @@
+import { render } from '@react-email/render';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('@react-email/render', () => ({
@@ -27,6 +28,7 @@ interface UpdateCall {
     failureCount?: number;
     recipientCount?: number;
     sentSubscribers?: string[];
+    lastError?: string;
   };
 }
 
@@ -70,16 +72,23 @@ const runTask = (payload: PayloadStub, dispatchId: string, dispatch: unknown) =>
     return original(args as never);
   }) as never;
 
-  return dispatchNewsletterTask.handler({
+  const result = dispatchNewsletterTask.handler({
     input: { dispatchId },
     req: { payload: payload as never },
   });
+
+  // Mark the rejection as handled while timers run; callers still receive it.
+  result.catch(() => {});
+
+  return vi.runAllTimersAsync().then(() => result);
 };
+
+const dispatchUpdates = (payload: PayloadStub): UpdateCall[] =>
+  (payload.update.mock.calls as unknown[][]).map(call => call[0] as UpdateCall).filter(call => call.collection === 'newsletter-dispatches');
 
 describe('dispatchNewsletterTask', () => {
   beforeEach(() => {
-    // make sleeps instant so tests don't wait 600ms per email
-    vi.useFakeTimers({ shouldAdvanceTime: true });
+    vi.useFakeTimers();
   });
 
   afterEach(() => {
@@ -256,5 +265,142 @@ describe('dispatchNewsletterTask', () => {
     const finalUpdate = lastUpdateCall(payload);
     expect(finalUpdate.data.status).toBe('sent');
     expect(finalUpdate.data.recipientCount).toBe(0);
+  });
+
+  it('persists each recipient right after sending so a crash mid-run does not resend', async () => {
+    const payload = buildPayload();
+    payload.find.mockResolvedValue({
+      docs: [
+        { id: 'sub-1', email: 'a@test', preferredLocale: 'en' },
+        { id: 'sub-2', email: 'b@test', preferredLocale: 'en' },
+      ],
+    });
+    vi.mocked(render).mockResolvedValueOnce('<html>email</html>').mockRejectedValueOnce(new Error('render crashed'));
+
+    const dispatch = { id: 'd-1', article: 'article-1', status: 'queued', sentSubscribers: [] };
+
+    await expect(runTask(payload, 'd-1', dispatch)).rejects.toThrow('render crashed');
+
+    expect(payload.sendEmail).toHaveBeenCalledTimes(1);
+    const progress = dispatchUpdates(payload).find(call => call.data.sentSubscribers);
+    expect(progress?.data).toEqual({ successCount: 1, sentSubscribers: ['sub-1'] });
+  });
+
+  it('retries once after a 429 and counts the retry success', async () => {
+    const payload = buildPayload();
+    payload.find.mockResolvedValue({
+      docs: [{ id: 'sub-1', email: 'a@test', preferredLocale: 'en' }],
+    });
+    payload.sendEmail.mockRejectedValueOnce(new Error('429 Too Many Requests')).mockResolvedValueOnce({} as never);
+
+    const dispatch = { id: 'd-1', article: 'article-1', status: 'queued', sentSubscribers: [] };
+
+    await runTask(payload, 'd-1', dispatch);
+
+    expect(payload.sendEmail).toHaveBeenCalledTimes(2);
+    const finalUpdate = lastUpdateCall(payload);
+    expect(finalUpdate.data).toMatchObject({ status: 'sent', successCount: 1, failureCount: 0, sentSubscribers: ['sub-1'] });
+  });
+
+  it('counts a failure when the 429 retry also fails', async () => {
+    const payload = buildPayload();
+    payload.find.mockResolvedValue({
+      docs: [{ id: 'sub-1', email: 'a@test', preferredLocale: 'en' }],
+    });
+    payload.sendEmail.mockRejectedValueOnce(new Error('429 Too Many Requests')).mockRejectedValueOnce(new Error('429 again'));
+
+    const dispatch = { id: 'd-1', article: 'article-1', status: 'queued', sentSubscribers: [] };
+
+    await runTask(payload, 'd-1', dispatch);
+
+    expect(payload.sendEmail).toHaveBeenCalledTimes(2);
+    const finalUpdate = lastUpdateCall(payload);
+    expect(finalUpdate.data).toMatchObject({ status: 'failed', successCount: 0, failureCount: 1, lastError: '429 again' });
+  });
+
+  it('does not retry non-429 errors', async () => {
+    const payload = buildPayload();
+    payload.find.mockResolvedValue({
+      docs: [{ id: 'sub-1', email: 'a@test', preferredLocale: 'en' }],
+    });
+    payload.sendEmail.mockRejectedValueOnce(new Error('SMTP down'));
+
+    const dispatch = { id: 'd-1', article: 'article-1', status: 'queued', sentSubscribers: [] };
+
+    await runTask(payload, 'd-1', dispatch);
+
+    expect(payload.sendEmail).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps earlier recipients when the article is unpublished mid-run', async () => {
+    const payload = buildPayload();
+    payload.find.mockResolvedValue({
+      docs: [
+        { id: 'sub-1', email: 'a@test', preferredLocale: 'en' },
+        { id: 'sub-2', email: 'b@test', preferredLocale: 'en' },
+      ],
+    });
+    payload.sendEmail.mockImplementationOnce(async () => {
+      (payload._articles['article-1'] as { _status: string })._status = 'draft';
+      return {};
+    });
+
+    const dispatch = { id: 'd-1', article: 'article-1', status: 'queued', sentSubscribers: [] };
+
+    await runTask(payload, 'd-1', dispatch);
+
+    expect(payload.sendEmail).toHaveBeenCalledTimes(1);
+    const finalUpdate = lastUpdateCall(payload);
+    expect(finalUpdate.data).toMatchObject({ status: 'disabled', successCount: 1, sentSubscribers: ['sub-1'] });
+  });
+
+  it('counts failures per run so retried subscribers are not counted twice', async () => {
+    const payload = buildPayload();
+    payload.find.mockResolvedValue({
+      docs: [
+        { id: 'sub-1', email: 'a@test', preferredLocale: 'en' },
+        { id: 'sub-2', email: 'b@test', preferredLocale: 'en' },
+      ],
+    });
+    payload.sendEmail.mockRejectedValue(new Error('SMTP down'));
+
+    const dispatch = {
+      id: 'd-1',
+      article: 'article-1',
+      status: 'sending',
+      sentSubscribers: ['sub-1'],
+      successCount: 1,
+      failureCount: 1,
+    };
+
+    await runTask(payload, 'd-1', dispatch);
+
+    const finalUpdate = lastUpdateCall(payload);
+    expect(finalUpdate.data).toMatchObject({ status: 'sent', successCount: 1, failureCount: 1 });
+  });
+
+  it('marks dispatch failed when every send fails, even with failures carried over from a previous run', async () => {
+    const payload = buildPayload();
+    payload.find.mockResolvedValue({
+      docs: [
+        { id: 'sub-1', email: 'a@test', preferredLocale: 'en' },
+        { id: 'sub-2', email: 'b@test', preferredLocale: 'en' },
+      ],
+    });
+    payload.sendEmail.mockRejectedValue(new Error('SMTP down'));
+
+    const dispatch = {
+      id: 'd-1',
+      article: 'article-1',
+      status: 'sending',
+      sentSubscribers: [],
+      successCount: 0,
+      failureCount: 2,
+    };
+
+    await runTask(payload, 'd-1', dispatch);
+
+    const finalUpdate = lastUpdateCall(payload);
+    expect(finalUpdate.data).toMatchObject({ status: 'failed', successCount: 0, failureCount: 2 });
   });
 });
