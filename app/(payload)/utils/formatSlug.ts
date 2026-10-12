@@ -1,15 +1,17 @@
 /**
- * Returns a Payload CMS FieldHook that automatically formats a slug based on a given field.
+ * Returns a Payload CMS FieldHook that formats the slug field.
  *
- * This hook formats the `value` of the slug field by:
- * - Replacing spaces with hyphens (`-`)
- * - Removing non-alphanumeric characters (except hyphens)
- * - Converting the string to lowercase
+ * A slug typed by an editor is kept (and normalized). When the slug is empty,
+ * it is generated from the `fallback` field (e.g. `title`) in whichever locale
+ * is being saved. The slug field is not localized, so one slug serves all locales.
  *
- * During the `create` or `update` operation, if the slug `value` is not manually provided,
- * it falls back to another field (e.g., `title`) from the incoming `data` or the original document.
+ * Formatting:
+ * - Turkish dotless `ı` becomes `i`; other accents are stripped (`ç` → `c`, `ş` → `s`)
+ * - Whitespace becomes a single hyphen; other non-alphanumeric characters are removed
+ * - Repeated hyphens are collapsed and leading/trailing hyphens trimmed
+ * - Lowercased
  *
- * @param {string} fallback - The name of the field to fallback to if the slug value is not present.
+ * @param {string} fallback - The field to generate the slug from when none is provided.
  * @returns {FieldHook} A function to be used in Payload CMS field hooks like `beforeChange`.
  *
  * @example
@@ -25,25 +27,38 @@
  */
 import type { FieldHook } from 'payload';
 
+// `ı` has no decomposed form, so NFKD alone would drop it instead of mapping it to `i`.
 const normalizeText = (text: string): string => {
-  return text.normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+  return text
+    .replace(/ı/g, 'i')
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '');
 };
 
 const format = (val: string): string =>
   normalizeText(val)
-    .replace(/ /g, '-')
-    .replace(/[^\w\-]+/g, '')
-    .toLowerCase();
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w-]+/g, '')
+    .replace(/-{2,}/g, '-')
+    .replace(/^-|-$/g, '');
 
 const formatSlug =
   (fallback: string): FieldHook =>
-  ({ data, operation, originalDoc, value, req }) => {
-    if ((operation === 'create' || operation === 'update') && req.locale === 'en') {
-      const fallbackData = data?.[fallback] || originalDoc?.[fallback];
+  ({ data, operation, originalDoc, value }) => {
+    if (operation !== 'create' && operation !== 'update') {
+      return value;
+    }
 
-      if (fallbackData && typeof fallbackData === 'string') {
-        return format(fallbackData);
-      }
+    if (typeof value === 'string' && value.trim()) {
+      return format(value);
+    }
+
+    const fallbackData = data?.[fallback] || originalDoc?.[fallback];
+
+    if (fallbackData && typeof fallbackData === 'string') {
+      return format(fallbackData);
     }
 
     return value;
