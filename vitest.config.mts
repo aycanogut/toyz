@@ -9,11 +9,27 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 export default defineConfig({
   plugins: [react()],
   test: {
-    environment: 'happy-dom',
-    include: ['**/tests/**/*.test.{ts,tsx}'],
     exclude: ['**/node_modules/**'],
     globals: true,
     setupFiles: ['./tests/setup.ts'],
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: 'node',
+          environment: 'node',
+          include: ['tests/unit/**/*.test.ts', 'tests/integration/**/*.test.ts'],
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'dom',
+          environment: 'happy-dom',
+          include: ['tests/components/**/*.test.tsx'],
+        },
+      },
+    ],
   },
   resolve: {
     alias: {

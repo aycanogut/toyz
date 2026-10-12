@@ -2,10 +2,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { scheduleNewsletterDispatch } from '@/app/(payload)/utils/scheduleNewsletterDispatch';
 
-const setNodeEnv = (value: string | undefined) => {
-  (process.env as Record<string, string | undefined>).NODE_ENV = value;
-};
-
 const buildPayload = () => ({
   logger: {
     info: vi.fn(),
@@ -49,19 +45,18 @@ const buildDoc = (overrides: Record<string, unknown> = {}) => ({
 });
 
 describe('scheduleNewsletterDispatch', () => {
-  const originalEnv = process.env.NODE_ENV;
-
   beforeEach(() => {
-    setNodeEnv('production');
+    vi.stubEnv('NODE_ENV', 'production');
   });
 
   afterEach(() => {
-    setNodeEnv(originalEnv);
+    vi.unstubAllEnvs();
+    vi.useRealTimers();
     vi.restoreAllMocks();
   });
 
   it('is a no-op outside production', async () => {
-    setNodeEnv('development');
+    vi.stubEnv('NODE_ENV', 'development');
     const payload = buildPayload();
 
     await callHook({ doc: buildDoc(), operation: 'update', payload });
@@ -87,45 +82,53 @@ describe('scheduleNewsletterDispatch', () => {
     expect(payload.find).not.toHaveBeenCalled();
   });
 
-  it('creates dispatch + queues job when published with sendNewsletter true', async () => {
+  it('creates dispatch + queues job 30 minutes out when published with sendNewsletter true', async () => {
+    const now = new Date('2026-01-01T12:00:00.000Z');
+    const sendAt = new Date('2026-01-01T12:30:00.000Z');
+    vi.useFakeTimers();
+    vi.setSystemTime(now);
     const payload = buildPayload();
     payload.create.mockResolvedValue({ id: 'dispatch-1' });
 
     await callHook({ doc: buildDoc(), operation: 'create', payload });
 
-    expect(payload.create).toHaveBeenCalledOnce();
-    const createCall = payload.create.mock.calls[0][0];
-    expect(createCall.collection).toBe('newsletter-dispatches');
-    expect(createCall.data.article).toBe('article-1');
-    expect(createCall.data.status).toBe('queued');
-    expect(typeof createCall.data.scheduledFor).toBe('string');
-
-    expect(payload.jobs.queue).toHaveBeenCalledOnce();
-    const queueCall = payload.jobs.queue.mock.calls[0][0];
-    expect(queueCall.task).toBe('dispatchNewsletter');
-    expect(queueCall.input).toEqual({ dispatchId: 'dispatch-1' });
-    expect(queueCall.waitUntil).toBeInstanceOf(Date);
+    expect(payload.create).toHaveBeenCalledWith({
+      collection: 'newsletter-dispatches',
+      data: {
+        article: 'article-1',
+        status: 'queued',
+        scheduledFor: sendAt.toISOString(),
+        triggeredAt: now.toISOString(),
+      },
+    });
+    expect(payload.jobs.queue).toHaveBeenCalledWith({
+      task: 'dispatchNewsletter',
+      input: { dispatchId: 'dispatch-1' },
+      waitUntil: sendAt,
+    });
   });
 
-  it('swallows E11000 duplicate-key errors silently (re-edit scenario)', async () => {
+  it.each([
+    { name: 'error code 11000', error: Object.assign(new Error('write failed'), { code: 11000 }) },
+    { name: 'E11000 in the message only', error: new Error('E11000 duplicate key error collection') },
+  ])('skips with a warning on duplicate-key errors ($name, re-edit scenario)', async ({ error }) => {
     const payload = buildPayload();
-    const dupErr: Error & { code?: number } = Object.assign(new Error('E11000 duplicate key'), {
-      code: 11000,
-    });
-    payload.create.mockRejectedValue(dupErr);
+    const doc = buildDoc();
+    payload.create.mockRejectedValue(error);
 
-    await expect(callHook({ doc: buildDoc(), operation: 'update', payload })).resolves.toBeDefined();
+    await expect(callHook({ doc, operation: 'update', payload })).resolves.toBe(doc);
 
-    expect(payload.logger.warn).toHaveBeenCalled();
+    expect(payload.logger.warn).toHaveBeenCalledOnce();
     expect(payload.logger.error).not.toHaveBeenCalled();
     expect(payload.jobs.queue).not.toHaveBeenCalled();
   });
 
   it('swallows generic errors without throwing (save must not be blocked)', async () => {
     const payload = buildPayload();
+    const doc = buildDoc();
     payload.create.mockRejectedValue(new Error('boom'));
 
-    await expect(callHook({ doc: buildDoc(), operation: 'update', payload })).resolves.toBeDefined();
+    await expect(callHook({ doc, operation: 'update', payload })).resolves.toBe(doc);
 
     expect(payload.logger.error).toHaveBeenCalled();
     expect(payload.jobs.queue).not.toHaveBeenCalled();
@@ -141,7 +144,13 @@ describe('scheduleNewsletterDispatch', () => {
       payload,
     });
 
-    expect(payload.find).toHaveBeenCalledOnce();
+    expect(payload.find).toHaveBeenCalledWith({
+      collection: 'newsletter-dispatches',
+      where: {
+        and: [{ article: { equals: 'article-1' } }, { status: { equals: 'queued' } }],
+      },
+      limit: 1,
+    });
     expect(payload.update).toHaveBeenCalledWith({
       collection: 'newsletter-dispatches',
       id: 'dispatch-1',

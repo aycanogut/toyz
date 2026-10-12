@@ -39,12 +39,4 @@ describe('getSlider', () => {
       slug: 'slider',
     });
   });
-
-  it('should call findGlobal with correct slug', async () => {
-    await getSlider();
-
-    expect(mockPayloadFindGlobal).toHaveBeenCalledWith({
-      slug: 'slider',
-    });
-  });
 });
