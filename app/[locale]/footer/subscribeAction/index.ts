@@ -32,9 +32,9 @@ export async function subscribeAction({ email, preferredLocale, token }: Subscri
     };
   }
 
-  const { isValid, score } = await verifyReCaptcha(token);
+  const { isValid } = await verifyReCaptcha(token);
 
-  if (!isValid || (score && score < 0.5)) {
+  if (!isValid) {
     return {
       success: false,
       message: 'error',

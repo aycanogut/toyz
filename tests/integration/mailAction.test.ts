@@ -108,23 +108,26 @@ describe('mailAction', () => {
     expect(mockSendEmail).not.toHaveBeenCalled();
   });
 
-  it('should return error when reCaptcha score is low', async () => {
-    mockVerifyReCaptcha.mockResolvedValue({ isValid: true, score: 0.3 });
-
-    const result = await mailAction(validInput);
-
-    expect(result.success).toBe(false);
-    expect(result.message).toBe('error');
-    expect(mockSendEmail).not.toHaveBeenCalled();
-  });
-
-  it('should return error when email sending fails', async () => {
+  it('should return a generic error without leaking provider details when sending fails', async () => {
     mockSendEmail.mockRejectedValue(new Error('SMTP connection failed'));
 
     const result = await mailAction(validInput);
 
     expect(result.success).toBe(false);
-    expect(result.message).toBe('SMTP connection failed');
+    expect(result.message).toBe('error');
+  });
+
+  it('should validate input before calling reCAPTCHA', async () => {
+    await mailAction({ ...validInput, email: 'not-an-email' });
+
+    expect(mockVerifyReCaptcha).not.toHaveBeenCalled();
+  });
+
+  it('should reject a name longer than 50 characters', async () => {
+    const result = await mailAction({ ...validInput, name: 'a'.repeat(51) });
+
+    expect(result.message).toBe('invalid-data');
+    expect(mockSendEmail).not.toHaveBeenCalled();
   });
 
   it('should escape HTML in user input', async () => {

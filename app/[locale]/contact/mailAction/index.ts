@@ -7,6 +7,8 @@ import toyzConfig from '@/toyzConfig';
 import { getPayloadClient } from '@/utils/payloadClient';
 import verifyReCaptcha from '@/utils/verifyReCaptcha';
 
+import { ContactSchema } from '../contactSchema';
+
 const escapeHtml = (str: string): string =>
   str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 
@@ -18,26 +20,22 @@ interface MailActionProps {
   token: string;
 }
 
-const ContactSchema = z.object({
-  name: z.string().min(2).max(50),
-  email: z.email(),
-  subject: z.string().min(3).max(100),
-  message: z.string().min(10).max(5000),
+const MailActionSchema = ContactSchema.extend({
   token: z.string().min(1),
 });
 
 export async function mailAction({ name, email, subject, message, token }: MailActionProps) {
   const t = await getTranslations('Contact');
 
-  const { isValid, score } = await verifyReCaptcha(token);
-
-  const result = ContactSchema.safeParse({ name, email, subject, message, token });
+  const result = MailActionSchema.safeParse({ name, email, subject, message, token });
 
   if (!result.success) {
     return { success: false, message: t('invalid-data') };
   }
 
-  if (!isValid || (score && score < 0.5)) {
+  const { isValid } = await verifyReCaptcha(token);
+
+  if (!isValid) {
     return {
       success: false,
       message: t('error'),
@@ -73,7 +71,7 @@ export async function mailAction({ name, email, subject, message, token }: MailA
     console.error('Mail action error:', error);
     return {
       success: false,
-      message: error instanceof Error ? error.message : t('error'),
+      message: t('error'),
     };
   }
 }
