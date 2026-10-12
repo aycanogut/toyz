@@ -1,40 +1,42 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
+
+import en from '../../locales/en.json';
+
+async function openSearch(page: Page) {
+  await page.goto('/en');
+  // Desktop header on homepage starts hidden (y: -100%) and animates in after 250px scroll
+  await page.evaluate(() => window.scrollTo(0, 300));
+  await page.getByRole('button', { name: en.Navigation.search }).click();
+
+  const dialog = page.getByRole('dialog', { name: en.Search.title });
+  await expect(dialog).toBeVisible();
+
+  return dialog;
+}
 
 test.describe('Search overlay', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/');
-    await page.setViewportSize({ width: 1440, height: 900 });
-    // Desktop header on homepage starts hidden (y: -100%) and animates in after 250px scroll
-    await page.evaluate(() => window.scrollTo(0, 300));
-    await page.waitForTimeout(400);
-  });
+  test('should close with Escape', async ({ page }) => {
+    const dialog = await openSearch(page);
 
-  test('should open and close search overlay', async ({ page }) => {
-    const searchButton = page.getByRole('button', { name: 'search' });
-    await expect(searchButton).toBeVisible({ timeout: 5000 });
-    await searchButton.click();
-
-    const overlay = page.locator('input[type="text"]').first();
-    await expect(overlay).toBeVisible();
+    await expect(dialog.getByRole('textbox', { name: en.Search.placeholder })).toBeFocused();
 
     await page.keyboard.press('Escape');
-    await expect(overlay).not.toBeVisible();
+    await expect(dialog).toBeHidden();
   });
 
-  test('should show results when typing', async ({ page }) => {
-    const searchButton = page.getByRole('button', { name: 'search' });
-    await expect(searchButton).toBeVisible({ timeout: 5000 });
-    await searchButton.click();
+  test('should show results or the empty state when typing', async ({ page }) => {
+    const dialog = await openSearch(page);
 
-    const input = page.locator('input[type="text"]').first();
-    await input.fill('punk');
+    await dialog.getByRole('textbox', { name: en.Search.placeholder }).fill('punk');
 
-    await page.waitForTimeout(500);
+    const resultOrEmptyState = dialog.locator('a[href*="/content/"]').or(dialog.getByText(en.Search.result)).first();
+    await expect(resultOrEmptyState).toBeVisible();
+  });
 
-    const closeButton = page.locator('button[aria-label="Close search"]');
-    await expect(closeButton).toBeVisible();
-    await closeButton.click();
+  test('should close with the close button', async ({ page }) => {
+    const dialog = await openSearch(page);
 
-    await expect(input).not.toBeVisible();
+    await dialog.getByRole('button', { name: 'Close search' }).click();
+    await expect(dialog).toBeHidden();
   });
 });

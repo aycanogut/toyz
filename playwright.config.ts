@@ -2,16 +2,15 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests/e2e',
-  fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  // Limit to 1 worker locally: Next.js + Payload CMS dev server crashes under concurrent load
-  workers: process.env.CI ? 1 : 1,
+  // Single worker: Next.js + Payload CMS dev server crashes under concurrent load
+  workers: 1,
   timeout: 60000,
   reporter: 'html',
   use: {
     baseURL: 'http://localhost:3000',
-    trace: 'on',
+    trace: 'retain-on-failure',
   },
   projects: [
     {

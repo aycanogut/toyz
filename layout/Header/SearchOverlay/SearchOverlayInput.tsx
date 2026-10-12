@@ -28,6 +28,7 @@ function SearchOverlayInput({ query, onChange, inputRef }: SearchOverlayInputPro
           value={query}
           onChange={e => onChange(e.target.value)}
           placeholder={`${t('placeholder')}...`}
+          aria-label={t('placeholder')}
           className="font-heading text-title-light placeholder:text-title-dark w-full border-b-2 border-b-transparent bg-transparent pb-4 pl-11 text-3xl font-black uppercase focus:border-b-current focus:outline-none lg:pl-14 lg:text-5xl xl:text-6xl"
         />
         {query && (

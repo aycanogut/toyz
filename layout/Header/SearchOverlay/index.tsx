@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 
 import { AnimatePresence, motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 
 import { Category } from '@/payload-types';
 
@@ -22,6 +23,8 @@ interface SearchOverlayProps {
 function SearchOverlay({ isOpen, onClose, categories }: SearchOverlayProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const t = useTranslations('Search');
+
   const { query, setQuery, selectedCategory, setSelectedCategory, toggleCategory, results, isPending, reset } = useSearch();
 
   useOverlayBehavior({ isOpen, onClose, inputRef, reset });
@@ -36,6 +39,9 @@ function SearchOverlay({ isOpen, onClose, categories }: SearchOverlayProps) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.18, ease: 'easeOut' }}
+          role="dialog"
+          aria-modal="true"
+          aria-label={t('title')}
           className="bg-background/90 fixed inset-0 z-200 overflow-y-auto backdrop-blur-sm"
         >
           <SearchOverlayHeader onClose={onClose} />

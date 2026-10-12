@@ -1,26 +1,23 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('Article Navigation Flow', () => {
-  test('should navigate from home to article detail and verify content', async ({ page }) => {
-    await page.goto('/');
-    await page.waitForLoadState('domcontentloaded');
+  test('should navigate from home to the matching article detail', async ({ page }) => {
+    await page.goto('/en');
 
     const firstArticle = page.locator('article').first();
-    await expect(firstArticle).toBeVisible({ timeout: 10000 });
+    await expect(firstArticle).toBeVisible();
 
+    const title = (await firstArticle.locator('h2').first().textContent())?.trim();
     const detailLink = firstArticle.locator('a[href*="/content/"]').first();
-    await expect(detailLink).toBeVisible({ timeout: 5000 });
+    const href = await detailLink.getAttribute('href');
 
-    await Promise.all([page.waitForURL(/.*\/content\/.*/, { waitUntil: 'domcontentloaded', timeout: 30000 }), detailLink.click()]);
+    expect(title).toBeTruthy();
+    expect(href).toBeTruthy();
 
-    const detailTitle = page.locator('h1');
-    await expect(detailTitle).toBeVisible();
+    await detailLink.click();
 
-    const backButton = page.getByRole('button', { name: /^(back|geri)$/i });
-
-    if (await backButton.isVisible()) {
-      await backButton.click();
-      await expect(page).toHaveURL(/\/en$|\/tr$|\/$/, { timeout: 10000 });
-    }
+    // The dev server compiles the detail page on first visit, which can take well over 5s.
+    await expect(page).toHaveURL(new URL(href!, page.url()).href, { timeout: 30000 });
+    await expect(page.locator('h1')).toHaveText(title!);
   });
 });
