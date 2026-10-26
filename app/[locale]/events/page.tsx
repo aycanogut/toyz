@@ -33,7 +33,7 @@ async function Events() {
 
       <div className="mx-auto w-full max-w-7xl px-4 pt-6 sm:px-6 lg:px-8 lg:pt-14">
         <header className="border-title-light mb-8 border-b-2 pb-6 lg:mb-12 lg:pb-8">
-          <h1 className="font-heading text-title-light text-6xl leading-none font-black tracking-tight uppercase lg:text-8xl">
+          <h1 className="font-heading text-title-light text-5xl leading-none font-black tracking-tight uppercase md:text-6xl lg:text-8xl">
             {eventGlobal.title}
           </h1>
         </header>

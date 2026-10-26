@@ -21,7 +21,7 @@ async function Contact() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
           <div className="flex flex-col gap-8">
             <header>
-              <h1 className="font-heading text-title-light text-6xl leading-none font-black tracking-tight uppercase md:text-6xl lg:text-8xl">
+              <h1 className="font-heading text-title-light text-5xl leading-none font-black tracking-tight uppercase md:text-6xl lg:text-8xl">
                 {contact.title}
               </h1>
             </header>
