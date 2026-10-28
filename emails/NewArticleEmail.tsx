@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Body, Button, Container, Head, Heading, Hr, Html, Img, Link, Preview, Section, Text, Tailwind } from '@react-email/components';
+import { Body, Button, Container, Head, Heading, Hr, Html, Img, Link, Preview, Section, Text, Tailwind } from 'react-email';
 
 import en from '@/locales/en.json';
 import tr from '@/locales/tr.json';
@@ -82,7 +82,7 @@ export const NewArticleEmail = ({ title, summary, imageUrl, articleUrl, unsubscr
               </Section>
             </Section>
 
-            <Hr className="border-border-dark mx-0 my-6 w-full border border-solid" />
+            <Hr className="border-border-dark border-t-border-dark mx-0 my-6 w-full border border-solid" />
 
             <Section className="text-title-dark text-center">
               <Text>{t['subscription-note']}</Text>
