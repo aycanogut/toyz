@@ -58,6 +58,7 @@ describe('getEvents', () => {
       collection: 'events',
       locale: 'en',
       pagination: false,
+      sort: 'details.date',
       where: {
         _status: {
           equals: 'published',
