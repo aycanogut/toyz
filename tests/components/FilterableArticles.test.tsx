@@ -54,7 +54,6 @@ function makeArticle(overrides: Partial<ArticleCardData>): ArticleCardData {
     image: '/img.webp',
     date: '2026-01-01',
     author: 'Author',
-    colorIndex: 0,
     slug: overrides.slug ?? 'untitled',
     colorIndex: overrides.colorIndex ?? 0,
     ...overrides,
