@@ -14,6 +14,7 @@ const getEvents = unstable_cache(
           equals: 'published',
         },
       },
+      sort: 'details.date',
       pagination: false,
     });
   },

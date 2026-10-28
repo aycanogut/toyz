@@ -5,6 +5,7 @@ import { getTranslations } from 'next-intl/server';
 
 import Breadcrumbs from '@/components/Breadcrumbs';
 import CategoryBadge from '@/components/CategoryBadge';
+import ScrollProgressAnimation from '@/components/ScrollProgressAnimation';
 import { routing } from '@/i18n/routing';
 import { Category, Media } from '@/payload-types';
 import getArticle from '@/services/article';
@@ -19,7 +20,6 @@ import AnimatedSimilarGrid from '../../components/AnimatedSimilarGrid';
 import SocialMediaShare from '../../components/SocialMediaShare';
 
 import RichText from './RichText';
-import ScrollProgressAnimation from './ScrollProgressAnimation';
 import TOC from './TOC';
 
 interface ContentDetailsProps {
@@ -68,7 +68,7 @@ async function ContentDetails({ params }: ContentDetailsProps) {
 
   return (
     <div>
-      <ScrollProgressAnimation />
+      <ScrollProgressAnimation className="fixed inset-x-0 top-0 z-60 hidden h-1 lg:block" />
 
       <Breadcrumbs currentPageTitle={title} />
 
