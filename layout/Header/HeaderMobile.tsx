@@ -9,6 +9,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import Button from '@/components/Button';
 import buttonVariants from '@/components/Button/buttonVariants';
 import Icon from '@/components/Icon';
+import ScrollProgressAnimation from '@/components/ScrollProgressAnimation';
 import { Link, usePathname } from '@/i18n/routing';
 import cn from '@/utils/cn';
 
@@ -41,6 +42,8 @@ function HeaderMobile({ onSearchOpen }: HeaderMobileProps) {
   return (
     <header className={cn('sticky top-0 z-50 w-full overflow-hidden lg:absolute lg:hidden', isMenuOpen ? 'h-screen' : 'h-20')}>
       <div className="bg-background border-title-light absolute top-0 right-0 left-0 z-50 flex h-20 items-center gap-2 border-b-2 px-4">
+        {pathname.startsWith('/content/') && <ScrollProgressAnimation className="absolute inset-x-0 -bottom-0.5 h-0.5" />}
+
         <Button
           onClick={handleMenuToggle}
           className={cn('text-title-light bg-transparent p-0', isMenuOpen && 'invisible')}

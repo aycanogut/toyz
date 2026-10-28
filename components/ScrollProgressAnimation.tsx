@@ -1,8 +1,12 @@
 'use client';
 
+import { HTMLAttributes } from 'react';
+
 import { motion, useScroll, useSpring } from 'motion/react';
 
-function ScrollProgressAnimation() {
+import cn from '@/utils/cn';
+
+function ScrollProgressAnimation({ className }: HTMLAttributes<HTMLSpanElement>) {
   const { scrollYProgress } = useScroll();
 
   const scaleX = useSpring(scrollYProgress, {
@@ -14,7 +18,7 @@ function ScrollProgressAnimation() {
   return (
     <motion.span
       style={{ scaleX }}
-      className="bg-acid fixed inset-0 h-1 origin-left"
+      className={cn('bg-acid origin-left', className)}
     />
   );
 }
