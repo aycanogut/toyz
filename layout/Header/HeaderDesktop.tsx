@@ -77,7 +77,7 @@ function HeaderDesktop({ onSearchOpen }: HeaderDesktopProps) {
               className="font-heading text-title-light text-4xl leading-none font-black tracking-tight italic"
               style={{ transform: 'skewX(-8deg)', textShadow: '4px 4px 0 var(--color-acid)' }}
             >
-              TOYZ*
+              x TOYZ*
             </span>
           </Link>
 
