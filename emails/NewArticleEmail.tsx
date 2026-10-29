@@ -5,8 +5,6 @@ import { Body, Button, Container, Head, Heading, Hr, Html, Img, Link, Preview, S
 import en from '@/locales/en.json';
 import tr from '@/locales/tr.json';
 
-type Locale = 'en' | 'tr';
-
 interface NewArticleEmailProps {
   title: string;
   summary: string;
