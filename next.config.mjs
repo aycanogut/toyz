@@ -13,6 +13,11 @@ const nextConfig = {
         hostname: 'cdn.toyzwebzine.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn-dev.toyzwebzine.com',
+        pathname: '/**',
+      },
     ],
   },
   async redirects() {
@@ -59,7 +64,7 @@ const nextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com https://www.gstatic.com https://static.cloudflareinsights.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-              "img-src 'self' data: blob: https://cdn.toyzwebzine.com https://www.google-analytics.com https://www.gravatar.com",
+              "img-src 'self' data: blob: https://cdn.toyzwebzine.com https://cdn-dev.toyzwebzine.com https://www.google-analytics.com https://www.gravatar.com",
               "font-src 'self' data: https://fonts.gstatic.com",
               "connect-src 'self' https://www.google-analytics.com https://www.google.com https://www.gstatic.com https://www.googletagmanager.com https://static.cloudflareinsights.com",
               "frame-src 'self' https://www.google.com https://www.recaptcha.net https://www.youtube.com https://www.youtube-nocookie.com https://toyzwebzine.com https://*.toyzwebzine.com",

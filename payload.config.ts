@@ -80,13 +80,13 @@ export default buildConfig({
       collections: {
         media: {
           generateFileURL: ({ filename }) => {
-            return `https://cdn.toyzwebzine.com/${filename}`;
+            return `${toyzConfig.r2PublicUrl}/${filename}`;
           },
           disableLocalStorage: true,
         },
         'event-media': {
           generateFileURL: ({ filename }) => {
-            return `https://cdn.toyzwebzine.com/${filename}`;
+            return `${toyzConfig.r2PublicUrl}/${filename}`;
           },
           disableLocalStorage: true,
         },

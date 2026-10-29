@@ -13,6 +13,7 @@ interface ToyzConfigProps {
   r2AccessKeyId: string;
   r2SecretAccessKey: string;
   r2Endpoint: string;
+  r2PublicUrl: string;
 }
 
 const toyzConfig: ToyzConfigProps = {
@@ -30,6 +31,7 @@ const toyzConfig: ToyzConfigProps = {
   r2AccessKeyId: process.env.R2_ACCESS_KEY_ID,
   r2SecretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
   r2Endpoint: process.env.R2_ENDPOINT,
+  r2PublicUrl: process.env.R2_PUBLIC_URL,
 };
 
 export default toyzConfig;
