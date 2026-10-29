@@ -1,9 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import FilterableArticles from '@/app/[locale]/components/FilterableArticles';
 import type { ArticleCardData } from '@/app/[locale]/components/AnimatedArticleList';
 import type { Category } from '@/payload-types';
+
+import FilterableArticles from '@/app/[locale]/components/FilterableArticles';
 
 const { mockGet } = vi.hoisted(() => ({
   mockGet: vi.fn(),
@@ -14,8 +15,7 @@ vi.mock('next/navigation', () => ({
 }));
 
 vi.mock('next-intl', () => ({
-  useTranslations: () => (key: string, values?: Record<string, unknown>) =>
-    values ? `${key}:${JSON.stringify(values)}` : key,
+  useTranslations: () => (key: string, values?: Record<string, unknown>) => (values ? `${key}:${JSON.stringify(values)}` : key),
 }));
 
 vi.mock('@/app/[locale]/components/AnimatedArticleList', () => ({
@@ -56,7 +56,6 @@ function makeArticle(overrides: Partial<ArticleCardData>): ArticleCardData {
     author: 'Author',
     colorIndex: 0,
     slug: overrides.slug ?? 'untitled',
-    colorIndex: overrides.colorIndex ?? 0,
     ...overrides,
   };
 }
@@ -86,7 +85,7 @@ describe('FilterableArticles', () => {
         articles={articles}
         categories={categories}
         counts={counts}
-      />,
+      />
     );
 
     const items = screen.getAllByTestId('article-item');
@@ -101,7 +100,7 @@ describe('FilterableArticles', () => {
         articles={articles}
         categories={categories}
         counts={counts}
-      />,
+      />
     );
 
     const items = screen.getAllByTestId('article-item');
@@ -119,7 +118,7 @@ describe('FilterableArticles', () => {
         articles={articles}
         categories={categories}
         counts={counts}
-      />,
+      />
     );
 
     expect(screen.queryByTestId('article-list')).not.toBeInTheDocument();
@@ -134,7 +133,7 @@ describe('FilterableArticles', () => {
         articles={articles}
         categories={categories}
         counts={counts}
-      />,
+      />
     );
 
     expect(screen.getByTestId('strip-count')).toHaveTextContent('"count":1');
@@ -147,7 +146,7 @@ describe('FilterableArticles', () => {
         articles={articles}
         categories={categories}
         counts={counts}
-      />,
+      />
     );
 
     expect(screen.getByTestId('category-filter')).toHaveTextContent('total:3');
@@ -159,7 +158,7 @@ describe('FilterableArticles', () => {
         articles={[]}
         categories={categories}
         counts={{}}
-      />,
+      />
     );
 
     expect(screen.queryByTestId('article-list')).not.toBeInTheDocument();
