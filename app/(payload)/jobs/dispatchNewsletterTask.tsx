@@ -18,8 +18,6 @@ const RESEND_RATE_LIMIT_RETRY_DELAY_MS = 1000;
 // preview/summary block.
 const EMAIL_SUMMARY_SENTENCE_COUNT = 2;
 
-const CDN_BASE_URL = 'https://cdn.toyzwebzine.com';
-
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const inputSchema: TextField[] = [
@@ -64,13 +62,13 @@ const buildArticleImageUrl = async (
     const emailSize = (media as { sizes?: { email?: { filename?: string } } }).sizes?.email;
 
     if (emailSize?.filename) {
-      return `${CDN_BASE_URL}/${emailSize.filename}`;
+      return `${toyzConfig.r2PublicUrl}/${emailSize.filename}`;
     }
 
     const filename = (media as { filename?: string }).filename;
 
     if (filename) {
-      return `${CDN_BASE_URL}/${filename}`;
+      return `${toyzConfig.r2PublicUrl}/${filename}`;
     }
   } catch {
     // Image lookup is non-critical — fall through and return empty string.
