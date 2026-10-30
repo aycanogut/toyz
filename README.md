@@ -17,8 +17,8 @@ A webzine platform about graffiti, street art, underground music, skateboarding,
 
 ### Prerequisites
 
-- Node.js 18.x or higher
-- pnpm 11.19.0 or higher
+- Node.js 24 (see `.nvmrc`)
+- pnpm 12.15.0 (see `packageManager` in `package.json`)
 - MongoDB database
 - Cloudflare R2 Bucket account
 - Resend API key
@@ -39,7 +39,11 @@ cd toyz
 pnpm install
 ```
 
-3. Create `.env.local` file with the following variables:
+3. Create `.env.development` (used by `pnpm dev` and the env type generator) from `.env.example`. Production values go in `.env.production`.
+
+```bash
+cp .env.example .env.development
+```
 
 ```env
 NEXT_PUBLIC_TITLE=TOYZ
@@ -55,9 +59,12 @@ R2_BUCKET_NAME=your-r2-bucket-name
 R2_ACCESS_KEY_ID=your-acces-key-id
 R2_SECRET_ACCESS_KEY=your-secret-access-okey
 R2_ENDPOINT=your-endpoint
+R2_PUBLIC_URL=https://cdn-dev.example.com
 NEXT_PUBLIC_INSTAGRAM_URL=https://instagram.com/your-account
 CRON_SECRET=your-cron-secret
 ```
+
+`R2_PUBLIC_URL` is the public CDN origin of the bucket (no trailing slash). Its host must also be allowed in `images.remotePatterns` and the CSP `img-src` in `next.config.mjs`. `CRON_SECRET` is only needed where the jobs endpoint is called by the scheduler.
 
 4. Generate environment variable types:
 
@@ -104,7 +111,7 @@ tests/                  # Vitest (unit, integration, components) & Playwright (e
 
 ## Newsletter
 
-When an article is published with **Send newsletter** checked, an email to all active subscribers is scheduled for ~30 minutes later (unchecking it before then cancels the send). Background jobs are run by an external cron that calls Payload's jobs endpoint with `Authorization: Bearer $CRON_SECRET`.
+When an article is published with **Send newsletter** checked, an email to all active subscribers is scheduled for ~30 minutes later (unchecking it before then cancels the send). There is no in-process job runner: the `payload-jobs.yml` GitHub Actions workflow calls `/api/payload-jobs/run` hourly with `Authorization: Bearer $CRON_SECRET`, so emails go out roughly 30–90 minutes after publishing.
 
 ## 🧪 Testing
 
@@ -113,7 +120,8 @@ This project uses a multi-layered testing strategy:
 ### Test Types
 
 - **Unit Tests (Vitest):** Logic and utility functions (`tests/unit`).
-- **Integration Tests (Vitest):** Server Actions and Data Services (`tests/integration`).
+- **Integration Tests (Vitest):** Server Actions, Data Services and the newsletter job (`tests/integration`).
+- **Component Tests (Vitest + Testing Library, happy-dom):** UI components (`tests/components`).
 - **E2E Tests (Playwright):** Full user journeys and UI flows (`tests/e2e`).
 
 ### Commands

@@ -1,3 +1,10 @@
+---
+paths:
+  - '**/*.tsx'
+  - 'theme/**'
+  - '**/*Variants.ts'
+---
+
 # Styling Rules
 
 - **Tailwind v4** (PostCSS plugin) with `@tailwindcss/typography`. Theme tokens are declared in `theme/globals.css` under `@theme`.

@@ -1,87 +1,126 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code in this repository. Area-specific rules live in `.claude/rules/` and load only when matching files are touched:
+
+- `components.md`, `styling.md` — `.tsx` files, `theme/`
+- `payload.md` — `app/(payload)/`, `payload.config.ts`
+- `caching.md` — `services/`, revalidation hooks, `[slug]` routes, sitemap
+- `newsletter.md` — jobs, dispatch hook, subscribers, `emails/`
+- `testing.md` — `tests/`, Vitest/Playwright config
+
+## Project overview
+
+**TOYZ** (`toyzwebzine.com`) is a bilingual (`en` / `tr`) webzine about graffiti, street art, underground music, skateboarding, cinema and photography. It is a **single Next.js 16 App Router app with Payload CMS 3 running in-process**: public site, CMS admin, REST/GraphQL API and background jobs are served by the same app, deployed to **Vercel**.
+
+- **Core**: Next.js 16 (Turbopack in dev), React 19, TypeScript strict
+- **CMS / data**: Payload 3 (Lexical rich text, search plugin), MongoDB Atlas via Mongoose adapter
+- **Media**: Cloudflare R2 via `@payloadcms/storage-s3`, served from a CDN subdomain
+- **Email**: Resend (`@payloadcms/email-resend`), templates with `react-email`
+- **i18n**: `next-intl` 4 (UI strings) + Payload localization (content)
+- **UI**: Tailwind CSS v4, CVA, `tailwind-merge`, Radix Popover, Embla Carousel, `motion`, `react-icons`, `sonner`
+- **Forms**: `react-hook-form` + `zod` 4, Google reCAPTCHA v3
+- **Testing**: Vitest 5, Testing Library, Playwright
+- **Tooling**: pnpm 12, Node 24 (`.nvmrc`), ESLint 9 flat config, Prettier 3
 
 ## Commands
 
-Package manager is **pnpm** (12.15.0). Use `pnpm` for all installs/scripts.
+Use **pnpm** for everything.
 
-- `pnpm dev` — Next.js dev server with Turbopack
-- `pnpm build` / `pnpm start` — production build / serve
-- `pnpm lint` — ESLint (Next configs; `eslint-config-prettier` only disables conflicting rules)
-- `pnpm format` / `pnpm format:check` — Prettier write / check (runs separately from ESLint; generated files listed in `.prettierignore`)
-- `pnpm test` — Vitest (unit + integration) once
-- `pnpm test:watch` / `pnpm test:ui` — Vitest watch / UI dashboard
-- `pnpm test:e2e` / `pnpm test:e2e:ui` — Playwright (auto-starts `pnpm dev` on :3000)
-- Run a single Vitest file: `pnpm vitest run tests/unit/foo.test.ts` (or `-t "test name"` to filter)
-- Run a single Playwright spec: `pnpm playwright test tests/e2e/foo.spec.ts`
-- `pnpm generate:env-key-types` — regenerate `types/EnvFileTypes.d.ts` from `.env.*` (run after adding env vars)
+- `pnpm dev` — dev server on :3000 (site at `/en`, admin at `/toyz-panel`)
+- `pnpm build` / `pnpm start` — production build / serve. `next build` also type-checks test files
+- `pnpm lint` — ESLint
+- `pnpm format` / `pnpm format:check` — Prettier (separate from ESLint)
+- `pnpm test` — Vitest, single run. `pnpm vitest run <file>` (`-t "name"`) for one file/test
+- `pnpm test:e2e` — Playwright. `pnpm playwright test <spec>` for one spec
+- `pnpm generate:env-key-types` — regenerate `types/EnvFileTypes.d.ts` from `.env.development` (only)
+
+Before calling work done, run `pnpm lint`, `pnpm format:check` and the relevant tests. Run `pnpm build` when touching types, Payload config or route segment config.
+
+## Repository layout
+
+```
+app/
+  [locale]/                 Public site (next-intl). layout, page, error, loading, not-found
+    about/ contact/ events/ content/[slug]/   Feature routes
+    contact/mailAction/     Server action: contact form → email
+    footer/subscribeAction/ Server action: newsletter sign-up
+    components/             Page-level components used by page.tsx files
+    hooks/                  Client hooks (useReCaptcha)
+    [...rest]/              Catch-all → notFound()
+  (payload)/                Payload CMS: collections, globals, blocks, fields, hooks, jobs, utils,
+                            toyz-panel (admin), api (REST/GraphQL routes)
+  actions/searchArticles.ts Server action used by the header search overlay
+  sitemap.ts robots.ts global-error.tsx
+components/                 Reusable UI primitives (Badge, Button, Icon, Input, Popover, …)
+layout/                     Header (desktop/mobile, SearchOverlay, LanguageSwitcher) and Footer
+services/                   Cached server-side data fetchers (Payload Local API)
+utils/                      Pure helpers + payloadClient singleton
+emails/                     react-email templates
+i18n/                       next-intl routing + request config
+locales/                    en.json / tr.json UI strings
+theme/                      globals.css (@theme tokens), animations.css, fonts.ts, icons.ts
+types/                      Global ambient types (Locale, IntlMessages, env keys)
+tests/                      unit/ integration/ components/ e2e/
+payload.config.ts           Payload single source of truth
+payload-types.ts            Generated — never edit by hand
+toyzConfig.ts               Centralized env access
+proxy.ts                    next-intl middleware (Next 16 name for middleware.ts)
+next.config.mjs             Images, `/` → `/en` redirect, security headers + CSP
+.agents/payload/            Payload reference skill (SKILL.md + reference/*.md)
+```
 
 ## Architecture
 
-This is a **Next.js 16 (App Router) + Payload CMS 3** monorepo-style app where Payload runs in-process inside the same Next app.
+1. `proxy.ts` runs `next-intl` middleware for every path except `toyz-panel`, `api`, `monitoring`, `_next`, `_vercel` and files with an extension. `/` redirects to `/en` in `next.config.mjs`.
+2. `app/[locale]/layout.tsx` validates the locale, builds metadata from the `home` global and wraps the tree in `NextIntlClientProvider` → `ReCaptchaProvider` → `Layout` (Header / main / Footer), plus `Toaster` and `GoogleAnalytics`.
+3. Server `page.tsx` files fetch data through `services/*` and pass plain props to client components.
+4. Mutations go through server actions: zod validation → server-side reCAPTCHA (`utils/verifyReCaptcha.ts`) → Payload.
 
-### Two route groups under `app/`
+**UI code never calls Payload directly.** Reads go through `services/*` (cached with `unstable_cache` + tags, invalidated by Payload hooks). Outside Payload hooks, get the client with `getPayloadClient()` from `utils/payloadClient.ts`.
 
-- `app/[locale]/` — public site, wrapped by `next-intl` middleware. Locales: `en`, `tr` (default `en`). Routing helpers come from `i18n/routing.ts` — import `Link`, `redirect`, `usePathname`, `useRouter` from there, **not** from `next/navigation`.
-- `app/(payload)/` — Payload CMS code: `collections/`, `globals/`, `blocks/`, `fields/`, `jobs/`, plus the admin UI mounted at `/toyz-panel` (overridden via `routes.admin` in `payload.config.ts`, not `/admin`). The matcher in `proxy.ts` (Next 16's replacement for `middleware.ts`) excludes `toyz-panel`, `api`, etc. from i18n.
+`content/[slug]` and `events/[slug]` use `dynamicParams = false`: only slugs known at build time resolve.
 
-### Payload data model
+## i18n
 
-`payload.config.ts` is the single source of truth. Collections: `Articles`, `Media`, `Categories`, `Events`, `EventMedia`, `Subscribers`, `NewsletterDispatches`, `Users`. Globals: `Home`, `Slider`, `About`, `Contact`, `EventsGlobal`. Localization is enabled at the Payload level (`en`, `tr`) — most content fields are localized.
+- Two layers: **UI strings** in `locales/{en,tr}.json` (next-intl) and **content** localized by Payload (`localized: true`, queried with `locale`).
+- Import `Link`, `redirect`, `usePathname`, `useRouter` from `@/i18n/routing`; ESLint blocks `next/link` and those `next/navigation` exports. `notFound` from `next/navigation` is fine.
+- `Locale` (`'en' | 'tr'`) is a global ambient type — no import needed. `IntlMessages` is a global alias of `en.json`; keys are **not** type-checked via next-intl `AppConfig`. Add every new key to both JSON files.
+- Locale lists are also hardcoded in `payload.config.ts`, `subscribers.preferredLocale`, `subscribeAction`'s zod enum, `sitemap.ts` and `[locale]/layout.tsx` metadata.
 
-- Generated types live in `payload-types.ts` (regenerated by Payload from collection/global schemas — do not hand-edit).
-- Media is stored in **Cloudflare R2** via `@payloadcms/storage-s3` (region `auto`); public URLs are rewritten to `https://cdn.toyzwebzine.com/<filename>`. Local storage is disabled.
-- Search uses `@payloadcms/plugin-search` over the `articles` collection.
-- A rich-text Lexical editor adds a custom `YouTubeBlock` (`app/(payload)/blocks/youtube.ts`).
+## SEO and security
 
-### Background jobs
+- `app/sitemap.ts` emits static routes, articles and events per locale with `hreflang` alternates and `x-default` → `en`.
+- `generateMetadata` lives in each route's `layout.tsx` and builds canonical + alternate URLs from `toyzConfig.baseUrl`.
+- `next.config.mjs` sets HSTS, frame, referrer, permissions headers and a strict CSP. **Any new third-party script, image host or iframe needs a CSP update**, plus `images.remotePatterns` for images.
+- The contact action HTML-escapes user input before building the email. Keep it that way.
 
-There is **no `autoRun`** — jobs are executed by an external cron calling Payload's jobs run endpoint with `Authorization: Bearer $CRON_SECRET` (or by a logged-in admin); see `jobs.access.run` in `payload.config.ts`. The only registered task is `dispatchNewsletter` (`app/(payload)/jobs/dispatchNewsletterTask.tsx`, template in `emails/NewArticleEmail.tsx`). On boot, `onInit` recovers stuck jobs (`processing: true` with no `completedAt`) — keep this in mind when debugging job state.
+## Environment
 
-Newsletter flow:
+- Read env through `toyzConfig.ts`, never `process.env` in app code. Exceptions: `CRON_SECRET` (`payload.config.ts`) and `NODE_ENV`.
+- New variable: add to `toyzConfig.ts`, `.env.example` and every `.env.*`, then run `pnpm generate:env-key-types` (reads only `.env.development`).
+- Files: `.env.development`, `.env.production` (loaded by `next start`), `.env.local`, `.env.example`. Never print or commit their values.
+- **Dev and prod are fully separated**: different MongoDB clusters and R2 buckets. Prod media comes from `cdn.toyzwebzine.com`, dev/preview from `cdn-dev.toyzwebzine.com`, selected by `R2_PUBLIC_URL`. Both hosts are hardcoded in `next.config.mjs` on purpose.
+- `CRON_SECRET` is only set on Vercel and in GitHub secrets.
 
-- Article `afterChange` hook `scheduleNewsletterDispatch` (`app/(payload)/utils/`) runs only for `published` docs with `sendNewsletter: true`. It creates a `newsletter-dispatches` row (`status: queued`) and queues the task with `waitUntil` = now + 30 min.
-- The `article` field on `newsletter-dispatches` is unique, so one dispatch per article; re-saves hit Mongo E11000 and are skipped. Unchecking `sendNewsletter` before the send marks the dispatch `disabled`.
-- The task sends per subscriber (locale-aware) via Resend, 600 ms apart with one retry on 429, and records each recipient in `sentSubscribers` so retries (max 3) resume without duplicates. If the article is unpublished mid-run the dispatch becomes `disabled`; otherwise it ends `sent` (or `failed` if every send failed). Jobs are deleted on completion.
+## CI / CD
 
-### Data access pattern
+- `.github/workflows/tests.yml` — Vitest + Playwright on push/PR to `main` and `development`.
+- `.github/workflows/payload-jobs.yml` — hourly call to the Payload jobs endpoint (there is no `autoRun`).
+- `development` is the working branch; `main` is production.
 
-UI components do **not** call Payload directly. Instead:
+## Code conventions
 
-- `services/*.ts` — server-side data fetchers (one file per resource: `articles`, `article`, `home`, `events`, `event`, `sitemap`, etc.). They use the Payload Local API via `utils/payloadClient.ts`.
-- All service functions are wrapped with `unstable_cache` and tagged with semantic cache keys (e.g. `['article']`, `['events']`). Revalidation is 1 h for articles, events, categories and sitemaps, and 24 h for globals (home, slider, about, contact, events-global). Revalidate hooks in `app/(payload)/hooks/` invalidate tags on content changes.
-- `app/[locale]/**/page.tsx` calls these services and passes data to client components.
-- Server actions live alongside their feature (`app/[locale]/contact/mailAction`, `app/[locale]/footer/subscribeAction`) and call Payload + Resend directly; search is the exception at `app/actions/searchArticles.ts`. reCAPTCHA is verified server-side via `utils/verifyReCaptcha.ts`.
+- **Prettier**: single quotes, semicolons, `printWidth: 160`, `singleAttributePerLine`, `arrowParens: avoid`, `trailingComma: es5`, Tailwind class sorting.
+- **Imports**: ESLint `import/order` is an error — builtin → external → type → internal → parent → sibling, blank line between groups, alphabetized; `react` first, `next/*` before other externals. No file extensions.
+- **Blank lines** separate logical blocks: after `const` groups, after `if/else`, before `return`.
+- Default exports for components, hooks, services and utils; named exports for server actions and Payload configs.
+- Comments explain _why_ (rate limits, idempotency, unique-index tricks), never restate code.
+- Conventional commits (`feat(scope): …`, `fix: …`, `chore(payload): …`).
 
-### Env vars and config
+## Gotchas
 
-All env access is centralized in `toyzConfig.ts` — import from there rather than reading `process.env` ad-hoc. Types for env keys are generated into `types/EnvFileTypes.d.ts` by `generatorScripts/envFileTypeBuilder.ts` from the `.env.*` files; rerun `pnpm generate:env-key-types` after adding a variable. Known exception: `CRON_SECRET` is read via `process.env` in `payload.config.ts` and is missing from `.env.example`.
-
-### Path aliases
-
-- `@/*` → repo root (Next + Vitest both configured)
-- `@payload-config` → `./payload.config.ts` (used by Payload's Next adapter)
-
-### Testing
-
-- Vitest: `tests/unit/`, `tests/integration/`, `tests/components/` — env `happy-dom`, setup in `tests/setup.ts`, only files matching `tests/**/*.test.{ts,tsx}`.
-- Playwright: `tests/e2e/`, Chromium only, `webServer` boots `pnpm dev` automatically.
-
-### i18n messages
-
-Translation strings live in `locales/en.json` and `locales/tr.json`, loaded dynamically in `i18n/request.ts`. The `proxy.ts` matcher regex `/((?!toyz-panel|api|monitoring|_next|_vercel|.*\\..*).+)` excludes CMS routes, API endpoints, and static assets from locale routing.
-
-### Payload field conventions
-
-A `slugField` factory in `app/(payload)/fields/slug.ts` generates slug fields with a `formatSlug` hook. Use it when adding new slugged collections rather than defining slug logic inline.
-
-Articles have role-based read access (authenticated users see all statuses; public sees only published), draft autosave, scheduled publishing, and version history (max 10). This is enforced at the Payload config level, not in services.
-
-### Misc
-
-- Tailwind v4 (PostCSS plugin) with `@tailwindcss/typography`.
-- Shared UI primitives: `components/` (Badge, Breadcrumbs, Button, CategoryBadge, FilterPill, Icon, Input, Popover). Layout chrome: `layout/Header`, `layout/Footer`. Page-level components: `app/[locale]/components/`.
-- `app/[locale]/` has root-level `error.tsx`, `loading.tsx`, and `not-found.tsx` — all use `next-intl` translations.
-- `next.config.mjs` sets strict security headers including a CSP that whitelists `https://cdn.toyzwebzine.com` (R2), Google Analytics/reCAPTCHA, and YouTube iframes. Update the CSP there when integrating new third-party scripts.
-- Admin URL is `/toyz-panel` (not `/admin`).
+- Admin is at `/toyz-panel`, not `/admin`. Payload APIs are under `/api`.
+- `proxy.ts` is Next 16's middleware file; do not add a `middleware.ts`.
+- Font exports in `theme/fonts.ts` are named `grotesque` (Fira Code → `font-fira`) and `display` (DM Sans → `font-heading`).
+- `images.unoptimized: true` — `next/image` does not resize; upload appropriately sized images.
+- If another app is running on :3000, Playwright reuses it and tests the wrong app.
