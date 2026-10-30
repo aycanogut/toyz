@@ -23,9 +23,7 @@ const syncArticleSendNewsletter: CollectionAfterChangeHook = async ({ doc, req: 
       overrideAccess: true,
     });
   } catch (error) {
-    payload.logger.error(
-      `Failed to reset sendNewsletter for article ${articleId}: ${error instanceof Error ? error.message : String(error)}`
-    );
+    payload.logger.error(`Failed to reset sendNewsletter for article ${articleId}: ${error instanceof Error ? error.message : String(error)}`);
   }
 
   return doc;

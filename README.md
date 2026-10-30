@@ -18,7 +18,7 @@ A webzine platform about graffiti, street art, underground music, skateboarding,
 ### Prerequisites
 
 - Node.js 18.x or higher
-- pnpm 12.3.4 or higher
+- pnpm 11.19.0 or higher
 - MongoDB database
 - Cloudflare R2 Bucket account
 - Resend API key
@@ -80,6 +80,7 @@ Admin panel: [http://localhost:3000/toyz-panel](http://localhost:3000/toyz-panel
 - `pnpm build` - Build for production
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
+- `pnpm format` / `pnpm format:check` - Format with Prettier / check formatting
 - `pnpm deps:check` - Check for outdated dependencies
 - `pnpm deps:update` - Update dependencies
 - `pnpm generate:env-key-types` - Generate TypeScript types for environment variables
@@ -110,11 +111,13 @@ When an article is published with **Send newsletter** checked, an email to all a
 This project uses a multi-layered testing strategy:
 
 ### Test Types
+
 - **Unit Tests (Vitest):** Logic and utility functions (`tests/unit`).
 - **Integration Tests (Vitest):** Server Actions and Data Services (`tests/integration`).
 - **E2E Tests (Playwright):** Full user journeys and UI flows (`tests/e2e`).
 
 ### Commands
+
 - `pnpm test`: Runs all Vitest tests.
 - `pnpm test:watch`: Runs Vitest in watch mode for development.
 - `pnpm test:ui`: Opens Vitest UI for a visual test dashboard.

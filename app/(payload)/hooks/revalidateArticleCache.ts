@@ -3,18 +3,21 @@ import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'paylo
 
 import type { Article } from '@/payload-types';
 
-export const revalidateArticleCacheOnChange: CollectionAfterChangeHook<Article> = ({ doc }) => {
-  if (doc._status === 'published') {
-    revalidateTag('article', { expire: 0 });
-    revalidateTag('articles', { expire: 0 });
-    revalidateTag('sitemap', { expire: 0 });
+const revalidateArticleTags = () => {
+  revalidateTag('article', { expire: 0 });
+  revalidateTag('articles', { expire: 0 });
+  revalidateTag('sitemap', { expire: 0 });
+};
+
+// Also runs when a published article is unpublished, so it disappears from the site.
+export const revalidateArticleCacheOnChange: CollectionAfterChangeHook<Article> = ({ doc, previousDoc }) => {
+  if (doc._status === 'published' || previousDoc?._status === 'published') {
+    revalidateArticleTags();
   }
 
   return doc;
 };
 
 export const revalidateArticleCacheOnDelete: CollectionAfterDeleteHook = () => {
-  revalidateTag('article', { expire: 0 });
-  revalidateTag('articles', { expire: 0 });
-  revalidateTag('sitemap', { expire: 0 });
+  revalidateArticleTags();
 };

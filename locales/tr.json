@@ -54,6 +54,9 @@
     "validation-email-error": "Geçersiz e-posta adresi.",
     "validation-subject-error": "Konu en az 3 karakter olmalıdır.",
     "validation-message-error": "Mesaj en az 10 karakter olmalıdır.",
+    "validation-name-max-error": "İsim en fazla 50 karakter olabilir.",
+    "validation-subject-max-error": "Konu en fazla 100 karakter olabilir.",
+    "validation-message-max-error": "Mesaj en fazla 5000 karakter olabilir.",
     "privacy-notice": "Bu formu göndererek, kişisel verilerinizin (isim, e-posta, konu, mesaj) yalnızca talebinize yanıt vermek amacıyla kullanılacağını kabul edersiniz. Verileriniz üçüncü taraflarla paylaşılmayacak ve güvenli bir şekilde saklanacaktır. Verilerinizin silinmesini istediğinizde bize ulaşabilirsiniz."
   },
   "Email": {

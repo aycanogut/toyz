@@ -1,67 +1,54 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
-import { ContactSchema } from '@/app/[locale]/contact/ContactForm';
+import { ContactSchema } from '@/app/[locale]/contact/contactSchema';
+import en from '@/locales/en.json';
+
+const validData = {
+  name: 'John Doe',
+  email: 'test@example.com',
+  subject: 'Test Subject',
+  message: 'This is a test message with more than 10 characters',
+};
+
+const issueMessages = (data: unknown) => ContactSchema.safeParse(data).error?.issues.map(issue => issue.message) ?? [];
 
 describe('ContactSchema', () => {
-  it('should validate the contact form', () => {
-    const validData = {
-      name: 'John Doe',
-      email: 'test@example.com',
-      subject: 'Test Subject',
-      message: 'This is a test message with more than 10 characters',
-    };
-
-    const result = ContactSchema.safeParse(validData);
-
-    expect(result.success).toBe(true);
+  it('accepts valid data', () => {
+    expect(ContactSchema.safeParse(validData).success).toBe(true);
   });
 
-  it('should reject invalid email format', () => {
-    const invalidData = {
-      name: 'John Doe',
-      email: 'not-valid-email',
-      subject: 'Test Subject',
-      message: 'This is a test message with more than 10 characters',
-    };
+  it.each([
+    { field: 'name', value: 'J', message: 'validation-name-error' },
+    { field: 'name', value: 'a'.repeat(51), message: 'validation-name-max-error' },
+    { field: 'email', value: 'not-valid-email', message: 'validation-email-error' },
+    { field: 'subject', value: 'Te', message: 'validation-subject-error' },
+    { field: 'subject', value: 'a'.repeat(101), message: 'validation-subject-max-error' },
+    { field: 'message', value: 'Too short', message: 'validation-message-error' },
+    { field: 'message', value: 'a'.repeat(5001), message: 'validation-message-max-error' },
+  ])('rejects $field "$value" with $message', ({ field, value, message }) => {
+    expect(issueMessages({ ...validData, [field]: value })).toEqual([message]);
+  });
 
-    const result = ContactSchema.safeParse(invalidData);
+  it('accepts values at the max length', () => {
+    const atMax = { ...validData, name: 'a'.repeat(50), subject: 'a'.repeat(100), message: 'a'.repeat(5000) };
 
-    expect(result.success).toBe(false);
+    expect(ContactSchema.safeParse(atMax).success).toBe(true);
+  });
 
-    console.log(result);
+  it('reports one error per field for empty input', () => {
+    expect(issueMessages({ name: '', email: '', subject: '', message: '' })).toEqual([
+      'validation-name-error',
+      'validation-email-error',
+      'validation-subject-error',
+      'validation-message-error',
+    ]);
+  });
 
-    if (!result.success) {
-      expect(result.error.issues[0].message).toBe('validation-email-error');
+  it('uses message keys that exist in the translations', () => {
+    const keys = issueMessages({ name: '', email: '', subject: '', message: 'a'.repeat(5001) });
+
+    for (const key of keys) {
+      expect(en.Contact).toHaveProperty(key);
     }
-  });
-
-  it('should reject subject shorter than 3 characters', () => {
-    const invalidData = {
-      name: 'Aycan',
-      email: 'test@example.com',
-      subject: 'Te',
-      message: 'This is a test message',
-    };
-
-    const result = ContactSchema.safeParse(invalidData);
-
-    expect(result.success).toBe(false);
-    if (!result.success) {
-      expect(result.error.issues[0].message).toBe('validation-subject-error');
-    }
-  });
-
-  it('should reject empty strings', () => {
-    const invalidData = {
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
-    };
-
-    const result = ContactSchema.safeParse(invalidData);
-
-    expect(result.success).toBe(false);
-    expect(result.error?.issues.length).toBeGreaterThan(0);
   });
 });

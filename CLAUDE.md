@@ -8,7 +8,8 @@ Package manager is **pnpm** (12.15.0). Use `pnpm` for all installs/scripts.
 
 - `pnpm dev` — Next.js dev server with Turbopack
 - `pnpm build` / `pnpm start` — production build / serve
-- `pnpm lint` — ESLint (Next + Prettier configs)
+- `pnpm lint` — ESLint (Next configs; `eslint-config-prettier` only disables conflicting rules)
+- `pnpm format` / `pnpm format:check` — Prettier write / check (runs separately from ESLint; generated files listed in `.prettierignore`)
 - `pnpm test` — Vitest (unit + integration) once
 - `pnpm test:watch` / `pnpm test:ui` — Vitest watch / UI dashboard
 - `pnpm test:e2e` / `pnpm test:e2e:ui` — Playwright (auto-starts `pnpm dev` on :3000)

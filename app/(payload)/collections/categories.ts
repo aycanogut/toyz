@@ -1,7 +1,13 @@
 import type { CollectionConfig } from 'payload';
 
+import { revalidateCategoriesCacheOnChange, revalidateCategoriesCacheOnDelete } from '../hooks/revalidateCategoriesCache';
+
 export const Categories: CollectionConfig = {
   slug: 'categories',
+  hooks: {
+    afterChange: [revalidateCategoriesCacheOnChange],
+    afterDelete: [revalidateCategoriesCacheOnDelete],
+  },
   // versions: {
   //   drafts: true,
   // },

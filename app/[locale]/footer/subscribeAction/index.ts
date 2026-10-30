@@ -11,13 +11,18 @@ interface SubscribeActionProps {
   token: string;
 }
 
+export interface SubscribeActionResult {
+  success: boolean;
+  message: 'subscribed' | 'already-subscribed' | 'invalid-email' | 'error';
+}
+
 const SubscribeSchema = z.object({
   email: z.email(),
   preferredLocale: z.enum(['en', 'tr']),
   token: z.string().min(1),
 });
 
-export async function subscribeAction({ email, preferredLocale, token }: SubscribeActionProps) {
+export async function subscribeAction({ email, preferredLocale, token }: SubscribeActionProps): Promise<SubscribeActionResult> {
   const result = SubscribeSchema.safeParse({ email, preferredLocale, token });
 
   if (!result.success) {
@@ -27,9 +32,9 @@ export async function subscribeAction({ email, preferredLocale, token }: Subscri
     };
   }
 
-  const { isValid, score } = await verifyReCaptcha(token);
+  const { isValid } = await verifyReCaptcha(token);
 
-  if (!isValid || (score && score < 0.5)) {
+  if (!isValid) {
     return {
       success: false,
       message: 'error',

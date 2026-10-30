@@ -110,4 +110,38 @@ describe('getArticles', () => {
     expect(mockPayloadFind).toHaveBeenNthCalledWith(1, expect.objectContaining({ locale: 'tr' }));
     expect(mockPayloadFind).toHaveBeenNthCalledWith(2, expect.objectContaining({ locale: 'en' }));
   });
+
+  describe('with a category filter', () => {
+    it('looks up the category by slug and filters articles by its id', async () => {
+      mockPayloadFind.mockResolvedValueOnce({ docs: [{ id: 'cat-1' }] }).mockResolvedValueOnce(mockArticles);
+
+      await getArticles('en', 'music');
+
+      expect(mockPayloadFind).toHaveBeenNthCalledWith(1, {
+        collection: 'categories',
+        where: { slug: { equals: 'music' } },
+        limit: 1,
+        pagination: false,
+      });
+      expect(mockPayloadFind).toHaveBeenNthCalledWith(2, {
+        collection: 'articles',
+        locale: 'en',
+        where: { and: [{ _status: { equals: 'published' } }, { 'details.category': { equals: 'cat-1' } }] },
+        pagination: false,
+      });
+    });
+
+    it('matches no articles when the category does not exist', async () => {
+      mockPayloadFind.mockResolvedValueOnce({ docs: [] }).mockResolvedValueOnce({ docs: [] });
+
+      await getArticles('en', 'missing');
+
+      expect(mockPayloadFind).toHaveBeenNthCalledWith(
+        2,
+        expect.objectContaining({
+          where: { and: [{ _status: { equals: 'published' } }, { 'details.category': { equals: '__none__' } }] },
+        })
+      );
+    });
+  });
 });

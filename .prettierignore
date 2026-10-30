@@ -1,0 +1,8 @@
+pnpm-lock.yaml
+payload-types.ts
+app/(payload)/toyz-panel/importMap.js
+.agents/
+.claude/
+backups/
+playwright-report/
+test-results/

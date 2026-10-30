@@ -18,11 +18,9 @@ const RESEND_RATE_LIMIT_RETRY_DELAY_MS = 1000;
 // preview/summary block.
 const EMAIL_SUMMARY_SENTENCE_COUNT = 2;
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-const inputSchema: TextField[] = [
-  { name: 'dispatchId', type: 'text', required: true },
-];
+const inputSchema: TextField[] = [{ name: 'dispatchId', type: 'text', required: true }];
 
 /**
  * Resolves the image URL to embed in the newsletter email.
@@ -32,18 +30,12 @@ const inputSchema: TextField[] = [
  * swallowed — the email is sent without an image rather than failing the
  * entire dispatch over a missing thumbnail.
  */
-const buildArticleImageUrl = async (
-  payload: BasePayload,
-  imagesField: unknown
-): Promise<string> => {
+const buildArticleImageUrl = async (payload: BasePayload, imagesField: unknown): Promise<string> => {
   if (!imagesField) {
     return '';
   }
 
-  const mediaId =
-    typeof imagesField === 'object'
-      ? (imagesField as { id: string | number }).id
-      : imagesField;
+  const mediaId = typeof imagesField === 'object' ? (imagesField as { id: string | number }).id : imagesField;
 
   if (!mediaId) {
     return '';
@@ -93,13 +85,7 @@ export const dispatchNewsletterTask = {
   slug: 'dispatchNewsletter',
   retries: 3,
   inputSchema,
-  handler: async ({
-    input,
-    req,
-  }: {
-    input: { dispatchId: string };
-    req: { payload: BasePayload };
-  }) => {
+  handler: async ({ input, req }: { input: { dispatchId: string }; req: { payload: BasePayload } }) => {
     const { payload } = req;
     const { dispatchId } = input;
 
@@ -118,9 +104,7 @@ export const dispatchNewsletterTask = {
     const isActionable = dispatch.status === 'queued' || dispatch.status === 'sending';
 
     if (!isActionable) {
-      payload.logger.info(
-        `⏭️ Dispatch ${dispatchId} status is "${dispatch.status}" — skipping (not in actionable state).`
-      );
+      payload.logger.info(`⏭️ Dispatch ${dispatchId} status is "${dispatch.status}" — skipping (not in actionable state).`);
       return { output: {} };
     }
 
@@ -135,8 +119,7 @@ export const dispatchNewsletterTask = {
       });
     }
 
-    const articleId =
-      typeof dispatch.article === 'object' ? dispatch.article.id : dispatch.article;
+    const articleId = typeof dispatch.article === 'object' ? dispatch.article.id : dispatch.article;
 
     if (!articleId) {
       await payload.update({
@@ -153,9 +136,7 @@ export const dispatchNewsletterTask = {
     // Track which subscriber IDs already received this email in a prior run
     // (Payload retries reuse the same dispatch row).
     const alreadySentSubscriberIds = new Set(
-      (dispatch.sentSubscribers ?? [])
-        .map((subscriber) => (typeof subscriber === 'object' ? subscriber.id : subscriber))
-        .map((id) => String(id))
+      (dispatch.sentSubscribers ?? []).map(subscriber => (typeof subscriber === 'object' ? subscriber.id : subscriber)).map(id => String(id))
     );
 
     const { docs: subscribers } = await payload.find({
@@ -184,9 +165,10 @@ export const dispatchNewsletterTask = {
       data: { recipientCount: subscribers.length },
     });
 
-    let successCount = Number(dispatch.successCount ?? 0);
-    let failureCount = Number(dispatch.failureCount ?? 0);
     const nextSentSubscribers: (string | number)[] = Array.from(alreadySentSubscriberIds);
+    // Failures are counted per run: subscribers that failed in a previous run
+    // are retried on resume, so carrying the old count over would count them twice.
+    let failureCount = 0;
     let lastError: string | undefined;
 
     // If the article gets unpublished mid-dispatch we abort the whole run and
@@ -244,13 +226,13 @@ export const dispatchNewsletterTask = {
         />
       );
 
-      const subject =
-        locale === 'tr' ? `Yeni İçerik: ${article.title}` : `New Content: ${article.title}`;
+      const subject = locale === 'tr' ? `Yeni İçerik: ${article.title}` : `New Content: ${article.title}`;
+
+      let sent = false;
 
       try {
         await payload.sendEmail({ to: subscriber.email, subject, html });
-        successCount += 1;
-        nextSentSubscribers.push(subscriber.id);
+        sent = true;
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         const isRateLimited = message.includes('429');
@@ -260,8 +242,7 @@ export const dispatchNewsletterTask = {
 
           try {
             await payload.sendEmail({ to: subscriber.email, subject, html });
-            successCount += 1;
-            nextSentSubscribers.push(subscriber.id);
+            sent = true;
           } catch (retryError) {
             failureCount += 1;
             lastError = retryError instanceof Error ? retryError.message : String(retryError);
@@ -272,8 +253,26 @@ export const dispatchNewsletterTask = {
         }
       }
 
+      // Persist each recipient as soon as the send succeeds, so a crash or
+      // timeout mid-loop never causes a resend on retry. Kept outside the send
+      // try/catch: a failed write must not be counted as a failed send.
+      if (sent) {
+        nextSentSubscribers.push(subscriber.id);
+
+        await payload.update({
+          collection: 'newsletter-dispatches',
+          id: dispatchId,
+          data: {
+            successCount: nextSentSubscribers.length,
+            sentSubscribers: nextSentSubscribers as never,
+          },
+        });
+      }
+
       await sleep(RESEND_INTER_EMAIL_DELAY_MS);
     }
+
+    const successCount = nextSentSubscribers.length;
 
     if (articleNoLongerPublished) {
       await payload.update({
@@ -289,15 +288,12 @@ export const dispatchNewsletterTask = {
         },
       });
 
-      payload.logger.warn(
-        `🛑 Dispatch ${dispatchId} disabled because article ${articleId} is not published.`
-      );
+      payload.logger.warn(`🛑 Dispatch ${dispatchId} disabled because article ${articleId} is not published.`);
 
       return { output: {} };
     }
 
-    const everyRecipientFailed =
-      successCount === 0 && failureCount === subscribers.length;
+    const everyRecipientFailed = successCount === 0;
     const finalStatus = everyRecipientFailed ? 'failed' : 'sent';
 
     await payload.update({
@@ -313,9 +309,7 @@ export const dispatchNewsletterTask = {
       },
     });
 
-    payload.logger.info(
-      `✅ Dispatch ${dispatchId} finished: status=${finalStatus}, success=${successCount}, failure=${failureCount}.`
-    );
+    payload.logger.info(`✅ Dispatch ${dispatchId} finished: status=${finalStatus}, success=${successCount}, failure=${failureCount}.`);
 
     return { output: {} };
   },

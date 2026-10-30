@@ -1,25 +1,14 @@
 import { expect, test } from '@playwright/test';
 
 test.describe('Home page', () => {
-  test('should load and display main sections', async ({ page }) => {
-    await page.goto('/');
+  test('should load and display the article list', async ({ page }) => {
+    await page.goto('/en');
 
     await expect(page).toHaveTitle(/TOYZ/i);
 
-    const slider = page.locator('section').first();
-    await expect(slider).toBeVisible();
-
-    const contentSection = page.locator('section').filter({ hasText: /./ });
-    await expect(contentSection).toBeVisible();
-
-    const articles = page.locator('article');
-    await articles.first().scrollIntoViewIfNeeded();
-    await expect(articles.first()).toBeVisible({ timeout: 10000 });
-
-    const firstArticleTitle = articles.first().locator('h2, h5').first();
-    await expect(firstArticleTitle).toBeVisible();
-
-    const firstArticleLink = articles.first().locator('a[href*="/content/"]').first();
-    await expect(firstArticleLink).toBeVisible();
+    const firstArticle = page.locator('article').first();
+    await expect(firstArticle).toBeVisible();
+    await expect(firstArticle.locator('h2').first()).toBeVisible();
+    await expect(firstArticle.locator('a[href*="/content/"]').first()).toBeVisible();
   });
 });

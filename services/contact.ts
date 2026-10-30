@@ -13,7 +13,7 @@ const getContact = unstable_cache(
     });
   },
   ['contact'],
-  { revalidate: 86400 }
+  { revalidate: 86400, tags: ['contact'] }
 );
 
 export default getContact;

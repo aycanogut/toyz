@@ -2,7 +2,7 @@ import { unstable_cache } from 'next/cache';
 
 import { getPayloadClient } from '@/utils/payloadClient';
 
-const getArticles = unstable_cache(
+const getSlider = unstable_cache(
   async () => {
     const payload = await getPayloadClient();
 
@@ -14,4 +14,4 @@ const getArticles = unstable_cache(
   { revalidate: 86400, tags: ['slider'] }
 );
 
-export default getArticles;
+export default getSlider;

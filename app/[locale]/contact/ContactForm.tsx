@@ -4,22 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import z from 'zod';
 
 import Button from '@/components/Button';
 
 import useReCaptcha from '../hooks/useReCaptcha';
 
+import { ContactFormSchema, ContactSchema } from './contactSchema';
 import { mailAction } from './mailAction';
-
-export const ContactSchema = z.object({
-  name: z.string().min(2, { message: 'validation-name-error' }),
-  email: z.email({ message: 'validation-email-error' }),
-  subject: z.string().min(3, { message: 'validation-subject-error' }),
-  message: z.string().min(10, { message: 'validation-message-error' }),
-});
-
-export type ContactFormSchema = z.infer<typeof ContactSchema>;
 
 function ContactForm() {
   const { getReCaptchaToken } = useReCaptcha();

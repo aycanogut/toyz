@@ -1,9 +1,5 @@
 import { revalidateTag } from 'next/cache';
-import type {
-  CollectionAfterChangeHook,
-  CollectionAfterDeleteHook,
-  GlobalAfterChangeHook,
-} from 'payload';
+import type { CollectionAfterChangeHook, CollectionAfterDeleteHook, GlobalAfterChangeHook } from 'payload';
 
 import type { Event } from '@/payload-types';
 
@@ -13,8 +9,9 @@ const revalidateEventTags = () => {
   revalidateTag('sitemap-events', { expire: 0 });
 };
 
-export const revalidateEventsCacheOnChange: CollectionAfterChangeHook<Event> = ({ doc }) => {
-  if (doc._status === 'published') {
+// Also runs when a published event is unpublished, so it disappears from the site.
+export const revalidateEventsCacheOnChange: CollectionAfterChangeHook<Event> = ({ doc, previousDoc }) => {
+  if (doc._status === 'published' || previousDoc?._status === 'published') {
     revalidateEventTags();
   }
 

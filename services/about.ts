@@ -13,7 +13,7 @@ const getAbout = unstable_cache(
     });
   },
   ['about'],
-  { revalidate: 86400 }
+  { revalidate: 86400, tags: ['about'] }
 );
 
 export default getAbout;

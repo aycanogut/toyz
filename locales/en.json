@@ -54,6 +54,9 @@
     "validation-email-error": "Invalid email address.",
     "validation-subject-error": "Subject must be at least 3 characters long.",
     "validation-message-error": "Message must be at least 10 characters long.",
+    "validation-name-max-error": "Name must be at most 50 characters long.",
+    "validation-subject-max-error": "Subject must be at most 100 characters long.",
+    "validation-message-max-error": "Message must be at most 5000 characters long.",
     "privacy-notice": "By submitting this form, you agree that your personal data (name, email, subject, message) will be used solely for responding to your inquiry. Your data will not be shared with third parties and will be stored securely. You can request deletion of your data at any time."
   },
   "Email": {
