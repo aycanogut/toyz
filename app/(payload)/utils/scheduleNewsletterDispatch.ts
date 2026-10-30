@@ -7,8 +7,6 @@ const NEWSLETTER_SEND_DELAY_MS = 30 * 60 * 1000;
 // MongoDB throws error code 11000 (E11000) on unique-index violations.
 const MONGO_DUPLICATE_KEY_ERROR_CODE = 11000;
 
-const isProduction = () => process.env.NODE_ENV === 'production';
-
 /**
  * Detects MongoDB unique-index violation errors.
  *
@@ -34,12 +32,6 @@ const isDuplicateKeyError = (error: unknown): boolean => {
 
 export const scheduleNewsletterDispatch: CollectionAfterChangeHook<Article> = async ({ doc, operation, req: { payload } }) => {
   try {
-    // Newsletter sending is gated behind production to keep dev/staging from
-    // emailing real subscribers.
-    if (!isProduction()) {
-      return doc;
-    }
-
     if (operation !== 'create' && operation !== 'update') {
       return doc;
     }

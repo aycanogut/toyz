@@ -104,7 +104,7 @@ tests/                  # Vitest (unit, integration, components) & Playwright (e
 
 ## Newsletter
 
-When an article is published with **Send newsletter** checked, an email to all active subscribers is scheduled for ~30 minutes later (unchecking it before then cancels the send). Background jobs are run by an external cron that calls Payload's jobs endpoint with `Authorization: Bearer $CRON_SECRET`. Emails are only sent in production.
+When an article is published with **Send newsletter** checked, an email to all active subscribers is scheduled for ~30 minutes later (unchecking it before then cancels the send). Background jobs are run by an external cron that calls Payload's jobs endpoint with `Authorization: Bearer $CRON_SECRET`.
 
 ## 🧪 Testing
 

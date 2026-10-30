@@ -41,7 +41,7 @@ There is **no `autoRun`** — jobs are executed by an external cron calling Payl
 
 Newsletter flow:
 
-- Article `afterChange` hook `scheduleNewsletterDispatch` (`app/(payload)/utils/`) runs only in production, only for `published` docs with `sendNewsletter: true`. It creates a `newsletter-dispatches` row (`status: queued`) and queues the task with `waitUntil` = now + 30 min.
+- Article `afterChange` hook `scheduleNewsletterDispatch` (`app/(payload)/utils/`) runs only for `published` docs with `sendNewsletter: true`. It creates a `newsletter-dispatches` row (`status: queued`) and queues the task with `waitUntil` = now + 30 min.
 - The `article` field on `newsletter-dispatches` is unique, so one dispatch per article; re-saves hit Mongo E11000 and are skipped. Unchecking `sendNewsletter` before the send marks the dispatch `disabled`.
 - The task sends per subscriber (locale-aware) via Resend, 600 ms apart with one retry on 429, and records each recipient in `sentSubscribers` so retries (max 3) resume without duplicates. If the article is unpublished mid-run the dispatch becomes `disabled`; otherwise it ends `sent` (or `failed` if every send failed). Jobs are deleted on completion.
 

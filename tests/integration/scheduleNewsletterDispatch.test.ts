@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { scheduleNewsletterDispatch } from '@/app/(payload)/utils/scheduleNewsletterDispatch';
 
@@ -45,24 +45,9 @@ const buildDoc = (overrides: Record<string, unknown> = {}) => ({
 });
 
 describe('scheduleNewsletterDispatch', () => {
-  beforeEach(() => {
-    vi.stubEnv('NODE_ENV', 'production');
-  });
-
   afterEach(() => {
-    vi.unstubAllEnvs();
     vi.useRealTimers();
     vi.restoreAllMocks();
-  });
-
-  it('is a no-op outside production', async () => {
-    vi.stubEnv('NODE_ENV', 'development');
-    const payload = buildPayload();
-
-    await callHook({ doc: buildDoc(), operation: 'update', payload });
-
-    expect(payload.create).not.toHaveBeenCalled();
-    expect(payload.jobs.queue).not.toHaveBeenCalled();
   });
 
   it('is a no-op for non-create/update operations', async () => {
