@@ -67,7 +67,7 @@ const nextConfig = {
               "img-src 'self' data: blob: https://cdn.toyzwebzine.com https://cdn-dev.toyzwebzine.com https://www.google-analytics.com https://www.gravatar.com",
               "font-src 'self' data: https://fonts.gstatic.com",
               "connect-src 'self' https://www.google-analytics.com https://www.google.com https://www.gstatic.com https://www.googletagmanager.com https://static.cloudflareinsights.com",
-              "frame-src 'self' https://www.google.com https://www.recaptcha.net https://www.youtube.com https://www.youtube-nocookie.com https://toyzwebzine.com https://*.toyzwebzine.com",
+              "frame-src 'self' https://www.google.com https://www.recaptcha.net https://www.youtube.com https://www.youtube-nocookie.com https://bandcamp.com https://indiecrates.com https://toyzwebzine.com https://*.toyzwebzine.com",
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self'",

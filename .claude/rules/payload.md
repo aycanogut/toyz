@@ -29,7 +29,7 @@ Only facts not obvious from the schema files:
 - Use `slugField(fieldToUse, overrides)` from `fields/slug.ts` for new slugged collections.
 - Every collection/global that feeds the site needs an `afterChange` (and `afterDelete`) revalidation hook from `hooks/` (see `caching.md`).
 - Inside hooks use `req.payload`, not `getPayloadClient()`.
-- Rich text is Lexical with default features plus `YouTubeBlock` (`blocks/youtube.ts`). A new block also needs a renderer in `app/[locale]/content/[slug]/RichText/`.
+- Rich text is Lexical with default features plus `YouTubeBlock`, `BandcampBlock` and `IndieCratesBlock` (`blocks/`). Bandcamp stores the pasted embed code (its player needs numeric IDs not present in page URLs); Indie Crates stores the crate URL and derives `/embed`. A new block also needs a renderer in `app/[locale]/content/[slug]/RichText/`.
 - Upload size limit is 1 MB.
 - Live preview is enabled for `articles` and the `slider`, `about`, `contact` globals.
 - After a schema change, `payload-types.ts` and `toyz-panel/importMap.js` are regenerated. Commit them; never hand-edit.

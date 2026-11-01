@@ -7,7 +7,10 @@ import { Media } from '@/payload-types';
 import cn from '@/utils/cn';
 import { slugifyHeading } from '@/utils/extractHeadings';
 
+import Bandcamp from './Bandcamp';
+import EmbedCaption from './EmbedCaption';
 import Image from './Image';
+import IndieCrates from './IndieCrates';
 import Video from './Video';
 
 const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
@@ -51,6 +54,32 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
           videoId={videoId}
           title={title}
         />
+      );
+    },
+
+    bandcamp: ({ node }: { node: { fields: { embedCode: string; title?: string } } }) => {
+      const { embedCode, title } = node.fields;
+
+      return (
+        <EmbedCaption title={title}>
+          <Bandcamp
+            embedCode={embedCode}
+            title={title}
+          />
+        </EmbedCaption>
+      );
+    },
+
+    indieCrates: ({ node }: { node: { fields: { url: string; title?: string } } }) => {
+      const { url, title } = node.fields;
+
+      return (
+        <EmbedCaption title={title}>
+          <IndieCrates
+            url={url}
+            title={title}
+          />
+        </EmbedCaption>
       );
     },
   },

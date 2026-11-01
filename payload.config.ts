@@ -9,6 +9,8 @@ import { s3Storage } from '@payloadcms/storage-s3';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
+import { BandcampBlock } from './app/(payload)/blocks/bandcamp';
+import { IndieCratesBlock } from './app/(payload)/blocks/indieCrates';
 import { YouTubeBlock } from './app/(payload)/blocks/youtube';
 import { Articles } from './app/(payload)/collections/articles';
 import { Categories } from './app/(payload)/collections/categories';
@@ -107,7 +109,7 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   editor: lexicalEditor({
-    features: ({ defaultFeatures }) => [...defaultFeatures, BlocksFeature({ blocks: [YouTubeBlock] })],
+    features: ({ defaultFeatures }) => [...defaultFeatures, BlocksFeature({ blocks: [YouTubeBlock, BandcampBlock, IndieCratesBlock] })],
   }),
   localization: {
     locales: ['en', 'tr'],
