@@ -5,6 +5,7 @@ import { Media } from '@/payload-types';
 import getEventGlobal from '@/services/event-global';
 import getEvents from '@/services/events';
 import formatDate from '@/utils/formatDate';
+import hasEventGallery from '@/utils/hasEventGallery';
 import isUpcomingEvent from '@/utils/isUpcomingEvent';
 
 import EventCard from './EventCard';
@@ -57,7 +58,7 @@ async function Events() {
                   <EventCard
                     key={event.id}
                     title={event.title}
-                    slug={event.slug ?? ''}
+                    slug={hasEventGallery(event) ? (event.slug ?? undefined) : undefined}
                     poster={event.poster as Media}
                     date={formatDate(event.details.date, locale as Locale)}
                     location={event.details.location}

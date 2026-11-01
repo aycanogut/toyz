@@ -57,6 +57,7 @@ describe('getEvents', () => {
     expect(mockPayloadFind).toHaveBeenCalledWith({
       collection: 'events',
       locale: 'en',
+      joins: { gallery: { limit: 2 } },
       pagination: false,
       sort: 'details.date',
       where: {

@@ -1,3 +1,4 @@
+import hasEventGallery from '@/utils/hasEventGallery';
 import { getPayloadClient } from '@/utils/payloadClient';
 
 const getAllEventSlugs = async (locale: string) => {
@@ -13,12 +14,16 @@ const getAllEventSlugs = async (locale: string) => {
     },
     limit: 0,
     pagination: false,
+    depth: 0,
+    joins: { gallery: { limit: 2 } },
     select: {
       slug: true,
+      poster: true,
+      gallery: true,
     },
   });
 
-  return result.docs;
+  return result.docs.filter(hasEventGallery);
 };
 
 export default getAllEventSlugs;

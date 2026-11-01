@@ -1,5 +1,6 @@
 import { unstable_cache } from 'next/cache';
 
+import hasEventGallery from '@/utils/hasEventGallery';
 import { getPayloadClient } from '@/utils/payloadClient';
 
 const getSitemapEvents = unstable_cache(
@@ -15,13 +16,17 @@ const getSitemapEvents = unstable_cache(
       },
       pagination: false,
       limit: 10000,
+      depth: 0,
+      joins: { gallery: { limit: 2 } },
       select: {
         slug: true,
+        poster: true,
+        gallery: true,
         updatedAt: true,
       },
     });
 
-    return result.docs;
+    return result.docs.filter(hasEventGallery);
   },
   ['sitemap-events'],
   { revalidate: 3600, tags: ['sitemap-events'] }

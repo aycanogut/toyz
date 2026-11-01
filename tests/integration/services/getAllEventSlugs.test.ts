@@ -15,7 +15,11 @@ import getAllEventSlugs from '@/services/event-slugs';
 
 describe('getAllEventSlugs', () => {
   const mockSlugs = {
-    docs: [{ slug: 'event-1' }, { slug: 'event-2' }],
+    docs: [
+      { slug: 'event-1', poster: 'p1', gallery: { docs: ['p1', 'g1'] } },
+      { slug: 'event-2', poster: 'p2', gallery: { docs: ['g2'] } },
+      { slug: 'poster-only', poster: 'p3', gallery: { docs: ['p3'] } },
+    ],
   };
 
   beforeEach(() => {
@@ -23,7 +27,7 @@ describe('getAllEventSlugs', () => {
     mockPayloadFind.mockResolvedValue(mockSlugs);
   });
 
-  it('should return all published event slugs', async () => {
+  it('should return slugs of published events that have a gallery', async () => {
     const result = await getAllEventSlugs('tr');
 
     expect(result).toHaveLength(2);
@@ -38,8 +42,12 @@ describe('getAllEventSlugs', () => {
       },
       limit: 0,
       pagination: false,
+      depth: 0,
+      joins: { gallery: { limit: 2 } },
       select: {
         slug: true,
+        poster: true,
+        gallery: true,
       },
     });
   });

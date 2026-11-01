@@ -16,6 +16,8 @@ const getEvents = unstable_cache(
       },
       sort: 'details.date',
       pagination: false,
+      // Only needed to decide whether the card links to a detail page; poster + one image is enough.
+      joins: { gallery: { limit: 2 } },
     });
   },
   ['events'],

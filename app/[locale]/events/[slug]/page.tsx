@@ -10,6 +10,7 @@ import { EventMedia, Media } from '@/payload-types';
 import getEvent from '@/services/event';
 import getAllEventSlugs from '@/services/event-slugs';
 import formatDate from '@/utils/formatDate';
+import hasEventGallery from '@/utils/hasEventGallery';
 
 import SocialMediaShare from '../../components/SocialMediaShare';
 
@@ -45,7 +46,8 @@ async function EventDetails({ params }: EventDetailsProps) {
 
   const event = await getEvent(slug, locale);
 
-  if (!event) {
+  // Events without gallery images are listed as a plain poster and have no detail page.
+  if (!event || !hasEventGallery(event)) {
     return notFound();
   }
 

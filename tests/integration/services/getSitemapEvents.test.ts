@@ -20,8 +20,9 @@ import getSitemapEvents from '@/services/sitemap-events';
 describe('getSitemapEvents', () => {
   const mockSitemapData = {
     docs: [
-      { slug: 'event-1', updatedAt: '2024-01-01T00:00:00.000Z' },
-      { slug: 'event-2', updatedAt: '2024-01-02T00:00:00.000Z' },
+      { slug: 'event-1', poster: 'p1', gallery: { docs: ['g1'] }, updatedAt: '2024-01-01T00:00:00.000Z' },
+      { slug: 'event-2', poster: 'p2', gallery: { docs: ['p2', 'g2'] }, updatedAt: '2024-01-02T00:00:00.000Z' },
+      { slug: 'no-gallery', poster: 'p3', gallery: { docs: [] }, updatedAt: '2024-01-03T00:00:00.000Z' },
     ],
   };
 
@@ -44,8 +45,12 @@ describe('getSitemapEvents', () => {
       },
       pagination: false,
       limit: 10000,
+      depth: 0,
+      joins: { gallery: { limit: 2 } },
       select: {
         slug: true,
+        poster: true,
+        gallery: true,
         updatedAt: true,
       },
     });
